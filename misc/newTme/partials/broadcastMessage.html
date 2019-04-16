@@ -1,0 +1,8 @@
+<div class="broadcastTab width100 left"  ng-init="disPlaymsgmessageBroadcastPop()" style='color:#ffffff'>
+	<div class="absolute closePop_broadcast right0 pointer" ng-click="closePopTop(2)">Close</div>
+	<div class="broadcastMsg width50 repeat-animation">
+		<div class="left blueDark" style="margin-left: 50%; font-size: 20px; font-weight: bold;">Message From {{Messagedetails.senderId}}</div>
+		<div class="stripAlloc left width100 pad-top-5 pad-bot-5 border-top-grey" style="margin-left: 50%;" ng-bind-html="MytrustedHtml">
+		</div>
+	</div>
+</div>

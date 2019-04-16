@@ -1,0 +1,93 @@
+<section class="mainSection" subtract="500">
+	<section class="mainContain" ng-if="tmeAlloc.errorCode == 0">
+		<h3 class="marBot10px" ng-if="mainPage	==	'search'">Below is your Search Result :</h3>
+		<nav ng-if="mainPage	!=	'search'" class="left margin8 slideIndi" >
+			<div class="left arrow marTop10px" ng-if="setArrowPos==1" ng-click="slideright($event)"><img ng-src="img/arrow-left.png" /></div>
+			<div class="navSlider left">
+				<ul class="navFilters left width100 marBot30px marTop10px repPop setTotContWidth">
+					<li ng-click="$state.go('appHome.filter',{srchparam:'all',srchWhich:'',currPage:'tmeAlloc'})" class="left">All</li><span class="left">/</span>
+					<li ng-click="showSubMenu($event)" class="left">companyname
+						<ul class="hide submenuUl">
+							<li class="left" ng-click="$state.go('appHome.filter',{srchparam:'companyname',srchWhich:'order-asc',currPage:'tmeAlloc'})">ORDER ASC</li><span class="left">/</span>
+							<li class="left" ng-click="$state.go('appHome.filter',{srchparam:'companyname',srchWhich:'order-desc',currPage:'tmeAlloc'})">ORDER DESC</li>
+						</ul>
+					</li><span class="left">/</span>
+					<li ng-click="showSubMenu($event)" class="left lastLiTop">Entry Date
+						<ul class="hide submenuUl">
+							<li class="left" ng-click="$state.go('appHome.filter',{srchparam:'entry_date',srchWhich:'order-asc',currPage:'tmeAlloc'})">ORDER ASC</li><span class="left">/</span>
+							<li class="left" ng-click="$state.go('appHome.filter',{srchparam:'entry_date',srchWhich:'order-desc',currPage:'tmeAlloc'})">ORDER DESC</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div class="left arrow marTop10px" ng-if="setArrowPos==1" ng-click="slideleft($event)"><img ng-src="img/arrow-right.png" /></div>
+		</nav>
+		<div class="left inputIndiSrch marBot30px"><input type="text" class="SearchCompany" ng-model="compFilter" placeholder="Search in loaded Contracts within this page" ></div>
+		<div class="left width50 slideIndi" ng-if="mainPage	!=	'search'">
+			<div class="left arrow marTop10px ng-scope" ng-click="sliderRightPage($event)" ng-if="setArrowPosPage==1">
+				<img ng-src="img/arrow-left.png" src="img/arrow-left.png">
+			</div>
+			<div class="pageSlider left">
+				<ul class="left text-center navFilters setTotContWidthPage repPop">
+					<li ng-class="{selectedPage: $index==selectedIndex || (selectedIndex == '' && n == 0)}" class="left pointer pageLi" ng-repeat="n in [] | range:pageContracts" ng-click="clickLoad(n)">{{n+1}}</li>
+				</ul>
+			</div>
+			<div class="left arrow marTop10px ng-scope" ng-click="slideleftPage($event)" ng-if="setArrowPosPage==1">
+				<img ng-src="img/arrow-right.png" src="img/arrow-right.png">
+			</div>
+		</div>
+		<div class="divbackground" ng-click="compFilter = ''"><img class="very-small-cross" ng-show="compFilter" ng-src="img/blackCross.jpeg"></div>
+		<div class="incDiv left width100">
+			<div class="panelDiv repeat-animation" ng-repeat="contract in tmeAlloc.data | filter:compFilter">
+				<div class="contDivs left front">
+					<div class="innerContDiv">
+						<div class="compNameTile blue pointer" ng-click="goToBform(contract)"><h3>{{contract.companyname == '' && 'Company Name Not Found' || contract.companyname }}</h3></div>
+						<div class="divContContainer overflow">
+							<p class="parentidShow arial small-font darkGrey mar-bot-5 | filter:compFilter">{{contract.contractid}}</p>
+							<p class="parentidShow arial small-font darkGrey mar-bot-5">Entry Date - {{contract.entry_date}}</p>
+						</div>
+						<div class="slideIndi left positionAbs bottom0 width100">
+							<div class="left arrow marTop10px" ng-click="slideright($event)"><img ng-src="img/arrow-left.png" /></div>
+							<div class="upperLayerMenu left">
+								<div class="left repPop setTotContWidth">
+									<div ng-click="showCats($event,contract.contractid)" class="left repDivsIndi very-small-font darkGrey arial text-center marRt10px marTop7px"><div class="marBot10px"><img ng-src="img/more.png" /></div><div>Show Cats</div></div>
+									<a ng-href="../00_Payment_Rework/add_on_payment/mode_selection.php?parentid={{contract.contractid}}&compname={{contract.companyname | urlEncode}}" target="_blank"><div class="left repDivsIndi very-small-font darkGrey arial text-center marRt10px"><div class="marBot10px"><img ng-src="img/add-on.png" /></div><div>AddOn Payment</div></div></a>
+									<a ng-href="../00_Payment_Rework/accounts/mandate_selection.php?parentid={{contract.contractid}}&compname={{contract.companyname | urlEncode}}&flag=" target="_blank"><div class="left repDivsIndi very-small-font darkGrey arial text-center marRt10px"><div class="marBot10px"><h3>EM</h3></div><div>Ext. Mandate</div></div></a>
+									<div class="left repDivsIndi very-small-font darkGrey arial text-center marRt10px" ng-click="checkTrackerRep($event,contract.contractid)"><div class="marBot10px"><img ng-src="img/report-small.png" /></div><div>Tracker Report</div></div>
+									<a ng-href="../tmAlloc/companyFeedbackRep.php?contractID={{contract.contractid}}" target="_blank"><div class="left repDivsIndi very-small-font darkGrey arial text-center marRt10px"><div class="marBot10px"><img ng-src="img/phone2.png" /></div><div>Statement/Feed</div></div></a>
+								</div>
+							</div>
+							<div class="left arrow marTop10px" ng-click="slideleft($event)"><img ng-src="img/arrow-right.png" /></div>
+						</div>
+					</div>
+					<div class="catupeven coverOverlay hide colorWhite">
+						<h3 class="loadingMini hide colorWhite">Loading...</h3>
+						<a><div class="right arial" ng-click="closeOverlay($event)">X</div></a>
+						<div class="catContain" ng-if="categories.errorCode=='0'">
+							<h3 class="colorWhite">Categories for {{contract.companyname|capitalize}}</h3>
+							<div class="catsShow" ng-repeat="cats in categories.data">
+								{{cats.category_name}}
+							</div>
+						</div>
+						<div class="catContain" ng-if="categories.errorCode=='1'">
+							<h3 class="colorWhite">Categories Not Present</h3>
+						</div>
+					</div>
+					<div class="trackeroverlay coverOverlay hide colorWhite">
+						<h3 class="loadingMini hide colorWhite">Loading...</h3>
+						<a><div class="right arial" ng-click="closeOverlay($event)">X</div></a>
+						<div class="catContain">
+							<div class="colorWhite text-center" ng-if="trackRepChk.ECS == 1"><a class="colorWhite" ng-href="../00_Payment_Rework/accounts/ecs_tracker_report_tme.php?parentid={{contract.contractid}}&flag=1&me_tme={{employees.hrInfo.data.empcode}}" target="_blank"><h3 class="colorWhite">Click to see report for ECS</h3></a></div>
+							<div class="colorWhite text-center" ng-if="trackRepChk.SI == 1"><a class="colorWhite" ng-href="../00_Payment_Rework/accounts/si_tracker_report_tme.php?parentid={{contract.contractid}}&flag=2&me_tme={{employees.hrInfo.data.empcode}}" target="_blank"><h3 class="colorWhite">Click to see report for SI</h3></a></div>
+							<div class="colorWhite text-center" ng-if="trackRepChk.SI == 0 && trackRepChk.ECS == 0"><h3 class="colorWhite">Track Report is not available</h3></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section ng-if="tmeAlloc.errorCode == 1" class="text-center">
+		<div style="font-size:294px;">:(</div>
+		<h2>Sorry! No contracts are allocated to you.</h2>
+	</section>
+</section>

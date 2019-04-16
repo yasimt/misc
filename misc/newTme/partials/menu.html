@@ -1,0 +1,137 @@
+<aside id="Menuscroll" class="floatSide setAutoHeight" heightset="65">
+	<nav>
+		<img src="img/search.png" alt="Search" style="position: absolute;right: 12px;top: 15px;" />
+		<input type="text" ng-model="searchMenu" class="menusearch" placeholder="Search Menu Links" />
+		<ul>
+			
+			<li ng-repeat="menu in linksSortInvent  | filter: searchMenu" ng-if="menu.display_menu == 1" namemenu="{{menu.menu_name}}">
+				<a ng-if="menu.display_menu == 1 && (menu.menu_id != 59 && menu.menu_id != 60 && menu.menu_id != 61 && menu.menu_name != 'Ecs Upgrade or Degrade') && disable_emp.indexOf(user) <= -1" ui-sref="{{menu.menu_link}}({srchparam:'',srchWhich:''})" ng-mouseover="showCompleteMenu($event)">
+					<div class="nameContainLink">{{menu.menu_name}}</div>
+				</a>
+			</li>	
+
+
+			
+			<li ng-repeat="menu in linksData  | filter: searchMenu" ng-if="menu.display_menu == 1 || menu.display_menu == 4 || menu.display_menu == 8"  namemenu="{{menu.menu_name}}">
+				<a ng-if="menu.display_menu == 1 && (menu.menu_id != 59 && menu.menu_id != 60 && menu.menu_id != 61 && menu.menu_name != 'Ecs Upgrade or Degrade' && menu.menu_name != 'DIY JDRR prospect DATA' && menu.menu_name != 'Jdrr courier data' && menu.menu_id != 102 && menu.menu_id != 103 && menu.menu_id != 104 && menu.menu_id != 105) && disable_emp.indexOf(user) <= -1" ui-sref="{{menu.menu_link}}({srchparam:'',srchWhich:''})" ng-mouseover="showCompleteMenu($event)">
+					<div class="nameContainLink">{{menu.menu_name}}</div>
+				</a>
+				<a ng-if="(menu.menu_name == 'DIY JDRR prospect DATA' || menu.menu_name == 'Jdrr courier data') && (menu.menu_id != 59 && menu.menu_id != 60 && menu.menu_id != 61 && menu.menu_name != 'Ecs Upgrade or Degrade' && menu.menu_id != 102 && menu.menu_id != 103 && menu.menu_id != 104 && menu.menu_id != 105) && disable_emp.indexOf(user) <= -1" 	ui-sref="{{menu.menu_link}}({srchparam:'',srchWhich:''})" ng-mouseover="showCompleteMenu($event)">
+					<div class="nameContainLink" ng-if = "menu.count != '' && menu.count !== undefined " style="border-radius: 50%; background: #ffa900 none repeat scroll 0% 0%; border: 2px solid #ffa900; color: #ffffff; text-align: center; font: 13px Arial,sans-serif; padding: 2px 1px 0; width: 18px; height: 18px;">{{menu.count}}</div>
+					<div class="nameContainLink">{{menu.menu_name}}</div>
+				</a>
+
+				<a ng-if="menu.menu_name == 'Ecs Upgrade or Degrade'" ui-sref="{{menu.menu_link}}({srchparam:'',srchWhich:''})" ng-mouseover="showCompleteMenu($event)">
+					<div class="nameContainLink">{{menu.menu_name}}</div>
+				</a>
+				
+				<a ng-if="menu.menu_name == 'online transfer'"  ng-mouseover="showCompleteMenu($event)" ng-click="openTransferPop($event)">
+					<div class="nameContainLink">{{menu.menu_name}}</div>
+				</a>
+				
+			</li>
+			<li namemenu="Dealclosed (Geniolite)">
+				<a title="Dealclosed (Geniolite)" href="http://lite.genio.in:8100/genio_lite/setEmpRedirect.php?empcode={{loginUserId}}&data_city={{loginUserCity}}&deal=1" target="_blank"> <!-- http://lite.genio.in:8100/genio_lite/#/allocation/dealClosed -->
+					<div class="nameContainLink">Dealclosed (Geniolite)</div>
+				</a>
+			</li>
+			<li namemenu="Discount Report(Geniolite)">
+				
+				<a title="Discount Report(Geniolite)" href="http://lite.genio.in:8100/genio_lite/setEmpRedirect.php?empcode={{loginUserId}}&data_city={{loginUserCity}}&deal=0" target="_blank"> <!-- http://lite.genio.in:8100/genio_lite/#/allocation/dealClosed -->
+					<div class="nameContainLink">Discount Report(Geniolite)</div>
+				</a>
+			</li>
+			<li class="repMenu" ng-click="showImgReportMenu()">
+					<div class="nameContainLink" style='margin-left: 37px;cursor:pointer;'>Reports</div>
+					<img style='float: right;margin-right: 20px;' ng-src="img/downArrow.png"/>
+				</li>
+
+				<div class="" ng-show="hidereport">
+					<div class="" ng-hide="report">
+					<ul>
+						<li class="pointer"  style="margin-left: 20px;" ng-repeat="menu in linksReportIn" ng-if="menu.display_menu==2 || menu.display_menu==5" namemenu="{{menu.menu_name}}">
+							<a style="color:#636262" ng-if="menu.display_menu==2" ui-sref=".report({currPage:menu.menu_link,srchparam:'',srchWhich:'',extraVals:menu.extraVals})">
+								<div class="nameContainLink">{{menu.menu_name}}</div>
+							</a>
+							<a style="color:#636262" ng-if="menu.display_menu==5" ng-href="{{menu.menu_link}}" target="_blank">
+								<div class="nameContainLink">{{menu.menu_name}}</div>
+							</a>
+						</li>
+					</ul>
+					</div>
+				</div>
+
+				<li class="finMenu" ng-click="showImgFinanceMenu()">
+					<div class="nameContainLink" style='margin-left: 37px;cursor:pointer;top:15px;'>Finance</div>
+					<img style='float: right;margin-right: 20px;' ng-src="img/downArrow.png"/>
+				</li>
+				<div class="" ng-show="hidefinance">
+				<div class="">
+					<ul>
+						<li class="pointer" style="margin-left: 20px;" ng-repeat="menu in linksReportIn" ng-if="menu.display_menu==3" namemenu="{{menu.menu_name}}">
+							<a style="color:#636262" ng-href="{{menu.menu_link}}{{employees.results.mktEmpCode}}" target="indiReport">
+								<div class="nameContainLink">{{menu.menu_name}}</div>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<li ng-repeat="menu in linksData  | filter: searchMenu" ng-if="menu.display_menu == 1 || menu.display_menu == 4" namemenu="{{menu.menu_name}}">
+				
+				<a ng-if="menu.display_menu == 1 && (menu.menu_name == 'Category Paid Data' && menu.menu_id != 59 && menu.menu_id != 60 && menu.menu_id != 61 && employees.results.allocId == 'SJ')  && disable_emp.indexOf(user) <= -1" ui-sref="{{menu.menu_link}}({srchparam:'',srchWhich:''})" ng-mouseover="showCompleteMenu($event)">
+					<div class="nameContainLink">{{menu.menu_name}}</div>
+				</a>
+				
+				<!--	 	 && employees.results.allocid == 'BD'					---->
+				<a ng-if="menu.display_menu == 1 && (employees.results.allocId == 'BD' || employees.results.secondary_allocID == 'BD') && (menu.menu_id == 59 || menu.menu_id == 60 || menu.menu_id == 61) && disable_emp.indexOf(user) <= -1"  ui-sref="{{menu.menu_link}}({srchparam:'',srchWhich:''})"  ng-mouseover="showCompleteMenu($event)">
+					<div class="nameContainLink">{{menu.menu_name}}</div>
+				</a>
+				
+				<a ng-if="menu.display_menu == 1 && (employees.results.allocId == 'SJ' || employees.results.secondary_allocID == 'SJ' || employees.results.allocId == 'BE' || employees.results.secondary_allocID == 'BE'  || employees.results.allocId == 'BD' || employees.results.secondary_allocID == 'BD') && (menu.menu_id == 102 || menu.menu_id == 103 || menu.menu_id == 104 || menu.menu_id == 105) && disable_emp.indexOf(user) <= -1"  ui-sref="{{menu.menu_link}}({srchparam:'',srchWhich:''})"  ng-mouseover="showCompleteMenu($event)">
+					<div class="nameContainLink">{{menu.menu_name}}</div>
+				</a>
+				
+				
+				<a ng-if="menu.display_menu == 4 && (stationId == 1 && (menu.menu_id == 52 || menu.menu_id == 53 || menu.menu_id == 54)) && menu.menu_id != 14 && disable_emp.indexOf(user) <= -1" ng-href="{{menu.menu_link}}"  ng-mouseover="showCompleteMenu($event)">
+					<div class="nameContainLink">{{menu.menu_name}}</div>
+				</a>
+				<a ng-if="menu.display_menu == 4 && (menu.menu_id != 52 && menu.menu_id != 53 && menu.menu_id != 54) && menu.menu_id != 14 && disable_emp.indexOf(user) <= -1 && menu.menu_name !='Incentive'" ng-href="{{menu.menu_link}}" target="_blank" ng-mouseover="showCompleteMenu($event)">
+				<div class="nameContainLink">{{menu.menu_name}}</div>
+			
+				<a ng-if="menu.menu_id == 14 && (menu.menu_id != 56 && menu.menu_id != 17)" ng-href="{{menu.menu_link}}" target="_self" ng-mouseover="showCompleteMenu($event)">
+					<div class="nameContainLink">{{menu.menu_name}}</div>
+				</a>
+				
+				<a ng-if="menu.display_menu == 4 && menu.menu_name == 'Incentive'" href="http://{{menu.menu_link}}?incentive_empcode={{user}}&fromJDA=" target="_blank" ng-mouseover="showCompleteMenu($event)">
+				<div class="nameContainLink">{{menu.menu_name}}</div>
+				</a>
+				
+				
+<!--
+				special handling for those empcode
+-->
+
+				<a ng-if="(menu.display_menu == 1 || menu.display_menu == 4) && (menu.menu_id == 51 || menu.menu_id == 1 || menu.menu_id == 2 || menu.menu_id == 3 ) && disable_emp.indexOf(user) > -1"  ui-sref="{{menu.menu_link}}({srchparam:'',srchWhich:''})"  ng-mouseover="showCompleteMenu($event)">
+					<div class="nameContainLink">{{menu.menu_name}}</div>
+				</a>
+				
+				<a ng-if="menu.display_menu == 4 && (stationId == 1 && (menu.menu_id == 52 || menu.menu_id == 53)) && menu.menu_id != 14 && disable_emp.indexOf(user) > -1" ng-href="{{menu.menu_link}}"  ng-mouseover="showCompleteMenu($event)">
+					<div class="nameContainLink">{{menu.menu_name}}</div>
+				</a>
+			</li>
+			
+			<li ng-repeat="menu in linksData  | filter: searchMenu" ng-if="menu.display_menu == 7" namemenu="{{menu.menu_name}}">
+				<a ng-if="menu.display_menu == 7 && (menu.menu_id != 59 && menu.menu_id != 60 && menu.menu_id != 61 && menu.menu_name != 'Ecs Upgrade or Degrade') && disable_emp.indexOf(user) <= -1" ng-href="{{menu.menu_link}}" ng-mouseover="showCompleteMenu($event)" target='_blank'>
+					<div class="nameContainLink">{{menu.menu_name}}</div>
+				</a>
+			</li>
+			<li namemenu="Freebees Approval Module" ng-if="resellerHods.indexOf(user) > -1" >
+				<a title="Freebees Approval Module" href="../Freebees/#/Homepage/{{loginUserId}}/{{loginUserCity}}" target="_blank">
+					<div class="nameContainLink">Freebees Approval Module</div>
+				</a>
+			</li>
+			
+		</ul>
+	</nav>
+</aside>

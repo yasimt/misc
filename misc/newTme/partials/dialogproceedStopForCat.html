@@ -1,0 +1,131 @@
+<md-dialog aria-label="Categories">	
+	<md-toolbar>
+		<div class="md-toolbar-tools">
+			<h2 ng-if="proceedStopFlag == 1" style="color:#FFFFFF">Following categories are Premium Category. Are You Sure To continue?</h2>
+			<h2 ng-if="proceedStopFlag == 2" style="color:#FFFFFF">&nbsp;Alert !!!<br>&nbsp;Following generic category/s  are missing in the contract.<br>&nbsp;Hence they will be added through the system by default.<span ng-if="premium_flag == 1">&nbsp;Premium Category will go for Moderation.</span></h2>
+			<h2 ng-if="proceedStopFlag == 3" style="color:#FFFFFF">&nbsp;Have you received authorization letter?</h2>
+			<h2 ng-if="proceedStopFlag == 4" style="color:#FFFFFF">Following category/s are tagged as restricted category.Kindly upload the following document/s.</h2>
+			<h2 ng-if="proceedStopFlag == 5" style="color:#FFFFFF">&nbsp;Non-Ratable category found !!!</h2>
+			<h2 ng-if="proceedStopFlag == 6" style="color:#FFFFFF">&nbsp;Exclusive booking present in following category/s !!!</h2>
+			<span flex></span>
+		</div>
+	</md-toolbar>
+	<md-dialog-content>
+		<div ng-if="proceedStopFlag == 1">
+			<div layout="row" layout-sm="column" layout-align="space-around" ng-if="showLoader==1">
+				<md-progress-circular class="md-hue-2" md-mode="indeterminate"></md-progress-circular>
+			</div>
+			<div layout="column" layout-sm="column" layout-align="space-around">
+				<md-list>
+					<md-list-item ng-repeat="(key2,dataCheck) in PremiumTaggedCategory | splitAll:'|~|'" class="blue">{{dataCheck}}</md-list-item>
+				</md-list>
+				<md-divider></md-divider>
+				<div layout="row" layout-sm="column" layout-align="space-around">
+					<md-button class="md-raised md-accent" ng-click="restFunctionCheck(counterProceedStop,$event)">Yes</md-button>
+					<md-button class="md-raised md-accent" ng-click="hide()">No</md-button>
+				</div>
+			</div>
+			<div layout="row" layout-sm="column" layout-align="space-around" ng-if="showLoader==0 && dataDialog.error.code	==	1">
+				No Categories Found
+			</div>
+		</div>
+		<div ng-if="proceedStopFlag == 2">
+			<div layout="row" layout-sm="column" layout-align="space-around" ng-if="showLoader==1">
+				<md-progress-circular class="md-hue-2" md-mode="indeterminate"></md-progress-circular>
+			</div>
+			<div layout="column" layout-sm="column" layout-align="space-around">
+				<md-list>
+					<md-list-item ng-repeat="(key2,dataCheck) in RestaurantMissingCategory | splitAll:'|~|'" class="blue">{{dataCheck | indexReplace}}</md-list-item>
+				</md-list>
+				<md-divider></md-divider>
+				<div layout="row" layout-sm="column" layout-align="space-around">
+					<md-button class="md-raised md-accent" ng-click="restFunctionCheck(counterProceedStop,$event)">Proceed</md-button>
+					<md-button class="md-raised md-accent" ng-click="hide()">Cancel</md-button>
+				</div>
+			</div>
+			<div layout="row" layout-sm="column" layout-align="space-around" ng-if="showLoader==0 && dataDialog.error.code	==	1">
+				No Categories Found
+			</div>
+		</div>
+		<div ng-if="proceedStopFlag == 3">
+			<div layout="row" layout-sm="column" layout-align="space-around" ng-if="showLoader==1">
+				<md-progress-circular class="md-hue-2" md-mode="indeterminate"></md-progress-circular>
+			</div>
+			<div layout="column" layout-sm="column" layout-align="space-around">
+				<div layout="row" layout-sm="column" layout-align="space-around">
+					<md-button class="md-raised md-accent" ng-click="checkAuthFlag($event)">Yes</md-button>
+					<md-button class="md-raised md-accent" ng-click="hide()">No</md-button>
+				</div>
+			</div>
+			<div layout="row" layout-sm="column" layout-align="space-around" ng-if="showLoader==0 && dataDialog.error.code	==	1">
+				No Categories Found
+			</div>
+		</div>
+		<div ng-if="proceedStopFlag == 4">
+			<div layout="row" layout-sm="column" layout-align="space-around" ng-if="showLoader==1">
+				<md-progress-circular class="md-hue-2" md-mode="indeterminate"></md-progress-circular>
+			</div>
+			<div layout="column" layout-sm="column" layout-align="space-around">
+				<md-list>
+					<md-list-item ng-repeat="(key2,dataCheck) in RestrictedTaggedCategory | splitAll:'|~|'" class="blue">{{dataCheck}}</md-list-item>
+				</md-list>
+				<md-list>
+					<div class="floatLeft" >
+						<md-icon style="color:#3B4BA9" md-svg-icon="img/ic_star_24px.svg"></md-icon>
+						<span class="blue">Document Needed : {{DocumentList}}</span>
+					</div>
+				</md-list>
+				<md-divider></md-divider>
+				<div layout="row" layout-sm="column" layout-align="space-around">
+					<md-button class="md-raised md-accent" ng-click="restFunctionCheck(counterProceedStop,$event)">Proceed Further</md-button>
+					<md-button class="md-raised md-accent" ng-click="uploadRedirect()" >Go For Upload</md-button>
+				</div>
+			</div>
+			<div layout="row" layout-sm="column" layout-align="space-around" ng-if="showLoader==0 && dataDialog.error.code	==	1">
+				No Categories Found
+			</div>
+		</div>
+		
+		<div ng-if="proceedStopFlag == 5">
+			<div layout="row" layout-sm="column" layout-align="space-around" ng-if="showLoader==1">
+				<md-progress-circular class="md-hue-2" md-mode="indeterminate"></md-progress-circular>
+			</div>
+			<div layout="column" layout-sm="column" layout-align="space-around">
+				Sorry..! This is a non-ratable category & proceeding with this will lead to  deactivation of Rating & Reviews on the website. 
+				<br>
+				Kindly click on CONTINUE to proceed or click on EDIT to edit category & proceed
+				<md-list>
+					<md-list-item ng-repeat="(key2,dataCheck) in PromtRatingsCategory | splitAll:'|~|'" class="blue">{{dataCheck}}</md-list-item>
+				</md-list>
+				<md-divider></md-divider>
+				<div layout="row" layout-sm="column" layout-align="space-around">
+					<md-button class="md-raised md-accent" ng-click="restFunctionCheck(counterProceedStop,$event)">Continue</md-button>
+					<md-button class="md-raised md-accent" ng-click="hide()">edit</md-button>
+				</div>
+			</div>
+			<div layout="row" layout-sm="column" layout-align="space-around" ng-if="showLoader==0 && dataDialog.error.code	==	1">
+				No Categories Found
+			</div>
+		</div>
+		<div ng-if="proceedStopFlag == 6">
+			<div layout="row" layout-sm="column" layout-align="space-around" ng-if="showLoader==1">
+				<md-progress-circular class="md-hue-2" md-mode="indeterminate"></md-progress-circular>
+			</div>
+			<div layout="column" layout-sm="column" layout-align="space-around">
+				<md-list>
+					<md-list-item ng-repeat="(key2,dataCheck) in ExclCategory | splitAll:'|~|'" class="blue">{{dataCheck}}</md-list-item>
+				</md-list>
+				<md-divider></md-divider>
+				<span class="popup_rtxt_new"><span style="color:#1273c0;font-weight:bold;font-size:21px;">Note : </span><br><span style="color:#1273c0;font-size:21px;">Package client will not be shared any feedback from phone/web/app.<br>Package client name will not appear in a category search on Phone.<br>Package clients will only get presence on web/wap/app.</span></span>
+				<md-divider></md-divider>
+				<div layout="row" layout-sm="column" layout-align="space-around">
+					<md-button class="md-raised md-accent" ng-click="restFunctionCheck(counterProceedStop,$event)">Yes</md-button>
+					<md-button class="md-raised md-accent" ng-click="hide()">No</md-button>
+				</div>
+			</div>
+			<div layout="row" layout-sm="column" layout-align="space-around" ng-if="showLoader==0 && dataDialog.error.code	==	1">
+				No Categories Found
+			</div>
+		</div>
+	</md-dialog-content>
+</md-dialog>

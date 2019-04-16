@@ -1,0 +1,264 @@
+<md-toolbar md-scroll-shrink style="background-color:white;" ng-controller="catPreviewController" >
+	<div class="md-toolbar-tools">
+		<md-button class="md-icon-button" aria-label="Settings" style="margin-left:20px;" ng-click="toggleLeft()">
+			<md-icon md-svg-icon="img/ic_menu_36px.svg" style="color:#000000;"></md-icon>
+        </md-button>
+        <h2>
+			<span>Attribute Page</span>
+        </h2>
+	</div>
+</md-toolbar>
+<section class="mid_sec mid_search-plus1" ng-if="complete_flg == 1">
+	<div class="container mid-otr">Loading Attributes Page... Please Wait...
+	</div>
+</section>
+<!--<div ng-if="complete_flg == 2"> -->
+	<!--<md-toolbar md-scroll-shrink style="background-color:#FFFFFF;border-bottom:1px solid #CCCCCC">
+		<div class="md-toolbar-tools">
+			<md-button class="md-icon-button" aria-label="Settings" style="margin-left:20px;" ng-click="toggleLeft()">
+				<md-icon md-svg-icon="img/ic_menu_36px.svg" style="color:#000000;"></md-icon>
+			</md-button>
+		</div>
+	</md-toolbar>-->
+	
+	
+<section class="mid-section wrapper windwhgt odf-service" style="min-height: 650px;top:15%;" ng-if="complete_flg == 2">
+		<div class="wrapper mb-10 srchotr inpterror">	
+			
+<!--
+			<md-toolbar md-scroll-shrink style="background-color:#C9CFAB" ng-controller="catPreviewController" >
+				<div class="md-toolbar-tools">
+					<md-button class="md-icon-button" aria-label="Settings" style="margin-left:20px;" ng-click="toggleLeft()">
+						<md-icon md-svg-icon="img/ic_menu_36px.svg" style="color:#000000;"></md-icon>
+					</md-button>
+				</div>
+			</md-toolbar>
+-->
+			
+			<!--<md-button class="md-icon-button" aria-label="Settings" style="margin-left:20px;" ng-click="toggleLeft()">
+				<md-icon md-svg-icon="img/ic_menu_36px.svg" style="color:#000000;"></md-icon>
+			</md-button>-->	
+		</div>
+		<div class="container" style="padding-bottom:100px;">
+			<div  class="row mb-0">
+				<div   class="wrapper pl-0 pr-0 rest_attr">
+					<!-- new attribute html start -->					
+					<div class="wrapper attrotr">						
+						<div class="wrapper mb-10 srchotr inpterror">
+							<input type="text" class="wrapper" placeholder="Type to search" id='searchKeyword' ng-model='searchKeyword' ng-keyup="show_hidden_divs($event,searchKeyword)">
+							<i class="gen_spr srch_i"></i>
+							
+																							
+						</div>
+						<div class="showSelected mt-20" ng-if="complete_flg==2"	 ng-repeat="(group_id, existingData) in existing" >
+							<ul ng-repeat = "(key, value) in existingData">								
+								<li class="fl"  ng-if="value.tpe == 'rad' || value.tpe == 'txt' || value.tpe=='sel' || value.tpe=='tfrmto' || value.tpe=='tim' || value.tpe=='mulsel' || value.tpe=='chk'">
+									<span ng-if="value.tpe == 'chk'" class="fl rmvdocex" id="exist_remove_{{value.uCde}}" ng-style="dispDiv1[value.uCde]" style="cursor:pointer;">{{value.aNm}}								
+									<span class="gen_spr wcir_i" ng-click='removeCrossed1(value.aNm,value.uCde,this.id,"checkbox",group_id);'></span></span>
+									
+									<span ng-if="value.tpe == 'rad'" class="fl rmvdocex" id="exist_remove_{{value.uCde}}" ng-style="radio_pre[value.uCde]" style="cursor:pointer;">{{value.aNm}}<span id="yes_{{value.uCde}}" ng-style="radio_yes[value.uCde]">- Yes</span>
+									<span id="no_{{value.uCde}}" ng-style="radio_no[value.uCde]">- No</span>
+									<span class="gen_spr wcir_i" ng-click="removeCrossed1(value.aNm,value.uCde,this.id,'radioButton',group_id)"></span></span>
+									
+									<span ng-if="value.tpe=='txt'" class="fl rmvdocex" id="exist_remove_{{value.uCde}}" ng-style="dispDiv1[value.uCde]" style="cursor:pointer;width:auto">{{value.aNm}}
+										<span id='text_{{value.uCde}}' ng-style="dispDiv1[value.uCde]" >- {{timefrmto_vals[value.uCde].val}}</span>
+										<span class="gen_spr wcir_i" ng-click='removeCrossed1(value.aNm,value.uCde,this.id,"textArea",group_id);'></span>
+									</span>
+									
+									<span ng-if="value.tpe=='sel'" class="fl rmvdocex" id="exist_remove_{{value.uCde}}" ng-style="dispDiv1[value.uCde]" style="cursor:pointer;width:auto">{{value.aNm}}																	
+										<span id='select_{{value.uCde}}' ng-style="dispDiv1[value.uCde]" >- {{timefrmto_vals[value.uCde].val}}</span>
+										<span class="gen_spr wcir_i" ng-click='removeCrossed1(value.aNm,value.uCde,this.id,"select",group_id);'></span>
+									</span> 
+									<span ng-if="value.tpe=='tfrmto'" class="fl rmvdocex" id="exist_remove_{{value.uCde}}" ng-style="timefrmto_pre[value.uCde]" style="cursor:pointer;width:auto">{{value.aNm}}
+										<span id='timeMul_{{value.uCde}}' ng-style="timefrmto_pre[value.uCde]"> - {{timefrmto_vals[value.uCde].val}}</span>
+										<span class="gen_spr wcir_i" ng-click='removeCrossed1(value.aNm,value.uCde,this.id,"timeFrmTo",group_id);'></span>
+									</span>  
+									
+									<span ng-if="value.tpe=='tim'" class="fl rmvdocex" id="exist_remove_{{value.uCde}}" ng-style='dispDiv1[value.uCde]' style="cursor:pointer;width:auto">{{value.aNm}}
+										<span id='timeSimple_{{value.uCde}}' ng-style='dispDiv1[value.uCde]'>- {{timefrmto_vals[value.uCde].val}}</span>
+										<span class="gen_spr wcir_i" ng-click='removeCrossed1(value.aNm,value.uCde,this.id,"simeplTime",group_id);'></span>
+									</span> 
+									<span ng-if="value.tpe=='mulsel'" class="fl rmvdocex" id="exist_remove_{{value.uCde}}" ng-style='dispDiv1[value.uCde]'  style="cursor:pointer;width:auto">{{value.aNm}}-
+										<span id='multiSelect_{{value.uCde}}' ng-style='dispDiv1[value.uCde]' >{{timefrmto_vals[value.uCde].val}}</span>
+										<span class="gen_spr wcir_i" ng-click='removeCrossed1(value.aNm,value.uCde,this.id,"multiSelect",group_id);'></span>
+									</span>
+								</li>	
+							</ul>
+						</div>
+						<div  class="showSelected mt-20" ng-if="complete_flg==2"	ng-repeat="(group_id, attrdata1) in fin_res.data" >
+							<ul  ng-repeat="(key, value) in attrdata1  | limitTo: limitArr[group_id]" ng-init="$index">	
+								<li class="fl"  ng-if="value.tpe == 'rad' || value.tpe == 'txt' || value.tpe=='sel' || value.tpe=='tfrmto' || value.tpe=='tim' || value.tpe=='mulsel' || value.tpe=='chk'">
+									<span ng-if="value.tpe == 'chk'" class="fl rmvdocex" id="remove_{{value.uCde}}" style="display:none;cursor:pointer;">{{value.aNm}}								
+									<span class="gen_spr wcir_i" ng-click='removeCrossed(value.aNm,value.uCde,this.id,"checkbox",group_id);'></span></span>
+									
+									<span ng-if="value.tpe == 'rad'" class="fl rmvdocex" id="remove_{{value.uCde}}" style="display:none;cursor:pointer;">{{value.aNm}}<span id="yes_{{value.uCde}}" ng-style="radio_yes[value.uCde]">- Yes</span>
+									<span id="no_{{value.uCde}}" ng-style="radio_no[value.uCde]">- No</span>
+									<span class="gen_spr wcir_i" ng-click="removeCrossed(value.aNm,value.uCde,this.id,'radioButton',group_id)"></span></span>
+									
+									<span ng-if="value.tpe=='txt'" class="fl rmvdocex" id="remove_{{value.uCde}}" style="display:none;cursor:pointer;width:auto">{{value.aNm}}
+										<span id='text_{{value.uCde}}' ng-style="dispDiv1[value.uCde]" >- {{timefrmto_vals[value.uCde].val}}</span>
+										<span class="gen_spr wcir_i" ng-click='removeCrossed(value.aNm,value.uCde,this.id,"textArea",group_id);'></span>
+									</span>
+									
+									<span ng-if="value.tpe=='sel'" class="fl rmvdocex" id="remove_{{value.uCde}}" style="display:none;cursor:pointer;width:auto">{{value.aNm}}																	
+										<span id='select_{{value.uCde}}' ng-style="dispDiv1[value.uCde]" >- {{timefrmto_vals[value.uCde].val}}</span>
+										<span class="gen_spr wcir_i" ng-click='removeCrossed(value.aNm,value.uCde,this.id,"select",group_id);'></span>
+									</span> 
+									<span ng-if="value.tpe=='tfrmto'" class="fl rmvdocex" id="remove_{{value.uCde}}" style="display:none;cursor:pointer;width:auto">{{value.aNm}}
+										<span id='timeMul_{{value.uCde}}' ng-style="timefrmto_pre[value.uCde]"> - {{timefrmto_vals[value.uCde].val}}</span>
+										<span class="gen_spr wcir_i" ng-click='removeCrossed(value.aNm,value.uCde,this.id,"timeFrmTo",group_id);'></span>
+									</span>  
+									
+									<span ng-if="value.tpe=='tim'" class="fl rmvdocex" id="remove_{{value.uCde}}"  style="display:none;cursor:pointer;width:auto">{{value.aNm}}
+										<span id='timeSimple_{{value.uCde}}' ng-style='dispDiv1[value.uCde]'>- {{timefrmto_vals[value.uCde].val}}</span>
+										<span class="gen_spr wcir_i" ng-click='removeCrossed(value.aNm,value.uCde,this.id,"simeplTime",group_id);'></span>
+									</span> 
+									<span ng-if="value.tpe=='mulsel'" class="fl rmvdocex" id="remove_{{value.uCde}}"  style="display:none;cursor:pointer;width:auto">{{value.aNm}}-
+										<span id='multiSelect_{{value.uCde}}' ng-style='dispDiv1[value.uCde]' >{{timefrmto_vals[value.uCde].val}}</span>
+										<span class="gen_spr wcir_i" ng-click='removeCrossed(value.aNm,value.uCde,this.id,"multiSelect",group_id);'></span>
+									</span>
+								</li>
+							</ul>
+						</div> 
+						<div class="wrapper accr mt-20">
+							<!-- main ul for sub header-->
+							<div ng-if="complete_flg==2" ng-repeat="group_id in notSorted(attributeData)"   ng-init="$index" >
+								<div class="wrapper tab "  ng-click="openDiv_slide($event,group_id,'tab',$index)" ng-class="{actv: $index==0 || $index==1}" id="{{group_id}}"><a class="wrapper ">{{name_sub_id_arr[group_id]}}<i class="fr gen_spr arwdwn_i"></i></a></div>	
+																			
+									<div class="wrapper cnt_attr bluscrl act mb-20" id="heading_{{$index}}" ng-style="dispDiv[$index]" > 
+										<ul ng-repeat="(key, value) in attributeData[group_id] | filter : searchKeyword | limitTo: limitArr[group_id]" class="chklst">
+											
+											<li class="fl"  ng-if="value.tpe == 'rad' || value.tpe == 'txt' || value.tpe=='sel' || value.tpe=='tfrmto' || value.tpe=='tim' || value.tpe=='mulsel' || value.tpe=='chk'">
+												
+												<span ng-if="value.tpe == 'chk'">
+													<label class='seramnt'>
+														<input type="checkbox" class="chkinpt_attr" id="{{value.uCde}}" ng-click="showSelected('checkBox',value.aNm,value.uCde)" ng-model="checkAttr[group_id][value.uCde]">
+														<span class="gen_spr chk_i_attr"></span>
+														<span class="txt_attr">{{value.aNm}}</span>
+													</label>
+												</span>																	
+												<span class="wrapper mb-20"  ng-if="value.tpe == 'rad'" style='margin-left:10px;'>
+													<div class="fl cel mt-20 mb-20" style='width:auto;'>
+														<label class="wrapper lbln">{{value.aNm}}</label>
+														<span ng-repeat="(key,value1) in radioAttr1[group_id][value.uCde]['options']">
+															<div class="mt-10 typotr">
+																<label class="fl radinpt" ng-click="showSelected('radioButton',value.aNm,value.uCde,radioAttr[group_id]['frm'+value.uCde])" style='margin-left:10px;'>
+																	<input name='{{value.uCde}}' type="radio" id="{{key+'_'+value.uCde}}" ng-model="radioAttr[group_id]['frm'+value.uCde]" value="{{value1}}" style="margin:5px 5px 5px 0px;"><span class="gen_spr rad_i" ></span>{{value1}} 
+																</label>
+															</div>
+														</span>														
+													</div>											
+												</span>													
+												<div class="fl cel50 mt-20 mb-20" ng-if="value.tpe=='tim'">
+													<label class="wrapper lbln">{{value.aNm}}</label>
+													<div class="wrapper mt-10" style='width:315px;'>
+														
+														<select  id="simeplTime_{{value.uCde}}" ng-model="timeAttr[group_id][value.uCde]" ng-options="optionval for optionval in default_time" ng-change="showSelected('simeplTime',value.aNm,value.uCde,default_time)"> 
+														</select>
+													</div>
+												</div>
+												<div class="fl cel50 mt-20 mb-20" ng-if="value.tpe=='tfrmto'">
+													<label class="wrapper lbln">{{value.aNm}}</label>
+													<div class="wrapper mt-10" style='width:315px;'>														
+														<select  id="timeFrm_{{value.uCde}}" ng-model="frmAttr[group_id]['frm'+value.uCde]" ng-options="optionval for optionval in default_time" ng-change="showSelected('timefromto',value.aNm,value.uCde,default_time)"> 
+														</select>
+														<select  id="timeTo_{{value.uCde}}" ng-model="toAttr[group_id]['to'+value.uCde]" ng-options="optionval for optionval in default_time" ng-change="showSelected('timefromto',value.aNm,value.uCde,default_time)">
+														</select>
+													</div>
+												</div>
+												
+												<div class="fl cel50 mt-20 mb-20" ng-if="value.tpe=='sel'">
+													<label class="wrapper lbln">{{value.aNm}}</label>
+													<div class="wrapper mt-10" style='width:315px;'>
+														<select ng-model="selectAttr[group_id][value.uCde]"  name="attributeSel" id="sel_{{value.uCde}}" ng-options="optval for optval in value.options" ng-change="showSelected('select',value.aNm,value.uCde,value.options)" ng-value='{{optval}}'>
+														</select>								
+													</div>
+													
+												</div>
+												 
+												<div class="fl cel50 mt-20 mb-20" ng-if="value.tpe=='mulsel'" style='width:auto;'>
+													<label class="wrapper lbln">{{value.aNm}}</label>
+													<div class="wrapper mt-10" style='width:315px;' >
+														<span class="fl drop" ng-click="openDiv(value.uCde,event)" style='width:266px;cursor:pointer;'>Select <i class="gen_spr ardwn_i"></i></span>				
+														<div class="drpdwn_attr openDiv" id="openDiv_{{value.uCde}}" style="width:265px;display:none;height:148px;background:#F8F8FF;z-index:999;overflow:auto;"  ng-blur="setDropFocus()">
+															<ul class="wrapper" ng-repeat="(key1,value2) in chkMulAttr1[group_id][value.uCde]['options']">
+																<li class="" style='width:230px;'> 
+																	<label><input type="checkbox" class="chkinpt_attr removeChk" id="multiSel_{{$index+'_'+value.uCde}}" ng-model="checkmult_model[group_id][value.uCde][value2]['val']" ng-click="showSelected('multiDropdown',value.aNm,value.uCde,key1,value2,$index)"><span class="gen_spr chk_i_attr"  ></span><span class="txt_attr">{{value2}}</span></label>
+																</li>																
+															 </ul>
+														</div>
+													</div>													
+												</div>
+												
+												<div class="wrapper"  ng-if="value.tpe=='txt'" style="float:none !important; ">
+													<div class="fl cel50 mt-20 mb-20" style='width:auto;'>
+														<label class="wrapper lbln">{{value.aNm}}</label>
+														<div class="mt-10">
+															<textarea ng-blur="showSelected('textArea',value.aNm,value.uCde)" ng-if="value.uCde=='res27' || value.uCde=='res62'" ng-model="textAttr[group_id][value.uCde]" id="{{value.uCde}}" style='width:255px;height:35px;' ></textarea>
+															<textarea ng-blur="showSelected('textArea',value.aNm,value.uCde)"  ng-if="value.uCde!='res27' && value.uCde!='res62'" ng-model="textAttr[group_id][value.uCde]" id="{{value.uCde}}"  style='width:255px;height:35px;' ></textarea>
+														</div>
+													</div>
+												</div>
+												
+											</li>														
+										</ul>																				
+										<span class="wrapper" ng-show="limitArr[group_id] < attributeData[group_id].length && attributeData[group_id].length > limitArr[group_id]">
+											<a href="#" style="color:#1274c0;" ng-click="showMoreAttributes(limitArr[group_id],attributeData[group_id].length,group_id)">Show More Attributes</a>
+										</span>				
+										<!--
+										<div class="showMore wrapper pt-15" ng-if="attributeVars[$index] < fin_res.data[group_id].length && fin_res.data[group_id].length	> 12"> <a href="#" style="color:#1274c0;" ng-click="showMoreAttributes($index,fin_res.data[group_id].length)" >Show More Attributes</a> </div>-->
+										
+										<span class="wrapper errotr" ng-show="!(attributeData[group_id]| filter:searchKeyword).length"  ><i class="gen_spr rd_alrt"></i> Sorry, no matches found for your term</span>
+									</div>
+								</div>								
+							</div> <!--main ul fr sub headers close-->
+						</div>						
+					</div>					
+				</div>
+			</div>
+		</div>		
+</section>
+<div  style="bottom:10px !important;background:white !important;width:100%;text-align:center;" ng-if="complete_flg == 2">			
+	<button class="button" style=" background: none repeat scroll 0 0 #f1f1f1;border: 1px solid #1274c0;border-radius: 2px;color: #1274c0;font-size: 14px;font-weight: 400;height: 35px;line-height: 35px;margin: 10px;padding: 0 !important;text-align: center;width: 160px;"  ng-click="$state.go('appHome.catpreview',{parid:parentid,page:extraHandler})" >Prev</button>			
+
+	<button class="button" style=" background: none repeat scroll 0 0 #f1f1f1;border: 1px solid #1274c0;border-radius: 2px;color: #1274c0;font-size: 14px;font-weight: 400;height: 35px;line-height: 35px;margin: 10px;padding: 0 !important;text-align: center;width: 160px;" ng-click="submitAttributes($event)">Submit & Proceed</button>	
+
+</div>
+
+<!--</div>-->
+
+<md-toolbar md-scroll-shrink style="background-color:#C9CFAB" ng-controller="catPreviewController" ng-if="fin_res.error.code == 1">
+	<div class="md-toolbar-tools">
+		<md-button class="md-icon-button" aria-label="Settings" style="margin-left:20px;" ng-click="toggleLeft()">
+			<md-icon md-svg-icon="img/ic_menu_36px.svg" style="color:#000000;"></md-icon>
+        </md-button>
+		<h2>
+			<span>Attribute Page</span>
+        </h2>
+		<span flex></span>
+		<div>
+			<md-button aria-label="Open phone interactions menu" class="md-fab md-primary" style="top:30px; right:40px; font-weight:bold;" ng-click="submitAttributes($event)">
+				<md-icon  md-menu-origin md-svg-icon="img/ic_arrow_forward_24px.svg"></md-icon>
+			</md-button>
+		</div>
+	</div>
+</md-toolbar>
+<section class="mainSection" subtract="500" ng-if="fin_res.error.code == 1">
+	<section class="mainContain">
+		<div>
+<!--
+			<md-content class="md-padding">
+				<div class="md-padding">
+					<md-card layout="column">
+						<md-card-content>
+							<div class="md-title blue" layout="row" layout-align="space-around">Attribute mapped category not found.</div>
+						</md-card-content>
+					</md-card>		
+				</div>
+			</md-content>
+-->
+		</div>
+	</section>
+</section>
+
+

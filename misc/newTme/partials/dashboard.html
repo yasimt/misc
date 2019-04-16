@@ -1,0 +1,30 @@
+<section class="hide dashWidget target" ng-controller="dashBoardController">
+	<nav class="navDash left">
+		<ul>
+			<li><a  ng-click="dashLinks('0')" class="clickMeAuto">Profile</a></li>
+			<li><a  ng-click="dashLinks('1')">Important Links</a></li>
+			<li><a  ng-click="dashLinks('2')">Deals Closed</a></li>
+<!--
+			<li><a  ng-click="dashLinks('3')">Speed Links</a></li>
+
+			<li><a  ng-click="dashLinks('4')">Sort Menu</a></li>
+			<li><a  ng-click="dashLinks('5')">Sort Report Menu</a></li>
+-->
+			<li><a  ng-click="dashLinks('6')">Lineage Data</a></li>
+		</ul>
+	</nav>
+	<section class="left mainDash windowResize" subtract="350" heightSet='set'>
+		<div class="leftPaneDash left" ng-if="showVal!=6" ng-include src="'partials/profile.html'"></div>
+		<div class="clear"></div>
+		<div class="leftPaneDash left windowResize animateSlide " ng-if="showVal==1" subtract="345"  ng-include src="'partials/implinks.html'"></div>
+		<div class="leftPaneDash left windowResize animateSlide " ng-if="showVal==2" subtract="345"  ng-include src="'partials/dealClosed.html'"></div>
+<!--
+		<div class="leftPaneDash left windowResize animateSlide " ng-if="showVal==3" subtract="345"  ng-include src="'partials/speedLinks.html'"></div>
+
+		<div class="leftPaneDash left windowResize animateSlide" ng-if="showVal==4" subtract="345"  ng-include src="'partials/sortMenu.html'"></div>
+		<div class="leftPaneDash left windowResize animateSlide" ng-if="showVal==5" subtract="345"  ng-include src="'partials/sortReportMenu.html'"></div>
+		-->
+		<div class="leftPaneDash left windowResize animateSlide" ng-if="showVal==6" subtract="345"  ng-include src="'partials/lineageData.html'"></div>
+	</section>
+	<div class="closeDash" style="cursor:pointer" ng-click="closeDash()"><img ng-src="img/closeWhite.png" /></div>
+</section>

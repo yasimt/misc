@@ -1,0 +1,169 @@
+<section class="mid_sec_learn" style="display:block;background-color:#eef1f8;overflow-x:hidden;">
+		<div class="mid-otr" style="height:500px;padding: 30px 25px 70px;">
+		<div style="font-size:40px;">Learning Center
+		</div>
+		<div class="wrpfl p0 mt20 mb20 srchbar" style="height:43px;width:76%;">
+			<div class="slct">
+				<div class="wrpfl slctbx">
+					<div layout="row" class="form-control" layout-align="space-between center"style="height:44px;background-color:#eef1f8;padding:0px 0px;">
+					  <select ng-change="filterchange()" ng-model="searchmediatype.searchmediavalue"  placeholder="Search All" style="width:100%;padding:10px;color:black;font-size:15px;background-color:#eef1f8;" >
+						  <option style="font-size:15px;" value="all">Select All</option>
+						  <option style="font-size:15px;"value="audio">Audio</option>
+						  <option style="font-size:15px;" value="video">Video</option>
+						  <option style="font-size:15px;" value="document">Document</option>
+					</select> 
+				  </div>
+				</div>
+			</div>
+			<div class="wrpfl p0 srchinpt" style="height:43px;width:97%;">
+				<input id="textsearch" style="height: 25px;" type="text" class="wrpfl inpt" placeholder="Search for audio, video, documents e.g. JD TV Ad (Main) - All in One App" ng-model="search_title.search" ng-disabled="alldata_tmegenio.errorcode==1" searchlist/>
+				<div  class=" btn-srch" style="width:40px;height:43px;position:absolute;left:103%;top:-41%;border-left:0px solid #c1ced7;cursor:pointer;z-index:2;"><img ng-click="upload_module_show(1,searchmediatype.searchmediavalue,search_title.search)" src="img/search.svg" height="40px" width="39px" style="padding:10px;" ></div>
+			</div>
+			
+		</div>
+		
+		<div class="tblotr">
+			<div class="wrpfl p0 mb10 tablresp">
+				<p ng-if="alldata_tmegenio.errorCode==1" style="font-weight:bold;color:#ddd;font-size:70px;text-align:center;">No Media To Show</p>
+				<table ng-if="alldata_tmegenio.errorCode==0 " class="wrpfl dtatbl" cellpadding="0" cellspacing="0">
+					<thead>
+						<tr>
+							<th>Display Picture</th>
+							<th width="35%">Title &amp; Description</th>
+							<th>Employee Name</th>
+							<th>Employee City</th>
+							<th>Media Type</th>
+							<th>Posted On</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="all_data in alldata_tmegenio.data">
+							<td ng-click="showpopupdiv_func($index,all_data)" align="center" class="vmid" style="cursor:pointer;">
+								<span class="pic"><img src="{{all_data.display_path}}" style="height:100%; width:100%;" alt="" title=""></span>
+							</td>
+							<td>
+								<span class="wrpfl tit" style="width: 25em;"><span style="word-break:break-word;width: 24em;">{{all_data.title}} </span><img ng-show="all_data.isNew == 1" ng-src="img/new24.png" alt="New"/></span>
+								<span ng-if="all_data.length_desc == all_data.description.length && all_data.description.length>100" class="wrpfl desc"style="word-break: break-all;">{{all_data.description | limitTo: all_data.length_desc}}<a style="margin-left:5px; cursor:pointer;"ng-if="all_data.description.length>100" ng-click="decreaserow($index)">hide</a></span>
+								<span ng-if="all_data.length_desc != all_data.description.length && all_data.description.length>100" class="wrpfl desc"style="word-break: break-all;">{{all_data.description | limitTo: all_data.length_desc}}<a style="margin-left:5px; cursor:pointer;"ng-if="all_data.description.length>100" ng-click="increaserow($index)">more</a></span>
+								<span ng-if="all_data.description.length <=100" class="wrpfl desc"style="word-break: break-all;">{{all_data.description | limitTo: all_data.length_desc}}</span>
+							</td>
+							<td>{{all_data.record_of}}</td>
+							<td>{{all_data.record_city}}</td>
+							<td>{{all_data.media_type}}</td>
+							<td>{{all_data.postedon}}</td>
+							
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div id="pagi_nation" style="position:unset;height:30px;float:right;" ng-if="alldata_tmegenio.errorCode==0">
+				<button ng-disabled="currentPage == 1" ng-click="upload_module_show('prev',searchmediatype.searchmediavalue)" style="background-color: white;border: 1px solid #cbe0f2; color:#53a1f3;margin: 5px;padding: 5px;">Prev</button>
+				<span ng-repeat="page in pagearr track by $index">
+					<span class="pagntion"><a class=" act" ng-if="currentPage==page" class="act" ng-click="upload_module_show($index+1)">{{page}}</a></span>
+					<span><a style="text-decoration: none;border: 0;outline: none;cursor: pointer;color:#039be5;font-weight:normal;padding:0 3px 0 0;" ng-if="currentPage!=page" ng-click="upload_module_show($index+1,searchmediatype.searchmediavalue)">{{page}}</a></span>	
+				</span>
+				<button ng-disabled="currentPage == numOfpages" ng-click="upload_module_show('next',searchmediatype.searchmediavalue)" style="background-color: white; border: 1px solid #cbe0f2;color:#53a1f3;margin: 5px;padding: 5px;">Next</button>
+				
+		</div>
+	</div>
+</section>
+
+<div ng-if="showpopupdiv==1"class="add_new_overlay" style="display:block;pointer-events:auto !important;z-index:1000"></div>
+<div id="media_showdiv" ng-if="showpopupdiv==1"style="display:block;position:fixed;top:20%;left:30%;width:540px;height:460px;z-index:1001;background-color:white;border: 1px 1px 1px 1px #ccc;box-sizing: border-box;border-radius: 5px;">
+	<div id="media_showdiv_header" class="header_div" style="height:35px;border-bottom:1px solid #ccc;">
+		<span class="close" ng-click="showpopupdiv_close()" style="left:93%;position: absolute;top: 0;cursor:pointer;"> <a  style="font-size:40px;color:#C0C0C0;">&times;</a></span>
+		<div style="margin:20px;">
+			<p style="font-size:22px;font-weight:500;white-space: nowrap;overflow: hidden;text-overflow: ellipsis; width: 21em;">{{alldata_tmegenio.data[index].title}}</p>
+		</div>
+	</div>
+		<div ng-if="alldata_tmegenio.data[index].media_show=='video'" style="height:321px;border-bottom:1px solid #ccc;">
+			<video width="500px" height="300px" style="margin-top:10px;margin-left:20px;" controls>
+				<source src="{{trustSrc(alldata_tmegenio.data[index].media_path)}}" >
+				Your browser does not support the video tag.
+			</video> 
+		</div>
+		<div id="media_show_audio" ng-if="alldata_tmegenio.data[index].media_show=='audio'" style="height:321px;border-bottom:1px solid #ccc">
+			<audio width="500px" height="300px" style="margin-top:65px;margin-left:100px;" controls>
+				<source src="{{trustSrc(alldata_tmegenio.data[index].media_path)}}" >
+				Your browser does not support the video tag.
+			</audio> 
+		</div>
+		<div ng-if="alldata_tmegenio.data[index].media_show=='youtube'" style="height:321px;border-bottom:1px solid #ccc">
+			<iframe width="500px" height="300px"  style="margin-top:10px;margin-left:20px;" src="{{trustSrc(alldata_tmegenio.data[index].media_path)}}"> 
+			</iframe>
+		</div>
+		<div ng-if="alldata_tmegenio.data[index].media_show=='image'" style="height:321px;border-bottom:1px solid #ccc">
+			<img width="500px" height="300px" style="margin-top:10px;margin-left:20px;" ng-src="{{alldata_tmegenio.data[index].media_path}}" class="md-card-image">
+		</div>
+	<div id="media_showdiv_footer" class="footer_div" style="height:100px;border-top:1px solid #ccc;">
+		<button  style="border: 1px solid #dce2e7;float: right;  font-size: 14px;height: 40px; line-height: 36px;margin-right:5px;width: 100px;background-color: #4082c4;color: #ffffff;margin-top:20px;" ng-click="showpopupdiv_close()">OK</button>
+	</div>
+</div>
+<div ng-if="showpopupdivaudio==1"class="add_new_overlay" style="display:block;pointer-events:auto !important;z-index:1000"></div>
+<div id="media_showdiv" ng-if="showpopupdivaudio==1"style="display:block;position:fixed;top:20%;left:30%;width:540px;height:300px;z-index:1001;background-color:white;border: 1px 1px 1px 1px #ccc;box-sizing: border-box;border-radius: 5px;">
+	<div id="media_showdiv_header" class="header_div" style="height:35px;border-bottom:1px solid #ccc;">
+		<span class="close" ng-click="showpopupdiv_close()" style="left:93%;position: absolute;top: 0;cursor:pointer;"> <a  style="font-size:40px;color:#C0C0C0;">&times;</a></span>
+		<div style="margin:20px;">
+			<p style="font-size:22px;font-weight:500;white-space: nowrap;overflow: hidden;text-overflow: ellipsis; width: 21em;">{{alldata_tmegenio.data[index].title}}</p>
+		</div>
+	</div>
+		<div id="media_show_audio" ng-if="alldata_tmegenio.data[index].media_show=='audio'" style="height:165px;border-bottom:1px solid #ccc">
+			<iframe style="position:absolute;top:80px;margin-top:5px;margin-left:50px;z-index: 3000;" width="550px" height="150px" scrolling="auto" frameborder="0" src="{{audio_show}}" >
+			  <p>Your browser does not support iframes.</p>
+			</iframe>
+		</div>
+	<div id="media_showdiv_footer" class="footer_div" style="height:100px;border-top:1px solid #ccc;">
+		<button  style="border: 1px solid #dce2e7;float: right;  font-size: 14px;height: 40px; line-height: 36px;margin-right:5px;width: 100px;background-color: #4082c4;color: #ffffff;margin-top:20px;" ng-click="showpopupdiv_close()">OK</button>
+	</div>
+</div>
+
+<!--
+compulsory
+-->
+<div class="add_new_overlay" ng-if="showdivmediamandatoryoverlay==1"style="display:block;pointer-events:auto !important;"></div>
+		<div id="modal2"ng-if="showmediamandatorydiv==1" style="display:block;position:fixed;top:20%;left:30%;width:540px;height:460px;z-index:1001;background-color:white;border: 1px 1px 1px 1px #ccc;box-sizing: border-box;border-radius: 5px;">
+			<div align="center" ng-repeat="all_data_mandatory in data_tmegenio_mandatory.data">
+				<div ng-if="media_index == $index">
+					<div id="media_showdiv_header" class="header_div" style="height:35px;border-bottom:1px solid #ccc;">
+						<div style="margin:20px;">
+							<p style="font-size:22px;font-weight:500;white-space: nowrap;overflow: hidden;text-overflow: ellipsis; width: 21em;">{{all_data_mandatory.title}}</p>
+						</div>
+					</div>
+					<div  style="width:540px;height:321px;border-bottom:1px solid #ccc">
+						<div ng-if="all_data_mandatory.media_show=='video'" style="height:321px;border-bottom:1px solid #ccc;">
+							<video width="500px" height="300px" style="margin-top:10px;margin-left:20px;" controls>
+								<source src="{{trustSrc(all_data_mandatory.media_path)}}" >
+								Your browser does not support the video tag.
+							</video> 
+						</div>
+						<div  ng-if="all_data_mandatory.media_show=='audio'" style="">
+							<iframe style="position:absolute;top:144px;margin-top:5px;margin-left:50px;z-index: 3000;left:0px;" width="550px" height="150px" scrolling="auto" frameborder="0" src="{{audio_show_mandatory}}" >
+						  <p>Your browser does not support iframes.</p>
+						</iframe>
+						</div>
+						<div ng-if="all_data_mandatory.media_show=='youtube'" style="height:321px;border-bottom:1px solid #ccc">
+							<iframe width="500px" height="300px"  style="margin-top:10px;margin-left:20px;" src="{{trustSrc(all_data_mandatory.media_path)}}"> 
+							</iframe>
+						</div>
+						<div ng-if="all_data_mandatory.media_show=='image'" style="height:321px;border-bottom:1px solid #ccc">
+							<img width="500px" height="300px" style="margin-top:10px;margin-left:20px;" ng-src="{{all_data_mandatory.media_path}}" class="md-card-image">
+						</div>
+						<div ng-if="all_data_mandatory.media_show=='document'" style="height:321px;border-bottom:1px solid #ccc">
+							<a href="{{all_data_mandatory.media_path}}" target="_blank"><img width="500px" height="300px" style="margin-top:10px;margin-left:20px;" ng-src="img/Click-to-Download.jpg" class="md-card-image"></a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer wrapper">
+				<div class="f_right">
+					<button class="modal-button" ng-click="nextmedia()" ng-if="closemediamandatorypopup==0" style="border: 1px solid #dce2e7;float: right;  font-size: 14px;height: 40px; line-height: 36px;margin-right:5px;width: 100px;background-color: #4082c4;color: #ffffff;margin-top:20px;">NEXT</button>
+					<button class="modal-button" ng-click="closemedia()" ng-if="closemediamandatorypopup==1" style="border: 1px solid #dce2e7;float: right;  font-size: 14px;height: 40px; line-height: 36px;margin-right:5px;width: 100px;background-color: #4082c4;color: #ffffff;margin-top:20px;">CLOSE</button>
+				</div>
+				<div class="f_left" >
+					<button class="modal-button" ng-if="pevmedia_button==1" ng-click="premedia()" style="border: 1px solid #dce2e7;float: right;  font-size: 14px;height: 40px; line-height: 36px;margin-right:5px;width: 100px;background-color: #4082c4;color: #ffffff;margin-top:20px;margin-left:5px;">PREVIOUS</button>
+				</div>
+			</div>
+		</div>
+</div>
+

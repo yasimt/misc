@@ -1,0 +1,102 @@
+<div class="right-slidbx">			
+	<div class="conboxSlide"> 
+	<div class="whtUget-bx" ng-click="slide_menu()"> What you get?  </div>
+		<ul> 
+			<li> Place your banner on your business related searches on Justdial.com. </li>
+			<li> Place your banner on your competitor’s listing page. </li>
+			<li> Banner will appear in rotation with other advertisers. </li>
+		</ul>
+	</div>
+</div>
+
+<div class="main-imgConBx wrpr text-center" id="tabs"> 
+	<div class="tabBx wrpr"> 
+		<ul class="wrpr">  
+			<li ng-class="{'selected_demo' : show_listing == 'category'}"><a ng-class="{'selected_demo_title' : show_listing == 'category'}"  ng-click="swith_option('category')">Sample Category Banners</a></li>
+			<li ng-class="{'selected_demo' : show_listing == 'competitor'}"> <a ng-class="{'selected_demo_title' : show_listing == 'competitor'}" ng-click="swith_option('competitor')">Sample Competitor Banners</a> </li>
+		</ul>  
+	</div>
+	<div class="con-bx wrpr" ng-if="show_listing == 'category' && show_img != 'category_sample'"> 
+		<div class="jdrrmaincontent" style="width:960px">
+			<div class="sml_bnr" style='margin-top: 30px; !important'>
+				<div class="smpl_text" style="padding-bottom: 30px;">							
+					<div style='float:right;display: inline-block;'>
+						<div style='background: url("img/banner_img/jdrr_sprite.png") no-repeat scroll -11px -13px / 215px auto rgba(0, 0, 0, 0);float: left;height: 35px;width: 36px;' ng-if='show_sample_banner == 1'></div>
+						<div style='background: url("img/banner_img/jdrr_sprite.png") no-repeat scroll -13px -67px / 215px auto rgba(0, 0, 0, 0);float: left;height: 59px;width: 34px;cursor:pointer' ng-if='show_sample_banner != 1' ng-click="banner_slider_prev()"></div>
+						<div style='background: url("img/banner_img/jdrr_sprite.png") repeat-y scroll -62px -67px / 215px auto rgba(0, 0, 0, 0);cursor: pointer;float: left;height: 35px;width: 35px;' ng-if='show_sample_banner != 5' ng-click='banner_slider_nxt()'></div>
+						<div style='background: url("img/banner_img/jdrr_sprite.png") repeat-y scroll -63px -13px / 215px auto rgba(0, 0, 0, 0);float: left;height: 35px;width: 35px;' ng-if='show_sample_banner == 5'></div>
+						<span class="spn">{{show_sample_banner}} of 5</span>
+					</div>
+				</div>
+				<div style='margin: 0 auto;max-width: 100%;width: 999px;'>
+					<div style="width: 100%; overflow: hidden; position: relative; height: 115px;">
+						<ul class="bxslider" style="width: 715%; position: relative; transition-duration: 0.5s;translate3d('0px','0px','0px')">
+						  <li style="float: left; list-style: none outside none; position: relative; width: 999px;"><img src="img/banner_img/banner_01.jpg" /></li>
+						  <li style="float: left; list-style: none outside none; position: relative; width: 999px;"><img src="img/banner_img/banner_02.jpg" /></li>
+						  <li style="float: left; list-style: none outside none; position: relative; width: 999px;"><img src="img/banner_img/banner_03.jpg" /></li>
+						  <li style="float: left; list-style: none outside none; position: relative; width: 999px;"><img src="img/banner_img/banner_04.jpg" /></li>
+						  <li style="float: left; list-style: none outside none; position: relative; width: 999px;"><img src="img/banner_img/banner_05.jpg" /></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="con-bx wrpr" ng-if="show_img == 'category_sample' && show_listing != 'competitor'" style="padding: 30px 0;"> 
+		<img src="img/banner_img/result_01.jpg" />
+	</div>
+	
+	<div class="con-bx wrpr" ng-if="show_listing == 'competitor' && show_img != 'competitor_sample'"> 
+		<div class="jdrrmaincontent" style="width:960px">
+			<div class="sml_bnr" style='margin-top: 30px; !important'>
+				<div class="smpl_text" style="padding-bottom: 30px;">
+					<div style='float:right;display: inline-block;'>
+						<div style='background: url("img/banner_img/jdrr_sprite.png") no-repeat scroll -11px -13px / 215px auto rgba(0, 0, 0, 0);float: left;height: 35px;width: 36px;' ng-if='show_sample_banner == 1'></div>
+						<div style='background: url("img/banner_img/jdrr_sprite.png") no-repeat scroll -13px -67px / 215px auto rgba(0, 0, 0, 0);float: left;height: 59px;width: 34px;cursor:pointer' ng-if='show_sample_banner != 1' ng-click="banner_slider_prev()"></div>
+						<div style='background: url("img/banner_img/jdrr_sprite.png") repeat-y scroll -62px -67px / 215px auto rgba(0, 0, 0, 0);cursor: pointer;float: left;height: 35px;width: 35px;' ng-if='show_sample_banner != 5' ng-click='banner_slider_nxt()'></div>
+						<div style='background: url("img/banner_img/jdrr_sprite.png") repeat-y scroll -63px -13px / 215px auto rgba(0, 0, 0, 0);float: left;height: 35px;width: 35px;' ng-if='show_sample_banner == 5'></div>
+						<span class="spn">{{show_sample_banner}} of 5</span>
+					</div>
+				</div>
+				
+				<div style='margin: 0 auto;max-width: 100%;width: 999px;padding-right: 30px;'>
+					<div style="width: 100%; overflow: hidden; position: relative; height: 115px;">
+						<ul class="bxslider" style="width: 715%; position: relative; transition-duration: 0.5s;translate3d('0px','0px','0px')">
+							<li style="float: left; list-style: none outside none; position: relative; width: 999px;">
+								<img src="img/banner_img/competitor_bnr1.png" />
+							</li>
+							<li style="float: left; list-style: none outside none; position: relative; width: 999px;">
+								<img src="img/banner_img/competitor_bnr2.png" />
+							</li>
+							<li style="float: left; list-style: none outside none; position: relative; width: 999px;">
+								<img src="img/banner_img/competitor_bnr3.png" />
+							</li>
+							<li style="float: left; list-style: none outside none; position: relative; width: 999px;">
+								<img src="img/banner_img/competitor_bnr4.png" />
+							</li>
+							<li style="float: left; list-style: none outside none; position: relative; width: 999px;">
+								<img src="img/banner_img/competitor_bnr5.png" />
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="con-bx wrpr" ng-if="show_img == 'competitor_sample' && show_listing != 'category'" style="padding: 55px 0;"> 
+		<img src="img/banner_img/details_01.jpg" />
+	</div>
+	
+</div>    
+
+<div id="posi_fx"></div>
+<div class="prnt" style="bottom: 50px;">
+	<div class="wrpr text-center butn-bx" id="btnSec"> 
+<!--
+		<button class="sendLink" ng-click='showlivephoneserach()' style="width: 140px;"> Go To Website </button> 
+-->
+		<button class="proceed mrg-left-15" ng-click="gotonxtdemo()"> Proceed </button> 
+	</div>
+</div>

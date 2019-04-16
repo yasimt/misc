@@ -1,0 +1,45 @@
+<md-dialog aria-label="Banner Popup" style="max-height:500px">	
+ 	<md-dialog-content layout='column' style='padding:0px'>
+		<div id='demo_link_wrapper' class="combo_dgn_popup" style="height: 500px; width: 600px;">
+			<span class="cls_btn" ng-click="closepopup()">X</span>
+			
+			<div class="ttle" ng-if="previewTheme == 0">
+				Send Website Theme Link
+			</div>
+			
+			<div class="ttle" ng-if="previewTheme == 1">
+				Preview Website Theme Link
+			</div>
+
+			
+			<div  id='mobile_wrapper' style="height: 330px;overflow-y: auto;padding-left: 35px;" >
+				
+				<div style="float:left;width: 300px;">
+					<p style="color: #747474;font-size: 18px;font-weight: bold;">Mobile No</p>
+					<div ng-repeat="x in mobile_count" style="margin-top:10px;">
+						<input type="text" style='width:40px;height:40px;background:#f1f1f1 none repeat scroll 0 0;border: 2px solid #f1f1f1;text-align:center;float: left;' value='+91' disabled/>
+						<input type="text" style='border: 2px solid #f1f1f1;font-size: 16px;height: 40px;width: 200px;' placeholder="Enter Mobile Number" id="entrmob" ng-model='mobile_arr[$index]' numbersonly>
+					</div>
+					<p style="color: #4484c5;padding: 10px;cursor: pointer;" ng-click="addmobile()">Add More Mobile Numbers</p>
+				</div>
+				
+				<div style="float:left;width: 300px;">
+					<p style="color: #747474;font-size: 18px;font-weight: bold;margin-top: 12px;">Email</p>
+					<input type="text" class="entrdmn"   placeholder="Enter EmailId" id="entrmob" ng-model="email_arr[$index]" style="border: 2px solid #f1f1f1;font-size: 16px;height: 40px;width: 300px;margin-top:10px" ng-repeat="x in email_count">
+					<p style="color: #4484c5;padding: 10px;cursor: pointer; width:100%"  ng-click="addemail()">Add More Email</p>
+				</div>
+			</div>
+			
+			<div id='demo_button_wrapper' style="border-top: 1px solid #adadad;bottom: 0;width: 100%;">
+				<div style="margin-top:25px">
+					<span class="" style="background: white none repeat scroll 0 0;border: 1px solid;color: #4484c5;float: right;font-size: 20px; margin-left: 2px;padding: 9px;text-align: center;width: 88px;margin-bottom: 25px;cursor: pointer;margin-right: 25px;" ng-click='closepopup()'>Close</span>
+					<span class="" style="float:right;background: #e58a00 none repeat scroll 0 0;width: 160px;text-align: center;padding: 10px;margin-right: 8px;font-size: 20px;color: white;margin-bottom: 25px;cursor: pointer;" ng-click='call_demo_api($event,0)' ng-if="previewTheme == 0">Send Theme Link</span>
+					<span class="" style="float:right;background: #e58a00 none repeat scroll 0 0;width: 160px;text-align: center;padding: 10px;margin-right: 8px;font-size: 20px;color: white;margin-bottom: 25px;cursor: pointer;" ng-click='call_demo_api($event,1)' ng-if="previewTheme == 1">Preview Theme Link</span>
+				</div>
+			</div>
+			<div style="display: none">
+				<a id="omniredirect" target="_blank"></a>
+			</div>
+		</div>
+	</md-dialog-content>
+</md-dialog>	

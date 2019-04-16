@@ -1,0 +1,27 @@
+<md-dialog aria-label="Categories">
+	<form>
+	<md-toolbar>
+		<div class="md-toolbar-tools">
+			<h2 style="color:#FFFFFF">Please enter the custom package value</h2>
+			<span flex></span>
+			<md-button class="md-icon-button" ng-click="hide()">
+				<md-icon md-svg-src="img/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+			</md-button>
+		</div>
+	</md-toolbar>
+	<md-dialog-content>
+		<md-input-container>
+			<div layout="column" layout-align="center end">
+				<div class="errorValInv red text-center" ng-if="captchaCorrect == 1">Cannot Submit because {{errorMessage}}</div>
+				<div layout="column" style="width:100%">
+					<label style="color:#000000;">Enter the package amount</label>
+					<input required type="text" name="rate" ng-model="customMixPackageVal" numbersonly="numbersonly" autocomplete="off">
+				</div>
+				<md-button class="md-fab md-primary" aria-label="Use Android" style="background:#ffc11b none repeat scroll 0 0" ng-click="submitCustomMixPackage()">
+					<md-icon md-svg-src="img/ic_arrow_forward_24px.svg" style="color: #199d25;"></md-icon>
+				</md-button>
+			</div>
+		</md-input-container>
+	</md-dialog-content>
+	</form>
+</md-dialog>

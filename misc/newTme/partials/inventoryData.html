@@ -1,0 +1,73 @@
+<section class="mainSection" subtract="500">
+	<section class="mainContain" ng-if="inventoryData.errorCode == 0" >
+		<h3 class="marBot10px" ng-if="mainPage	==	'search'">Below is your Search Result :</h3>
+		<nav ng-if="mainPage	!=	'search'" class="left margin8 slideIndi" >
+			<div class="left arrow marTop10px" ng-if="setArrowPos==1" ng-click="slideright($event)"><img ng-src="img/arrow-left.png" /></div>
+			<div class="navSlider left">
+				<ul class="navFilters left width100 marBot30px marTop10px repPop setTotContWidth">
+					<li ng-click="$state.go('appHome.filter',{srchparam:'all',srchWhich:'',currPage:'inventoryData'})" class="left">All</li><span class="left">/</span>
+					<li ng-click="showSubMenu($event)" class="left">companyname
+						<ul class="hide submenuUl">
+							<li class="left" ng-click="$state.go('appHome.filter',{srchparam:'companyname',srchWhich:'order-asc',currPage:'inventoryData'})">ORDER ASC</li><span class="left">/</span>
+							<li class="left" ng-click="$state.go('appHome.filter',{srchparam:'companyname',srchWhich:'order-desc',currPage:'inventoryData'})">ORDER DESC</li>
+						</ul>
+					</li><span class="left">/</span>
+				</ul>
+			</div>
+			<div class="left arrow marTop10px" ng-if="setArrowPos==1" ng-click="slideleft($event)"><img ng-src="img/arrow-right.png" /></div>
+		</nav>
+		<div class="left inputIndiSrch marBot30px"><input type="text" class="SearchCompany" ng-model="compFilter" placeholder="Search in loaded Contracts within this page" ></div>
+		<div class="left width50 slideIndi" ng-if="mainPage	!=	'search'">
+			<div class="left arrow marTop10px ng-scope" ng-click="sliderRightPage($event)" ng-if="setArrowPosPage==1">
+				<img ng-src="img/arrow-left.png" src="img/arrow-left.png">
+			</div>
+			<div class="pageSlider left">
+				<ul class="left text-center navFilters setTotContWidthPage repPop">
+					<li ng-class="{selectedPage: $index==selectedIndex || (selectedIndex == '' && n == 0)}" class="left pointer pageLi" ng-repeat="n in [] | range:pageContracts" ng-click="clickLoad(n)">{{n+1}}</li>
+				</ul>
+			</div>
+			<div class="left arrow marTop10px ng-scope" ng-click="slideleftPage($event)" ng-if="setArrowPosPage==1">
+				<img ng-src="img/arrow-right.png" src="img/arrow-right.png">
+			</div>
+		</div>
+
+		<div class="divbackground" ng-click="compFilter = ''"><img class="very-small-cross" ng-show="compFilter" ng-src="img/blackCross.jpeg"></div>
+
+			<div class="tab-container inv_class_info" >
+				<div class="shiftArrow leftShiftArrow"  ng-click="setPageShiftRight()"></div>
+				<div class="shiftArrow rightShiftArrow"ng-click="setPageShiftLeft()"></div>
+				<div class="headerTable width100 border-bot-grey">
+					<div class="tab-row repeat-animation">
+						<div class="left widthFree blue headFont">
+							<span>Companyname</span>
+						</div>
+						<div class="rotateRight">
+							<div class="left widthFreeSmall1 text-center blue headFont" >Company Id</div>
+							<div class="left widthFreeSmall1 text-center blue headFont">Categories</div>
+							<div class="left widthFreeSmall1 text-center blue headFont">Inventory</div>
+						</div>
+					</div>
+				</div>
+				<div class="bodyTable width100">
+					<div class="width100 border-bot-grey" ng-repeat="contract in inventoryData.data | filter:compFilter">
+						<div class="tab-row repeat-animation">
+							<div class="left widthFree" ng-class="{'green':contract.paidstatus=='1','blue':contract.paidstatus!='1'}">
+								<span ng-if="contract.companyname !='' && contract.companyname != null" ng-click="goToBform(contract)" title="{{contract.contractid}}" class="pointer">{{contract.companyname|capitalize}}</span>
+								<span ng-if="contract.companyname =='' || contract.companyname == null" ng-click="goToBform(contract)" class="pointer">Company Name Not Found</span>
+							</div>
+							<div class="rotateRight">
+								<div class="left widthFreeSmall1 pointer text-center" style="width:200px !important;">{{contract.contractid}}</div>
+								<div  ng-click="showDataModeTab($event,2,contract.contractid,contract.companyname)" class="left widthFreeSmall1 pointer text-center" ><img ng-src="img/more.png" /></div>
+								<div  ng-click="showDataModeTab($event,11,contract.contractid,contract.companyname)" class="left widthFreeSmall1 pointer text-center"><img ng-src="img/inventory_img.png" style="height:20px;width:20px;"/></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section ng-if="inventoryData.errorCode == 1" class="text-center">
+		<div style="font-size:294px;">:(</div>
+		<h2>Sorry! No contracts are allocated to you.</h2>
+	</section>
+</section>

@@ -1,0 +1,213 @@
+<md-toolbar md-scroll-shrink style="background-color:#FFFFFF" ng-init="onLoadCall()" ng-controller="catPreviewController">
+	<div class="md-toolbar-tools">
+		<md-button class="md-icon-button" aria-label="Settings" style="margin-left:20px;" ng-click="toggleLeft()">
+			<md-icon md-svg-icon="img/ic_menu_36px.svg" style="color:#000000;"></md-icon>
+		</md-button>
+		<h2>
+			<span>Budget Summary</span>
+		</h2>
+		<span flex></span>
+<!--
+		<md-button aria-label="Open phone interactions menu" class="md-fab md-primary" style="right:40px; font-weight:bold;" ng-click="$state.go('appHome.pricechart',{parid:$stateParams.parid,page:extraHandler,ver:$stateParams.ver});">
+					<md-icon  md-menu-origin md-svg-icon="img/ic_arrow_back_24px.svg"></md-icon>
+		</md-button>
+-->
+	</div>
+</md-toolbar>
+
+<div class="fin_container" style="font-family: 'Roboto',sans-serif;padding-bottom:30px;">
+	<div class="tab_wrp">
+		<div class="snbdr">
+		</div>
+
+		<div id="tab-1" class="tab-main tab-main-active" ng-click="!check_ecs && selected_payment_type=='upfront' && switch_option('campaign')"  ng-disabled="check_ecs">
+			<div class="hmain-text">Campaign Budget </div>
+			<span class="hsmal-text">(UPFRONT PAYMENT PLAN)</span>
+		</div>
+		<div id="tab-2" class="tab-main" ng-click="!tenure_miss && !tenure_less && !pure_jdrr &&  !omni_ultima && selected_payment_type=='ecs' && switch_option('ecs')">
+			<div class="hmain-text">Easy Monthly Installment Plan</div>
+			<span class="hsmal-text">(ECS)</span>
+		</div>
+	</div>
+	<div class="tab-content-wrp">
+
+		<div id="tab-1-content" class="tab-1-content">
+<!--			 <a href="#" class="imgl-offr" ng-show="show_upfront_inaugral">Inaugural Offer</a> 
+
+			<a href="#" class="imgl-offr">Inaugural Offer</a>
+-->
+			<div class="tot_prce">
+<!--
+				<a href="#" class="click-star dn hide_div" ng-click="show_dis_input()" ng-if="selected_camapign != 'combo1' &&  selected_camapign != 'combo2'">
+					***
+				</a>
+-->
+				<span ng-if="show_camp_error == false">
+					Total Price : <span>{{grand_price_offer | currency : '&#8377;' : 0}}</span>
+				</span>
+				<span ng-if="show_camp_error == true">
+					<span class=''>No campaign selected</span>
+				</span>
+				
+			</div>
+<!--
+			<a href="#" class="click-star dn hide_div" ng-click="show_omni_dis()" ng-if="selected_camapign != 'combo1' &&  selected_camapign != 'combo2' && selected_camapign != 'omni2'">
+					**
+			</a>
+-->
+			<table class="data-table" cellpadding="0" cellspacing="0">
+				<tr>
+					<td class="tt-txt">&nbsp;</td>
+					<td class="tt-txt" style="text-align:right">Price</td>
+<!--
+					<td class="tt-txt dn hide_div">Offer Price</td>
+					<td class="tt-txt dn  hide_div">Money Saved</td>
+-->
+				</tr>
+			</table> 
+			<table class="data-table" cellpadding="0" cellspacing="0" ng-repeat="key in notSorted(campaign_bud)">
+				<tr>
+					<td class="td-title" colspan="4">
+						{{campaign_bud[key].campaign_name}}  
+					</td>
+					
+				</tr>
+				<tr>
+					<td class="text-del">Campaign Cost</td>
+					<td class="text-del  clr-light hide_div"><i class="iro-sprite sml-rs"></i>{{campaign_bud[key].price}}</td>
+				</tr>
+				<tr>
+					<td class="text-del" >Sub Total</td>
+					<td class="text-del  clr-light hide_div"><i class="iro-sprite sml-rs"></i>{{campaign_bud[key].price}}</td>
+				</tr>
+			</table>
+			
+			<table class="data-table" cellpadding="0" cellspacing="0">
+				<tr>
+					<td class="text-del g-tot g-tot-lbl">Grand Total</td>
+					<td class="text-del   hide_div clr-light g-tot"><i class="iro-sprite sml-rs"></i>{{grand_price_offer}}</td>
+				</tr>
+			</table>
+
+		</div>
+
+		<div id="tab-2-content" class="tab-2-content">
+<!--
+			<a href="#" class="imgl-offr" ng-show="show_ecs_inaugral">Inaugural Offer</a>
+-->
+			<div class="tot_prce">
+				
+				<span ng-if="show_ecs_error == false">
+					Total Price :<span>{{ecs_tot_offer_price | currency : '&#8377;' :0}}</span>
+				</span>
+				
+				<span ng-if="show_ecs_error == true">
+					<span class=''>No campaign selected</span>
+				</span>
+				
+			</div>
+<!--
+			<a href="#" class="click-star dn hide_div" ng-click="show_omni_dis()" ng-if="selected_camapign != 'combo1' &&  selected_camapign != 'combo2' && selected_camapign != 'omni2'">
+					**
+			</a>
+-->
+			
+			<table class="data-table" cellpadding="0" cellspacing="0">
+				
+				<tr>
+					<td class="td-title" colspan="4">Advance Amount</td>
+				</tr>
+				
+				<tr>
+					<td class="text-del">&nbsp;</td>
+					<td class="text-del clr-light">Price</td>
+				</tr>
+				
+				<tr ng-repeat="adv_key in notSorted(ecs_bud_advance)">
+<!--
+						<input   class='left' type="checkbox" ng-model="adv_cb[ecs_bud_advance[adv_key].campaignid]" ng-change="delete_tot(ecs_bud_advance[adv_key].price,ecs_bud_advance[adv_key].offer_price,ecs_bud_advance[adv_key].discount,adv_cb[adv_key],ecs_bud_advance[adv_key].campaignid,1)"  ng-if="selected_camapign != 'combo1' &&  selected_camapign != 'combo2' && adv_key !=74 && adv_key != '473' && adv_key != '1173' && adv_key != '1273'">
+-->
+					<td class="text-del  clr-light hide_div">
+						 <span>{{ecs_bud_advance[adv_key].campaign_name}}</span>
+					</td>
+				
+					<td class="text-del  clr-light hide_div"><i class="iro-sprite sml-rs"></i>
+						<span>{{ecs_bud_advance[adv_key].price}}</span>
+					</td>
+				</tr>
+				
+				<tr>
+					<td class="text-del">Total</td>
+					<td class="text-del  clr-light hide_div"><i class="iro-sprite sml-rs"></i>{{adv_price_offer}}</td>
+				</tr>
+				
+			</table>
+			
+			
+			<table class="data-table" cellpadding="0" cellspacing="0" style="margin: auto; margin-bottom: 60px">
+				
+				<tr>
+					<td class="td-title" colspan="4">Monthly Amount</td>
+				</tr>
+				
+				<tr>
+					<td class="text-del">&nbsp;</td>
+					<td class="text-del clr-light">Price</td>
+				</tr>
+				
+				<tr ng-repeat="mon_key in notSorted(ecs_bud_monthly)">
+					<td class="text-del  clr-light hide_div">
+						<span>{{ecs_bud_monthly[mon_key].campaign_name}}</span>
+					</td>
+					<td class="text-del  clr-light hide_div">
+						<span>{{ecs_bud_monthly[mon_key].price}}</span>
+					</td>
+					
+				</tr>
+				
+				<tr>
+					<td class="text-del">Total</td>
+					<td class="text-del  clr-light hide_div"><i class="iro-sprite sml-rs"></i>{{mon_price_offer}}</td>
+				</tr>
+				
+			</table>
+		</div>
+
+	</div>
+</div>
+
+<div style='padding-bottom:40px;'></div>
+<div class="wrapper" id="">
+	<div class="wrapper">
+		<div class="button-abs" >
+			<div class="button-wrap" style="bottom: 0px;width:100%;" layout="row" layout-align="space-around" sitbutdown>
+				<div style="background: none repeat scroll 0 0 #FFFFFF;border-left: 1px solid #CCCCCC;border-right: 1px solid #CCCCCC;width: 1000px;">
+				
+<!--
+					<a ng-if="sel_option == 'campaign'" href="#" class="prcpay"  style="margin: 4px 0 0;" ng-click='proceed_payment("campaign",$event)'>Proceed To Payment</a>
+					<a ng-if="sel_option == 'ecs'" href="#" class="prcpay"  style="margin: 4px 0 0;" ng-click='proceed_payment("ecs",$event)'>Proceed To Payment</a>
+-->					
+					<div  style="bottom:0px !important;position:fixed !important;background:white !important;margin:0 auto !important;width:1000px; ">
+						<button class="button" ng-click="$state.go('appHome.pricechartnew',{parid:$stateParams.parid,page:extraHandler,ver:$stateParams.ver});" style=" background: none repeat scroll 0 0 #f1f1f1;border: 1px solid #1274c0;border-radius: 2px;color: #1274c0;font-size: 14px;font-weight: 400;height: 35px;line-height: 35px;padding: 0 !important;text-align: center;width: 160px;"> Prev </button>
+						
+						<button class="button" ng-if="sel_option == 'campaign'" ng-click='proceed_payment("campaign",$event)' style=" background: none repeat scroll 0 0 #f1f1f1;border: 1px solid #1274c0;border-radius: 2px;color: #1274c0;font-size: 14px;font-weight: 400;height: 35px;line-height: 35px;margin: 10px;padding: 0 !important;text-align: center;width: 160px;"> Proceed To Payment </button>
+						
+						<button class="button" ng-if="sel_option == 'ecs'" ng-click='proceed_payment("ecs",$event)' style=" background: none repeat scroll 0 0 #f1f1f1;border: 1px solid #1274c0;border-radius: 2px;color: #1274c0;font-size: 14px;font-weight: 400;height: 35px;line-height: 35px;margin: 10px;padding: 0 !important;text-align: center;width: 160px;"> Proceed To Payment </button>
+					</div>
+						
+				</div>
+			</div>
+		</div>
+
+	</div>
+<!--
+	<div class="wrapper" style="background:#F6F6F6; border-top:1px solid #E3E3E3;position:fixed !important;bottom:0px !important;">
+		<div class="">
+			<div class="jdrr_footer">
+					Copyright 2008-2016 Justdial.com. All Rights Reserved. <a href="#">Privacy</a> I <a href="#">Terms</a>
+			</div>
+		</div>
+	</div>
+-->
+</div>		
+		

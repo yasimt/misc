@@ -1,0 +1,461 @@
+<md-toolbar md-scroll-shrink style="background-color:#FFFFFF;border-bottom:1px solid #CCCCCC" ng-init="onLoadCall()" ng-controller="catPreviewController">
+	<div class="md-toolbar-tools">
+		<md-button class="md-icon-button" aria-label="Settings" style="margin-left:20px;" ng-click="toggleLeft()">
+			<md-icon md-svg-icon="img/ic_menu_36px.svg" style="color:#000000;"></md-icon>
+		</md-button>
+		<h2>
+			<span ng-if="showparam == 'Jdrr Certificate'">JDRR Certificate Demo</span>
+			<span ng-if="showparam == 'Banner'">JD Banner Demo</span>
+		</h2>
+		<span flex></span>
+	</div>
+</md-toolbar>
+
+<section class="" subtract="500">
+	<section class="mainContain">
+		
+		<div jdrrbutton>
+
+			 <div ng-if="showparam == 'Jdrr Certificate'">
+				 	
+				 	<div ng-if='showimg == 5'>
+				 		
+				 		<div id="jdrr-wrapper">
+							<div class="jdrrcontainer">
+								<div class="jdrrmaincontent">
+									<div class="big_bnr">
+										<div class="smpl_text">Sample Certificate With Ratings</div>
+										
+										<div id='rating_img'>
+											<img src="img/banner_img/6_JDRR.jpg" alt="">
+										</div>
+									</div>
+									
+								</div>
+								
+							</div>
+							
+							
+							<div id="posi_fx"></div>
+							<div class="prnt">
+								<div class="btm_btns _fixed" id="ftr_sctn" style='background:#FFFFFF;'>
+									<div class="btn_cont">
+										<input type="submit" value="Proceed" class="procced_btn" ng-click="nextbanner('Jdrr Certificate',6)">
+									</div>
+								</div>
+								
+								<div class="ftr_wrpper">
+									<div class="jdrrcontainer">
+										<div class="jdrr_footer">
+												Copyright 2008-2016 Justdial.com. All Rights Reserved. <a href="#">Privacy</a> I <a href="#">Terms</a>
+										</div><!--end of jdrr_footer-->
+									</div>
+								</div>
+							
+							</div>
+						</div>
+
+					</div>  
+					
+					<div ng-if='showimg == 6'>
+				 			
+				 		<div id="jdrr-wrapper">
+							<div class="jdrrcontainer">
+								<div class="jdrrmaincontent">
+									<div class="big_bnr">
+										<div class="smpl_text">Sample Certificate With No Ratings</div>
+										
+										<div id='rating_img'>
+											<img src="img/banner_img/7_JDRR.jpg" alt="">
+										</div>
+									</div>
+									
+								</div>
+								
+							</div>
+							
+							
+							<div id="posi_fx"></div>
+							<div class="prnt">
+								<div class="btm_btns _fixed" id="ftr_sctn" style='background:#FFFFFF;'>
+									<div class="btn_cont">
+										<input type="submit" value="Proceed" class="procced_btn" ng-click="nextbanner('Jdrr Certificate',7)">
+									</div>
+								</div>	
+								
+								<div class="ftr_wrpper">
+									<div class="jdrrcontainer">
+										<div class="jdrr_footer">
+												Copyright 2008-2016 Justdial.com. All Rights Reserved. <a href="#">Privacy</a> I <a href="#">Terms</a>
+										</div><!--end of jdrr_footer-->
+									</div>
+								</div>
+						
+							</div>
+						</div>	
+
+					</div>
+					
+					<div ng-if='showimg == 7'>
+						
+						<div id="jdrr-wrapper">
+							
+							<div class="jdrrcontainer">
+								<div class="jdrrmaincontent">
+									<div class="big_bnr">
+										<div class="smpl_text"><b>Live JDRR Certificate</b>
+											<div style='float:right;display: inline-block;'>
+												<div style='background: url("img/banner_img/jdrr_sprite.png") no-repeat scroll -11px -13px / 215px auto rgba(0, 0, 0, 0);float: left;height: 35px;width: 36px;' ng-if='show_jdrr_samaple == 1'></div>
+												<div style='background: url("img/banner_img/jdrr_sprite.png") no-repeat scroll -13px -67px / 215px auto rgba(0, 0, 0, 0);float: left;height: 59px;width: 34px;cursor:pointer' ng-if='show_jdrr_samaple != 1' ng-click="jdrr_slider_prev()"></div>
+												<div style='background: url("img/banner_img/jdrr_sprite.png") repeat-y scroll -62px -67px / 215px auto rgba(0, 0, 0, 0);cursor: pointer;float: left;height: 35px;width: 35px;' ng-if='show_jdrr_samaple != 3' ng-click='jdrr_slider_nxt()'></div>
+												<div style='background: url("img/banner_img/jdrr_sprite.png") repeat-y scroll -63px -13px / 215px auto rgba(0, 0, 0, 0);float: left;height: 35px;width: 35px;' ng-if='show_jdrr_samaple == 3'></div>
+												<span class="spn">{{show_jdrr_samaple}} of 3</span>
+											</div>
+										
+										</div>
+										
+										<div style="max-width: 100%; margin: 0px auto;width: 999px;">
+											<div style="width: 100%; overflow: hidden; position: relative; height: 743px;">
+												<ul class="bxslider" style="width: 515%; position: relative; transition-duration: 0.5s; transform: translate3d(0px, 0px, 0px);">
+													<li style="float: left; list-style: none outside none; position: relative; width: 999px;">
+														<img src="img/banner_img/8_JDRR.jpg" />
+													</li>
+													<li style="float: left; list-style: none outside none; position: relative; width: 999px;">
+														<img src="img/banner_img/9_JDRR.jpg" />
+													</li>
+													<li style="float: left; list-style: none outside none; position: relative; width: 999px;">
+														<img src="img/banner_img/10_JDRR.jpg" />
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+								</div><!--end of jdrrmaincontent-->
+								
+							</div>
+							
+							<div id="posi_fx"></div>
+							
+							<div class="prnt">
+								<div class="btm_btns _fixed" id="ftr_sctn" style='background:#FFFFFF;'>
+									<div class="btn_cont">
+<!--
+										<input type="submit" value="Add JDRR" class="procced_btn" ng-click="addjdrr()">
+										<input type="submit" value="Skip JDRR" class="procced_btn skip_btn" ng-click='deletejdrr()'>
+-->										<input type="submit" value="Proceed" class="procced_btn" ng-click="goto_budgetsummary()">
+									</div>
+								</div>		
+								
+								<div class="ftr_wrpper">
+									<div class="jdrrcontainer">
+										<div class="jdrr_footer">
+												Copyright 2008-2016 Justdial.com. All Rights Reserved. <a href="#">Privacy</a> I <a href="#">Terms</a>
+										</div><!--end of jdrr_footer-->
+									</div>
+								</div>
+					
+							</div>
+							
+						</div>
+						
+					</div>
+					
+			  
+			 </div>   <!--jdrr certificate div close-->
+
+			<div ng-if="showparam == 'Banner'">
+				
+				<div ng-if='showimg == 1'>
+					
+					<div id="jdrr-wrapper">	
+						<div class="jdrrcontainer">
+							<div class="jdrrmaincontent" style="height: 699px;">
+								<div class="sml_bnr" style='margin-top: 86px; !important'>
+									<div class="smpl_text">Sample Banner									
+										<div style='float:right;display: inline-block;'>
+											<div style='background: url("img/banner_img/jdrr_sprite.png") no-repeat scroll -11px -13px / 215px auto rgba(0, 0, 0, 0);float: left;height: 35px;width: 36px;' ng-if='show_sample_banner == 1'></div>
+											<div style='background: url("img/banner_img/jdrr_sprite.png") no-repeat scroll -13px -67px / 215px auto rgba(0, 0, 0, 0);float: left;height: 59px;width: 34px;cursor:pointer' ng-if='show_sample_banner != 1' ng-click="banner_slider_prev()"></div>
+											<div style='background: url("img/banner_img/jdrr_sprite.png") repeat-y scroll -62px -67px / 215px auto rgba(0, 0, 0, 0);cursor: pointer;float: left;height: 35px;width: 35px;' ng-if='show_sample_banner != 5' ng-click='banner_slider_nxt()'></div>
+											<div style='background: url("img/banner_img/jdrr_sprite.png") repeat-y scroll -63px -13px / 215px auto rgba(0, 0, 0, 0);float: left;height: 35px;width: 35px;' ng-if='show_sample_banner == 5'></div>
+											<span class="spn">{{show_sample_banner}} of 5</span>
+										</div>
+									</div>
+									<div style='margin: 0 auto;max-width: 100%;width: 999px;'>
+										<div style="width: 100%; overflow: hidden; position: relative; height: 115px;">
+											<ul class="bxslider" style="width: 715%; position: relative; transition-duration: 0.5s;translate3d('0px','0px','0px')">
+											  <li style="float: left; list-style: none outside none; position: relative; width: 999px;"><img src="img/banner_img/banner_01.jpg" /></li>
+											  <li style="float: left; list-style: none outside none; position: relative; width: 999px;"><img src="img/banner_img/banner_02.jpg" /></li>
+											  <li style="float: left; list-style: none outside none; position: relative; width: 999px;"><img src="img/banner_img/banner_03.jpg" /></li>
+											  <li style="float: left; list-style: none outside none; position: relative; width: 999px;"><img src="img/banner_img/banner_04.jpg" /></li>
+											  <li style="float: left; list-style: none outside none; position: relative; width: 999px;"><img src="img/banner_img/banner_05.jpg" /></li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div id="posi_fx"></div>
+						
+						<div class="prnt">
+							<div class="prnt">
+								<div class="btm_btns _fixed" id="ftr_sctn" style='background:#FFFFFF;'>
+									<div class="btn_cont">
+										<input type="submit" value="Proceed" class="procced_btn" ng-click="nextbanner('Banner',2)">
+									</div>
+								</div>	
+							</div>	
+							
+							<div class="ftr_wrpper ">
+								<div class="jdrrcontainer">
+									<div class="jdrr_footer">
+											Copyright 2008-2016 Justdial.com. All Rights Reserved. <a href="#">Privacy</a> I <a href="#">Terms</a>
+									</div><!--end of jdrr_footer-->
+								</div>
+							</div>
+								
+							
+						</div>
+						
+						
+						
+					</div>
+					
+				</div>
+				
+				<div ng-if='showimg == 2'> 
+					
+					<div id="jdrr-wrapper">
+						<div class="jdrrcontainer">
+							<div class="jdrrmaincontent">
+								<div class="big_bnr">
+									
+									<div class="smpl_text">Sample Banner
+										<div style='float:right;display: inline-block;'>
+											<div style='background: url("img/banner_img/jdrr_sprite.png") no-repeat scroll -11px -13px / 215px auto rgba(0, 0, 0, 0);float: left;height: 35px;width: 36px;' ng-if='show_sample_banner == 1' ng-if='show_sample_banner == 1'></div>
+											<div style='background: url("img/banner_img/jdrr_sprite.png") no-repeat scroll -13px -67px / 215px auto rgba(0, 0, 0, 0);float: left;height: 59px;width: 34px;cursor:pointer' ng-if='show_sample_banner != 1' ng-click="banner_slider_prev()"></div>
+											<div style='background: url("img/banner_img/jdrr_sprite.png") repeat-y scroll -62px -67px / 215px auto rgba(0, 0, 0, 0);cursor: pointer;float: left;height: 35px;width: 35px;' ng-if='show_sample_banner != 5' ng-click='banner_slider_nxt()'></div>
+											<div style='background: url("img/banner_img/jdrr_sprite.png") repeat-y scroll -63px -13px / 215px auto rgba(0, 0, 0, 0);float: left;height: 35px;width: 35px;' ng-if='show_sample_banner == 5'></div>
+											<span class="spn">{{show_sample_banner}} of 5</span>
+										</div>
+									</div>
+									
+									<div style="max-width: 100%; margin: 0px auto;width: 999px;">
+										<div style="width: 100%; overflow: hidden; position: relative; height: 775px;">
+											<ul class="bxslider" style="width: 715%; position: relative; transition-duration: 0.5s; transform: translate3d(0px, 0px, 0px);">
+												<li style='float: left; list-style: none outside none; position: relative; width: 999px;'>
+												  <img src="img/banner_img/result_01.jpg" />
+												</li>
+												<li style='float: left; list-style: none outside none; position: relative; width: 999px;'>
+													<img src="img/banner_img/result_02.jpg" />
+												</li>
+												<li style='float: left; list-style: none outside none; position: relative; width: 999px;'>
+													<img src="img/banner_img/result_03.jpg" />
+												</li>
+												<li style='float: left; list-style: none outside none; position: relative; width: 999px;'>
+													<img src="img/banner_img/result_04.jpg" />
+												</li>
+												<li style='float: left; list-style: none outside none; position: relative; width: 999px;'>
+													<img src="img/banner_img/result_05.jpg" />
+												</li>
+											</ul>
+										</div>
+									</div>
+									
+								</div>
+							</div>
+						</div>
+						
+						<div id="posi_fx"></div>
+						
+						<div class="prnt">
+							<div class="prnt">
+								<div class="btm_btns _fixed" id="ftr_sctn" style='background:#FFFFFF;'>
+									<div class="btn_cont">
+										<input type="submit" value="Show Live Demo" class="live_demo_btn" ng-click="showbannersample(13)">
+										
+										<input type="submit" value="Proceed" class="procced_btn" ng-click="nextbanner('Banner',3)">
+									</div>
+								</div>		
+							</div>	
+							
+							<div class="ftr_wrpper">
+								<div class="jdrrcontainer">
+									<div class="jdrr_footer">
+											Copyright 2008-2016 Justdial.com. All Rights Reserved. <a href="#">Privacy</a> I <a href="#">Terms</a>
+									</div><!--end of jdrr_footer-->
+								</div>
+							</div>
+							
+						</div>
+	
+					</div>
+					
+				</div>
+				
+				
+				<div ng-if='showimg == 3'>
+					
+					
+					<div id="jdrr-wrapper">
+						
+						<div class="jdrrcontainer">
+							<div class="jdrrmaincontent" style="height: 699px;">
+								<div class="sml_bnr" style='margin-top: 86px; !important'>
+									<div class="smpl_text">Sample Banner 
+										<div style='float:right;display: inline-block;'>
+											<div style='background: url("img/banner_img/jdrr_sprite.png") no-repeat scroll -11px -13px / 215px auto rgba(0, 0, 0, 0);float: left;height: 35px;width: 36px;' ng-if='show_sample_banner == 1'></div>
+											<div style='background: url("img/banner_img/jdrr_sprite.png") no-repeat scroll -13px -67px / 215px auto rgba(0, 0, 0, 0);float: left;height: 59px;width: 34px;cursor:pointer' ng-if='show_sample_banner != 1' ng-click="banner_slider_prev()"></div>
+											<div style='background: url("img/banner_img/jdrr_sprite.png") repeat-y scroll -62px -67px / 215px auto rgba(0, 0, 0, 0);cursor: pointer;float: left;height: 35px;width: 35px;' ng-if='show_sample_banner != 5' ng-click='banner_slider_nxt()'></div>
+											<div style='background: url("img/banner_img/jdrr_sprite.png") repeat-y scroll -63px -13px / 215px auto rgba(0, 0, 0, 0);float: left;height: 35px;width: 35px;' ng-if='show_sample_banner == 5'></div>
+											<span class="spn">{{show_sample_banner}} of 5</span>
+										</div>
+									</div>
+									
+									<div style='margin: 0 auto;max-width: 100%;width: 999px;'>
+										<div style="width: 100%; overflow: hidden; position: relative; height: 115px;">
+											<ul class="bxslider" style="width: 715%; position: relative; transition-duration: 0.5s;translate3d('0px','0px','0px')">
+												<li style="float: left; list-style: none outside none; position: relative; width: 999px;">
+													<img src="img/banner_img/competitor_bnr1.png" />
+												</li>
+												<li style="float: left; list-style: none outside none; position: relative; width: 999px;">
+													<img src="img/banner_img/competitor_bnr2.png" />
+												</li>
+												<li style="float: left; list-style: none outside none; position: relative; width: 999px;">
+													<img src="img/banner_img/competitor_bnr3.png" />
+												</li>
+												<li style="float: left; list-style: none outside none; position: relative; width: 999px;">
+													<img src="img/banner_img/competitor_bnr4.png" />
+												</li>
+												<li style="float: left; list-style: none outside none; position: relative; width: 999px;">
+													<img src="img/banner_img/competitor_bnr5.png" />
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+
+							</div>
+						</div>
+						
+						
+						<div id="posi_fx"></div>
+						
+						<div class="prnt">
+							<div class="prnt">
+								<div class="btm_btns _fixed" id="ftr_sctn" style='background:#FFFFFF;'>
+									<div class="btn_cont">
+										<input type="submit" value="Proceed" class="procced_btn" ng-click="nextbanner('Banner',4)">
+									</div>
+								</div>	
+							</div>	
+							
+							<div class="ftr_wrpper ">
+								<div class="jdrrcontainer">
+									<div class="jdrr_footer">
+											Copyright 2008-2016 Justdial.com. All Rights Reserved. <a href="#">Privacy</a> I <a href="#">Terms</a>
+									</div><!--end of jdrr_footer-->
+								</div>
+							</div>
+								
+							
+						</div>
+						
+						
+						
+					</div>	
+						
+				</div>
+				
+				<div ng-if='showimg == 4'> 
+					
+					<div id="jdrr-wrapper">
+						
+						<div class="jdrrcontainer">
+							<div class="jdrrmaincontent">
+								<div class="big_bnr">
+									<div class="smpl_text">Sample Banner
+										<div style='float:right;display: inline-block;'>
+											<div style='background: url("img/banner_img/jdrr_sprite.png") no-repeat scroll -11px -13px / 215px auto rgba(0, 0, 0, 0);float: left;height: 35px;width: 36px;' ng-if='show_sample_banner == 1'></div>
+											<div style='background: url("img/banner_img/jdrr_sprite.png") no-repeat scroll -13px -67px / 215px auto rgba(0, 0, 0, 0);float: left;height: 59px;width: 34px;cursor:pointer' ng-if='show_sample_banner != 1' ng-click="banner_slider_prev()"></div>
+											<div style='background: url("img/banner_img/jdrr_sprite.png") repeat-y scroll -62px -67px / 215px auto rgba(0, 0, 0, 0);cursor: pointer;float: left;height: 35px;width: 35px;' ng-if='show_sample_banner != 5' ng-click='banner_slider_nxt()'></div>
+											<div style='background: url("img/banner_img/jdrr_sprite.png") repeat-y scroll -63px -13px / 215px auto rgba(0, 0, 0, 0);float: left;height: 35px;width: 35px;' ng-if='show_sample_banner == 5'></div>
+											<span class="spn">{{show_sample_banner}} of 5</span>
+										</div>
+									
+									</div>
+									
+									<div style="max-width: 100%; margin: 0px auto;width: 999px;">
+										<div style="width: 100%; overflow: hidden; position: relative; height: 895px;">
+											<ul class="bxslider" style="width: 715%; position: relative; transition-duration: 0.5s; transform: translate3d(0px, 0px, 0px);">
+												<li style='float: left; list-style: none outside none; position: relative; width: 999px;'>
+													<img src="img/banner_img/details_01.jpg" />
+												</li>
+												<li style='float: left; list-style: none outside none; position: relative; width: 999px;'>
+													<img src="img/banner_img/details_02.jpg" />
+												</li>
+												<li style='float: left; list-style: none outside none; position: relative; width: 999px;'>
+													<img src="img//banner_img/details_03.jpg" />
+												</li>
+												<li style='float: left; list-style: none outside none; position: relative; width: 999px;'>
+													<img src="img//banner_img/details_04.jpg" />
+												</li>
+												<li style='float: left; list-style: none outside none; position: relative; width: 999px;'>
+													<img src="img//banner_img/details_05.jpg" />
+												</li>
+											</ul>
+										</div>
+									</div>
+									
+								</div>
+							</div><!--end of jdrrmaincontent-->
+						</div>
+						
+						<div id="posi_fx"></div>
+						<div class="prnt">
+							<div class="btm_btns _fixed" id="ftr_sctn" style='background:#FFFFFF;'>
+								<div class="btn_cont">
+								<!-- 	<a href="#" class="left" style="color: #FF9A00;font-size: 30px;margin-right: 13px;" ng-click="show_oly_jdrr = !show_oly_jdrr">
+											*** 
+									</a>
+									<input ng-show="show_oly_jdrr" type="submit" value="Add JDRR Only" class="live_demo_btn" style="color:#FF9A00; background-color:#fff; border:1px solid #FF9A00;transition:none;margin-right:10px" ng-click='addonlyjdrr()'>
+									
+									<input type="submit" value="Show Live Demo" class="live_demo_btn" ng-click='showbannersample(5)'>
+									
+									<input type="submit" value="Skip JDRR Plus"  style="color:#4182C4; background-color:#fff; border:1px solid #4182C4;transition:none;margin-left:10px" class="live_demo_btn" ng-click='deletejdrrplus()'>
+									
+									<input type="submit" value="Add JDRR Plus" class="procced_btn" ng-click='addspecification($event)'> -->
+<!--								
+									<input type="submit" value="Skip Banner" class="procced_btn skip_btn"  ng-click='deletebanner()'>
+
+-->
+									<input type="submit" value="Show Live Demo" class="live_demo_btn" ng-click='showbannersample(5)'>
+									
+									<input type="submit" value="Proceed" class="procced_btn" ng-click="jdrrplus_proceed()">
+								</div>
+							</div>	
+							
+							<div class="ftr_wrpper">
+								<div class="jdrrcontainer">
+									<div class="jdrr_footer">
+											Copyright 2008-2016 Justdial.com. All Rights Reserved. <a href="#">Privacy</a> I <a href="#">Terms</a>
+									</div><!--end of jdrr_footer-->
+								</div>
+							</div>
+					
+								
+						</div>
+	
+	
+						
+					</div>
+
+				</div>
+				
+			</div> <!--banner certificate div close-->
+		</div>
+		
+	</section>
+</section>
+				
+

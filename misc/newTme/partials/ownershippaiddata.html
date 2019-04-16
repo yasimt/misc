@@ -1,0 +1,229 @@
+<section class="mainSection" subtract="500">
+	<section class="mainContain" ng-if="ownershipdata.errorCode == 0">
+		<h3 class="marBot10px" ng-if="mainPage	==	'search'">Below is your Search Result :</h3>
+		<nav ng-if="mainPage	!=	'search'" class="left margin8 slideIndi " >
+			<div class="left arrow marTop10px" ng-if="setArrowPos==1" ng-click="slideright($event)"><img ng-src="img/arrow-left.png" /></div>
+			<div class="navSlider left">
+				<ul class="navFilters left width100 marBot30px marTop10px repPop setTotContWidth">
+					<li ng-click="$state.go('appHome.filter',{srchparam:'all',srchWhich:'',currPage:'ownershippaiddata'})" class="left">All</li><span class="left">/</span>
+					<li ng-click="showSubMenu($event)" class="left">CompanyName
+						<ul class="hide submenuUl" style="width:250px;">
+							<li class="left" ng-click="$state.go('appHome.filter',{srchparam:'companyname',srchWhich:'order-asc',currPage:'ownershippaiddata'})">ORDER ASC</li><span class="left">/</span>
+							<li class="left" ng-click="$state.go('appHome.filter',{srchparam:'companyname',srchWhich:'order-desc',currPage:'ownershippaiddata'})">ORDER DESC</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div class="left arrow marTop10px" ng-if="setArrowPos==1" ng-click="slideleft($event)"><img ng-src="img/arrow-right.png" /></div>
+		</nav>
+		<div class="left inputIndiSrch marBot30px"><input type="text" class="SearchCompany" ng-model="compFilter" placeholder="Search in loaded Contracts within this page" ></div>
+		<div class="left width50 slideIndi" ng-if="mainPage	!=	'search'">
+			<div class="left arrow marTop10px ng-scope" ng-click="sliderRightPage($event)" ng-if="setArrowPosPage==1">
+				<img ng-src="img/arrow-left.png" src="img/arrow-left.png">
+			</div>
+			<div class="pageSlider left">
+				<ul class="left text-center navFilters setTotContWidthPage repPop">
+					<li ng-class="{selectedPage: $index==selectedIndex || (selectedIndex == '' && n == 0)}" class="left pointer pageLi" ng-repeat="n in [] | range:pageContracts" ng-click="clickLoad(n)">{{n+1}}</li>
+				</ul>
+			</div>
+			<div class="left arrow marTop10px ng-scope" ng-click="slideleftPage($event)" ng-if="setArrowPosPage==1">
+				<img ng-src="img/arrow-right.png" src="img/arrow-right.png">
+			</div>
+		</div>
+		<div class="right marBot10px"><div class="left marRt10px" ng-click="changeView($event,2)"><img ng-src="img/list.png" /></div><div class="left marRt20px" ng-click="changeView($event,1)"><img ng-src="img/grid.png" /></div></div>
+		<div class="divbackground" ng-click="compFilter = ''"><img class="very-small-cross" ng-show="compFilter" ng-src="img/blackCross.jpeg"></div>
+		<div class="incDiv left width100">
+			<div class="panelDiv repeat-animation" ng-repeat="contract in ownershipdata.data | filter:compFilter" ng-if="viewParam	==	1">
+				<div class="contDivs left front">
+					<div class="innerContDiv">
+						<div class="compNameTile blue pointer" ng-click="goToBform(contract)"><h3>{{contract.companyname}}</h3></div>
+						<div class="parentidShow arial small-font darkGrey mar-bot-5 | filter:compFilter">{{contract.contractid}}</div>
+						<p class="arial small-font darkGrey" ng-if="contract.allocationtype != '' && contract.allocationtype != null" ng-switch on="contract.allocationtype">
+									<span ng-switch-when="25">Allocated Appointment on </span>
+									<span ng-switch-when="99">Appointment Refixed on </span>
+									<span ng-switch-when="22">Call Back on </span>
+									<span ng-switch-when="208">Call to ME on </span>
+									<span ng-switch-when="12">Company Closed on </span>
+									<span ng-switch-when="114">Discard Call on </span>
+									<span ng-switch-when="9">Do Not Disturb on </span>
+									<span ng-switch-when="24">Follow up on </span>
+									<span ng-switch-when="244">Jda Demo Appointment Fixed on </span>
+									<span ng-switch-when="6">Not Contactable on </span>
+									<span ng-switch-when="21">Not Interested on </span>
+									<span ng-switch-when="98">Not in Business on </span>
+									<span ng-switch-when="207">Paid Client on </span>
+									<span ng-switch-when="7">Wrong Number on </span>
+									<span ng-switch-when="256">Bank Account Details Updated on </span>
+									<span ng-switch-when="203">Interested for JDFOS AND TR on </span>
+									<span ng-switch-when="205">Interested only for JDFOS on </span>
+									<span ng-switch-when="204">Interested only for JDTRS on </span>
+									<span ng-switch-when="257">No Bank Account on </span>
+									<span ng-switch-when="127">No Menu on </span>
+									<span ng-switch-when="259">Not interested for Online payment on </span>
+									<span ng-switch-when="180"> Shopfront deal closed on </span>
+									<span ng-switch-when="10">Interested for only pickup on </span>
+									<span ng-switch-when="150">Not interested for shop front on </span>
+									<span ng-switch-when="186">SF_B form verified/Updated on </span>
+									<span ng-switch-when="124">Call back – Contact details verified on </span>
+									<span ng-switch-when="116">Interested in Master App on </span>
+									<span ng-switch-when="119">Not Applicable for Master App on </span>
+									<span ng-switch-when="117">Not Interested in Master App on </span>
+									<span ng-switch-when="90">Not providing Home Delivery/Table Reservation on </span>
+									<span ng-switch-when="209">Voice Mail OR IVR on </span>
+									<span ng-switch-when="245">Call Transferred To Helpdesk on </span>
+									<span ng-switch-when="234">Contract Not Found on </span>
+									<span ng-switch-when="225">Doc Not Interested on </span>
+									<span ng-switch-when="238">Doc Using Other Software on </span>
+									<span ng-switch-when="237">Doc Using Pra*** on </span>
+									<span ng-switch-when="221">Doctor Already Active on </span>
+									<span ng-switch-when="241">Doctor Not Tech Savvy on </span>
+									<span ng-switch-when="236">Inbound Activation And Tutorial Done on </span>
+									<span ng-switch-when="224">Incorrect Emailid on </span>
+									<span ng-switch-when="228">Invalid Hospital Data on </span>
+									<span ng-switch-when="239">No Internet Access on </span>
+									<span ng-switch-when="242">Not Getting Leads on </span>
+									<span ng-switch-when="227">Others</span>
+									<span ng-switch-when="211">Outbound Activation And Tutorial Done on </span>
+									<span ng-switch-when="222">Query Addressed on </span>
+									<span ng-switch-when="223">Query Pending on </span>
+									<span ng-switch-when="240">SW Is Time Consuming/Complex on </span>
+									<span ng-switch-when="243">SW Not Required For Walk In Patients on </span>
+									<span ng-switch-when="235">Tutorial Follow Up on </span>
+									<span ng-switch-default>--</span>
+									<span>{{contract.allocationtime}}</span>
+								</p>
+						<div class="slideIndi left positionAbs bottom0 width100">
+							<div class="left arrow marTop10px" ng-click="slideright($event)"><img ng-src="img/arrow-left.png" /></div>
+							<div class="upperLayerMenu left">
+								<div class="left repPop setTotContWidth">
+									<div ng-click="showCats($event,contract.contractid)" class="left repDivsIndi very-small-font darkGrey arial text-center marRt10px marTop7px"><div class="marBot10px"><img ng-src="img/more.png" /></div><div>Show Cats</div></div>
+									<a ng-href="../00_Payment_Rework/add_on_payment/mode_selection.php?parentid={{contract.contractid}}&compname={{contract.companyname | urlEncode}}" target="_blank"><div class="left repDivsIndi very-small-font darkGrey arial text-center marRt10px"><div class="marBot10px"><img ng-src="img/add-on.png" /></div><div>AddOn Payment</div></div></a>
+									<a ng-href="../00_Payment_Rework/accounts/mandate_selection.php?parentid={{contract.contractid}}&compname={{contract.companyname | urlEncode}}&flag=" target="_blank"><div class="left repDivsIndi very-small-font darkGrey arial text-center marRt10px"><div class="marBot10px"><h3>EM</h3></div><div>Ext. Mandate</div></div></a>
+									<div class="left repDivsIndi very-small-font darkGrey arial text-center marRt10px" ng-click="checkTrackerRep($event,contract.contractid)"><div class="marBot10px"><img ng-src="img/report-small.png" /></div><div>Tracker Report</div></div>
+									<a ng-href="../tmAlloc/companyFeedbackRep.php?contractID={{contract.contractid}}" target="_blank"><div class="left repDivsIndi very-small-font darkGrey arial text-center marRt10px"><div class="marBot10px"><img ng-src="img/phone2.png" /></div><div>Statement/Feed</div></div></a>
+								</div>
+							</div>
+							<div class="left arrow marTop10px" ng-click="slideleft($event)"><img ng-src="img/arrow-right.png" /></div>
+						</div>
+					</div>
+					<div class="catupeven coverOverlay hide colorWhite">
+						<h3 class="loadingMini hide colorWhite">Loading...</h3>
+						<a><div class="right arial" ng-click="closeOverlay($event)">X</div></a>
+						<div class="catContain" ng-if="categories.errorCode=='0'">
+							<h3 class="colorWhite">Categories for {{contract.companyname|capitalize}}</h3>
+							<div class="catsShow" ng-repeat="cats in categories.data">
+								{{cats.category_name}}
+							</div>
+						</div>
+						<div class="catContain" ng-if="categories.errorCode=='1'">
+							<h3 class="colorWhite">Categories Not Present</h3>
+						</div>
+					</div>
+					<div class="trackeroverlay coverOverlay hide colorWhite">
+						<h3 class="loadingMini hide colorWhite">Loading...</h3>
+						<a><div class="right arial" ng-click="closeOverlay($event)">X</div></a>
+						<div class="catContain">
+							<div class="colorWhite text-center" ng-if="trackRepChk.ECS == 1"><a class="colorWhite" ng-href="../00_Payment_Rework/accounts/ecs_tracker_report_tme.php?parentid={{contract.contractid}}&flag=1&me_tme={{employees.hrInfo.data.empcode}}" target="_blank"><h3 class="colorWhite">Click to see report for ECS</h3></a></div>
+							<div class="colorWhite text-center" ng-if="trackRepChk.SI == 1"><a class="colorWhite" ng-href="../00_Payment_Rework/accounts/si_tracker_report_tme.php?parentid={{contract.contractid}}&flag=2&me_tme={{employees.hrInfo.data.empcode}}" target="_blank"><h3 class="colorWhite">Click to see report for SI</h3></a></div>
+							<div class="colorWhite text-center" ng-if="trackRepChk.SI == 0 && trackRepChk.ECS == 0"><h3 class="colorWhite">Track Report is not available</h3></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="tab-container width100" ng-if="viewParam	==	2">
+				<div class="shiftArrow leftShiftArrow"  ng-click="setPageShiftRight()"></div>
+				<div class="shiftArrow rightShiftArrow"ng-click="setPageShiftLeft()"></div>
+				<div class="headerTable width100 border-bot-grey">
+					<div class="tab-row repeat-animation">
+						<div class="left widthFree blue headFont">
+							<span>Companyname</span>
+						</div>
+						<div class="rotateRight">
+							<div class="left widthFreeSmall text-center blue headFont">Company Id</div>
+							<div class="left widthFreeSmall text-center blue headFont">AllocationType</div>
+							<div class="left widthFreeSmall text-center blue headFont">AllocationTime</div>
+							<div class="left widthFreeSmall text-center blue headFont">Add on Payment</div>
+							<div class="left widthFreeSmall text-center blue headFont">External Mandate</div>
+							<div class="left widthFreeSmall text-center blue headFont">Categories</div>
+						</div>
+					</div>
+				</div>
+				<div class="bodyTable width100">
+					<div class="width100 border-bot-grey" ng-repeat="contract in ownershipdata.data | filter: compFilter">
+						<div class="tab-row repeat-animation">
+							<div class="left widthFree" ng-class="{'green':contract.paidstatus=='1','blue':contract.paidstatus!='1'}">
+								<span ng-if="contract.companyname !='' && contract.companyname != null" ng-click="goToBform(contract)" title="{{contract.contractid}}" class="pointer">{{contract.companyname}}</span>
+								<span ng-if="contract.companyname =='' || contract.companyname == null" ng-click="goToBform(contract)" class="pointer">Company Name Not Found</span>
+							</div>
+							<div class="rotateRight">
+								<div class="left widthFreeSmall pointer text-center">{{contract.contractid}}</div>
+								<div class="left widthFreeSmall pointer text-center" ng-if="contract.allocationtype != '' && contract.allocationtype != null" ng-switch on="contract.allocationtype">
+									<span ng-switch-when="25">Allocate Appointment</span>
+									<span ng-switch-when="99">Appointment Refixed</span>
+									<span ng-switch-when="22">Call Back</span>
+									<span ng-switch-when="208">Call to ME</span>
+									<span ng-switch-when="12">Company Closed</span>
+									<span ng-switch-when="114">Discard Call</span>
+									<span ng-switch-when="9">Do Not Disturb</span>
+									<span ng-switch-when="24">Follow up</span>
+									<span ng-switch-when="244">Jda Demo Appointment Fixed</span>
+									<span ng-switch-when="6">Not Contactable</span>
+									<span ng-switch-when="21">Not Interested</span>
+									<span ng-switch-when="98">Not in Business</span>
+									<span ng-switch-when="207">Paid Client</span>
+									<span ng-switch-when="7">Wrong Number</span>
+									<span ng-switch-when="256">Bank Account Details Updated</span>
+									<span ng-switch-when="203">Interested for JDFOS AND TR</span>
+									<span ng-switch-when="205">Interested only for JDFOS</span>
+									<span ng-switch-when="204">Interested only for JDTRS</span>
+									<span ng-switch-when="257">No Bank Account</span>
+									<span ng-switch-when="127">No Menu</span>
+									<span ng-switch-when="259">Not interested for Online payment</span>
+									<span ng-switch-when="180"> Shopfront deal closed </span>
+									<span ng-switch-when="10">Interested for only pickup</span>
+									<span ng-switch-when="150">Not interested for shop front</span>
+									<span ng-switch-when="186">SF_B form verified/Updated</span>
+									<span ng-switch-when="124">Call back – Contact details verified</span>
+									<span ng-switch-when="116">Interested in Master App</span>
+									<span ng-switch-when="119">Not Applicable for Master App</span>
+									<span ng-switch-when="117">Not Interested in Master App</span>
+									<span ng-switch-when="90">Not providing Home Delivery/Table Reservation</span>
+									<span ng-switch-when="209">Voice Mail OR IVR</span>
+									<span ng-switch-when="245">Call Transferred To Helpdesk</span>
+									<span ng-switch-when="234">Contract Not Found</span>
+									<span ng-switch-when="225">Doc Not Interested</span>
+									<span ng-switch-when="238">Doc Using Other Software</span>
+									<span ng-switch-when="237">Doc Using Pra***</span>
+									<span ng-switch-when="221">Doctor Already Active</span>
+									<span ng-switch-when="241">Doctor Not Tech Savvy</span>
+									<span ng-switch-when="236">Inbound Activation And Tutorial Done</span>
+									<span ng-switch-when="224">Incorrect Emailid</span>
+									<span ng-switch-when="228">Invalid Hospital Data</span>
+									<span ng-switch-when="239">No Internet Access</span>
+									<span ng-switch-when="242">Not Getting Leads</span>
+									<span ng-switch-when="227">Others</span>
+									<span ng-switch-when="211">Outbound Activation And Tutorial Done</span>
+									<span ng-switch-when="222">Query Addressed</span>
+									<span ng-switch-when="223">Query Pending</span>
+									<span ng-switch-when="240">SW Is Time Consuming/Complex</span>
+									<span ng-switch-when="243">SW Not Required For Walk In Patients</span>
+									<span ng-switch-when="235">Tutorial Follow Up</span>
+								</div>
+								<div class="left widthFreeSmall pointer text-center" ng-if="contract.allocationtype == '' || contract.allocationtype == null">--</div>
+								<div class="left widthFreeSmall pointer text-center" ng-if="contract.allocationtime != '' && contract.allocationtime != null">{{contract.allocationtime}}</div>
+								<div class="left widthFreeSmall pointer text-center" ng-if="contract.allocationtime == '' || contract.allocationtime == null">--</div>
+								<div class="left widthFreeSmall pointer text-center"><a ng-href="../00_Payment_Rework/add_on_payment/mode_selection.php?parentid={{contract.contractid}}&compname={{contract.compname | urlEncode}}" target="_blank"><img ng-src="img/add-on.png" /></a></div>
+								<div class="left widthFreeSmall pointer text-center"><a ng-href="../00_Payment_Rework/accounts/mandate_selection.php?parentid={{contract.contractid}}&compname={{contract.compname | urlEncode}}&flag=" target="_blank"><div class="marBot10px blue">EM</div></a></div>
+								<div  ng-click="showDataModeTab($event,2,contract.contractid,contract.compname,$index)" class="left widthFreeSmall pointer text-center"><img ng-src="img/more.png" /></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section ng-if="ownershipdata.errorCode == 1" class="text-center">
+		<div style="font-size:294px;">:(</div>
+		<h2>Sorry! No contracts are allocated to you.</h2>
+	</section>
+</section>

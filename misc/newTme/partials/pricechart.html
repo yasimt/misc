@@ -1,0 +1,145 @@
+<md-toolbar md-scroll-shrink style="background-color:#FFFFFF" ng-init="onLoadCall()" ng-controller='catPreviewController'>
+	<div class="md-toolbar-tools">
+		<md-button class="md-icon-button" aria-label="Settings" style="margin-left:20px;" ng-click="toggleLeft()">
+			<md-icon md-svg-icon="img/ic_menu_36px.svg" style="color:#000000;"></md-icon>
+		</md-button>
+		<h2>
+			<span>Price Chart</span>
+		</h2>
+		<span flex></span>
+	</div>
+</md-toolbar>
+
+<div class="pc-container" style="font-family:Roboto">
+	<div class="inWrp"> 
+		<md-button class="md-warn md-raised right" ng-click="reset_campaign($event)">Reset Campaign</md-button>
+		<div class="tab-header"> 
+			<span class="tab pc_upfront" ng-click="switch_option('upfront')"> Upfront Payment Plan </span>
+			<span class="tab pc_ecs" ng-click="switch_option('ecs')"> Easy Monthly Installment Plan </span>
+		</div>
+		<div class="wrpr"> <span class="noteTx1" ng-hide="true"> *As Loyalty Bonus package value keeps increasing 10% every month... <a href="#"> Show More </a> </span> <a  href="#" class="starlink" style="font-size:20px;width: 30px;" ng-click="open_price()">*</a></div>
+		<div class="tblBx wrpr pc_details1"> 
+			<table class="table-box" cellpadding="0" cellspacing="0" width="100%"> 
+				<tr class="thead"> 
+					<td width="5%"> </td>
+					<td width="20%"> Campaign</td>
+					<td width="45%"> What You Get? </td>
+					<td width="10%"> Down Payment</td>
+					<td width="10%"> Cost </td>
+					<td width="10%"> Total </td>						
+				</tr>
+				<tr> 
+					<td class="stand-plan" colspan="6"> Standard Plans </td>
+				</tr>
+				<tr class="subRow" ng-repeat="(key,value) in pricechatup.Standard_Plans"> 
+					<td width="5%"> <input type="checkbox"  ng-model='pricechart_cb[key]' ng-click='disable_campaign(key,"upfront",$event)' ng-disabled='disable_cb[key]'> </td>
+					<td width="20%"> {{value.name}} </td>
+					<td width="45%"> {{value.campaign_description}} <a class="viewDemo" ng-hide="true" href="#" ng-if="key==5 || key==22"> View Demo </a></td>
+					<td class="text-right" width="10%" colspan="3" ng-if="key == 1"> Select & Proceed to view Package </td>
+					<td width="10%" class="text-right" ng-if="key != 1">
+						<span ng-if="value.setup == 0"> - </span>
+						<span ng-if="value.setup != 0">
+							<span ng-if="edit_price == false || custom_campaign_upfront.indexOf(key+'_setup') == -1 ">{{value.setup}}</span>
+							<input class="edit-input" type="text"  ng-model="pc_discount[key+'_setup']" ng-if="edit_price == true && custom_campaign_upfront.indexOf(key) > -1" ng-blur="call_discount_api($event,key+'_setup','upfront')" numbersonly>
+						</span>
+					</td>
+					
+					<td width="10%" class="text-right" ng-if="key != 1">
+						<span ng-if="edit_price == false || custom_campaign_upfront.indexOf(key) == -1 ">{{value.actual_price}}</span> 
+						<input class="edit-input" type="text"  ng-model="pc_discount[key]" ng-if="edit_price == true && custom_campaign_upfront.indexOf(key) > -1" ng-blur="call_discount_api($event,key,'upfront')" numbersonly>
+					</td>
+					<td width="10%" class="text-right" ng-if="key != 1">{{value.total}}</td>
+				</tr>
+				<tr> 
+					<td class="stand-plan" colspan="6"> Recommended Plans </td>
+				</tr>
+				<tr class="subRow" ng-repeat="(key,value) in pricechatup.Recommended_Plans"> 
+					<td width="5%"> <input type="checkbox"  ng-model='pricechart_cb[key]' ng-click='disable_campaign(key,"upfront",$event)' ng-disabled='disable_cb[key]'> </td>
+					<td width="20%"> {{value.name}} </td>
+					<td width="45%"> {{value.campaign_description}} <a class="viewDemo" href="#" ng-if="key==225" ng-hide="true"> View Demo </a> </td>
+					<td width="10%" class="text-right"> 
+						<span ng-if="value.setup == 0"> - </span> 
+						<span ng-if="value.setup != 0">
+							<span ng-if="edit_price == false || custom_campaign_upfront.indexOf(key+'_setup') == -1 ">{{value.setup}}</span>
+							<input class="edit-input" type="text"  ng-model="pc_discount[key+'_setup']" ng-if="edit_price == true && custom_campaign_upfront.indexOf(key) > -1" ng-blur="call_discount_api($event,key+'_setup','upfront')" numbersonly>
+						</span>
+					</td>
+					<td width="10%" class="text-right"><span ng-if="edit_price == false || custom_campaign_upfront.indexOf(key) == -1 ">{{value.actual_price}}</span> <input class="edit-input" type="text"  ng-model="pc_discount[key]" ng-if="edit_price == true && custom_campaign_upfront.indexOf(key) > -1" ng-blur="call_discount_api($event,key,'upfront')" numbersonly> </td>
+					<td width="10%" class="text-right">{{value.total}}</td>
+				</tr>
+
+			</table>
+			<div class="botom-row-wrp wrpr"> 
+				<span class="proceed-btn"> <button ng-click='submit_campaigns($event)'> PROCEED </button></span>
+				<span class="botom-note2"> Omni Multiple Outlets will be charged at 50% of Primary outlet per multiple outlet. </span>
+			</div>
+		</div>
+		<div class="tblBx wrpr pc_details2"> 
+			<!-- ================== Easy Monthly Installment start ======================== -->
+			<table class="table-box" cellpadding="0" cellspacing="0" width="100%"> 
+				<tr class="thead"> 
+					<td width="5%"> </td>
+					<td width="20%"> Campaign</td>
+					<td width="45%"> What You Get? </td>
+					<td width="15%"> Down Payment</td>
+					<td width="15%"> Rental/Monthly </td>						
+				</tr>
+				<tr> 
+					<td class="stand-plan" colspan="6"> Standard Plans </td>
+				</tr>
+				<tr class="subRow" ng-repeat="(key,value) in pricechatecs.Standard_Plans"> 
+					<td width="5%"> <input type="checkbox"  ng-model='pricechart_cb[key]' ng-click='disable_campaign(key,"ecs",$event)' ng-disabled='disable_cb[key]'></td>
+					<td width="20%"> {{value.name}} </td>
+					<td width="45%"> {{value.campaign_description}} <a ng-hide="true" class="viewDemo" href="#" ng-if="key==5 || key==22"> View Demo </a></td>
+					<td class="text-right" width="10%" colspan="2" ng-if="key == 1"> Select & Proceed to view Package </td>
+					<td width="10%" class="text-right" ng-if="key != 1">
+						<span ng-if="value.setup == 0"> - </span>
+						<span ng-if="value.setup != 0">
+							<span ng-if="edit_price == false || custom_campaign_ecs.indexOf(key+'_setup') == -1 ">{{value.setup}}</span>
+							<input class="edit-input" type="text"  ng-model="pc_discount[key+'_setup']" ng-if="edit_price == true && custom_campaign_ecs.indexOf(key) > -1" ng-blur="call_discount_api($event,key+'_setup','ecs')" numbersonly>
+						</span>
+					</td>
+					<td width="10%" class="text-right" ng-if="key != 1">
+						<span ng-if="edit_price == false || custom_campaign_ecs.indexOf(key) == -1 ">{{value.emi}}</span> 
+						<input class="edit-input" type="text" ng-model="pc_discount[key]" ng-if="edit_price == true && custom_campaign_ecs.indexOf(key) > -1" ng-blur="call_discount_api($event,key,'ecs')" numbersonly>
+					</td>
+				</tr>
+				<tr> 
+					<td class="stand-plan" colspan="5"> Recommended Plans </td>
+				</tr>
+				<tr class="subRow" ng-repeat="(key,value) in pricechatecs.Recommended_Plans"> 
+					<td width="5%"> <input type="checkbox"  ng-model='pricechart_cb[key]' ng-click='disable_campaign(key,"ecs",$event)' ng-disabled='disable_cb[key]'></td>
+					<td width="20%"> {{value.name}} </td>
+					<td width="45%"> {{value.campaign_description}} <a ng-hide="true" class="viewDemo" href="#" ng-if="key==225">View Demo </a></td>
+					<td width="10%" class="text-right">
+						<span ng-if="value.setup == 0"> - </span>
+						<span ng-if="value.setup != 0">
+							<span ng-if="edit_price == false || custom_campaign_ecs.indexOf(key+'_setup') == -1 ">{{value.setup}}</span>
+							<input class="edit-input" type="text"  ng-model="pc_discount[key+'_setup']" ng-if="edit_price == true && custom_campaign_ecs.indexOf(key) > -1" ng-blur="call_discount_api($event,key+'_setup','ecs')" numbersonly>
+						</span>	
+					</td>
+					<td width="10%" class="text-right">
+						<span ng-if="edit_price == false || custom_campaign_ecs.indexOf(key) == -1 ">{{value.emi}}</span> 
+						<input class="edit-input" type="text" ng-model="pc_discount[key]" ng-if="edit_price == true && custom_campaign_ecs.indexOf(key) > -1" ng-blur="call_discount_api($event,key,'ecs')" numbersonly >
+					</td>
+				</tr>
+			</table>
+			<div class="botom-row-wrp wrpr"> 
+				<span class="proceed-btn"> <button ng-click='submit_campaigns($event)'> PROCEED </button></span>
+				<span class="botom-note2"> Omni Multiple Outlets will be charged at 50% of Primary outlet per multiple outlet. </span>
+			</div>
+			<!-- ================== Easy Monthly Installment End  ======================== -->
+			
+		</div>
+	</div>			
+</div>
+
+<div class="wrapper" id="">
+	<div class="wrapper" style="background:#F6F6F6; border-top:1px solid #E3E3E3;">
+		<div class="">
+			<div class="jdrr_footer">
+					Copyright 2008-2016 Justdial.com. All Rights Reserved. <a href="#">Privacy</a> I <a href="#">Terms</a>
+			</div>
+		</div>
+	</div>
+</div>

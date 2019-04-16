@@ -1,0 +1,254 @@
+<section class="kpi_learn" style="display:block;background-color:#eef1f8;overflow-x:hidden;">
+    <div class="mid-otr mid-otr-rel" style="height:500px;padding: 30px 25px 70px;">
+        <div style="font-size:40px;">KPI</div>
+        <div class="genio-collect">
+            <div class="tab_section">
+			<ul>
+                            <li><a ng-class="{'actab' : activeMainTab == '1' }" ng-click="mainTab('1')"><b>Targets</b></a> </li>
+			    <li><a ng-class="{'actab' : activeMainTab == '2' }" ng-click="mainTab('2')"><b>KPI</b> </a></li>				
+			</ul>
+		</div>
+            <div class="tabPanel_section" id="section_30days">
+            <div class="tab_section" ng-show="activeMainTab == '2'">
+                <ul>
+                    <li><a ng-class="{'actab' : activeTab == '1' }" ng-click="activeData(1)">Last 30 days</a> </li>
+                    <li><a ng-class="{'actab' : activeTab == '2' }" ng-click="activeData(2)">Last Month </a></li>
+                    <li><a ng-class="{'actab' : activeTab == '3' }" ng-click="activeData(3)">Last Year </a></li>
+                    <li><a ng-class="{'actab' : activeTab == '4' }" ng-click="activeData(4)">MTD</a></li>
+                </ul>
+            </div>
+            <div class="tabPanel_section" ng-show="showData == 0 && activeMainTab == '2'" style="padding: 9px 0px 0px 0px;border-bottom:none;">
+            <span ng-if="activeTab == 1" style="color:#747474;margin-left:35px;">{{currStartDateDays | date : "dd MMM"}} - {{currEndDateDays | date : "dd MMM"}}</span>
+            <span ng-if="activeTab == 2" style="margin-left:26%;color:#747474">{{currStartDateMonth | date : "dd MMM"}} - {{currEndDateMonth | date : "dd MMM"}}</span>
+            <span ng-if="activeTab == 3" style="margin-left:48%;color:#747474">{{currStartDateYear | date : "dd MMM"}} - {{currEndDateYear | date : "dd MMM"}}</span>
+            <span ng-if="activeTab == 4" style="margin-left:68%;color:#747474">{{currStartDateMtd | date : "dd MMM"}} - {{currEndDateMtd | date : "dd MMM"}}</span>
+                <div class="title_head" style="margin-top:10px;">
+                <div class="width40">Sections</div>
+                
+                <div class="width17" ng-if="activeTab == 1">
+                    Last 30 days
+                    <p style="color:#696969;font-size:14px;display:block;width:100%;float:right;">{{currStartDateDays | date : "dd MMM"}} - {{currEndDateDays | date : "dd MMM"}}</p>
+                </div>
+                
+                <div class="width17" ng-if="activeTab == 1">
+                    Previous 30 days
+                    <p style="color:#696969;font-size:14px;display:block;width:100%;float:right;">{{prevStartDateDays | date : "dd MMM"}} - {{prevEndDateDays | date : "dd MMM"}}</p>
+                </div>
+                
+                <div class="width17" ng-if="activeTab == 2">Last Month
+                    <p style="color:#696969;font-size:14px;display:block;width:100%;float:right;">{{currStartDateMonth | date : "dd MMM"}} - {{currEndDateMonth | date : "dd MMM"}}</p>
+                </div>
+                <div class="width17" ng-if="activeTab == 2">
+                    Previous Month
+                    <p style="color:#696969;font-size:14px;display:block;width:100%;float:right;">{{prevStartDateMonth | date : "dd MMM"}} - {{prevEndDateMonth | date : "dd MMM"}}</p>
+                </div>
+                
+                <div class="width17" ng-if="activeTab == 3">
+                    Last Year
+                    <p style="color:#696969;font-size:14px;display:block;width:100%;float:right;">{{currStartDateYear | date : "dd MMM"}} - {{currEndDateYear | date : "dd MMM"}}</p>
+                </div>
+                
+                <div class="width17" ng-if="activeTab == 3">
+                    Previous Year
+                    <p style="color:#696969;font-size:14px;display:block;width:100%;float:right;">{{prevStartDateYear | date : "dd MMM"}} - {{prevEndDateYear | date : "dd MMM"}}</p>
+                </div>
+                
+                <div class="width17" ng-if="activeTab == 4">
+                    Last MTD
+                    <p style="color:#696969;font-size:11px;display:block;width:100%;float:right;">{{currStartDateMtd | date : "dd MMM"}} - {{currEndDateMtd | date : "dd MMM"}}</p>
+                </div>
+                
+                <div class="width17" ng-if="activeTab == 4">Previous MTD
+                    <p style="color:#696969;font-size:14px;display:block;width:100%;float:right;">{{prevStartDateMtd | date : "dd MMM"}} - {{prevEndDateMtd | date : "dd MMM"}}</p>
+                </div>
+                
+                <div class="width17">Change</div>
+            </div>
+                <div class="subCollect">					
+                    <div class="value_head">
+                        <div class="width40"><i class="genio_collect plus-icon"></i> <span class="txtalign">Realisable Value Per Day</span></div>
+                        <div class="width17">{{currRealVal| number:0 }}</div>
+                        <div class="width17">{{oldRealVal| number:0}}</div>
+                        <div class="width17">
+                            <span>{{changeRealVal| number:0}} ({{finalRealVal| number:0}} %) <i ng-show="currRealVal > oldRealVal" class="genio_collect up-icon"></i> <i ng-show="currRealVal <= oldRealVal" class="genio_collect down-icon"></i></span> 
+                            <!-- <span ng-show="changeRealVal < oldRealVal">{{changeRealVal | number:0}} ({{changeRealVal/oldRealVal*100 | number:0}} %) <i class="genio_collect down-icon"></i></span>                          -->
+                        </div>
+                    </div>
+                </div>
+                <div class="vlue_section">
+                    <div class="inner_section">
+                        <div class="value_head ycolor">
+                            <div class="width40"><i class="genio_collect plus-icon"></i> <span class="txtalign">Contracts Per Day</span></div>
+                            <div class="width17">{{currContVal| number:2}}</div>
+                            <div class="width17">{{oldContVal| number:2}}</div>
+                            <div class="width17">
+                                <span>{{changeContVal| number:2}} ({{finalContVal| number : 0}} %) <i ng-show="currContVal > oldContVal" class="genio_collect up-icon"></i> <i ng-show="currContVal <= oldContVal" class="genio_collect down-icon"></i></span> 
+                                <!-- <span ng-show="changeContVal < oldContVal">{{changeContVal | number:2}} ({{changeContVal/oldContVal*100 | number : 0}} %)</span>  -->
+                            </div>
+                        </div>
+                        <div class="pize_tble">
+                            <div class="pize_row">
+                                <div class="width40">ECS %</div>
+                                <div class="width17">{{currEcsVal| number : 0}}%</div>
+                                <div class="width17">{{oldEcsVal| number : 0}}%</div>
+                                <div class="width17">
+                                    <span>{{changeEcsVal| number : 0}}% <i ng-show="currEcsVal > oldEcsVal" class="genio_collect up-icon"></i> <i ng-show="currEcsVal <= oldEcsVal" class="genio_collect down-icon"></i></span> 
+                                    <!-- <span ng-show="changeEcsVal < oldEcsVal">{{changeEcsVal | number : 0}}%</span> -->
+                                </div>
+                            </div>						
+                        </div>
+                    </div>
+                    <div class="inner_section">
+                        <div class="value_head ycolor">
+                            <div class="width40"><i class="genio_collect plus-icon"></i> <span class="txtalign">Average Value Per Contract</span></div>
+                            <div class="width17">{{currAvpcVal| number : 0}}</div>
+                            <div class="width17">{{oldAvpcVal| number : 0}}</div>
+                            <div class="width17">
+                                <span>{{changeAvpcVal| number : 0}} ({{finalAvpcVal| number : 0}} %) <i ng-show="currAvpcVal > oldAvpcVal" class="genio_collect up-icon"></i> <i ng-show="currAvpcVal <= oldAvpcVal" class="genio_collect down-icon"></i></span> 
+                                <!-- <span ng-show="changeAvpcVal < oldAvpcVal">{{changeAvpcVal | number : 0}} ({{changeAvpcVal/oldAvpcVal*100 | number : 0}} %)<i class="genio_collect down-icon"></i></span>   -->
+                            </div>
+                        </div>
+                        <div class="pize_tble">
+                            <div ng-repeat="(key, value) in CampaignWise" class="pize_row">
+                                <div class="width40">{{value.campaign_name}}</div>
+                                <div class="width17">{{value.current_budget| number : 0 }}</div>
+                                <div class="width17">{{value.old_budget| number : 0 }}</div>
+                                <div class="width17"><span>{{ value.change_value | number : 0 }}</span> <i ng-show="value.change_value > 0" class="genio_collect up-icon"></i> <i ng-show="value.change_value <= 0" class="genio_collect down-icon"></i></div>
+                            </div>
+                        </div>
+                    </div>	
+                </div>
+
+                <div class="subCollect">					
+                    <div class="value_head">
+                        <div class="width40"><i class="genio_collect plus-icon togglelink dropsection"></i> <span class="txtalign">Collections Per Day</span></div>
+                        <div class="width17">{{currColDay| number:0}}</div>
+                        <div class="width17">{{oldColDay| number:0}}</div>
+                        <div class="width17">
+                            <span>{{changeColDay| number:0}} ({{finalColDay| number:0}} %) <i ng-show="currColDay > oldColDay"  class="genio_collect up-icon"></i><i ng-show="currColDay <= oldColDay" class="genio_collect down-icon"></i></span>
+                            <!-- <span ng-show="changeColDay < oldColDay">{{changeColDay | number:0}} ({{changeColDay/oldColDay*100 | number:0}} %) <i class="genio_collect down-icon"></i></span> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="vlue_section">
+                    <div class="inner_section">
+                        <div class="value_head ycolor">
+                            <div class="width40"><!--<i class="genio_collect plus-icon togglelink"></i> --><span class="txtalign">Contracts Per Day</span></div>
+                            <div class="width17">{{currContVal| number : 0}}</div>
+                            <div class="width17">{{oldContVal| number : 0}}</div>
+                            <div class="width17">
+                                <span>{{changeContVal| number : 0}} ({{finalContVal| number : 0}}%) <i ng-show="currContVal > oldContVal" class="genio_collect up-icon"></i><i ng-show="currContVal <= oldContVal" class="genio_collect down-icon"></i></span> 
+                                <!-- <span ng-show="changeContVal < oldContVal">{{changeContVal | number : 0}} ({{changeContVal/oldContVal*100 | number : 0}}%)<i class="genio_collect down-icon"></i></span>  -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="inner_section">
+                        <div class="value_head ycolor">
+                            <div class="width40"><!--<i class="genio_collect plus-icon togglelink"></i>--> <span class="txtalign">Average Value Per Contract</span></div>
+                            <div class="width17">{{currAvpcValperCol| number : 0 }}</div>
+                            <div class="width17">{{oldAvpcValperCol| number : 0}}</div>
+                            <div class="width17">
+                                <span>{{changeAvpcValperCol| number : 0}} ({{finalAvpcValperCol| number : 0}}%) <i  ng-show="currAvpcValperCol > oldAvpcValperCol" class="genio_collect up-icon"></i><i ng-show="currAvpcValperCol <= oldAvpcValperCol" class="genio_collect down-icon"></i></span> 
+                                <!-- <span ng-show="changeAvpcVal < oldAvpcVal">{{changeAvpcVal | number : 0}} ({{changeAvpcVal/oldAvpcVal*100 | number : 0}}%)</span>  -->
+                            </div>
+                        </div>
+                    </div>	
+                    <div class="inner_section">
+                        <div class="value_head ycolor">
+                            <div class="width40"><i class="genio_collect plus-icon togglelink"></i> <span class="txtalign"><strong>CLEARED COLLECTION</strong></span></div>
+                            <div class="width17">{{currClrCol| number : 0}}</div>
+                            <div class="width17">{{oldClrCol| number : 0}}</div>
+                            <div class="width17">
+                                <span>{{changeClrCol| number : 0}} ({{finalClrCol| number : 0 }}%) <i ng-show="currClrCol > oldClrCol" class="genio_collect up-icon"></i><i ng-show="currClrCol <= oldClrCol" class="genio_collect down-icon"></i></span> 
+                                <!-- <span ng-show="changeClrCol < oldClrCol">{{changeClrCol | number : 0}} ({{changeClrCol/oldClrCol*100 | number : 0}}%)</span>  -->
+                            </div>
+                        </div>
+                        <div class="pize_tble">
+                            <div class="pize_row">
+<!--
+                                <div class="width40">Non ECS</div>
+                                <div class="width17">{{currNonEcs| number : 0}}</div>
+                                <div class="width17">{{oldNonEcs| number : 0}}</div>
+                                <div class="width17">
+                                    <span>{{changeNonEcs| number : 0}} ({{finalNonEcs| number : 0}}%) <i ng-show="currNonEcs > oldNonEcs" class="genio_collect up-icon"></i><i ng-show="currNonEcs <= oldNonEcs" class="genio_collect down-icon"></i></span> 
+-->
+                                    <!-- <span ng-show="changeNonEcs < oldNonEcs">{{changeNonEcs | number : 0}} ({{changeNonEcs/oldNonEcs*100 | number : 0}}%)<i class="genio_collect down-icon"></i></span>   -->
+                                <div class="width40">ECS Carried Forward</div>
+                                <div class="width17">{{currEcsCarry| number : 0}}</div>
+                                <div class="width17">{{OldEcsCarry| number : 0}}</div>
+                                <div class="width17">
+                                    <span>{{changeEcsCarry| number : 0}} ({{finalEcsCarry| number : 0}}%) <i ng-show="currEcsCarry > OldEcsCarry" class="genio_collect up-icon"></i><i ng-show="currEcsCarry <= OldEcsCarry" class="genio_collect down-icon"></i></span> 
+                                </div>
+                            </div>
+                            <div class="pize_row">
+                                <div class="width40">Collection</div>
+                                <div class="width17">{{currCol| number : 0}}</div>
+                                <div class="width17">{{oldCol| number : 0}}</div>
+                                <div class="width17">
+                                    <span>{{changeCol| number : 0}} ({{finaloldCol| number : 0}}%) <i  ng-show="currCol > oldCol" class="genio_collect up-icon"></i><i ng-show="currCol <= oldCol" class="genio_collect down-icon"></i></span> 
+                                    <!-- <span ng-show="changeCol < oldCol">{{changeCol | number : 0}} ({{changeCol/oldCol*100 | number : 0}}%)<i class="genio_collect down-icon"></i></span>   -->
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+                </div>
+            <div class="tabPanel_section" id="targets" ng-show="activeMainTab == '1' && showData == 0">
+			<div class="status_flag">
+				<ul> 
+				<li> <i class="kpi_sprite kpi_gren"></i> = Mission Accomplished</li>
+				<li> <i class="kpi_sprite kpi_yellow"></i> = Almost There</li>
+				<li> <i class="kpi_sprite kpi_red"></i> = Still A Long Way TO Go</li>
+				</ul>
+			</div>
+			<div class="title_head">
+				<div class="width40">MTD</div>
+				<div class="width17">{{currMonthName}} Target Given</div>
+				<div class="width17">{{currMonthName}} Target Achieved</div>
+				<div class="width17">Achievement %</div>
+			</div>
+			<div class="subCollect">					
+				<div class="value_head" style="position:relative;">
+					<div class="width40"><i class="kpi_sprite {{tagColor}} pstn"></i><span class="txtalign">Collection Value Per Day</span></div>
+<!--					<div class="width40"><span class="txtalign">Collection Value Per Day</span></div>-->
+                        <!--<div class="width17">{{currTarget| number:0 }}</div>-->
+<!--						<div class="width17">-</div>-->
+                        <div class="width17">{{currCollTarget | number:0 }}</div>
+                        <div class="width17">{{collTargetVal| number:0}}</div>
+                        <div class="width17">
+<!--
+                            <span>{{changeTarget| number:0}} ({{finalTarget | number:0}} %) <i ng-show="currTarget > currRealVal" class="genio_collect down-icon"></i> <i ng-show="currTarget <= currRealVal" class="genio_collect up-icon"></i></span>
+-->
+<!--                            <span>-</span> -->
+                        <span>{{changeCollTarget| number:0}} 
+                            <span>(<span style="color:{{percentColor}}">{{finalCollTarget | number:0}} %<span>)</span>
+                        </span> 
+                            <!-- <span ng-show="changeRealVal < oldRealVal">{{changeRealVal | number:0}} ({{changeRealVal/oldRealVal*100 | number:0}} %) <i class="genio_collect down-icon"></i></span>                          -->
+                        </div>
+				</div>
+			</div>
+			                    
+
+                    <div ng-show="graphmsg == 0 && showData == 0">
+<!--                    <div id="container" style="height: auto; max-width: 600px; margin: 0 auto" ng-show="activeMainTab == 1">
+                    
+                    </div>-->
+
+                    <div class="clearfix"></div>
+                    
+                    <div id="doughnut" style="height: auto; max-width: 600px; margin: 0 auto;text-width:center" ng-show="activeMainTab == 1"></div>
+                </div>
+<!--                 <div ng-show="graphmsg == 1 && showData == 0 && activeMainTab == '1'">
+                    <p style="color:black;text-align:center;font-size:35px;">Oops..!! No Targets Assigned</p>
+                </div>-->
+		
+		</div>
+            <div style="text-align:center; font-size:35px; padding-top:14%" ng-show="showData == 1">
+                <span>Oops..!! No data found</span>
+            </div>
+        </div>
+    </div>
+</section>

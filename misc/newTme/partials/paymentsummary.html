@@ -1,0 +1,114 @@
+<md-toolbar md-scroll-shrink style="background-color:#FFFFFF" ng-init="onLoadCall()" ng-controller="catPreviewController">
+	<div class="md-toolbar-tools">
+		<md-button class="md-icon-button" aria-label="Settings" style="margin-left:20px;" ng-click="toggleLeft()">
+			<md-icon md-svg-icon="img/ic_menu_36px.svg" style="color:#000000;"></md-icon>
+		</md-button>
+		<h2>
+			<span>Payment Summary(Easy Monthly Installment Plan)</span>
+		</h2>
+		<span flex></span>
+	</div>
+</md-toolbar>
+
+
+<div class="fin_container" style="font-family: 'Roboto',sans-serif;">
+	<table class="data-table" cellpadding="0" cellspacing="0">
+		<tr>
+			<td colspan="2" class="pg2-fulltd">Advance</td>
+		</tr>
+		<tr>
+			<td class="wdth-td litle-dark">Description</td>
+			<td class="wdth-td litle-dark">Amount</td>
+		</tr>
+		<tr ng-repeat="adv_key in notSorted(pay_adv_list)" ng-if="((show_adv_both == 1 && pay_adv_list[adv_key].campaignid != 2) ||  show_adv_both == 0 )&& pay_adv_list[adv_key].offer_price != 0 ">
+			<td class="wdth-td litle-gray" ng-if="pay_adv_list[adv_key].campaignid != 1 && pay_adv_list[adv_key].campaignid != 2">{{pay_adv_list[adv_key].campaign_name}}</td>
+			<td class="wdth-td litle-gray" ng-if="show_adv_campaign == 1 && (pay_adv_list[adv_key].campaignid == 1 || pay_adv_list[adv_key].campaignid == 2)">JD Campaign</td>
+			<td class="wdth-td litle-gray" ng-if="pay_adv_list[adv_key].campaignid != 1 && pay_adv_list[adv_key].campaignid != 2"><i class="iro-sprite sml-rs"></i>{{pay_adv_list[adv_key].offer_price}}</td>
+			<td class="wdth-td litle-gray" ng-if="show_adv_campaign == 1 && (pay_adv_list[adv_key].campaignid == 1 || pay_adv_list[adv_key].campaignid == 2)"><i class="iro-sprite sml-rs"></i>{{adv_camp_price}}</td>
+
+		</tr>
+
+		<tr>
+			<td class="wdth-td litle-dark">Total</td>
+			<td class="wdth-td litle-dark"><i class="iro-sprite sml-rs"></i>{{adv_total}}</td>
+		</tr>
+		<tr>
+			<td class="wdth-td litle-dark">GST(18%)</td>
+			<td class="wdth-td litle-dark"><i class="iro-sprite sml-rs"></i>{{adv_tax}}</td>
+		</tr>
+		<tr>
+			<td class="wdth-td litle-dark dark-bg">Total Advance Payable</td>
+			<td class="wdth-td litle-dark dark-bg"><i class="iro-sprite sml-rs"></i>{{adv_total_payable}}
+				<span class="tot-in-text">{{adv_total_payable | numToWord}}</span>
+			</td>
+		</tr>
+	</table>
+	<table class="data-table" cellpadding="0" cellspacing="0"  style="margin: auto; margin-bottom: 60px">
+		<tr>
+			<td colspan="2" class="pg2-fulltd">Monthly Amount</td>
+		</tr>
+		<tr>
+			<td class="wdth-td litle-dark">Description</td>
+			<td class="wdth-td litle-dark">Amount</td>
+		</tr>
+		
+		<tr ng-repeat="mon_key in notSorted(pay_mon_list)" ng-if="((show_mon_both == 1 && pay_mon_list[mon_key].campaignid != 2 && pay_mon_list[mon_key].campaignid != 74) || (show_mon_both == 0 && pay_mon_list[mon_key].campaignid != 74)) && pay_mon_list[mon_key].offer_price !=0">
+			<td class="wdth-td litle-gray" ng-if="pay_mon_list[mon_key].campaignid != 1 && pay_mon_list[mon_key].campaignid != 2 && pay_mon_list[mon_key].campaignid != 72 && pay_mon_list[mon_key].campaignid != 73 ">{{pay_mon_list[mon_key].campaign_name}}</td>
+			<td class="wdth-td litle-gray" ng-if="show_mon_campaign == 1 && (pay_mon_list[mon_key].campaignid == 1 || pay_mon_list[mon_key].campaignid == 2)">JD Campaign</td>
+			<td class="wdth-td litle-gray" ng-if="pay_mon_list[mon_key].campaignid == 73 && pay_mon_list[173] == undefined">Website Maintenance Fee</td>
+			
+			<td class="wdth-td litle-gray" ng-if="pay_mon_list[mon_key].campaignid != 1 && pay_mon_list[mon_key].campaignid != 2 "><i class="iro-sprite sml-rs"></i>{{pay_mon_list[mon_key].offer_price}}</td>
+			<td class="wdth-td litle-gray" ng-if="show_mon_campaign == 1 && (pay_mon_list[mon_key].campaignid == 1 || pay_mon_list[mon_key].campaignid == 2)"><i class="iro-sprite sml-rs"></i>{{mon_camp_price}}</td>
+<!--
+			<td class="wdth-td litle-gray" ng-if="pay_mon_list[mon_key].campaignid == 73  && pay_mon_list[173] == undefined"><i class="iro-sprite sml-rs"></i>{{omni_pay_mon}}</td>
+-->
+			
+		</tr>
+		
+		<tr>
+			<td class="wdth-td litle-dark">Total</td>
+			<td class="wdth-td litle-dark"><i class="iro-sprite sml-rs"></i>{{mon_total}}</td>
+		</tr>
+		<tr>
+			<td class="wdth-td litle-dark">GST(18%)</td>
+			<td class="wdth-td litle-dark"><i class="iro-sprite sml-rs"></i>{{mon_tax}}</td>
+		</tr>
+		<tr>
+			<td class="wdth-td litle-dark dark-bg">Total Advance Payable</td>
+			<td class="wdth-td litle-dark dark-bg"><i class="iro-sprite sml-rs"></i>{{mon_total_payable}}
+				<span class="tot-in-text">{{mon_total_payable | numToWord}}</span>
+			</td>
+		</tr>
+	</table>
+</div>
+
+<div class="wrapper" id="">
+	<div class="wrapper">
+		<div class="button-abs" >
+			<div class="button-wrap" style="bottom: 0px;width:100%;" layout="row" layout-align="space-around" sitbutdown>
+				<div style="background: none repeat scroll 0 0 #FFFFFF;margin: 0 auto;border-left: 1px solid #CCCCCC;border-right: 1px solid #CCCCCC;width: 990px;">
+<!--
+					<a href="#" class="prcpay right"  style="margin: 4px 0 0;" ng-click='call_finnace_pg($event)'>Proceed To Payment</a>
+					<a href="#" class="prcpay left"  style="margin: 4px 0 0;" ng-click="$state.go('appHome.ecsform',{parid:url_paridInfo,ver:url_ver,ecsflg:1,page:extraHandler})" style="width: 140px;float:left">Back</a>
+					
+-->
+					<div  style="bottom:0px !important;position:fixed !important;background:white !important;margin:0 auto !important;width:990px;">
+						<button class="button" style=" background: none repeat scroll 0 0 #f1f1f1;border: 1px solid #1274c0;border-radius: 2px;color: #1274c0;font-size: 14px;font-weight: 400;height: 35px;line-height: 35px;margin: 10px;padding: 0 !important;text-align: center;width: 160px;" ng-click="$state.go('appHome.ecsform',{parid:$stateParams.parid,page:extraHandler,ver:$stateParams.ver,ecsflg:1});">Prev</button>
+						
+						<button class="button" style=" background: none repeat scroll 0 0 #f1f1f1;border: 1px solid #1274c0;border-radius: 2px;color: #1274c0;font-size: 14px;font-weight: 400;height: 35px;line-height: 35px;margin: 10px;padding: 0 !important;text-align: center;width: 160px;" ng-click='call_finnace_pg($event)'>Next</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<div class="wrapper" style="background:#F6F6F6; border-top:1px solid #E3E3E3;">
+		<div class="">
+			<div class="jdrr_footer">
+					Copyright 2008-2016 Justdial.com. All Rights Reserved. <a href="#">Privacy</a> I <a href="#">Terms</a>
+			</div>
+		</div>
+	</div>
+</div>	
+
+

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<?php session_start();
+$parent = str_replace("index.html","",$_SERVER['PHP_SELF']);
+
+GLOBAL $parseConf;
+if($_SERVER['SERVER_ADDR']	==	'172.29.64.64') {
+	$parseConf	=	parse_ini_file('../tme_services/public/files/developmentip.conf',1);
+} else {
+	$parseConf	=	parse_ini_file('../tme_services/public/files/productionip.conf',1);
+}
+if(strtoupper($parseConf['servicefinder']['module']) == 'CS'){
+	require_once("../library/config.php");
+	include_once(APP_PATH."/library/path.php");	
+	include_once($headpath_new);
+}
+$cityCode_array	 = $_SERVER['SERVER_ADDR'];
+$cityCode = explode(".", $cityCode_array);
+if($_SERVER['REMOTE_ADDR'] == '172.29.87.53') {
+	print_r($_SESSION);
+}
+?>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+  <base href="<?=$parent;?>">
+  <title>Justdial Limited</title>
+  <link rel="stylesheet" href="css/app.css?ver=1.70"/>
+  <link rel="stylesheet" href="css/jquery-ui-1.9.2.custom.css"/>
+  <link rel="stylesheet" href="css/angular-material.min.css"/>
+  <link rel="stylesheet" href="css/jquery.dataTables.min.css">
+  <link rel="stylesheet" href="css/style.css?ver=3"/>
+  <script>var USERID		=	'<?=(isset($_SESSION['empcode'])) ? $_SESSION['empcode'] : '';?>';</script>
+  <script>var UNAME  	    = "<?=$_SESSION['uname'];?>";</script>
+  <script>var STATID		=	'<?=(isset($_SESSION['Stationid'])) ? $_SESSION['Stationid'] : '';?>';</script>
+  <script>var UTYPE  	    = "<?=$_SESSION['mktgEmpType'];?>";</script>
+  <script>var DATACITY    	=   '<?=($parseConf['servicefinder']['remotecity'] == 1) ? $_SESSION['remote_city'] : $_SESSION['s_deptCity'];?>';</script>
+  <script>var SERVICE_PARAM	=	'<?=$parseConf['servicefinder']['serviceparam']?>';</script>
+  <script>var SERVICE_CITY	=	'<?=$parseConf['servicefinder']['remotecity']?>';</script>
+  <script>var SSO_LOGOUT	=	'http://accounts.justdial.com/logout/logoutServiceAuth';</script>
+  <script>var IPADD    =       '<?=$_SERVER['REMOTE_ADDR'];?>';</script>
+  <script>var LOGIN_CITY     =       '<?=$_SESSION['loginCity'];?>';</script>
+  <script>var cityCode    =       '<?=$cityCode[2];?>';</script>
+  <script>var ALLOWNEWEVENTPULL    =       '<?=$parseConf['servicefinder']['allowneweventpull'];?>';</script>
+</head>
+<body ng-controller="employeeController">
+	<div butterbar class="showLoad">Loading...</div>
+	<div class="ui-view-container">
+		<div ui-view="initload"></div>
+	</div>
+	<script type="text/javascript" src="js/socket.io.js?ver=1.0"></script>
+	<script type="text/javascript" src="js/autobahn.min.jgz"></script>
+	<script type="text/javascript" src="js/messageConnection.js?ver=1.0"></script>
+	<script src="bower_components/require.js" data-main="js/main.js?ver=56.5"></script>
+	<script src="../poc/pocfn.js"></script>
+</body>
+</html>

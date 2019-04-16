@@ -1,0 +1,37 @@
+<md-dialog aria-label="Categories">
+	<form>
+	<md-toolbar>
+		<div class="md-toolbar-tools">
+			<h2 ng-if="companyInfoDialog.errorCode == 0" style="color:#FFFFFF">Showing Existing Bidders for {{catPin}} with {{catPopup | capitalize}} category</h2>
+			<span flex></span>
+			<md-button class="md-icon-button" ng-click="answer('not applicable')">
+				<md-icon md-svg-src="img/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+			</md-button>
+		</div>
+	</md-toolbar>
+	<md-dialog-content>
+		<div layout="row" layout-sm="column" layout-align="space-around" ng-if="showLoader==1">
+			<md-progress-circular class="md-hue-2" md-mode="indeterminate"></md-progress-circular>
+		</div>
+		<div layout="column" layout-sm="column" layout-align="space-around">
+			<div class="dataPinsInt width80">
+				<div layout="row" flex class="text-center greyBack">
+					<div flex="50" class="borderTakeLeft borderTop pad-top-5">Companyname</div>
+					<div flex="25" class="borderTake borderTop pad-top-5 pad-bot-5">Inventory Percentage</div>
+					<div flex="24" class="borderTake borderTop pad-top-5 pad-bot-5">Position</div>
+				</div>
+				<div layout="row" class="bestBudgetRow" ng-repeat="(key,dataBidder) in bidArrVal">
+					<div layout="row" flex class="text-center" layout-wrap>
+						<div flex="50" class="borderTakeLeft">{{(sendCompNameBidData[$index] == "" || sendCompNameBidData[$index] == null) && 'Companyname Not Found' || sendCompNameBidData[$index]}} ({{dataBidder.data | split:'-':0}})</div>
+						<div flex="25" class="borderTakeLeft">{{(dataBidder.data | split:'-':2) *100 | setDecimal:0}}</div>
+						<div flex="24" class="borderTakeLeft">{{dataBidder.pos}}</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div layout="row" layout-sm="column" layout-align="space-around" ng-if="showLoader==0 && dataDialog.error.code	==	1">
+			No Categories Found
+		</div>
+	</md-dialog-content>
+	</form>
+</md-dialog>

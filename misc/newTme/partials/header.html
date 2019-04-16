@@ -1,0 +1,1165 @@
+<header class="headApp" ng-init="setSmallMenu()" ng-class="{headAppHeightTME:moduleType != 'CS',headAppHeightCS:moduleType == 'CS'}" id="homeData">
+	<div style="position:absolute;width:100%;height:100%;z-index:2000" ng-click="closedisplist()" ng-show="close_overlay"> </div>
+	<div class="topHead left width100" ng-if='moduleType != "CS"'>
+		<div class="logo left">
+			<a><img ng-if="setNewLogo	==	0" ng-src="img/jdlogo.png" /><img ng-if="setNewLogo	==	1" ng-src="img/jdSmallLogo.png" />TME</a>
+		</div>
+		<div class="left searchByWhat" ng-if="setNoMenu	!=	1">
+			<div class="left divOne otherDiv backSelBlue" ng-click="setSearchBut(this,1)">Others<div class="divOneBord otherDivIn left"></div></div>
+			<div class="left divTwo catDiv" ng-click="setSearchBut(this,0)"><div class="divTwoBord left catDivIn"></div>Category</div>
+		</div>
+		<div class="searchBox left" ng-if="setNoMenu	!=	1">
+			<form>
+				<div class="inputSrch left width100">
+					<input type="text" class="searchText left width100" ng-show="showSearchNorm" showautocomplete ng-model="autocompleteModel" placeholder="Search Contracts with phone number,companyname" />
+					<input type="text" class="searchText left width100" ng-hide="showSearchNorm" ng-model="autocompleteModel" placeholder="Search Contracts Category name" />
+				</div>
+				<div class="buttonSrch left">
+					<button class="buttonSearch left bottnSearchDuo" ng-click="searchBut($event)" ng-disabled="isDisabled">Search</button>
+				</div>
+			</form>				
+		</div>
+		<div class="right proLinks">  
+			<div class="pro-pic-rt right" ng-click="showLogoutpopup()">
+				<img src="{{employees.hrInfo.data.pro_pic_url == '' && 'img/defaultUser.png' || employees.hrInfo.data.pro_pic_url}}" alt="pro-pic" class="very-small-img pro-pic-welcome" />
+				<div class="very-small-img pro-pic-welcome pic-round-set-small"></div>
+			</div>
+			<a ng-if="setNewIcon == 0" class="black"><div class="marRt10px dash-link-head right text-center reportshowbutton">Dashboard</div></a>
+			<div ng-if="setNewIcon == 0" class="user-name-head right text-center">
+				{{employees.hrInfo.data.empname}}
+			</div>
+		</div>
+	</div>
+	<md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left"  ng-if="setNoMenu	==	1 && PathSet != 'showBudgetDataNational' && PathSet != 'customPackageNational'" style="position:fixed;">
+		<md-toolbar style="background:transparent;">
+			<div class="left" style=" margin-left: 15px;margin-top: 15px;">
+				<a><img ng-if="setNewLogo	==	0" ng-src="img/jdlogo.png" /><img ng-if="setNewLogo	==	1" ng-src="img/jdSmallLogo.png" /><span style="color:#000000">TME</span></a>
+			</div>
+		</md-toolbar>
+		<md-content layout-padding>
+			<md-list>
+				<md-list-item ng-if="moduleType == 'TME' || (moduleType == 'ME' && extraHandler != 'jda')">
+					<div alt="PN" class="md-avatar" style="background:#000000;color:#FFFFFF;"><div style="padding-left:10px;margin-top:10px">EB</div></div>
+					<md-button ng-if='moduleType != "CS"' ng-href="{{businessUrl}}"><b>Edit Business Details</b></md-button>
+					<md-button ng-if='moduleType == "CS"' ng-href="../genio-i/url_convert.php?genio-i=redirect&parentid={{parentid}}"><b>Edit Business Details</b></md-button>
+				</md-list-item>
+				<md-divider></md-divider>
+				<md-list-item ng-if="extraHandler != 'jda' && bypassGeniolite!=1">
+					<div alt="PN" class="md-avatar" style="background:red;color:#FFFFFF;"><div style="padding-left:10px;margin-top:10px">AC</div></div>
+					<md-button ng-href="../newTme/catSearch/{{parentid}}/" ng-click="close()"><b>Add Categories</b></md-button>
+				</md-list-item>
+				<md-divider></md-divider>
+				<md-list-item ng-if="extraHandler != 'jda' && bypassGeniolite!=1">
+					<div alt="PN" class="md-avatar" style="background:#41BA44;color:#FFFFFF;"><div style="padding-left:10px;margin-top:10px">EC</div></div>
+					<md-button ng-click="submitCats($event,'appHome.catpreview','')"><b>Selected Category Preview</b></md-button>
+				</md-list-item>
+				<md-divider></md-divider>
+				<md-list-item ng-if="bypassGeniolite!=1">
+					<div alt="PN" class="md-avatar" style="background:#44648D;color:#FFFFFF;"><div style="padding-left:10px;margin-top:10px">DP</div></div>
+					<md-button  ng-if="extraHandler != 'jda' && bypassGeniolite!=1" ng-click="submitCats($event,'appHome.areaSel','demo')"><b>Demo Page</b></md-button>
+					<md-button  ng-if="extraHandler == 'jda' && bypassGeniolite!=1" ng-href="../newTme/areaSel/{{parentid}}/jda"><b>Demo Page</b></md-button>
+				</md-list-item>
+				<md-divider></md-divider>
+				<md-list-item ng-if="extraHandler != 'jda' && bypassGeniolite!=1">
+					<div alt="PN" class="md-avatar" style="background:#F44336;color:#FFFFFF;"><div style="padding-left:10px;margin-top:10px">PN</div></div>
+					<md-button ng-click="openPayNarrat()"><b>Payment Details Narration</b></md-button>
+				</md-list-item>
+				<md-divider></md-divider>
+				<md-list-item ng-if="extraHandler != 'jda' && bypassGeniolite!=1">
+					<div alt="PN" class="md-avatar" style="background:#41BA44;color:#FFFFFF;"><div style="padding-left:10px;margin-top:10px">AT</div></div>
+					<md-button ng-click="submitCats($event,'appHome.attributes','')"><b>Attributes</b></md-button>
+				</md-list-item>
+				<md-divider></md-divider>
+				<md-list-item  ng-if="extraHandler != 'jda' && bypassGeniolite!=1">
+					<div alt="PN" class="md-avatar" style="background:#1273C0;color:#FFFFFF;"><div style="padding-left:10px;margin-top:10px">SJ</div></div>
+					<md-button ng-click="submitCats($event,'','../business/jd_rating_review.php?jdrr_button=')"><b>Sell JDRR</b></md-button>
+				</md-list-item>
+				<md-divider></md-divider>
+				<md-list-item  ng-if="skip_demo_parentid == parentid  && bypassGeniolite!=1">
+					<div alt="PN" class="md-avatar" style="background:#D66012;color:#FFFFFF;"><div style="padding-left:10px;margin-top:10px">PC</div></div>
+					<md-button ng-click="skip_demo(parentid,extraHandler)"><b>Price Chart</b></md-button>
+				</md-list-item>
+				<md-divider></md-divider>
+				<md-list-item  ng-if="extraHandler != 'jda' && bypassGeniolite!=1">
+					<div alt="PN" class="md-avatar" style="background:#FF5891;color:#FFFFFF;"><div style="padding-left:10px;margin-top:10px">OC</div></div>
+					<md-button ng-click="showBottomOtherCampList($event)" target="_blank"><b>Other Campaigns</b></md-button>
+				</md-list-item>
+				<md-divider></md-divider>
+				<md-list-item  ng-if="extraHandler != 'jda' && bypassGeniolite!=1">
+					<div alt="PN" class="md-avatar" style="background:#3F51B5;color:#FFFFFF;"><div style="padding-left:10px;margin-top:10px">SP</div></div>
+					<md-button ng-click="openMenuSP()"><b>Search Plus</b></md-button>
+				</md-list-item>
+				<div class="none showSPList" ng-if="extraHandler != 'jda' && bypassGeniolite!=1">
+					<md-progress-linear md-mode="indeterminate" ng-if="showLoaderMenu==1 && bypassGeniolite!=1"></md-progress-linear>
+					<ul ng-if="searchPlusCampaigns.error.code == 0" style="margin-left:60px;">
+						<li ng-repeat="(key,data) in searchPlusCampaigns.data">
+							<md-button ng-click="submitCats($event,'',redirectUrlSP[data.vertical_id])" ng-if="data.vertical_id != '11' && data.vertical_id != '12' && data.vertical_id != '20' && bypassGeniolite!=1"><b>{{key}}</b></md-button>
+							<md-button ng-click="hospitalDocHandle(data.vertical_id)" ng-if="(data.vertical_id == '11' || data.vertical_id == '12') && bypassGeniolite!=1"><b>{{key}}</b></md-button>
+							<md-button ng-click="othersVerticalHandle(data.vertical_id)" ng-if="data.vertical_id == '20' && bypassGeniolite!=1"><b>{{key}}</b></md-button>
+						</li>
+					</ul>
+					<p ng-if="searchPlusCampaigns.error.code == 1 && bypassGeniolite!=1">Not Eligible for Search Plus</p>
+				</div>
+				<md-divider></md-divider>
+			</md-list>
+		</md-content>
+    </md-sidenav>
+	<md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left"  ng-if="setNoMenu	==	1 && (PathSet == 'showBudgetDataNational' || PathSet == 'customPackageNational')" style="position:fixed;">
+		<md-toolbar style="background:transparent;">
+			<div class="left" style=" margin-left: 15px;margin-top: 15px;">
+				<a><img ng-if="setNewLogo	==	0" ng-src="img/jdlogo.png" /><img ng-if="setNewLogo	==	1" ng-src="img/jdSmallLogo.png" /><span style="color:#000000">TME</span></a>
+			</div>
+		</md-toolbar>
+		<md-content layout-padding>
+			<md-list>
+				<md-list-item ng-if="moduleType == 'TME' || (moduleType == 'ME' && extraHandler != 'jda')">
+					<div alt="PN" class="md-avatar" style="background:#000000;color:#FFFFFF;"><div style="padding-left:10px;margin-top:10px">EB</div></div>
+					<md-button ng-if='moduleType != "CS"' ng-href="{{businessUrl}}"><b>Edit Business Details</b></md-button>
+					<md-button ng-if='moduleType == "CS"' ng-href="../genio-i/url_convert.php?genio-i=redirect&parentid={{parentid}}"><b>Edit Business Details</b></md-button>
+				</md-list-item>
+				<md-divider></md-divider>
+				<md-list-item ng-if="extraHandler != 'jda' && bypassGeniolite!=1">
+					<div alt="PN" class="md-avatar" style="background:red;color:#FFFFFF;"><div style="padding-left:10px;margin-top:10px">AC</div></div>
+					<md-button ng-href="../business/category.php" ng-click="close()"><b>Add Categories</b></md-button>
+				</md-list-item>
+				<md-divider></md-divider>
+
+				<md-list-item ng-if="extraHandler != 'jda' && bypassGeniolite!=1">
+					<div alt="PN" class="md-avatar" style="background:#41BA44;color:#FFFFFF;"><div style="padding-left:10px;margin-top:10px">EC</div></div>
+					<md-button ng-href="../business/catpreview.php" ng-click="close()"><b>Selected Category Preview</b></md-button>
+				</md-list-item> 
+				
+				<md-divider></md-divider>
+				<md-list-item ng-if="extraHandler != 'jda' && bypassGeniolite!=1">
+					<div alt="PN" class="md-avatar" style="background:#F44336;color:#FFFFFF;"><div style="padding-left:10px;margin-top:10px">PN</div></div>
+					<md-button ng-click="openPayNarrat()"><b>Payment Details Narration</b></md-button>
+				</md-list-item>
+				<md-divider></md-divider>
+				<md-list-item  ng-if="extraHandler != 'jda' && bypassGeniolite!=1">
+					<div alt="PN" class="md-avatar" style="background:#1273C0;color:#FFFFFF;"><div style="padding-left:10px;margin-top:10px">SJ</div></div>
+					<md-button ng-click="submitCats($event,'','../business/jd_rating_review.php?jdrr_button=')"><b>Sell JDRR</b></md-button>
+				</md-list-item>
+				<md-divider></md-divider>
+				<md-list-item  ng-if="skip_demo_parentid == parentid && bypassGeniolite!=1">
+					<div alt="PN" class="md-avatar" style="background:#D66012;color:#FFFFFF;"><div style="padding-left:10px;margin-top:10px">PC</div></div>
+					<md-button ng-click="skip_demo(parentid,extraHandler)"><b>Price Chart</b></md-button>
+				</md-list-item>
+				<md-divider></md-divider>
+				<md-list-item  ng-if="extraHandler != 'jda' && bypassGeniolite!=1">
+					<div alt="PN" class="md-avatar" style="background:#FF5891;color:#FFFFFF;"><div style="padding-left:10px;margin-top:10px">OC</div></div>
+					<md-button ng-click="showBottomOtherCampList($event)" target="_blank"><b>Other Campaigns</b></md-button>
+				</md-list-item>
+				<md-divider></md-divider>
+				<md-list-item  ng-if="extraHandler != 'jda' && bypassGeniolite!=1">
+					<div alt="PN" class="md-avatar" style="background:#3F51B5;color:#FFFFFF;"><div style="padding-left:10px;margin-top:10px">SP</div></div>
+					<md-button ng-click="openMenuSP()"><b>Search Plus</b></md-button>
+				</md-list-item>
+				<div class="none showSPList" ng-if="extraHandler != 'jda' && bypassGeniolite!=1">
+					<md-progress-linear md-mode="indeterminate" ng-if="showLoaderMenu==1 && bypassGeniolite!=1"></md-progress-linear>
+					<ul ng-if="searchPlusCampaigns.error.code == 0" style="margin-left:60px;">
+						<li ng-repeat="(key,data) in searchPlusCampaigns.data">
+							<md-button ng-click="submitCats($event,'',redirectUrlSP[data.vertical_id])" ng-if="data.vertical_id != '11' && data.vertical_id != '12' && data.vertical_id != '20'"><b>{{key}}</b></md-button>
+							<md-button ng-click="hospitalDocHandle(data.vertical_id)" ng-if="(data.vertical_id == '11' || data.vertical_id == '12') && bypassGeniolite!=1"><b>{{key}}</b></md-button>
+							<md-button ng-click="othersVerticalHandle(data.vertical_id)" ng-if="data.vertical_id == '20' && bypassGeniolite!=1"><b>{{key}}</b></md-button>
+						</li>
+					</ul>
+					<p ng-if="searchPlusCampaigns.error.code == 1 && bypassGeniolite!=1">Not Eligible for Search Plus</p>
+				</div>
+				<md-divider></md-divider>
+			</md-list>
+		</md-content>
+    </md-sidenav>
+	<div class="lowerHead left width100">
+		<div class="logoSmall hide left pointer" ng-click="moveToTop($event)"><img ng-src="img/jdSmallLogo.png" alt="Small Logo" /></div>
+		<div class="logo left">
+			<div class="currMenu left" ng-mouseenter="showMenu()" ng-if="setNoMenu	!=	1">
+				<div class="activeLink left" ng-if="activeMenu != 'filter'" ng-switch on="activeMenu">
+					<span ng-switch-when="appHome">Home</span>
+					<span ng-switch-when="penalty">Penalty Report</span>
+					<span ng-switch-when="hotData">Hot Data</span>
+					<span ng-switch-when="newBusiness">New Business</span>
+					<span ng-switch-when="jdRatingData">Jd Rating Data</span>
+					<span ng-switch-when="restaurantData">Grocery Data</span>
+					<span ng-switch-when="specialData">Buy1 Get1</span>
+					<span ng-switch-when="accountDetRest">Rest Account Details</span>
+					<span ng-switch-when="deactivatedRest">Deactivated Restaurant</span>
+					<span ng-switch-when="retentionData">Retention Data</span>
+					<span ng-switch-when="bouncedData">Bounced Data</span>
+					<span ng-switch-when="bouncedDataECS">Bounced ECS Data</span>
+					<span ng-switch-when="instantECS">Instant ECS Data</span>
+					<span ng-switch-when="srchRetention">Search ECS Retention</span>
+					<span ng-switch-when="workedECSData">Worked for ECS</span>
+					<span ng-switch-when="expiredData">Expired Data</span>
+					<span ng-switch-when="paidEcsData">Paid ECS Data</span>
+					<span ng-switch-when="shopfrontData">ShopFront Data</span>
+					<span ng-switch-when="chainRest">Chain Restaurant</span>
+					<span ng-switch-when="paidExpVNData">Paid Expired VN</span>
+					<span ng-switch-when="prospectData">Prospect Data</span>
+					<span ng-switch-when="resellerAudit">Reseller Audit</span>
+					<span ng-switch-when="resellers">Reseller</span>
+					<span ng-switch-when="appointmentRep">Appointment Report</span>
+					<span ng-switch-when="callBackRep">CallBack Report</span>
+					<span ng-switch-when="callBackContVerRep">CallBack Report</span>
+					<span ng-switch-when="notInterestedRep">Not Interested</span>
+					<span ng-switch-when="notConcernedRep">Not Concerned</span>
+					<span ng-switch-when="cmpnyClosedRep">Company Closed</span>
+					<span ng-switch-when="dndRep">DND Report</span>
+					<span ng-switch-when="internalCall">Internal Call</span>
+					<span ng-switch-when="paidClientRep">Paid Client</span>
+					<span ng-switch-when="wrongNumRep">Wrong Number</span>
+					<span ng-switch-when="notInBusinessRep">Not in Business</span>
+					<span ng-switch-when="followUpRep">Follow Up</span>
+					<span ng-switch-when="intJdServicesRep">Interested in Jd</span>
+					<span ng-switch-when="intMasterAppRep">Interested in Master</span>
+					<span ng-switch-when="notIntMasterAppRep">Not Intr. in Master</span>
+					<span ng-switch-when="refixedAppRep">Refixed Appt.</span>
+					<span ng-switch-when="doctorInterestedRep">Doctor Intr.</span>
+					<span ng-switch-when="doctorNotInterestedRep">Doctor Not Intr.</span>
+					<span ng-switch-when="ibCallBackRep">IB Call Back</span>
+					<span ng-switch-when="ibAppointmentRep">IB Appt. Rep</span>
+					<span ng-switch-when="ibRenewedRep">IB Renewed Appt.</span>
+					<span ng-switch-when="inNotInterested">IB Not Intr.</span>
+					<span ng-switch-when="dealClosedRep">Deal Closed Rep.</span>
+					<span ng-switch-when="todaysCall">Todays Call Rep.</span>
+					<span ng-switch-when="bankAccDetailsUpdated">Bank Account Details Updated</span>
+					<span ng-switch-when="noBankAccount">No Bank Account</span>
+					<span ng-switch-when="notInterestedOnlinePayment">notInterestedOnlinePayment</span>
+					<span ng-switch-when="callcountData">Callcount Data</span>
+					<span ng-switch-when="tmeAlloc">Online Allocated</span>
+					<span ng-switch-when="retention">Revised Retention</span>
+					<span ng-switch-when="package">Packer and estate</span>
+					<span ng-switch-when="topCalledExpiredData">Top Called Expired Data</span>
+					<span ng-switch-when="pdgdata">PDG Data</span>
+					<span ng-switch-when="categoryPaidData">Category Paid Data</span>
+					<span ng-switch-when="inventoryData">Inventory Less Than 50</span>
+					<span ng-switch-when="inventoryMorethanFifty">Inventory Greater Than 50</span>
+					<span ng-switch-when="nonEcsData">Non Ecs Data</span>
+					<span ng-switch-when="search">Search</span>
+					<span ng-switch-when="iitfData">IITF 2015</span>
+					<span ng-switch-when="unsoldData">Unsold Data</span>
+					<span ng-switch-when="expiredDataEcs">Expired Ecs Data</span>
+					<span ng-switch-when="expiredDataNonEcs">Expired Non Ecs Data</span>
+					<span ng-switch-when="ecsRequest">Ecs Upgrade or Degrade</span>
+					<span ng-switch-when="report">Reports</span>
+					<span ng-switch-when="finance">Finance</span>
+					<span ng-switch-when="deliverySystem">Delivery System</span>
+					<span ng-switch-when="leadComplaints">Lead Related Complaints</span>
+					<span ng-switch-when="learningcenter">Learning Center</span>
+					<span ng-switch-when="magazineData">Magazine Data</span>
+					<span ng-switch-when="discountReport">Discount Report</span>
+					<span ng-switch-when="jdrrPropectData">DIY JDRR prospect DATA</span>
+					<span ng-switch-when="jdrrCourierData">Jdrr Courier Data</span>
+                                        <span ng-switch-when="kpi">KPI</span>
+<span ng-switch-when="ownershippaiddata">Ownership Paid Data</span>
+                    <span ng-switch-when="othertmepaiddata">Other Tme Paid Data</span>
+                    <span ng-switch-when="ownershipexpireddata">Ownership Expired Data</span>
+                    <span ng-switch-when="othertmeexpireddata">Other Tme Expired Data</span>
+                    <span ng-switch-when="JdrIro">JdrIro</span>
+                    <span ng-switch-when="WebIro">WebIro</span>
+                    <span ng-switch-when="whatsappcalled">whatsappcalled</span>
+					<span ng-switch-when="restaurantdealsoffer">Restaurant Offers & Deals</span>
+					<span ng-switch-when="superhotdata">Super Hot Data</span>
+				</div>
+				<div class="activeLink left" ng-if="activeMenu == 'filter'" ng-switch on="activeFilter">
+					<span ng-switch-when="allocation">Home</span>
+					<span ng-switch-when="penalty">Penalty Report</span>
+					<span ng-switch-when="hotData">Hot Data</span>
+					<span ng-switch-when="newBusiness">New Business</span>
+					<span ng-switch-when="jdRatingData">Jd Rating Data</span>
+					<span ng-switch-when="restaurantData">Grocery Data</span>
+					<span ng-switch-when="specialData">Buy1 Get1</span>
+					<span ng-switch-when="accountDetRest">Rest Account Details</span>
+					<span ng-switch-when="bouncedData">Bounced Data</span>
+					<span ng-switch-when="bouncedDataECS">Bounced ECS Data</span>
+					<span ng-switch-when="instantECS">Instant ECS Data</span>
+					<span ng-switch-when="deactivatedRest">Deactivated Restaurant</span>
+					<span ng-switch-when="retentionData">Retention Data</span>
+					<span ng-switch-when="srchRetention">Search ECS Retention</span>
+					<span ng-switch-when="workedECSData">Worked for ECS</span>
+					<span ng-switch-when="expiredData">Expired Data</span>
+					<span ng-switch-when="paidEcsData">Paid ECS Data</span>
+					<span ng-switch-when="shopfrontData">ShopFront Data</span>
+					<span ng-switch-when="chainRest">Chain Restaurant</span>
+					<span ng-switch-when="paidExpVNData">Paid Expired VN</span>
+					<span ng-switch-when="prospectData">Prospect Data</span>
+					<span ng-switch-when="resellerAudit">Reseller Audit</span>
+					<span ng-switch-when="resellers">Reseller</span>
+					<span ng-switch-when="appointmentRep">Appointment Report</span>
+					<span ng-switch-when="callBackRep">CallBack Report</span>
+					<span ng-switch-when="callBackContVerRep">CallBack Report</span>
+					<span ng-switch-when="notInterestedRep">Not Interested</span>
+					<span ng-switch-when="notConcernedRep">Not Concerned</span>
+					<span ng-switch-when="cmpnyClosedRep">Company Closed</span>
+					<span ng-switch-when="dndRep">DND Report</span>
+					<span ng-switch-when="internalCall">Internal Call</span>
+					<span ng-switch-when="paidClientRep">Paid Client</span>
+					<span ng-switch-when="wrongNumRep">Wrong Number</span>
+					<span ng-switch-when="notInBusinessRep">Not in Business</span>
+					<span ng-switch-when="followUpRep">Follow Up</span>
+					<span ng-switch-when="intJdServicesRep">Interested in Jd</span>
+					<span ng-switch-when="intMasterAppRep">Interested in Master</span>
+					<span ng-switch-when="notIntMasterAppRep">Not Intr. in Master</span>
+					<span ng-switch-when="refixedAppRep">Refixed Appt.</span>
+					<span ng-switch-when="doctorInterestedRep">Doctor Intr.</span>
+					<span ng-switch-when="doctorNotInterestedRep">Doctor Not Intr.</span>
+					<span ng-switch-when="ibCallBackRep">IB Call Back</span>
+					<span ng-switch-when="ibAppointmentRep">IB Appt. Rep</span>
+					<span ng-switch-when="ibRenewedRep">IB Renewed Appt.</span>
+					<span ng-switch-when="inNotInterested">IB Not Intr.</span>
+					<span ng-switch-when="dealClosedRep">Deal Closed Rep.</span>
+					<span ng-switch-when="todaysCall">Todays Call Rep.</span>
+					<span ng-switch-when="bankAccDetailsUpdated">Bank Account Details Updated</span>
+					<span ng-switch-when="noBankAccount">No Bank Account</span>
+					<span ng-switch-when="notInterestedOnlinePayment">notInterestedOnlinePayment</span>
+					<span ng-switch-when="callcountData">Callcount Data</span>
+					<span ng-switch-when="tmeAlloc">Online Allocated</span>
+					<span ng-switch-when="retention">Revised Retention</span>
+					<span ng-switch-when="package">Packer and estate</span>
+					<span ng-switch-when="topCalledExpiredData">Top Called Expired Data</span>					
+					<span ng-switch-when="pdgdata">PDG Data</span>
+					<span ng-switch-when="categoryPaidData">Category Paid Data</span>
+					<span ng-switch-when="inventoryData">Inventory Less Than 50</span>
+					<span ng-switch-when="inventoryMorethanFifty">Inventory Greater Than 50</span>
+					<span ng-switch-when="nonEcsData">Non Ecs Data</span>
+					<span ng-switch-when="report">Reports</span>
+					<span ng-switch-when="finance">Finance</span>
+					<span ng-switch-when="search">Search</span>
+					<span ng-switch-when="iitfData">IITF 2015</span>
+					<span ng-switch-when="unsoldData">Unsold Data</span>
+					<span ng-switch-when="expiredDataEcs">Expired Ecs Data</span>
+					<span ng-switch-when="expiredDataNonEcs">Expired Non Ecs Data</span>
+					<span ng-switch-when="ecsRequest">Ecs Upgrade or Degrade</span>
+					<span ng-switch-when="deliverySystem">Delivery System</span>
+					<span ng-switch-when="leadComplaints">Lead Related Complaints</span>
+					<span ng-switch-when="learningcenter">Learning Center</span>
+					<span ng-switch-when="magazineData">Magazine Data</span>
+					<span ng-switch-when="discountReport">Discount Report</span>
+					<span ng-switch-when="jdrrPropectData">DIY JDRR prospect DATA</span>
+					<span ng-switch-when="jdrrCourierData">Jdrr Courier Data</span>
+                                        <span ng-switch-when="kpi">KPI</span>
+                    <span ng-switch-when="ownershippaiddata">Ownership Paid Data</span>
+                    <span ng-switch-when="othertmepaiddata">Other Tme Paid Data</span>
+                    <span ng-switch-when="ownershipexpireddata">Ownership Expired Data</span>
+                    <span ng-switch-when="othertmeexpireddata">Other Tme Expired Data</span>
+					<span ng-switch-when="JdrIro">JdrIro</span>
+					<span ng-switch-when="WebIro">WebIro</span>
+					<span ng-switch-when="whatsappcalled">whatsappcalled</span>
+					<span ng-switch-when="restaurantdealsoffer">Restaurant Offers & Deals</span>
+					<span ng-switch-when="superhotdata">Super Hot Data</span>
+				</div>
+				<img ng-src="img/downArrow.png" />
+			</div>
+			
+			<div class="left" style="margin-left:7%;cursor:pointer;" class="animate-show-hide" ng-if="employees.client_waiting.flag == 1 && setNoMenu	!=	1" ng-show = "add_Visible" ng-click="show_waitDetails($event,1)">
+<!--
+				<img ng-src="img/client_img.png" alt="Client is Waiting" /></img>
+-->
+				<img ng-src="img/04-progress.gif" style="height:35px;width:50px;" alt="Client is Waiting" /></img>
+			</div>
+								
+			<div class="left" ng-if="setNoMenu	==	1">
+				<div layout="row"  ng-if='moduleType != "CS"'>
+					<div ng-click='getDispositionList()' style='width: 184px;'>
+						<div class='dispose_name'>
+							{{dispname}}
+						</div>
+						
+						<div class='downarrow'>
+								<img src='img/down_arrow.png'/>
+						</div>
+					</div>
+					
+					
+					<div class="displist" ng-show="dispose_list">
+						<ul ng-repeat="key in notSorted(disposelist)">
+							<li  class="optgroup_val"> {{key}}</li> 
+							<li ng-repeat="dispostval in disposelist[key]" class='dispval' ng-click="setdispval(dispostval.disposition_name,dispostval.disposition_value)">
+								{{dispostval.disposition_name}}
+							</li>
+						</ul>	
+						
+<!--
+						<ul ng-repeat="key in notSorted(disposelist)"  ng-if="key != 'GeneralDispositions' && disable_arr.indexOf(user) > -1">
+							<li  class="optgroup_val"> {{key}}</li> 
+							<li ng-repeat="dispostval in disposelist[key]" class='dispval' ng-click="setdispval(dispostval.disposition_name,dispostval.disposition_value)">
+								{{dispostval.disposition_name}}
+							</li>
+						</ul>	
+-->
+						
+					</div>
+					 
+                  
+					<md-button ng-click="saveDispose($event)" style="background: none repeat scroll 0 0 rgba(0, 97, 142, 0.38);color: #000000;margin-bottom: 27px;padding: 0;padding-left: 2px;padding-right: 2px" >
+							<span>Save and Exit</span>
+					</md-button>
+					
+			<div class="left" style="cursor:pointer;" class="animate-show-hide" ng-if="employees.client_waiting.flag == 1 && setNoMenu	==	1" ng-show = "add_Visible" ng-click="show_waitDetails($event,0)">
+<!--
+				<img ng-src="img/client_img.png" alt="Client is Waiting" /></img>
+-->
+				<img ng-src="img/04-progress.gif" style="height:40px;width:50px;padding-top:5px;" alt="Client is Waiting" /></img>
+			</div>
+			
+				</div>
+			</div>
+		</div>
+		<!--div class="filterHome left" ng-include src="'partials/filterMktg.html'" onLoad="page='allocation'"></div-->
+		<div class="right proLinks" ng-if="setNoMenu	!=	1">
+			<!--div class="pro-pic-rt right" ng-click="setDynRoute(currSpeedLink,extraValsSpeed)"><img ng-src="img/quick.png" alt="Quick Links" /></div-->
+			
+			<div class="pro-pic-rt  menu-icon sound-icon b-sprite" ng-click="showNotBoxFunc(0)" style="cursor:pointer;width:36px;height:24px;" title="Broadcast Messages"><span class=" right notfic">{{newMsgCount}}</span></div>
+<!--
+			<div class="pro-pic-rt right" ng-click="showImgSpeedLink()"><img ng-src="img/quick.png" alt="Quick Links" /></div>
+-->
+			<!-- <div class="pro-pic-Rep right" ng-click="showImgReportMenu()"><img ng-src="img/report.png" alt="Report" /></div> -->
+<!--
+			<div class="pro-pic-rt right" ng-click="showlineagePopUp(1)"><img ng-src="img/information_pop.png" alt="Information" width="25px;" height="25px;" /></div>
+-->
+			<div class="pro-pic-rt right" ng-click="gototmecallrecords()" style="cursor:pointer" title="TME Call Logs"><img src="img/call_log.png" alt="call logs" width="24" height="24"></div>
+<!--			<div class="pro-pic-rt right" ng-click="realizeValue()" style="cursor:pointer" title="TME Call Logs">Realize</div>-->
+			<div class="pro-pic-rt right" ng-click="getkpi()" style="cursor:pointer" title="KPI"><img id="detail-icon-img" src="img/kpi.png" alt="statistics" width="32" height="32"></div>
+			<!--************************** Grabbed Notification Code *************************************/	-->
+			<!--   	Added Image for Badge		 -->
+<!--
+			<div class="pro-pic-rt right">
+				<img  ng-src="img/grabbed.png" style="width:30px;height:30px;float:left;opacity: 0.65;"  ng-click="showNotification('ungrabbed')" title="UnGrabbed Count"/>	
+				<div style="margin-left: 38px; margin-top: -7px;"><md-badge class="md-notgrab pointer">{{ ungrabbedCount }}</md-badge></div>
+			</div>
+			<div class="pro-pic-rt right">
+				<img  ng-src="img/ungrabbed.png" style="width:30px;height:30px;float:left;opacity: 0.65;" ng-click="showNotification('grabbed')" title="Grabbed Count"/>
+				<div style="margin-left: 38px; margin-top: -7px;"><md-badge class="md-grab pointer" >{{ grabbedCount }}</md-badge></div>
+			</div>
+-->
+			<!--************************** Grabbed Notification Code *************************************/	-->
+			<div class="pro-pic-rt right" style=" background: none repeat scroll 0 0 orange;border: 2px solid;border-radius: 18px;color: white;cursor: pointer;font-size: 15px;font-weight: bold;  height: 23px;margin-right: 10px;padding: 8px 3px 3px 7px;width: 210px;" title="Learning Center">
+				<a ng-click="gotolearn()" style="margin-left: 32px;">Learning Center(New)</a>
+			</div>
+<!--
+			<div class="pro-pic-rt right" style=" background: none repeat scroll 0 0 orange;border: 2px solid;border-radius: 18px;color: white;cursor: pointer;font-size: 15px;font-weight: bold;  height: 23px;margin-right: 10px;padding: 8px 3px 3px 7px;width: 210px;" title="Learning Center">
+				<a ng-click="gototmecallrecords()" style="margin-left: 32px;">TME Call Records</a>
+			</div>
+-->
+
+		</div>
+		<div class="right proLinks" ng-if="setNoMenu	==	1">
+			<div class="right" ng-if="companyTempInfo.errorCode == 1">Company Not Found</div>
+			<div class="right dataCompShowHead md-title" ng-if="companyTempInfo.errorCode == 0">{{companyTempInfo.data.companyname }} | {{companyTempInfo.data.parentid}}</div>
+			<!--************************** Grabbed Notification Code *************************************/	-->
+<!--
+			<div class="pro-pic-rt right">
+				<img  ng-src="img/grabbed.png" style="width:30px;height:30px;float:left;opacity: 0.65;"  ng-click="showNotification('ungrabbed')" title="UnGrabbed Count"/>	
+				<div style="margin-left: 38px; margin-top: -7px;"><md-badge class="md-notgrab pointer">{{ ungrabbedCount }}</md-badge></div>
+			</div>
+			<div class="pro-pic-rt right">
+				<img  ng-src="img/ungrabbed.png" style="width:30px;height:30px;float:left;opacity: 0.65;" ng-click="showNotification('grabbed')" title="Grabbed Count"/>
+				<div style="margin-left: 38px; margin-top: -7px;"><md-badge class="md-grab pointer" >{{ grabbedCount }}</md-badge></div>
+			</div>
+-->
+			<!--************************** Grabbed Notification Code *************************************/	-->
+		</div>
+		
+		<!--************************** Grabbed Notification Code *************************************/	-->
+		
+		<div class="notificationBlock" ng-show="showNotificationValue" >
+			<div class="notificationDiv" ng-repeat="(notificationKey, notificationValue) in notificationData">
+					<div ng-click="grabGoToBform(notificationValue.parentid)" ng-if="notificationValue.FLAG != '1'">
+						<div style="font-weight: 600;" ng-if="notificationValue.mename != '' && notificationValue.mename != undefined">{{ notificationValue.mename }} ( {{ notificationValue.mecode }} )</div>
+						<span style="font-weight: 600;" class="pointer" ng-class="{green : (notificationValue.FLAG == '1')}"> {{ notificationValue.companyname | capitalize}}  <br> {{ notificationValue.parentid }} </span>
+					</div>
+					<div ng-if="notificationValue.FLAG == '1' && previousNotification =='ungrabbed'">
+						<div ng-if="notificationValue.mename != '' && notificationValue.mename != undefined">{{ notificationValue.mename }} ( {{ notificationValue.mecode }} )</div>
+						<span style="font-weight: 600;" ng-class="{green : (notificationValue.FLAG == '1')}"> {{ notificationValue.companyname | capitalize}}  <br> {{ notificationValue.parentid }} </span> 
+						<span style="font-weight: 600;" class="timing_notif md-avatar" ng-if="notificationValue.remainingTime!='' && notificationValue.remainingTime!=undefined" title="{{ notificationValue.remainingTime}} min">{{ notificationValue.remainingTime}}</span>
+					</div>
+			</div>
+		</div>
+		
+		<!--************************** Grabbed Notification Code *************************************/	-->
+		<!-- broadcast -->
+		 <div class="notBoxClass" ng-if="showNotBox == 1" style="float: right; position: fixed;z-index:2000;">
+              <ul ng-if="notArrLength > 0" class="mousescroll" style="height: 90vh; margin: 5px;">
+               <li ng-repeat="notData in notArr | limitTo:limiter" class="notLi" layout="row" layout-align="center center" ng-style="notData.flag == 1 && {'background': 'rgb(224, 242, 247) none repeat scroll 0px 0px'}"
+                                        >
+                   <div flex="20" layout="row" layout-align="center center">
+					<md-button class="md-fab md-hue-2 md-mini md-accent" aria-label="Profile" ng-if="notData.flag != 1">
+						{{notData.senderId[0]}}
+					</md-button>
+					<md-button class="md-fab md-hue-2 md-mini md-primary" aria-label="Profile" ng-if="notData.flag == 1">
+						<span style="font-size: 10px; color: white;">New<span>
+					</md-button>
+				</div>
+				<div flex="80" layout="column" layout-align="space-between" ng-click="view_msg(notData,$event)" style="cursor: pointer;">
+				<div layout="row" layout-align="space-between">
+					<div ng-if="notData.flag == 0" style="color: steelblue; font-size: 15px;">{{notData.senderId}}</div>
+					<div ng-if="notData.flag == 0" style="font-size: 12px;">{{notData.msg_time | date:'MMMM dd HH:mm a'}}</div>
+
+					<div ng-if="notData.flag == 1" style="color: steelblue; font-size: 15px;">Justdial</div>
+					<div ng-if="notData.flag == 1" style="font-size: 12px;">{{notData.msg_time | date:'MMMM dd HH:mm a'}}</div>
+				</div>
+				<div layout="row">
+					{{ notData.message | limitTo: 30}}{{notData.message.length > 30 ? '...' : ''}}
+				</div>
+				</div>
+                             
+               </li>
+               <li layout="row" layout-align="end center" class="notLi">
+				<md-button class="md-raised md-primary" ng-click="show_more_msg()">{{buttonText}}</md-button>
+			</li>
+            </ul>                
+			<div ng-if="notArrLength == 0" style="width:100%;line-height:20px;padding-top:50px;z-index:1000;" class="text-center">
+				<img ng-src="img/not-bell.png" />
+				<p>Sorry there are no broadcast messages for you</p>
+			</div>
+		</div>
+		
+		<!-- onload broadcast -->
+		<div class="popTopBarBroadcast_overlay" ng-if="showBroadDisp == 1" style="pointer-events:auto !important;"></div>
+		<div class="bkBgfix popTopBarBroadDisp  " ng-if="showBroadDisp == 1" style="z-index: 999;">  
+				<div class="modalBx broaddisp_{{key}} broadDisp modalBx" ng-repeat="(key,notArrDisp) in notArr" ng-if="notArrDisp.flag == 1 && index==$index" style="position:absolute;left:30%;">  
+						<div class="header"> 
+							<span class="hornicBx"> <i class="ic-horn learning_ceter_sprite"> </i> </span>
+							<span class="titl" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis; width: 21em;"> {{title[key]}} </span>
+<!--
+							<a class="clsBx" ng-click="closePopTopBroadDsip(key,media_id[key])"> <i class="ic-clos1 learning_ceter_sprite"> </i> </a>
+-->
+						</div>
+						<div class="contentBx" style="border-bottom:1px solid #E2E2E2;"> 
+							  <div class="msgBrdCon " ng-bind-html="MytrustedHtmlDisp[key]" style="overflow-y:auto;max-height:300px; margin-bottom:20px;min-height: 50px;"></div>
+							<div class="titl2" ng-if="media_show[key]!='nomedia'"> Downloads - </div>
+							<div class="downIcBx" ng-if="media_show[key]!='nomedia'"> 
+								<span class="bx1 mr20 mb20" ng-if="media_show[key]=='audio'"> 
+									<span class="dtblcell ic-sound learning_ceter_sprite"> </span>
+									<span class="tx1 pl10"><a target="_blank" ng-href="{{media_path[key]}}" > audio mp3</a></span>
+								</span>
+								<span class="bx1 mr20 mb20" ng-if="media_show[key]=='video'|| media_show[key]=='youtube'"> 
+									<span class="dtblcell ic-video learning_ceter_sprite"> </span>
+									<span class="tx1 pl10"><a target="_blank" ng-href="{{media_path[key]}}" > video mp4</a></span>
+								</span>
+								<span class="bx1  mb20" ng-if="media_show[key]=='document'"> 
+									<span class="dtblcell ic-pdf learning_ceter_sprite"> </span>
+									<span class="tx1 pl10"><a target="_blank" ng-href="{{media_path[key]}}" > document PDF</a></span>
+								</span>
+								<span class="bx1  mb20" ng-if="media_show[key]=='image'"> 
+									<span class="dtblcell ic-img learning_ceter_sprite"> </span>
+									<span class="tx1 pl10"><a target="_blank" ng-href="{{media_path[key]}}" > image.jpg</a></span>
+								</span>
+							</div>
+						</div>
+						<div>
+							<button  style="border: 1px solid #dce2e7;float: right;  font-size: 14px;height: 36px; line-height: 36px;margin-right:5px;width: 80px;background-color: #4082c4;color: #ffffff;margin-top:5px;margin-bottom:5px;" ng-click="closePopTopBroadDsip(key,media_id[key],para[key])">OK</button>
+						</div>
+					</div>
+				</div>
+		<!-- onload broadcast -->
+		
+		<!-- onclick broadcast -->
+		<div class="popTopBarBroad_overlay" style="display:none;pointer-events:auto !important;"></div>
+		<div class="bkBgfix popTopBarBroadcast dn "style="z-index: 999;">  
+					<div class="modalBx">  
+						<div class="header"> 
+							<span class="hornicBx"> <i class="ic-horn learning_ceter_sprite"> </i> </span>
+							<span class="titl" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis; width: 21em;"> {{Messagedetails.title}} </span>
+							<a class="clsBx" ng-click="closePopTopBroad(Messagedetails.media_id,Messagedetails.flag)"> <i class="ic-clos1 learning_ceter_sprite"> </i> </a>
+						</div>
+						<div class="contentBx" style="border-bottom:1px solid #E2E2E2;"> 
+							  <div class="msgBrdCon " ng-if="Showbroad == 1" ng-bind-html="MytrustedHtml"style="overflow-y:auto;max-height:300px; margin-bottom:20px;min-height: 50px;"></div>
+							<div class="titl2" ng-if="Messagedetails.media_show!='nomedia'"> Downloads - </div>
+							<div class="downIcBx" ng-if="Messagedetails.media_show!='nomedia'"> 
+								<span class="bx1 mr20 mb20" ng-if="Messagedetails.media_show=='audio'"> 
+									<span class="dtblcell ic-sound learning_ceter_sprite"> </span>
+									<span class="tx1 pl10"><a target="_blank" ng-href="{{Messagedetails.media_path}}" > audio mp3</a></span>
+								</span>
+								<span class="bx1 mr20 mb20" ng-if="Messagedetails.media_show=='video' || Messagedetails.media_show=='youtube'"> 
+									<span class="dtblcell ic-video learning_ceter_sprite"> </span>
+									<span class="tx1 pl10"><a target="_blank" ng-href="{{Messagedetails.media_path}}" > video mp4</a></span>
+								</span>
+								<span class="bx1  mb20" ng-if="Messagedetails.media_show=='document'"> 
+									<span class="dtblcell ic-pdf learning_ceter_sprite"> </span>
+									<span class="tx1 pl10"><a target="_blank" ng-href="{{Messagedetails.media_path}}" > document PDF</a></span>
+								</span>
+								<span class="bx1  mb20" ng-if="Messagedetails.media_show=='image'"> 
+									<span class="dtblcell ic-img learning_ceter_sprite"> </span>
+									<span class="tx1 pl10"><a target="_blank" ng-href="{{Messagedetails.media_path}}" > image.jpg</a></span>
+								</span>
+							</div>
+						</div>
+						<div>
+							<button  style="border: 1px solid #dce2e7;float: right;  font-size: 14px;height: 36px; line-height: 36px;margin-right:5px;width: 80px;background-color: #4082c4;color: #ffffff;margin-top:5px;margin-bottom:5px;" ng-click="closePopTopBroad(Messagedetails.media_id)">OK</button>
+						</div>
+					</div>
+				</div>
+				<!-- onclick broadcast -->
+		<!-- broadcast -->
+<!-- lineage -->
+
+<div class="add_new_overlay" style="display:block;pointer-events:auto !important;" ng-if="dataAllPopup	==	1"></div>
+	
+		<div class="lineagestyle overlay popup " id="pop1" style="height: 0%;top: 38px; left: 28%;" ng-if="showDiv == 0">
+			<div class="lineagestyle smpopup_box popup_box">
+				<div class="lineagestyle pheader">
+					<span class="lineagestyle head">Select Lineage</span>
+					<a  class="lineagestyle close_btn" ng-if="valclose==1" ng-click="closelineage()">x</a>
+				</div>
+				<div class="lineagestyle selectlineage emppopup abcd" id="empdet">
+					
+					<div class="lineagestyle selectlineage emppopup">
+					<div class="lineagestyle raw">
+						<span class="lineagestyle label">Do you make calls?</span>
+						<div class="lineagestyle radiodiv">
+							<span class="lineagestyle "><input type="radio" ng-model="radval2" ng-click="radvals2(radval2)" value="0" name="field" style="left:0px; position: static; visibility: visible;"/> &nbsp; Yes. I make calls.</span>
+							<span class="lineagestyle "><input type="radio" ng-model="radval2" ng-click="radvals2(radval2)" value="1" name="field" style="left:0px; position: static; visibility: visible;"/> &nbsp;  No. I don't make calls.</span>
+						</div>
+					</div>
+					<div class="lineagestyle raw" style="margin-bottom: -8px;">
+						<span class="lineagestyle label">Enter Your Working City</span>
+						<input type="text" class="inputbox" cityautolist ng-model="city_sel_lin[0]" ng-blur="city_sel_auto()" class="form-input contractCityInput" style="float: left;height: 2rem;padding: 0 1px 5px 10px;    text-transform: capitalize;width: 300px;"/>
+					</div>
+					<div class="lineagestyle raw" style=" margin-bottom: 9px;">
+						<span class="lineagestyle label" style="margin-top: 15px;">Tag Your Working City</span>
+						<div class="lineagestyle radiodiv" ng-if="field == 0">
+							<span class="lineagestyle "><input type="radio" name="citytype" value="Main City" ng-model="citytype" ng-click="seltagcity(citytype)" style="left:0px; position: static; visibility: visible;"/> &nbsp;Main City</span>
+							<span class="lineagestyle "><input type="radio" name="citytype" value="Remote City" ng-model="citytype" ng-click="seltagcity(citytype)" style="left:0px; position: static; visibility: visible;"/> &nbsp;Remote City</span>
+<!--
+							<span class="lineagestyle "><input type="radio"  name="citytype" value="All" ng-model="citytype" ng-click="seltagcity(citytype)" style="left:0px; position: static; visibility: visible;"/> &nbsp;Both</span>
+-->
+						</div>
+						<div class="lineagestyle radiodiv" ng-if="field == 1">
+							<span class="lineagestyle "><input type="radio" name="citytype" value="Main City" ng-model="citytype" ng-click="seltagcity(citytype)" style="left:0px; position: static; visibility: visible;"/> &nbsp;Main City</span>
+							<span class="lineagestyle "><input type="radio" name="citytype" value="Remote City" ng-model="citytype" ng-click="seltagcity(citytype)" style="left:0px; position: static; visibility: visible;"/> &nbsp;Remote City</span>
+							<span class="lineagestyle "><input type="radio"  name="citytype" value="All" ng-model="citytype" ng-click="seltagcity(citytype)" style="left:0px; position: static; visibility: visible;"/> &nbsp;Both</span>
+						</div>
+					</div>
+					<div class="lineagestyle raw" style="margin-bottom:-7px;">
+						<span class="lineagestyle label">Enter Your Mobile Number</span>
+						<div class="lineagestyle mbinput">
+							<input type="text" class="lineagestyle inputbox" id="mobilenum" ng-model="mobno" maxlength="10" style="margin:0px;outline:none;" numbersonly/>
+							<span class="lineagestyle mcode">+91</span>
+						</div>
+						
+						<span class="lineagestyle errordiv wrapper" style="font-size: 12px; padding: 9px 10px 5px 40px;">
+							<img src="img/itext.png" class="itext"/>
+							This number will be used to show your performance in Dashboard.
+						</span>
+					</div>
+
+						<div style="display:inline;float:left;width:250px;margin-right:20px;">
+							<div class="lineagestyle raw" style="margin-bottom:-10px;display:inline-block;">
+								<span class="lineagestyle label" style="width:200px;display:inline-block;">Tag your Manager</span>
+								<input type="text" class="inputbox" managerlistauto ng-model="lineage_sel[0]" ng-blur="lin_sel_auto()" class="form-input contractCityInput" style="float: left;height: 2rem;padding: 0 1px 5px 10px;    text-transform: capitalize;width: 250px;"/>
+							</div>
+						</div>
+						<div style="display:inline;float:left;width:100px;">
+							<div class="lineagestyle raw" style="margin-bottom:-10px;display:inline-block;">
+								<span class="lineagestyle label" style="width:200px;display:inline-block;">Team Name</span>
+								
+									  <select ng-model="team_name[0]" style="width:125px;color:#777474;">
+										  <option selected="selected" value="none">Select Team</option>
+										  <option value="BD">Bounce</option>
+										  <option value="HD">Hot Data</option>
+										  <option value="O">Online</option>
+										  <option value="RD">Retention</option>
+										  <option value="BE">Revival</option>
+										  <option value="S">Super</option>
+										  <option value="SJ">Super Cats</option>
+										  <option value="CO">Corporate</option>
+									  </select>
+
+							</div>
+						</div>
+
+					<span ng-if="getStatusLin	==	2" style="color:red;font-size:15px;width:400px; margin-top: 15px;height:18px;display:inline-block; margin-bottom: 3px;">Your request has been rejected. Re-enter manager name.</span>
+					<span ng-if="getStatusLin	==	0" style="color:red;font-size:15px;width:200px; margin-top: 15px;height:18px;display:inline-block; margin-bottom: 3px;">Your request is still pending.</span>
+					<span ng-if="getStatusLin	==	1" style="color:green;font-size:15px;width:200px; margin-top: 15px;height:18px;display:inline-block; margin-bottom: 3px;">Your request is Accepted.</span>
+					<div class="lineagestyle raw" style="margin-bottom:1px;">
+						<span class="lineagestyle labelhd" style="margin-top: 20px;">Manager Name Not In list? To Let Us Know, <a ng-click="submit_reportmanager()">Click Here</a></span>
+					</div>
+					<div class="lineagestyle raw">
+						<a class="lineagestyle button bluebutton" ng-click="empsubmit(mobno,city_sel_lin[0])"  style="margin:115px;">Submit & Proceed</a>
+					</div>
+					<hr style="color:#777474;">
+					<div class="lineagestyle raw" >
+						<span class="lineagestyle labelhd" style="padding-bottom:0px;">FOR MANAGERS:</span>
+						<span class="lineagestyle labelhd" style="padding-bottom:0px;">To Accept/ Reject Your Reportees, <a ng-click="viewReportees()">Click Here</a></span>
+					</div>
+				</div><!--End selectlineage-->
+			</div>
+		</div><!--end of popup-->
+		<input type="hidden" class="auto_select" value="0"/>
+	<input type="hidden" class="auto_city" value="0"/>
+	</div>
+	
+	<div class="lineagestyle overlay popup" id="pop2" style="height: 0%;top: 10%; left: 29%;" ng-if="showverdiv == 1">
+			<div class="lineagestyle popup_box smpopup_box">
+				<div class="lineagestyle pheader">
+					<span class="lineagestyle head">Verification</span>
+				</div>
+				<div class="lineagestyle verification wrapper verpopup">
+					<p class="lineagestyle vrtext">
+						We have sent a verification code on the mobile number <span class="lineagestyle mbn">{{mobno}}</span> .Please enter the same and verify yourself
+					</p>
+					<div class="lineagestyle verificationinput">
+						<input type="text" maxlength="3" class="verotp" id="otp1" ng-model="verinput1" otpkeyup numbersonly/>
+						<span class="lineagestyle dash" >-</span>
+						<input type="text" maxlength="3" id="otp2" class="verotp" ng-model="verinput2" numbersonly/> 
+					</div>
+					<p class="lineagestyle vrtext">
+						Did not receive the verification code? To resend the same <a ng-click="resendOTP()">Click here</a>
+					</p>
+					<hr>
+					<div class="lineagestyle buttondiv raw wrapper">
+						<a ng-click="Reentermob()" class="lineagestyle button greybutton">Re-enter Mobile Number</a>
+						<a ng-click="submitver(verinput1,verinput2)" class="lineagestyle button bluebutton">Submit</a>
+					</div>
+				</div><!--End verification-->
+			</div>
+		</div><!--end of popup-->
+		
+		<div class="lineagestyle overlay popup" id="pop3" style="height: 0%;top: 10%; " ng-if="showManagerDiv == 1">
+			<div class="lineagestyle popup_box">
+				<div class="lineagestyle pheader">
+					<span class="lineagestyle head">Accept / Reject Reportees</span>
+					<a ng-click="closemanagerdiv()" class="lineagestyle close_btn">x</a>
+				</div>
+				<div class="lineagestyle acceptrejectreport manpopup">
+				<div class="lineagestyle reportable" ng-if="reporteeInfo.errorCode == 0" style="overflow-y: auto;height:400px;">
+					<table class="lineagestyle tbl">
+						<thead>
+							<tr>
+								<th>Reportee Name</th>
+								<th>Employee Code</th>
+								<th>Location</th>
+								<th>Status</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="reportee in reporteeInfo.data">
+								
+								<td>{{reportee.employee_name}}</td>
+								<td>{{reportee.employee_id}}</td>
+								<td>{{reportee.data_city  | capitalize}}</td>
+								<td>
+									<div class="lineagestyle radiodiv " >
+										<span class="lineagestyle rdspan  acc_{{$index}}" ng-if="reportee.status	==	0"><input type="radio" id="accept{{$index}}" name="accrej_{{$index}}" value="1" ng-click="acc_rej_reportee(reportee.employee_id,1,'confirmed',$index)" class="resetCls" style="left:0px; position: static; visibility: visible;" > &nbsp; Accept</span>
+										
+										<span class="lineagestyle  rdspan rej_{{$index}}" ng-if="reportee.status	==	0"><input type="radio" id="reject{{$index}}" name="accrej_{{$index}}" value="2" ng-click="acc_rej_reportee(reportee.employee_id,2,'rejected',$index)" class="resetCls" style="left:0px; position: static; visibility: visible;" > &nbsp;  Reject</span>
+										
+										<span class="lineagestyle rdspan acc_{{$index}}   act" ng-if="reportee.status	==	1" ><input type="radio" checked id="accept{{$index}}" name="accrej_{{$index}}" value="1" ng-checked="reportee.status	==	1" ng-click="acc_rej_reportee(reportee.employee_id,1,'confirmed',$index)" class="resetCls" style="left:0px; position: static; visibility: visible;" > &nbsp; Accept</span>
+										
+										
+										<span class="lineagestyle rdspan rej_{{$index}} " ng-if="reportee.status	==	1"><input type="radio" id="reject{{$index}}" name="accrej_{{$index}}" value="2" ng-click="acc_rej_reportee(reportee.employee_id,2,'rejected',$index)" class="resetCls" style="left:0px; position: static; visibility: visible;" > &nbsp;  Reject</span>
+										
+										<span class="lineagestyle  rdspan acc_{{$index}}" ng-if="reportee.status	==	2"><input type="radio" id="accept{{$index}}" name="accrej_{{$index}}" value="1" ng-click="acc_rej_reportee(reportee.employee_id,1,'confirmed',$index)" class="resetCls" style="left:0px; position: static; visibility: visible;" > &nbsp; Accept</span>
+										
+										<span class="lineagestyle rdspan rej_{{$index}}  rejectedact" ng-if="reportee.status	==	2"><input type="radio" checked id="reject{{$index}}" name="accrej_{{$index}}" value="2" ng-click="acc_rej_reportee(reportee.employee_id,2,'rejected',$index)" class="resetCls" style="left:0px; position: static; visibility: visible;color:red;" > &nbsp;  Reject</span>
+										
+										
+									</div>
+								</td>
+								
+							</tr>							
+						</tbody>
+					</table>
+				
+				</div>
+				<div class="lineagestyle reportable" ng-if="reporteeInfo.errorCode == 1">
+					No Reportees Found!!!
+					</div>
+			</div><!--End acceptrejectreport-->
+				<div class="lineagestyle tablebutton wrapper" style="border-top: 1px solid #ccc;">
+						<a style="margin:10px;" ng-click="accrejsubmit()" class="lineagestyle button bluebutton" ng-if="reporteeInfo.errorCode == 0">Submit</a>
+						<a style="margin:10px;" ng-click="accrejreset()" class="lineagestyle button trfbutton" ng-if="reporteeInfo.errorCode == 0">Reset</a>
+						<a style="margin:10px;" ng-click="closemanagerdiv()" class="lineagestyle button bluebutton" ng-if="reporteeInfo.errorCode == 1">OK</a>
+					</div>
+			</div>
+			
+		</div><!--end of popup-->
+
+<!-- lineage -->
+<!--Penalty Pop Up popup start -->
+
+<div class="add_new_overlay" style="display:block;pointer-events:auto !important;z-index:2000;" ng-if="displayPenalty	==	1 || showDoDont == 1"></div>
+<span class="htlpopbg" ng-if="displayPenalty == 1 "></span>
+<div class="htlpopup htlcmnpop" ng-if="displayPenalty == 1">
+	<div class="modal-dialog" style="top:25%;position:fixed;">
+		<a href="javascript:void(0)" class="trvlsprt clsicn"></a>
+		<div class="modal-content flft ">
+			<span class="hdng flft ">Top Defaulter Pan India - {{penMonth}} {{penYear}}</span>
+			<div class="popmid flft ">
+				<div class="prflie_img">
+					<img src="{{penaltyData[indx].emp_photo}}" style="border-radius: 50%;width:85%;height:85%;">
+				</div>
+				<div class="defltName" style="padding-top:10px;">{{penaltyData[indx].empname}} | {{penaltyData[indx].empcode}}</div>
+				<div class="defltAdd">{{penaltyData[indx].city}}</div>
+				<div class="defltpenty"><span ng-if="penaltyData[indx].isTerminated == 0"  class="flotLeft">PENALTY AMOUNT </span>
+				<span ng-if="penaltyData[indx].isTerminated == 1"  class="flotLeft" style="margin-left:104px;">TERMINATED</span>
+				<span ng-if="penaltyData[indx].isTerminated == 0" class="flotLeft"><i class="red_rupp"></i>{{penaltyData[index].penalty}}</span>
+				</div>
+			</div>
+			<div class="horzLine"></div>
+			<div class="btn_wrpp">
+					<button type="submit" class="clrBtn cncltab" ng-click="prevDefaulter()">Previous</button>
+					<button type="submit" class="subBtn" ng-click="nextDefaulter()">Next</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!--Defaulter view popup end -->
+
+<span class="htlpopbg"></span>
+<div class="htlpopup htlcmnpop" ng-if="showDoDont == 1" >
+	<div class="modal-dialog" style="top:25%;position:fixed;">
+		<a href="javascript:void(0)" class="trvlsprt clsicn"></a>
+		<div class="modal-content flft " style="height:400px;overflow:auto;">
+			<span class="hdng flft ">Top Defaulter Pan India - {{penMonth}} {{penYear}}</span>
+
+			<div class="popmid flft ">
+				<span class="tit">Generic Data Entry Guidelines</span>
+			</div>
+			<div class="popmid flft ">
+				<table width="100%" height="112px" border="1" cellpadding="0" cellspacing="0" class="vlist" style="float:left;">
+				<tr>
+					<th>Do's</th>
+
+				</tr>
+				<tr ng-repeat="(key,msg) in doDontMsgs.do_msg" >
+					<td class="bodrnone">
+						<i class="tick" ></i>
+						<div class="dostxt" style="height:70px;">{{msg}}</div>
+						<hr style="height:1px;border:none;color:#333;background-color:#333;"></hr>
+					</td>
+				</tr>
+				</table>
+
+				<table width="100%" height="112px" border="1" cellpadding="0" cellspacing="0" class="vlist" >
+				<tr>
+					<th>Donts</th>
+				</tr>
+				<tr ng-repeat="(key,msg) in doDontMsgs.dont_msg">
+					<td class="bodrnone">
+							<i class="cross"></i>
+							<div class="dostxt" style="height:70px;">{{msg}}</div>
+							<hr style="height:1px;border:none;color:#333;background-color:#333;"></hr>
+						</td>
+				</tr>
+				</table>
+			</div>
+			<div class="daytyp">
+
+					<md-checkbox style="margin-bottom:0px !important;" ng-model="checkCon[0]" class="md-primary" ng-true-value="true" ng-false-value="false">I have read and understood the above rules and i accept the same </md-checkbox>
+			</div>
+			<div class="horzLine"></div>
+			<div class="btn_wrpp">
+					<button type="submit" class="clrBtn cncltab" ng-click="previousDef()">Previous</button>
+					<button type="submit" class="subBtn" ng-click="closeDef()">Submit</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!--Penalty Pop Up popup end -->
+		<div class="logoutDiv positionAbs" ng-show="hidelogout">
+			<div class="topArrow arrowLogout"></div>
+			<div class="toplogoutCont left width100">
+				<div class="left prologdiv marRt15px">
+					<img ng-src="{{employees.hrInfo.data.pro_pic_url == '' && 'img/defaultUser.png' || employees.hrInfo.data.pro_pic_url}}" alt="Profile Picture" class="pro-pic-welcome med-img-pro" />
+				</div>
+				<div class="left uppercase">
+					<div><h4 class="blue">{{employees.hrInfo.data.empname}}</h4></div>
+					<div class="marBot5px">{{employees.hrInfo.data.designation}}</div>
+					<div class="marBot5px">{{employees.hrInfo.data.empcode}}</div>
+					<div>{{employees.hrInfo.data.city}}</div>
+					<a class="black reportshowbutton" ng-if="setNewIcon == 1">DASHBOARD</a>
+				</div>
+			</div>
+			<div class="bottomlogoutCont left width100 text-center arial pointer" ng-click="logoutTme()">
+				<div style="margin-top:10px;">LOGOUT</div>
+			</div>
+		</div>
+		<!-- <div class="reportDiv positionAbs" ng-show="hidereport">
+			<div class="topArrow arrowRep"></div>
+			<div class="tabDivRep left width100">
+				<ul>
+					<li class="left pointer selectedTab" ng-click="report=false; showActive($event);">Reports</li><span class="left">/</span>
+					<li class="left pointer" ng-click="report=true; showActive($event);">Finance</li>
+				</ul>
+			</div> -->
+			<!-- <div class="repLinkContDiv left width100 box" ng-hide="report">
+				<ul>
+					<li class="pointer" ng-repeat="menu in linksReportIn" ng-if="menu.display_menu==2 || menu.display_menu==5" namemenu="{{menu.menu_name}}">
+						<a style="color:#636262" ng-if="menu.display_menu==2" ui-sref=".report({currPage:menu.menu_link,srchparam:'',srchWhich:'',extraVals:menu.extraVals})">
+							<div class="nameContainLink">{{menu.menu_name}}</div>
+						</a>
+						<a style="color:#636262" ng-if="menu.display_menu==5" ng-href="{{menu.menu_link}}" target="_blank">
+							<div class="nameContainLink">{{menu.menu_name}}</div>
+						</a>
+					</li>
+				</ul>
+			</div> -->
+			<!-- <div class="repLinkContDiv left width100 box" ng-show="report">
+				<ul>
+					<li class="pointer" ng-repeat="menu in linksReportIn" ng-if="menu.display_menu==3" namemenu="{{menu.menu_name}}">
+						<a style="color:#636262" ng-href="{{menu.menu_link}}{{employees.results.mktEmpCode}}" target="indiReport">
+							<div class="nameContainLink">{{menu.menu_name}}</div>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div> -->
+		<!-- <div class="reportDiv positionAbs favDiv" ng-show="hideFavourite">
+			<div class="topArrow arrowFav"></div>
+			<ul>
+				<li class="pointer blocksLi left text-center" ng-repeat="menu in linksData" ng-if="(currSpeedLink.indexOf(menu.menu_link) > -1) && (menu.display_menu == 1)" namemenu="{{menu.menu_name}}">
+					<a style="color:#636262" ui-sref="{{menu.menu_link}}">
+						<h3>{{menu.menu_name | stripNames}}</h3>
+						<div class="nameContainLink">{{menu.menu_name}}</div>
+					</a>
+				</li>
+				<li class="pointer blocksLi left text-center" ng-repeat="menu in linksReportIn" ng-if="(currSpeedLink.indexOf(menu.menu_link) > -1) && (menu.display_menu == 2)" namemenu="{{menu.menu_name}}">
+					<a style="color:#636262" ui-sref=".report({currPage:menu.menu_link,srchparam:'',srchWhich:'',extraVals:menu.extraVals})">
+						<h3>{{menu.menu_name | stripNames}}</h3>
+						<div class="nameContainLink">{{menu.menu_name}}</div>
+					</a>
+				</li>
+				<li class="pointer blocksLi left text-center" ng-repeat="menu in linksReportIn" ng-if="(currSpeedLink.indexOf(menu.menu_link) > -1) && (menu.display_menu == 5)" namemenu="{{menu.menu_name}}">
+					<a style="color:#636262" ng-href="{{menu.menu_link}}" target="_blank">
+						<h3>{{menu.menu_name | stripNames}}</h3>
+						<div class="nameContainLink">{{menu.menu_name}}</div>
+					</a>
+				</li>
+				<li class="pointer blocksLi left text-center" ng-repeat="menu in linksReportIn" ng-if="(currSpeedLink.indexOf(menu.menu_link) > -1) && (menu.display_menu==3)" namemenu="{{menu.menu_name}}">
+					<a style="color:#636262" ng-href="{{menu.menu_link}}{{employees.results.mktEmpCode}}" target="indiReport">
+						<h3>{{menu.menu_name | stripNames}}</h3>
+						<div class="nameContainLink">{{menu.menu_name}}</div>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div> -->
+	<div class="menulinks"></div>
+</header>
+<section class="popTopBar width100 left">
+	<div class="innerPopDiv" ng-if="divInnerShow==1" ng-include src="'partials/callBackPopup.html'"></div>
+		<div class="innerPopDiv broadcast" ng-if="showBroadPopDiv == 0">
+			<div class="broadcastTab width100 left" ng-init="disPlaymsgmessageBroadcastPop()" style='color:#ffffff'>
+				<div class="absolute closePop_broadcast right0 pointer" ng-click="closePopTop(2)" ng-if="Showbroad == 1">Close</div>
+				<div class="broadcastMsg width35 repeat-animation">
+					<div class="left blueDark" style="margin-left: 35%; font-size: 20px; font-weight: bold;" ng-if="Showbroad == 1">Message From {{Messagedetails.senderId}}</div>
+					<div class="stripAlloc left width100 pad-top-5 pad-bot-5 border-top-grey" style="color:black;font-weight:bold" ng-if="Showbroad == 1" ng-bind-html="MytrustedHtml">
+					</div>
+				</div>
+			</div>
+		</div>
+	<div class="innerPopDiv" ng-if="divInnerShow==2" ng-include src="'partials/abc.html'"></div>
+</section>
+<section class="setPopupBot absolute">
+	<div class="absolute closePop right0 pointer inventory_close" ng-if="whichPop==11 || whichPop==12" ng-click="closePopMid(2)">Close</div>
+	<div class="absolute closePop right0 pointer" ng-if="whichPop != 11 && whichPop!=12 &&  viewParam==1" ng-click="closePopMid(1)">Close</div>
+	<div class="absolute closePop right0 pointer" ng-if="whichPop !=11 && whichPop!=12  &&  viewParam==2" ng-click="closePopMid(2)">Close</div>
+	<div class="absolute closePop right0 pointer" ng-if="whichPop==2" ng-click="closePopMid(2)">Close</div>
+	<div class="contentPop">
+		<div class="innerContentPop" ng-if="whichPop==1" ng-include src="'partials/showBalance.html'"></div>
+		<div class="innerContentPop colorWhite" ng-if="whichPop==2">
+			<div ng-if="categories.errorCode == 0">
+				<h3 class="colorWhite">Showing Categories </h3>
+				<div ng-repeat="cats in categories.data">
+					{{cats.category_name}}
+				</div>
+			</div>
+			<div ng-if="categories.errorCode == 1">
+				Sorry No categories Present
+			</div>
+		</div>
+		<div class="innerContentPop" ng-if="whichPop==3" ng-include src="'partials/workedEcsPop.html'"></div>
+		<div class="innerContentPop" ng-if="whichPop==4" ng-include src="'partials/workedEcsPop.html'"></div>
+		<div class="innerContentPop" ng-if="whichPop==5" ng-include src="'partials/retentionPop.html'"></div>
+		<div class="innerContentPop" ng-if="whichPop==6" ng-include src="'partials/retentionPop.html'"></div>
+		<div class="innerContentPop" ng-if="whichPop==7" ng-include src="'partials/ReversedRetentionPop.html'"></div>
+		<div class="innerContentPop" ng-if="whichPop==8" ng-include src="'partials/ReversedRetentionPop.html'"></div>
+		<div class="innerContentPop" ng-if="whichPop==9" ng-include src="'partials/ReversedRetentionPop.html'"></div>
+		<div class="innerContentPop" ng-if="whichPop==10" ng-include src="'partials/ReversedRetentionPop.html'"></div>
+		<div class="innerContentPop" ng-if="whichPop==11 || whichPop==12" ng-include src="'partials/InventoryPopup.html'"></div>
+	</div>
+</section>
+<div class="addBuisnessIco fixed" title="Add New Business" ng-if="setNoMenu	!=	1">
+	<a ng-href="../business/check.php?flgNew=1"><div class="insAdd"></div></a>
+</div>
+<section >
+	<div class="iroAppoverlay" ng-if="popTransfer == 1"></div>
+	
+	<div style="z-index: 999; top: 90px; border-radius: 6px; position: fixed; display: none;width:50%;margin-left:20%" class="modal custom-modal add-business popTopBarBroad" id="modal2">
+					<div class="modal-header wrapper">
+						<span class="heading wrapper" style="font-weight:bold" ng-if="irodata.type=='0'">ONLINE TRANSFER FOR APPOINTMENT</span>
+						<span class="heading wrapper" style="font-weight:bold" ng-if="irodata.type==1 && irodata.f12_id==	'23232323' ">ONLINE TRANSFER FOR JD Omni Product Enquiry</span>
+						<span class="heading wrapper" style="font-weight:bold" ng-if="irodata.type==1 && irodata.f12_id==	'JDRRPromo'">ONLINE TRANSFER FOR JDRR Sales QUERY </span>
+						<span class="heading wrapper" style="font-weight:bold" ng-if="irodata.type==3">Expired contract - SMS campaign </span>
+						<span ng-if="paidFlag==1" style="font-weight:bold;text-align:center;font-size:25px" class="heading wrapper ng-scope">This is Paid Contract Its Can't be editable.</span>
+					</div>
+					<div class="modal-content wrapper" style="padding-bottom:10px;color: #424242;height:auto">
+						
+						<table style='margin-left:30%'>
+						
+						<tr><td class="iroApp" >CALLER NAME:</td> 	<td class="iroApp_details" ng-if="irodata.CallerName==''">NA</td>
+																	<td class="iroApp_details" ng-if="irodata.CallerName!=''">{{irodata.CallerName}}</td></tr>
+						<tr><td class="iroApp" >CALLER MOBILE:</td> <td class="iroApp_details" ng-if="irodata.CallerMobile==''">NA</td>
+																	<td class="iroApp_details" ng-if="irodata.CallerMobile!=''">{{irodata.CallerMobile}}</td></tr>	
+						<tr><td class="iroApp" >CALLER PHONE:</td> 	<td class="iroApp_details" ng-if="irodata.CallerPhone==''">NA</td>
+																	<td class="iroApp_details" ng-if="irodata.CallerPhone!=''">{{irodata.CallerPhone}}</td></tr>		
+						<tr><td class="iroApp" >BUSINESS NAME:</td> <td class="iroApp_details" ng-if="irodata.companyname==''">NA</td>
+																	<td class="iroApp_details" ng-if="irodata.companyname!=''">{{irodata.companyname}}</td></tr>
+																	
+						<tr><td class="iroApp" >AREA:</td> <td class="iroApp_details" ng-if="irodata.area!=''"><input type="text" value='{{area}}' id='area' name='area' class="loc_loop" areaautosuggest></input></td></tr>
+						
+						
+						<tr><td class="iroApp" >PINCODE:</td> <td class="iroApp_details" ng-if="irodata.pincode!=''"><select class="loc_change_dis_ip" name="pincode" id="pincode"><option ng-repeat="pincode  in pincodelist track by $index" value='{{pincode}}'>{{pincode}}</option></td></tr>											
+																	
+																	
+						<tr><td class="iroApp" >IRO CODE:</td> 		<td class="iroApp_details" ng-if="irodata.IroCode==''">NA</td>
+																	<td class="iroApp_details" ng-if="irodata.IroCode!=''">{{irodata.IroCode}}</td></tr>
+						<tr><td class="iroApp" >IRO NAME:</td> 		<td class="iroApp_details" ng-if="irodata.IroName==''">NA</td>
+																	<td class="iroApp_details" ng-if="irodata.IroName!=''">{{irodata.IroName}}</td></tr>
+						<tr><td class="iroApp" >CATEGORY:</td> 		<td class="iroApp_details" ng-if="irodata.Category==''">NA</td>
+																	<td class="iroApp_details" ng-if="irodata.Category!=''">{{irodata.Category}}</td></tr>
+						<tr><td class="iroApp" >CITY:</td> 			<td class="iroApp_details" ng-if="irodata.City==''">NA</td>
+																	<td class="iroApp_details" ng-if="irodata.City!=''">{{irodata.City}}</td></tr>
+						<tr><td class="iroApp" >EXTN:</td> 			<td class="iroApp_details" ng-if="irodata.ExtNo==''">NA</td>
+																	<td class="iroApp_details" ng-if="irodata.ExtNo!=''">{{irodata.ExtNo}}</td></tr>
+																	
+						<tr><td class="iroApp" >Line Disconnected:</td> 			<td class="iroApp_details" ng-if="irodata.LineDis==''">NA</td>
+																	<td class="iroApp_details" ng-if="irodata.LineDis!=''"><input type="checkbox" id='linedis' name='linedis' ></input></td></tr>											
+																	 
+					</table>
+					</div>
+					<div class="modal-footer wrapper" ng-if="paidFlag==0">
+						<div class="f_right" style='margin-left:25%'>
+							<button class="modal-button" ng-if="irodata.type!=3"  ng-click="saveExit(irodata.Parentid,irodata.City,paidFlag)">Save And Exit Flow</button>
+							<button class="modal-button" ng-click="proceedWithCompany(irodata.Parentid,irodata.City,irodata.Uniquefield)">Proceed With this Company</button>
+						</div>
+					</div>
+					
+					<div class="modal-footer wrapper" ng-if="paidFlag==1">
+						<div class="f_right" style='margin-left:25%'>
+							<button class="modal-button" ng-click="close_fn()">OK</button>
+						</div>
+					</div>
+	
+</section>
+<?php
+$arrMnuItem1 = array();
+$arrMnuItem2 = array();
+$arrMnuItem1 = array(
+						99	 => "Appointment Refixed",
+						12   => "Company Closed",
+						98	 => "Not in Business",
+						7    => "Wrong Number",
+						9    => "Do Not Disturb",
+						21   => "Not Interested",
+					);
+$arrMnuItem2 = array(			
+					25    	=> 	"Allocate Appointment",
+					22      => 	"Call Back",	
+					207 	=>	"Paid Client",
+					208 	=>	"Call to ME",
+					6       => 	"Not Contactable",
+					270		=>	"Company Shifted",
+					271		=>	"LOB Changed",
+					272		=>	"Not Valid Data",
+					114		=> "Discard Call",
+					24		=> "Follow up",
+				);
+?>
+
+
+<div ng-show="moveTo" class="fixed" style="width:200px;height: 50px;float:right;bottom:25% !important;right:95px;z-Index:9999;">
+	<div  id="timercont" style="width:130px;height:150px;margin-top:-150%;margin-left:38%;"></div>	
+	<span style="color: #d72a2a;font-size: 25px;font-weight: bolder;margin-left: 116px;margin-top: -105px;position: fixed;">00:<span class="counterVal" value="60" style="font-size:25px;color:#D72A2A;font-weight:bolder;"></span></span>
+</div>
+
+<div ng-show="auto_dispose" style="background:white;background: white none repeat scroll 0 0;height:240px;margin-left:30%;margin-top:10%;position:absolute;max-width:600px;overflow:auto;z-index:2000;border: thick solid #E20909;opacity:10%;">
+	<img src="img/danger.png" style="height:75px;width:70px;margin-left:28px;margin-top:10px;">
+	<span style="color: #db2828;float: right;font-size: 31.15px;font-family:Roboto Regular;margin-right: 82px;margin-top: 32px;">CALL AUTO DISPOSED</span>
+	<hr style="border-style: inset;border-width: 1px;color: #00000;margin-top:25px;margin-bottom:10px;opacity:10%;">
+	<span style="color: #424242;font-size:18px;padding: 25px 170px 15px 0;margin-left: 117px;font-family:Roboto Regular;">Your call has been auto disposed</span>
+	<hr style="border-style: inset;border-width: 1px;color: #00000;margin-top:35px;margin-bottom:10px;opacity:10%;">
+</div>
+
+<div ng-show="disp_overlay" style="background:none repeat scroll 0 0 rgba(0, 0, 0, 0.55);border: 1px solid #CCCCCC;height: 100%;margin-bottom: 15px;margin-right: 1%;padding-bottom: 45%;position: fixed;top: 0;width: 100%;overflow:auto; z-index: 1000;"></div>
+
+<div ng-show="callDisconnectPopUp == true" class="disposition" style="background: white none repeat scroll 0 0;margin-left:30%;margin-top:10%;position:absolute;max-width:605px;
+	max-height:395px;overflow:auto;z-index:2000;border: thick solid #db2828;opacity:10%;overflow-x:hidden;">
+	
+	
+	<div style="width:100%:height:78px;padding:3%;">
+	<img src="img/danger.png" style="float: left;height: 75px;padding-top: 2%;width: 70px;">
+	
+	<span style=" color: #db2828;float: left;font-size: 30.5px;font-weight: bolder;width:62%;margin-left:5%;padding-top:5%;font-family:Roboto Regular;">DISPOSE THE CALL</span>
+	
+	<div ng-show="moveFrom" style="float:left;width:110px;height:110px;">
+			<span style="font-size:18px;color:#D72A2A;position:absolute;margin-left:-83px;margin-top:31px;">00:<span class="counterVal" value="60" style="font-size:18px;color:#D72A2A;"></span></span>
+			<div id="timercon" style="float:left;width:120px;height:110px;"></div>
+		</div>	
+	</div>
+	
+	<hr style="border-style: inset;border-width: 1px;color: #00000;margin-top:16%;margin-bottom:10px;opacity:10%;">
+	
+	<span style="color: #424242;font-size:14px;padding: 25px 170px 15px 0;margin-left: 20px;font-family:Roboto Regular;">Please select the desired disposition and click Proceed</span>
+	<?php
+	
+	foreach($arrMnuItem1 as $key=>$mnu)
+	{
+		?>
+		<div ng-show="disp_list1" class="disp_list1" ng-model="dispose_value[0]" id="<?php echo $mnu; ?>" style="border:thin solid #b5b5b5;background: #FAFCFC;float:left;height:22px;width:175px;margin-left:12px;margin-top:12px;text-align:center;padding-top:6px;padding-bottom:6px;" ng-click="select_disposition(<?php echo $key; ?>,'<?php echo $mnu; ?>',$event);">
+			<span style="color:#4082C4;font-size:14px;" value="<?php echo $key; ?>"> <?php echo $mnu; ?> </span>
+			<img ng-show="dispose_value[0] == {{<?php echo $key; ?>}}" id="<?php echo $key; ?>" src="img/dispCheck.png" style="height:25px;width:25px;float:right;">
+		</div>
+	<?php
+	}
+	?>
+	
+	
+	<div ng-show="show_all_disp" style="padding-top:125px;padding-left:12px;cursor:pointer;" ng-click="show_all($event);">
+		<span  style="font-family:Roboto Regular;font-size:14px;color:#4082C4;">SHOW ALL DISPOSITIONS</span>
+	</div>
+	
+		<?php
+	
+	foreach($arrMnuItem2 as $key=>$mnu)
+	{
+		?>
+		<div ng-show="disp_list2" class="disp_list2" style="border:thin solid #b5b5b5;background: #FAFCFC;float:left;height:22px;width:175px;margin-left:12px;margin-top:12px;text-align:center;padding-top:6px;padding-bottom:6px;" ng-model="dispose_value[0]" ng-click="select_disposition(<?php echo $key; ?>,'<?php echo $mnu; ?>',$event);">
+			<span style="color:#4082C4;font-size:14px;" value="<?php echo $key; ?>"> <?php echo $mnu; ?> </span>
+			<img ng-show="dispose_value[0] == {{<?php echo $key; ?>}}" id="<?php echo $key; ?>" src="img/dispCheck.png" style="height:25px;width:25px;float:right;">
+		</div>
+	<?php
+	}
+	?>
+	
+<!--
+	<input type="hidden" id="selStatus_bform">
+-->
+	
+	
+	<div ng-show="show_imp_disp" style="padding-top: 330px;margin-left:12px;cursor:pointer;" ng-click="show_imp(event);">
+		<span  style="font-family:Roboto Regular;font-size:14px;color:#4082C4;">SHOW ONLY POPULAR DESTINATIONS</span>
+	</div>
+	
+	<hr style="border-style: inset;border-width: 1px;color: #fcfcfc;margin-bottom:10px;">
+
+	<span style="cursor:pointer;font-family:Roboto Regular;font-size:12px;color:#4082C4;float:left;font-weight:bold;margin-top:23px;margin-left:12px;" ng-click="suspendDispose($event);"> << Back To B-form </span>
+	
+	<button name="submit_dispose" id="submit_dispose" style=" background: none repeat scroll 0 0 #2d87d3;border: 1px solid #1274c0;border-radius: 2px;color: #f1f1f1;font-size: 16px;font-weight: 400;height: 35px;line-height: 35px;margin: 10px;padding: 0 !important;text-align: center;width: 125px;float:right;" ng-click="submitDispose($event);">Proceed</button>
+			
+</div>
+
+<div ng-show="disposeLoader" style="background:none repeat scroll 0 0 rgba(0, 0, 0, 0.6);border: 1px solid #CCCCCC;height: 100%;margin-bottom: 15px;margin-right: 1%;padding-bottom: 45%;position: fixed;top: 0;width: 100%;overflow:auto; z-index: 3050;text-align:center;">
+	<img src="img/loader.gif" style="margin-top: 311px;position: absolute;">
+</div>
+
+<md-button aria-label="Open phone interactions menu" class="md-fab md-raised" style="position:fixed; bottom:85px; right:10px;" ng-click="moveToTop($event)">
+	<md-icon md-menu-origin md-svg-icon="img/ic_expand_less_18px.svg" style="color:red;height:40px;width:40px;"></md-icon>
+</md-button>
+<div ng-if="getcon_loader == 1">
+	<div ng-include src="'partials/loader.html'" ></div>
+</div>
+<div>
+	<div ng-include src="'partials/popupCommon1.html'" ></div>
+</div>

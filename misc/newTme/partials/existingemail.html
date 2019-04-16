@@ -1,0 +1,31 @@
+<md-dialog aria-label="Banner Popup" style="max-height:500px">	
+ 	<md-dialog-content layout='column' style='padding:0px'>
+		
+		<div class="roboto">
+			<div class="">
+				<div class="pp-box" style="left:0px">
+					<a href="#" class="clse-spite" ng-click="close_popup()"></a>
+					<span class="pp-title">Existing Business Email</span>
+					<div class="pp-infotxt" ng-show="!show_comfirm_msg">
+						<span class="lbl_email">Email</span> 
+						<input ng-repeat="email in email_arr track by $index"  type="text" value="{{email}}" class="int-txt" ng-model="email_arr[$index]" style="margin:5px">
+						<a class="ad-mail" ng-click="addemail($event)">Add More Email</a>
+ 					</div>
+ 					<div class="pp-infotxt padd15" ng-show="show_comfirm_msg">
+						All orders and notifications of your website & mobile site will be sent to your email id 
+						<div style="display: inline-block;overflow: hidden;text-overflow: ellipsis;width: 236px;margin-bottom: -3px;">{{email_str}}</div>
+ 					</div>	
+ 					<div class="pp-btn-wrp">
+						<a class="canl-btn flo-lft" ng-click="close_popup()">Cancel</a>
+						<a class="cfm-btn flo-lft" ng-click="confirm_button()" ng-show="!show_comfirm_msg" >Confirm </a>
+						<a class="cfm-btn flo-lft" ng-click="proceed_button()" ng-show="show_comfirm_msg">Confirm</a>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+		
+		
+		
+	</md-dialog-content>
+</md-dialog>

@@ -1,0 +1,299 @@
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/repos/CSGENIO/!svn/ver/23275/TRUNK/library
+END
+genio_functions.php
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/repos/CSGENIO/!svn/ver/23128/TRUNK/library/genio_functions.php
+END
+autosuggest_wraper.php
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/repos/CSGENIO/!svn/ver/12424/TRUNK/library/autosuggest_wraper.php
+END
+category_api_class.php
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/repos/CSGENIO/!svn/ver/22887/TRUNK/library/category_api_class.php
+END
+class_telephony.php
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/repos/CSGENIO/!svn/ver/13144/TRUNK/library/class_telephony.php
+END
+DialableNumberclass.php
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/repos/CSGENIO/!svn/ver/17826/TRUNK/library/DialableNumberclass.php
+END
+class.vendorReport.php
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/repos/CSGENIO/!svn/ver/11082/TRUNK/library/class.vendorReport.php
+END
+companymastersearchClass.php
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/repos/CSGENIO/!svn/ver/23275/TRUNK/library/companymastersearchClass.php
+END
+compcatarea_regen.php
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/repos/CSGENIO/!svn/ver/23255/TRUNK/library/compcatarea_regen.php
+END
+class.nationallisting.php
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/repos/CSGENIO/!svn/ver/20298/TRUNK/library/class.nationallisting.php
+END
+class.virtualNumber.php
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/repos/CSGENIO/!svn/ver/21687/TRUNK/library/class.virtualNumber.php
+END
+PrimaryCategoryClass.php
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/repos/CSGENIO/!svn/ver/17945/TRUNK/library/PrimaryCategoryClass.php
+END
+companymasterclass.php
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/repos/CSGENIO/!svn/ver/14933/TRUNK/library/companymasterclass.php
+END
+getUrlApiPath.php
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/repos/CSGENIO/!svn/ver/22164/TRUNK/library/getUrlApiPath.php
+END
+class.enhancement_genio.php
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/repos/CSGENIO/!svn/ver/13775/TRUNK/library/class.enhancement_genio.php
+END
+all_cities_update.php
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/repos/CSGENIO/!svn/ver/12549/TRUNK/library/all_cities_update.php
+END
+class.vertical_action.php
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/repos/CSGENIO/!svn/ver/22164/TRUNK/library/class.vertical_action.php
+END
+class.bannerspontextManagement.php
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/repos/CSGENIO/!svn/ver/21794/TRUNK/library/class.bannerspontextManagement.php
+END
+CompanyAutosuggestGeneration.php
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/repos/CSGENIO/!svn/ver/14531/TRUNK/library/CompanyAutosuggestGeneration.php
+END
+CategoryAuthorisationClass.php
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/repos/CSGENIO/!svn/ver/12424/TRUNK/library/CategoryAuthorisationClass.php
+END
+RatingEmailSms.php
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/repos/CSGENIO/!svn/ver/15028/TRUNK/library/RatingEmailSms.php
+END
+updatec2lcategory.php
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/repos/CSGENIO/!svn/ver/21109/TRUNK/library/updatec2lcategory.php
+END
+bidperday_regen_wrapper.php
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/repos/CSGENIO/!svn/ver/12424/TRUNK/library/bidperday_regen_wrapper.php
+END
+unapprovedcontractdatapopulation.php
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/repos/CSGENIO/!svn/ver/11585/TRUNK/library/unapprovedcontractdatapopulation.php
+END
+test_comp_api.php
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/repos/CSGENIO/!svn/ver/21718/TRUNK/library/test_comp_api.php
+END
+class.comp_banner.php
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/repos/CSGENIO/!svn/ver/21794/TRUNK/library/class.comp_banner.php
+END
+backend_data_population_process.php
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/repos/CSGENIO/!svn/ver/12424/TRUNK/library/backend_data_population_process.php
+END
+bidperday_regen_function.php
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/repos/CSGENIO/!svn/ver/14455/TRUNK/library/bidperday_regen_function.php
+END
+categoryMaster.php
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/repos/CSGENIO/!svn/ver/21827/TRUNK/library/categoryMaster.php
+END
+define_virtualnumbers.php
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/repos/CSGENIO/!svn/ver/17300/TRUNK/library/define_virtualnumbers.php
+END
+area_correction_process.php
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/repos/CSGENIO/!svn/ver/12424/TRUNK/library/area_correction_process.php
+END
+test_cat_api.php
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/repos/CSGENIO/!svn/ver/21738/TRUNK/library/test_cat_api.php
+END
+company_details_class.php
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/repos/CSGENIO/!svn/ver/22495/TRUNK/library/company_details_class.php
+END
+class_guarantee.php
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/repos/CSGENIO/!svn/ver/17583/TRUNK/library/class_guarantee.php
+END
+historyLog.php
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/repos/CSGENIO/!svn/ver/22327/TRUNK/library/historyLog.php
+END
+DNDNumberClass.php
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/repos/CSGENIO/!svn/ver/22986/TRUNK/library/DNDNumberClass.php
+END
+config.php
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/repos/CSGENIO/!svn/ver/22082/TRUNK/library/config.php
+END
+contractVerificationClass.php
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/repos/CSGENIO/!svn/ver/11817/TRUNK/library/contractVerificationClass.php
+END
+classquotes.php
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/repos/CSGENIO/!svn/ver/17930/TRUNK/library/classquotes.php
+END
+class_email_sms_send.php
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/repos/CSGENIO/!svn/ver/15630/TRUNK/library/class_email_sms_send.php
+END
+class.logs.php
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/repos/CSGENIO/!svn/ver/11752/TRUNK/library/class.logs.php
+END
+backend_package_category_addition_process.php
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/repos/CSGENIO/!svn/ver/16061/TRUNK/library/backend_package_category_addition_process.php
+END
+vertical_tagging.php
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/repos/CSGENIO/!svn/ver/22164/TRUNK/library/vertical_tagging.php
+END
+class.banner.php
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/repos/CSGENIO/!svn/ver/22347/TRUNK/library/class.banner.php
+END
+solution.php
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/repos/CSGENIO/!svn/ver/11398/TRUNK/library/solution.php
+END
+bidperday_regen.php
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/repos/CSGENIO/!svn/ver/14455/TRUNK/library/bidperday_regen.php
+END
+virtualnumberclass.php
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/repos/CSGENIO/!svn/ver/22164/TRUNK/library/virtualnumberclass.php
+END
+designerbanner.php
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/repos/CSGENIO/!svn/ver/21828/TRUNK/library/designerbanner.php
+END
+packcatprocssClass.php
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/repos/CSGENIO/!svn/ver/14455/TRUNK/library/packcatprocssClass.php
+END
+class.getOldNewData.php
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/repos/CSGENIO/!svn/ver/19469/TRUNK/library/class.getOldNewData.php
+END

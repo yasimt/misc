@@ -1,0 +1,11 @@
+<hr>
+<section class="container">
+	<h1>Sort Report Menu</h1><br>
+	<div class="error_msg_sort_lnk" >Report MENU Sorted</div><br>
+	<ul ui-sortable ng-model="linksReport" id="sortable">
+        <li ng-repeat="menu in linksReport" ng-if="menu.display_menu == 2">
+			<div  class="data skyBlueBack linkBox marRt15px marBot10px text-center" value="{{menu.menu_name}}">{{menu.menu_name}}</div>
+		</li>
+    </ul><br>
+   <div><input type="submit" class=" button buttonLink width10" value="SUBMIT" ng-click="setSortMenu()"></div>
+</section>

@@ -1,0 +1,49 @@
+<md-toolbar md-scroll-shrink style="background-color:#FFFFFF" ng-init="onLoadCall()" ng-controller="catPreviewController">
+	<div class="md-toolbar-tools">
+		<md-button class="md-icon-button" aria-label="Settings" style="margin-left:20px;" ng-click="toggleLeft()">
+			<md-icon md-svg-icon="img/ic_menu_36px.svg" style="color:#000000;"></md-icon>
+		</md-button>
+		<h2>
+			<span>Campaign Selection</span>
+		</h2>
+		<span flex></span>
+	</div>
+</md-toolbar>
+
+
+<section class="" subtract="500">
+	<section class="mainContain">
+		<md-content class='payment_option' style="padding-right: 13%;padding-top: 70px;width: 735px;min-height: 680px;font-family: roboto">	
+			
+			<md-card>
+				<md-card-content style="padding: 26px;">	
+						<h3 style='color: #545454;font-family: roboto;font-size: 20px;'>Would you like to add Website & Mobile site to your selection?</h3>
+						
+						 <md-radio-group ng-model="omni_selected">
+							
+							<md-radio-button value="yes" class="md-primary" style='color: #424242;font-size: 15px;'>Yes</md-radio-button>
+							</md-radio-button>
+							<md-radio-button value="no" class="md-primary" style='color: #424242;font-size: 15px;'>No</md-radio-button>
+							</md-radio-button>
+						</md-radio-group>
+						
+						<div style="padding-top: 42px;text-align: center;">
+
+							<input type="submit" value="Proceed" class="procced_btn" ng-click="calldomain()">
+							<input type="submit" value="Back" class="procced_btn" ng-click="gotoaddonpage()" style="float:left">
+						</div>
+						
+				</md-card-content>
+			</md-card>
+		</md-content>	
+		
+		<div class="ftr_wrpper" style="position:relative">
+			<div class="jdrrcontainer">
+				<div class="jdrr_footer">
+						Copyright 2008-2016 Justdial.com. All Rights Reserved. <a href="#">Privacy</a> I <a href="#">Terms</a>
+				</div><!--end of jdrr_footer-->
+			</div>
+		</div>
+		
+	</section>
+</section>

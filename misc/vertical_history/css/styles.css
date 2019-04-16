@@ -1,0 +1,181 @@
+
+
+/*Basic reset*/
+* {margin: 0; padding: 0;}
+
+body {
+	background: #DAF0E6;
+	font-family: Nunito, arial, verdana;
+}
+#accordian {
+	background: #004050;
+	width: 750px;
+	margin: 100px auto 0 auto;
+	color: white;
+	/*Some cool shadow and glow effect*/
+	box-shadow: 
+		0 5px 15px 1px rgba(0, 0, 0, 0.6), 
+		0 0 200px 1px rgba(255, 255, 255, 0.5);
+}
+/*heading styles*/
+#accordian h3 {
+	font-size: 16px;
+	line-height: 45px;;
+	padding: 0 10px;
+	cursor: pointer;
+	/*fallback for browsers not supporting gradients*/
+	background: #003040; 
+	background: linear-gradient(#003040, #002535);
+}
+/*heading hover effect*/
+#accordian h3:hover {
+	text-shadow: 0 0 1px rgba(255, 255, 255, 0.7);
+}
+/*iconfont styles*/
+#accordian h3 span {
+	font-size: 14px;
+	margin-right: 10px;
+}
+/*list items*/
+#accordian li {
+	list-style-type: none;
+}
+/*links*/
+#accordian ul ul li a {
+	color: white;
+	text-decoration: none;
+	font-size: 11px;
+	line-height: 27px;
+	display: block;
+	padding: 0 15px;
+	/*transition for smooth hover animation*/
+	transition: all 0.15s;
+}
+/*hover effect on links*/
+#accordian ul ul li a:hover {
+	background: #003545;
+	border-left: 5px solid lightgreen;
+}
+/*Lets hide the non active LIs by default*/
+#accordian ul ul {
+	display: none;
+}
+#accordian li.active ul {
+	display: block;
+}
+.tbl_contact_details_cls{
+padding-top:10px;
+width :100%;
+padding-bottom:10px;
+border-top:1px solid white;
+border-bottom:1px solid white;
+}
+table.tbl_contact_details_cls th{
+	width:12%;
+	text-align: center;
+	color:white;
+}
+table.tbl_contact_details_cls td{
+	line-height: 27px;
+	padding-left : 10px;
+	color:white;
+}
+table.tbl_contact_details_cls .tr_show_bg:hover {
+	background: #003545;
+}
+.tbl_view_changes_header_cls{
+xbackground: #99EBFF;
+color:#003040;
+
+}
+.tbl_view_changes_header_cls th{
+text-align:left;
+
+
+}
+
+
+#changes-done-div1{ 
+background-color: white; 
+/* outer shadows  (note the rgba is red, green, blue, alpha) */
+-webkit-box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.4); 
+-moz-box-shadow: 0px 1px 6px rgba(23, 69, 88, .5);
+/* rounded corners */
+-webkit-border-radius: 12px;
+-moz-border-radius: 7px; 
+border-radius: 7px;
+/* gradients */
+background: -webkit-gradient(linear, left top, left bottom, 
+color-stop(0%, white), color-stop(15%, white), color-stop(100%, #D7E9F5)); 
+background: -moz-linear-gradient(top, white 0%, white 55%, #D5E4F3 130%);
+display:none;
+font-family: Trebuchet MS,Tahoma,Verdana,Arial,sans-serif;
+font-size: 16px;
+padding: 15px;
+
+/*position: fixed;
+top: 24%;
+left: 50%;
+width: 670px;
+height: 380px;
+text-align: left;
+z-index: 1999;
+margin-top:150px;
+margin-left:-300px;*/
+
+position:absolute;
+top:0%;
+left:50%;
+width : 1000px; /*adjust width*/
+height:600px;	/*adjust height*/
+z-index: 1000; 
+margin-top:300px; /*half of height*/
+margin-left:-500px; /*half of width*/
+
+}
+#changes-done-div{
+	z-index:999; 
+	display:none;
+	font-family: "lucida grande",tahoma,verdana,arial,sans-serif; 
+	background: none repeat scroll 0 0 #DAF0E6;
+    xborder: 10px solid #003040;
+    xborder-radius: 3px 3px 3px 3px;
+	position:fixed; 
+	height:80%; 
+	left:10%; 
+	top:5%; 
+	width:80%; 
+	-moz-border-radius:7px;
+	overflow: auto;
+}
+#changes-done-cover
+{
+	z-index:998; 
+	height:100%; 
+	position:fixed;
+	left:0; 
+	top:0; 
+	width:100%; 
+	display:none; 
+	background-color:#000000; 
+	opacity:0.80;
+}
+.color-white{
+color:white;
+}
+.closeButton
+{
+    display:block;
+    position:absolute;
+    top:0px;
+    right:0px;
+    width:27px;
+    height:27px;
+    background:url('../img/close.png') no-repeat center center;
+    cursor:pointer;
+}
+table.tbl_data_cls {border-collapse:collapse;table-layout:fixed; width:90%;margin-left:0%}
+  
+  table.tbl_data_cls td{word-wrap:break-word;line-height: 27px;}
+  .border_td{border:1px dotted #405366;}
+  

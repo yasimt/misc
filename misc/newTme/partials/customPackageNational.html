@@ -1,0 +1,85 @@
+<md-toolbar md-scroll-shrink style="background-color:#FFFFFF;border-bottom:1px solid #CCCCCC" ng-controller="catPreviewController">
+	<div class="md-toolbar-tools">
+		<md-button class="md-icon-button" aria-label="Settings" style="margin-left:20px;" ng-click="toggleLeft()">
+			<md-icon md-svg-icon="img/ic_menu_36px.svg" style="color:#000000;"></md-icon>
+        </md-button>
+		<h2>
+			<span>Custom Package</span>
+        </h2>
+		<span flex></span>
+		<div>
+			<md-button aria-label="Open phone interactions menu" class="md-fab md-primary" style="top:30px; right:40px; font-weight:bold; background:#48afde none repeat scroll 0 0;" ng-click="setCustomBudgetPackage($event,'national')">
+				<md-icon  md-menu-origin md-svg-icon="img/ic_arrow_forward_24px.svg"></md-icon>
+			</md-button>
+		</div>
+	</div>
+</md-toolbar>
+<section class="mainSection" subtract="500">
+	<section class="mainContain">
+<!--
+		<md-input-container class="upCatSearch">
+			<form layout="column">
+				<div layout="column" style="width:100%">
+					<label>Enter Per Day Budget</label>
+					<input type="text" required numbersonly="numbersonly" ng-model="customBudgetText" />
+				</div>
+				<div class="text-center">
+					<h2 class="orange">Total Budget : {{customBudgetText == null && '0' || customBudgetText*365  | currency : '&#8377;' : 0}}</h2>
+				</div>
+			</form>
+			<div style="position:relative;top:5px;"><md-progress-linear md-mode="indeterminate" ng-if="showLoader==1"></md-progress-linear></div>
+		</md-input-container>
+-->
+
+		<md-content class='payment_option' style="padding-right: 13%;padding-top: 70px;width: 810px;min-height: 680px;font-family: roboto">	
+					
+			<md-card>
+				<md-card-content style="padding: 20px;">
+					
+						<h3 style='color: #FF9A00;font-family: roboto;font-size: 25px;font-weight: bold;'>Monthly Packages</h3>
+						
+						 <md-radio-group ng-model="customBudgetText" ng-hide="showcomboprice">
+							
+							<md-radio-button ng-value="premium_bgt" class="md-primary" style='color: #424242;font-size: 15px;' ng-click='show_bonuspop($event,premium_bgt)' >
+								<span  style="font-size: 16px;font-weight: bold;padding-right: 13px;">Premium</span><span>{{premium_bgt | currency : '&#8377;' : 0}}</span>
+							</md-radio-button>
+							
+							<md-radio-button ng-value="regular_bgt" class="md-primary" style='color: #424242;font-size: 15px;' ng-hide='(bestBudget["result"]["upldrts_top_minbudget"] == bestBudget["result"]["city_bgt"]) || (bestBudget["result"]["upldrts_top_minbudget"] == bestBudget["result"]["upldrts_minbudget"])' ng-click="show_bonuspop($event,regular_bgt)">
+								<span style="font-weight:bold;font-size: 16px;padding-right: 13px;">Regular</span><span>{{regular_bgt | currency : '&#8377;' : 0}}</span>
+							</md-radio-button>
+							
+						</md-radio-group>
+						
+						
+						<div layout="row" style="width:100%;padding: 20px;" ng-hide="showcomboprice">
+							<span style="color: #FF9A00;font-size: 21px;padding: 5px;" ng-click="showcustomebudget()">*</span>
+							<div ng-show="customebudgettxt">
+								<label>Custom Budget:</label>
+								<input type="text" numbersonly="numbersonly" ng-model="customBudgetText" placeholder="Enter Monthly Budget:" style="margin-left: 15px;"/>
+							</div>
+						</div>
+						
+						<div ng-show="showcomboprice">
+							
+							<div style="display: inline-block;font-size: 16px;">You Have choosen Combo.The Monthly Package price is</div> <div style="display: inline-block;font-size: 20px;padding-left: 9px;">{{customBudgetText | currency : '&#8377;' : 0 }} </div>
+						
+						</div>
+					
+						
+						<div style="padding-top: 9px;text-align: center;">
+
+							<input type="submit" value="Proceed" class="procced_btn" ng-click="setCustomBudgetPackage($event,'national')">
+							<input type="submit" value="Back" class="procced_btn" ng-click="goback('national')" style="float:left">
+						</div>
+						
+				</md-card-content>
+			</md-card>
+		</md-content>
+		
+
+
+
+
+
+	</section>
+</section>

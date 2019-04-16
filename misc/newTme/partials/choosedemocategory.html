@@ -1,0 +1,18 @@
+<md-dialog aria-label="demo_category">	
+ 	<md-dialog-content layout='column' style='padding:0px'>
+		<div>
+			 <center>
+				 <h3 style="color: #4484c5;padding-bottom: 10px;padding-top: 15px;">Demo store for your category is not available at this time.</h3>
+				<h4 style='color: #4484c5'>Please select any one category from below.</h4>
+			</center>
+			 
+			<md-radio-group ng-model="budget_option_sel">
+				<md-radio-button ng-repeat="(key,value) in demo_categories" value="{{key}}" class="md-primary"> {{value}} </md-radio-button>
+			</md-radio-group>
+			<center>
+				<md-button class="md-primary md-raised" ng-click='sendlink($event)'>Submit</md-button>
+			</center>
+		</div>
+	</md-dialog-content>
+</md-dialog>	
+		

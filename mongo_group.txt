@@ -1,0 +1,69 @@
+db.deviceid.find( { empcode: 10042988 } ).limit(3).pretty()
+
+
+db.deviceid.aggregate({$sort:{"entryDate":-1}},{ $group: { _id: "$employee_id", date: { "$push": { time: "$entry_date"} },"empname":{"$first":"$employee_name"} ,"date":{"$last":"$entry_date"},count:{$sum:1} } } )
+
+
+db.deviceid.aggregate({$sort:{"entryDate":-1}},{ $group: { _id: "$deviceId","device":{"$first":"$device"} ,"date":{"$last":"$entryDate"},count:{$sum:1} } } )
+
+
+
+db.collection.aggregate([
+            {$group: {
+                "_id": "$device_id",
+                "gateway_id": {"$last":"$gateway_id"},
+                 data: {$last: '$data'},
+                 date: {$last: '$date_time'},
+            }},
+        {$project: {
+                 "device_id": "$_id",
+                  "gateway_id": "$gateway_id",
+                  "data": "$data",
+                  "date_time": "$date"
+              }},
+        {$sort: {
+                'entryDate': -1
+            }}
+    ])
+    
+    
+db.deviceid.aggregate([{ $sort: { empcode: 1, entryDate: 1 } },{$group:{_id: "$empcode",entryDate: { $last: "$entryDate" }, device: { $last: "$device" }, devicetype: { $last: "$devicetype" }, data_city: { $last: "$data_city" } } } ])
+    
+    
+    
+    {
+  "aggregate" : { $sort: { empcode: 1, entryDate: 1 },{
+  
+   $group: {_id: "$empcode",entryDate: { $last: "$entryDate" }, device: { $last: "$device" }, devicetype: { $last: "$devicetype" }, data_city: { $last: "$data_city" } } }
+   
+   
+   
+    }
+}
+    
+    $group: {"_id": "$empcode",entryDate: { $last: "$entryDate" }, device: { $last: "$device" }, devicetype: { $last: "$devicetype" }, data_city: { $last: "$data_city" } }
+    
+    
+{   "aggregate" : { $sort: { "empcode": 1, entryDate: 1 } ,  $group: {"_id": "$empcode",entryDate: { $last: "$entryDate" }, device: { $last: "$device" }, devicetype: { $last: "$devicetype" }, data_city: { $last: "$data_city" } }} }    
+    
+db.collection.aggregate([
+            {$group: {
+                "_id": "$device_id",
+                "device": {"$last":"$device"},
+                 date: {$last: '$entryDate'},
+            }},
+        {$project: {
+                 "device_id": "$_id",
+                  "device": "$device",
+                  "entryDate": "$date"
+              }},
+        {$sort: {
+                'entryDate': -1
+            }}
+    ])
+    
+    
+    _id" : ObjectId("59884e7192f0cae2b7308cf4"),
+	"device" : "1234562389",
+	"entryDate" : ISODate("2017-08-07T16:56:41Z"),
+	"empcode

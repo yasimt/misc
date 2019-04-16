@@ -1,0 +1,54 @@
+<md-dialog aria-label="ecsdetailspopup">
+	<md-dialog-content>
+		<div class="innerECSCont">
+			
+					<div class="changedValCont" ng-repeat="contract in ecs_contract_details">
+						
+								<div class="mainEcsDEt"  ng-if="contract.detail_cname != ''">
+		
+									<p class="ecs_details">Company Name To Be Stopped - {{contract.companyname}} </p>
+									<p class="ecs_details">Contract ID To Be Stopped  - {{contract.parentid}} </p>
+									<p class="ecs_details">Current Contract Value - {{contract.current_contract_value}} </p>
+									<p class="ecs_details">New Contract Value - {{contract.new_contract_value}} </p>
+									<p class="ecs_details">Current Contract Type  - {{contract.current_contract_type}} </p>
+									<p class="ecs_details">New Contract Type - {{contract.new_contract_type}} </p>
+									<p class="ecs_details">Have you collected new payment - {{contract.collected_new_payment}} </p>
+									
+									<span class="ecs_details" ng-if="contract.collected_new_payment == 'yes'">
+										<p class="ecs_details">Instrument Details : {{contract.instrument_details|capitalize}} <br></p>
+										<p class="ecs_details" ng-if="contract.instrument_details != 'cash'" > {{contract.instrument_details|capitalize}} Number - {{contract.payment_number}} <br></p>
+										<p class="ecs_details"> {{contract.instrument_details|capitalize}} Date - {{contract.payment_date}} <br></p>
+										<p class="ecs_details"> {{contract.instrument_details|capitalize}} Amount - {{contract.payment_amount}} <br></p>
+									</span>
+									
+									<p class="ecs_details">New Contract Payment Mode - {{contract.new_contract_payment_mode|capitalize}} </p>
+									<p class="ecs_details">Associated Tme currently - {{contract.detail_current_tme}} </p>
+									<p class="ecs_details">New TME - {{contract.detail_new_tme}} </p>
+									<p class="ecs_details">Associated ME currently - {{contract.detail_current_me}} </p>
+									<p class="ecs_details">New ME - {{contract.detail_new_me}} </p>
+
+								</div>
+					</div>
+					<div  ng-if="ecs_contract_details == 1">
+					<p> Sorry !! No Details Found. </p>
+					
+					</div>
+								
+					<div class="butContainerECS" style="float:right" >
+						<div class="butContECS butContECSIgnore"> <md-button class="md-raised md-primary" ng-click="ecs_mdDialog_hide()">OKAY !!</md-button></div>
+					</div>
+
+						
+		</div>
+				
+		
+	</md-dialog-content>	
+</md-dialog>
+	
+	
+	
+	
+	
+	
+	
+	

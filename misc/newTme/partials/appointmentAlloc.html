@@ -1,0 +1,384 @@
+<style>
+	@charset "utf-8";
+
+	* {box-sizing: border-box;-moz-box-sizing: border-box; -ms-box-sizing: border-box;-o-box-sizing: border-box;-webkit-box-sizing: border-box; margin: 0;outline: medium none;padding: 0; text-decoration:none;-webkit-text-size-adjust:none;}
+	img {max-width:100%; border: 0;}
+	a{text-decoration: none;border: 0;outline: none; cursor: pointer;}
+	ul, ol, li{ list-style:none; margin:0; padding:0; background:none;}
+	body{margin:0 auto; padding:0;-webkit-text-size-adjust:none; font-family:'Roboto', sans-serif; background:#CCCCCC; height:100%;}
+	hr{ border: none;}
+	body, input, textarea, select, button {font-feature-settings: "liga", "kern";text-rendering: optimizelegibility;   -webkit-text-size-adjust: 100%;}
+	input[type=number].input-number–noSpinners { -moz-appearance: textfield; }input[type=number].input-number–noSpinners::-webkit-inner-spin-button,input[type=number].input-number–noSpinners::-webkit-outer-spin-button {-webkit-appearance: none;margin: 0;}
+	select::-ms-expand {display: none;}
+	/* select { -webkit-appearance: none; -moz-appearance: none; appearance: none; }  */
+
+a:focus {outline: 0 none;}
+::-ms-clear {width : 0;height: 0;} 
+
+.wrapper{float:left; width:100%; position:relative; }
+.container{max-width: 1024px; margin: 0 auto;  }
+
+.bgWht {background: #fff; }
+.text-uppercase{text-transform: uppercase;}
+.text-capitalize{text-transform: capitalize;}
+.text-lowercase{text-transform: lowercase;}
+.text-center{text-align:center;}
+.text-left{text-align:left;}
+.f_left{float:left;}
+.f_right{float:right !important;}
+.pl-0{padding-left:0 !important;}
+.pr-0{padding-right:0 !important;}
+.p-0{padding:0 !important;}
+.mb-0{margin-bottom:0 !important;}
+.mt-5 {margin-top:5px;} .mt-10 {margin-top:10px;}.mt-15 {margin-top:15px;}.mt-20 {margin-top:20px;}.mt-25 {margin-top:25px;}
+.mb-10 {margin-bottom:10px;}.mb-15 {margin-bottom:15px;}.mb-20 {margin-bottom:20px;}.mb-25 {margin-bottom:25px;}
+.ml-10 {margin-left:10px;} .ml-15 {margin-left:15px;} .ml-20 {margin-left:20px;} .ml-25 {margin-left:25px;}
+.pt-5{padding-top: 5px;} .pt-10{padding-top: 10px;} .pt-15{padding-top: 15px;} 
+.pb-5{padding-bottom: 5px;} .pb-10{padding-bottom: 10px;} .pb-15{padding-bottom: 15px;} 
+.pl-5{padding-left:5px;} .pl-10{padding-left: 10px;} .pl-15{padding-left: 15px;} 
+.pr-5{padding-right: 5px;} .pr-10{padding-right: 10px;} .pr-15{padding-right: 15px;} 
+
+
+/* Sprite & icon */
+.sprite { background:url('./img/sprite_1x.png') no-repeat; display: inline-block;} 
+.ic-caln { background-position: -105px -14px; width: 20px;	height: 19px; }
+.ic-cls { background-position: -23px -15px;width: 13px;	height: 13px; }
+.ic-drpdwn { background-position: -67px -23px;	width: 7px;	height: 7px; }
+.ic-lftwrw1 { background-position: -144px -16px; width: 11px; height: 17px; }
+.ic-ritwrw1 { background-position: -162px -16px; width: 11px; height: 17px; }
+.ic-inpUnchk { background-position: -191px -15px;width: 18px;height: 18px; }
+.ic-inpChk { background-position: -222px -15px;	width: 18px;	height: 18px; }
+
+
+/* check box */
+ .control {display: block; position: relative; padding-left: 20px; margin-bottom: 15px; cursor: pointer; font-size: 18px; } 
+ .control input {position: absolute; z-index: -1; opacity: 0; display: none; } 
+ /*.control__indicator {position: absolute; top: 2px; left: 0; height: 20px; width: 20px; background: #e6e6e6; } */
+ .control--radio .control__indicator {border-radius: 50%; } 
+ .control input ~ .control__indicator, .control input:focus ~ .control__indicator {background:url('') no-repeat;display: inline-block; background-position: -175px -21px; width: 14px; height: 13px; position: absolute; top: 0; left: 0; } 
+ .control input:checked ~ .control__indicator {background:url('') no-repeat;display: inline-block; background-position: -127px -21px; width: 14px; height: 13px; position: absolute; top: 0; left: 0; } 
+ .control:hover input:not([disabled]):checked ~ .control__indicator, .control input:checked:focus ~ .control__indicator {background:url('') no-repeat;display: inline-block; background-position: -127px -21px; width: 14px; height: 13px; position: absolute; top: 0; left: 0; } 
+ .control input:disabled ~ .control__indicator {background: #e6e6e6; opacity: 0.6; pointer-events: none; } 
+ .control__indicator:after {content: ''; position: absolute; display: none; } 
+ .control input:checked ~ .control__indicator:after {display: block; } 
+ .control--checkbox .control__indicator:after {/* left: 8px; top: 4px; width: 3px; height: 8px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg);*/ } 
+ .control--checkbox input:disabled ~ .control__indicator:after {border-color: #7b7b7b; } 
+ .control--radio .control__indicator:after {left: 7px; top: 7px; height: 6px; width: 6px; border-radius: 50%; background: #fff; } 
+ .control--radio input:disabled ~ .control__indicator:after {background: #7b7b7b; }
+
+
+/* Time Select checkbox selector */
+.timBx ul.timeSele { width:100%; float:left;margin-top: 20px;}
+.timBx ul.timeSele li {    width: 10%;  height: 41px; text-align: center; line-height: 40px; float: left; margin-left: 2.8%; margin-bottom: 20px}
+.timBx ul.timeSele li:first-child, .timBx ul.timeSele li:nth-child(9), .timBx ul.timeSele li:nth-child(17), .timBx ul.timeSele li:nth-child(25) {margin-left:0;}
+.timBx ul.timeSele label.control--checkbox {   padding: 0;   margin-bottom: 0;}
+.timBx ul.timeSele .textlab { position:relative; z-index: 10;font-size:16px; color:#4182c4;    font-weight: 400;}
+.timBx ul.timeSele label .control__indicator {  width: 100%;  background-image: none;  height: 100%;  z-index: 1; background: #fff;  border: 1px solid #4182c4; color:#4182c4;}
+.timBx ul.timeSele .control input:checked ~ .control__indicator {background-image: none;  background: #c9e7ff;border-radius: 0;     height: 100%; border:1px solid #f0f0f0;}
+.timBx ul.timeSele .control input:checked ~ .textlab {color:#424242; font-size:16px;}
+.timBx ul.timeSele .control:hover input:not([disabled]):checked ~ .control__indicator, .daysPrct ul.daySele .control input:checked:focus ~ .control__indicator { background-image: none; background: #c9e7ff;  width: 100%; height: 100%; border-radius: 0;border:1px solid #f0f0f0;}
+.timBx ul.timeSele .control:hover input:not([disabled]):checked ~ .textlab, .daysPrct ul.daySele .control input:checked:focus ~ .textlab { color:#424242; font-size:16px;}
+.timBx ul.timeSele .control:hover input ~ .control__indicator, .daysPrct ul.daySele .control input:focus ~ .control__indicator { background-image:none; } 
+/* Time Select checkbox selector */
+
+.timBx ul.timeSele .control input:disabled ~ .control__indicator { background: #eaeaea; color:#ccc; border:1px solid #f0f0f0;}
+.timBx ul.timeSele .control input:disabled ~ .textlab {color:#ccc;}
+
+
+.incontainer { width:100%; height:100%; float:left; padding:10px;background: #EDF0F7 } 
+.mainBx { border-radius:10px; background: #fff; padding:20px 40px; min-height:400px;    float: left; width: 100%;}
+.inbx1 {padding-right:60px; }
+.selDtBx { width:230px; height: 60px; float:left;}
+.selDtBx .selDttx1 { color:#424242; font-size:16px; margin-bottom: 7px;}
+.selDtBx .dtBxin { border:1px solid #C0CDD6; border-radius:3px; float:left; width:100%; height:32px; position: relative}
+.selDtBx .dtBxin .tex1 {font-size: 14px; color: #000; width: 22%; float: left; height: 100%; line-height: 30px; padding-left: 10px;} 
+.selDtBx .dtBxin .calinp1 {font-size:14px; color:#777c80; width:75%;float:left;    height: 100%;  line-height: 30px; border:0; cursor: pointer;  z-index: 3;
+    position: relative; background: transparent;}
+.selDtBx .dtBxin .ic-caln { position: absolute; right: 10px; top: 5px; z-index: 2;}
+.adAltrAddBx {   float:right ;  }
+.adAltrAddBx button.bt1 { background: #4182C4;width:202px; height:40px;border-radius:4px; border:0;color: #fff;  font-size: 16px;  margin-top: 15px;cursor:pointer;}
+.instBx1 {margin-top:40px; width:100%!important; }
+.instBx1 textarea {float: left; width:100%; border: 1px solid #C0CDD6; border-radius:3px;height:75px; margin-top:10px; padding:10px; color:#777c80; resize:none; }
+.instBx1 .tx1 { font-size:16px; color:#424242;height:30px;}
+
+.timBx { margin-top:15px; }
+.timBx {overflow-x: hidden; }
+.fixAppontmnt {width:202px; height:40px; border-radius:4px;background: #ffa500; font-size:16px; color:#fff;text-align:center; border:0; cursor:pointer; margin-top:10px;}
+
+
+
+/* Popup */ 
+#appointmentWith .modal-dialog {width: 420px;}
+#alocateOption .modal-dialog {width: 490px;}
+#alocateConfirm .modal-dialog {width: 490px;}
+#apointsuccesful .modal-dialog {width: 370px;}
+
+.modal-body {display: inline-block;width:100%; font-size:14px; color:#424242;}
+.modal-header .modal-title { font-size:18px; color:#424242; font-weight: 400;}
+.modal-header button.ic-cls { float: right; border:0;    margin-top: 5px;}
+.modal-footer .btn { border-radius:2px; background: #4082c4; border:1px solid #d5dde3; font-size:14px; color:#fff; padding: 6px 15px; min-width:80px; }
+.modal-footer .btn.nobt { border:1px solid #4082c4; background: #fff; color:#4082c4;}
+
+.prefixBx { display: table-cell; border-radius: 3px; border:1px solid #c1cdd7; padding:6px 5px;  width:63px; height:35px; float: left;}
+.prefixBx select { border:0; font-size:14px; color:#424242;}
+.conNmBx {display: table-cell; width:75%; border: 1px solid #c1cdd7;float: left;margin-left:15px; height: 35px; border-radius: 3px; }
+.conNmBx input { width:100%; height: 100%; border: 0; padding: 0 10px; border-radius: 5px; color:#777c80; font-size:14px; font-weight: 300}
+.subhd1 {font-size:15px; color:#ff9a00; width:100%; float:left; }
+.radioListWrp { width:100%; float:left;    margin-top: 10px;}
+.radioListWrp .textlab { font-size:15px; color:#747474; font-weight: 300;    margin-left: 10px;}
+.radioListWrp label.control { margin-bottom:10px;}
+.radioListWrp label .control__indicator   {margin-top: 3px;}
+.radioListWrp label .control__indicator {   z-index: 1; background:url('./img/sprite_1x.png') no-repeat; display: inline-block; background-position: -191px -15px;width: 18px;height: 18px;}
+.radioListWrp .control input:checked ~ .control__indicator { background:url('./img/sprite_1x.png') no-repeat; display: inline-block; background-position:-222px -15px;width: 18px;	height: 18px;}
+.radioListWrp .control input:checked ~ .textlab {color:#424242; font-size:15px;}
+.radioListWrp .control:hover input:not([disabled]):checked ~ .control__indicator, .radioListWrp .control input:checked:focus ~ .control__indicator { background:url('./img/sprite_1x.png') no-repeat; display: inline-block; background-position:-222px -15px;width: 18px;	height: 18px;}
+.radioListWrp .control:hover input:not([disabled]):checked ~ .textlab, .daysPrct ul.daySele .control input:checked:focus ~ .textlab { color:#424242; font-size:15px;}
+.confAloctDetail { margin-bottom:10px;}
+.confAloctDetail .col1 {float:left;width:160px;font-size:15px; color:#222;}
+.confAloctDetail .col2 {float:left;font-size:15px; color:#747474;}
+
+.exe_head2 { border-bottom:1px solid #C8C6C7;padding: 20px 0 10px;    margin-bottom: 30px;}
+.exe_head2 .leftBx1 { font-size:22px; color:#424242; font-weight:600;}
+.exe_head2 .ritBx1 { font-size:20px; color:#424242; }
+.exe_head2 .ritBx1 button { color:#4182c4; font-size:18px; background: transparent; border: 0; float:right; font-weight:500; }
+
+
+.tblBx-main { width:830px; overflow-x:scroll;    padding-bottom: 20px;} 
+.tblBxIn {width:auto;margin-left: 90px;z-index: 8;}
+
+.timBx .table-bordered { border:1px solid #cecece;}
+.timBx .table-bordered th,.timBx .table-bordered td { width:148px;border:1px solid #cecece; padding:8px; border-right:0; border-top:0;    text-align: center;} 
+.timBx .table-bordered th:first-child,.timBx .table-bordered td:first-child {border-left:0;}
+.timBx .table-bordered tbody tr:last-child th, .timBx .table-bordered tr:last-child td {border-bottom:0;}
+.timBx .table-bordered tr {background: #FFFFFF; height:85px; }
+.timBx .table-bordered tr:nth-child(even) {background: #F6F6F6 }
+.timBx .table-bordered th { width:148px;min-width:148px; font-size:14px; color:#ff730d; font-weight:400; height:130px;    position: relative; line-height: 18px;background:#f1fafe;   vertical-align: middle; }
+.timBx .table-bordered th .rnkLbl { position: absolute; top:0; left:0; width:100%; text-align: center; color:#5C93CB; background: #D5EDF9; font-weight: 500; padding: 2px 5px;line-height: 15px}
+.timBx .table-bordered .radioListWrp label.control { padding-left:0; }
+.timBx .table-bordered .radioListWrp label .control__indicator { position:relative;}
+.timBx .table-bordered .radioListWrp .control:hover input:not([disabled]):checked ~ .control__indicator { position:relative;}
+.timBx .table-bordered .radioListWrp .control:hover input:not([disabled]):checked ~ .control__indicator { position:relative;}
+
+.timBx .table-bordered .time {font-size:15px; color:#424242;}
+.tblBxIn1 {width:90px; position: absolute;top:0;left:0;    z-index: 10;}
+.timBx .tblBxIn1 .table-bordered th, .timBx .tblBxIn1 .table-bordered td {width:85px;min-width:90px;}
+
+
+.tblBx-main::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: #E6E6E6;
+}
+
+.tblBx-main::-webkit-scrollbar
+{
+	width: 12px;
+	background-color: #E6E6E6;
+	border-radius: 10px;
+	height: 12px
+}
+
+.tblBx-main::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #C1C1C1;
+}
+.ldeal_outer{background:#f7f7f7;border-radius:2px;border:1px solid #e4e4e4;float:right;width:340px;line-height:22px;padding:5px 10px;}
+.ldeal_outer span.dtls{display:block;width:100%;font-size:14px;}
+.ldeal_outer .hdl{font-size:16px;display:block;width:90%;margin:0 0 10px 0;font-weight:bold;}
+.ldeal_outer .nm{display:inline-block;width:30%;}
+</style>
+<md-toolbar md-scroll-shrink style="background-color:#FFFFFF;border-bottom:1px solid #CCCCCC;" ng-controller="catPreviewController">
+	<div class="md-toolbar-tools" id="toolBar_mktgJrPage">
+		<md-button class="md-icon-button" aria-label="Settings" style="margin-left:20px;" ng-click="toggleLeft()">
+			<md-icon md-svg-icon="img/ic_menu_36px.svg" style="color:#000000;"></md-icon>
+        </md-button>
+		<h2>
+			<span ng-if="disposeval == 25 || disposeval == 25">Allocate Appointment</span>
+			<span ng-if="disposeval == 24">Follow Up</span>
+			<span ng-if="disposeval == 22">Call Back</span>
+        </h2>		
+	</div>
+</md-toolbar>
+
+<section class="wrapper ">
+	 <section class="container"> 
+	 	<div class="incontainer">
+			<div class= "wrapper" ng-if="timeData.errorCode_me == 1 || timeData.errorCode == 1" style="background: #fff none repeat scroll 0 0;border-radius: 10px;float: left;min-height: 400px;padding: 20px 40px;width: 100%;">
+				<span style="color: #ff3e3e;font-size: 31px;">No ME allocated to this Pin code.</span>
+				<span ng-if="(automated_flg == 1 && alertnateAddress_click == 1) || timeData.ME_NA == 1" style="color: #424242;font-size: 20px;"> <button style=" background: transparent none repeat scroll 0 0;border: 0 none;color: #4182c4;float: right;font-size: 18px;font-weight: 500;"ng-click="go_to_bfrom_automated_flow($event)"> Go Back to Time Chart </button> </span>
+				<div id="allocateToJda_id" ng-if="backToMEbtn == 0 && allocateToJda == 1 && (disposeval==25 || disposeval==99) && deal_close_jda ==0" class="adAltrAddBx" style="position: relative; float: left; bottom: 16px; padding-right: 5px;"> 
+					<button class="bt1" ng-click="allocateToJdafunc(1,$event)"> Allocate To JDA </button>
+				</div>
+				<div class="adAltrAddBx" ng-if="disposeval == 25 || disposeval==99" style="float: left;position: absolute;"> 
+					<button class="bt1" ng-click="addAlternateAdd($event)"> Add Alternate Address </button>
+				</div>
+			</div> 
+			
+	 		<div class="mainBx" ng-if="(timeData.errorCode == 0 || timeData.errorStatus == 'DIS') && timeData.errorCode_me !=1">
+				<div class="exe_head2 wrapper "> 
+	 				<span ng-if="timeData.whichFlow == 'normal' && timeData.errorCode == 0 && (disposeval==25 || disposeval==99) && (automated_flg == 0)" class="leftBx1"> {{meCount}} <span ng-if = "allocateToJda ==1">JDAs</span> <span ng-if = "allocateToJda !=1">MEs</span> In Pin Code : {{pincodeSelected}} </span>
+	 				<span class="ritBx1" ng-if="((automated_flg == 0) && (AllMeClickFlg == 1 && bypass_autoAlloc == 0))"> <button ng-click="go_to_automated_flow($event)"> Go Back to Time Chart </button> </span>	
+	 				<span class="ritBx1" ng-if="((automated_flg == 0) && (AllMeClickFlg == 0 && bypass_autoAlloc == 1))"> <button ng-click="go_to_automated_flow($event)"> Go Back to Time Chart </button> </span>	
+	 			</div>
+	 		 	<div class="inbx1 wrapper"  ng-if="timeData.errorCode == 0 || timeData.errorStatus == 'DIS'"> 
+		 			<div class="dateResol selDtBx" ng-if="timeData.errorCode == 0 || timeData.errorStatus == 'DIS'"> 
+		 				<span class="wrapper selDttx1"> Please Select Date </span>
+		 				<span class="dtBxin"> 
+		 					<span class="tex1"> From: </span>
+		 					<input  datepicker class="dateInpRes calinp1" ng-model="dateData" readonly placeholder="{{dateData}}" style="position:relative !important; z-index:188;">  
+		 					<span class="ic-caln sprite"> </span> 
+		 				</span>
+		 			</div>
+		 			<div class="adAltrAddBx" ng-if="disposeval == 25 || disposeval==99"> 
+		 				<button class="bt1" ng-click="addAlternateAdd($event)"> Add Alternate Address </button>
+		 			</div>
+		 			<div class="wrapper">
+<!--
+						<div class="adAltrAddBx" ng-if="(allocateToJda == 0 && disposeval==25 && (allME_DELHI == 1 || ME_NA == 1))" class="" id="allMebutton" style="float: left; padding-right: 5px;"> 
+							<button class="bt1" ng-click="showPrompt($event)"> ALL ME </button>
+						</div>
+-->
+						<div class="adAltrAddBx" id="allocateToJda_goBack_id" ng-if="backToMEbtn == 1 && allocateToJda == 1 && (disposeval==25 || disposeval==99)" style="float: left; padding-right: 5px;"> 
+							<button class="bt1" ng-click="backToMEfunc(0,$event)"> Back To ME </button>
+						</div>
+						<div id="allocateToJda_id" ng-if="backToMEbtn == 0 && allocateToJda == 1 && (disposeval==25 || disposeval==99) && deal_close_jda ==0" class="adAltrAddBx" style="float: left;padding-right: 5px;"> 
+							<button class="bt1" ng-click="allocateToJdafunc(1,$event)"> Allocate To JDA </button>
+						</div>
+						<!-- Start From Here-->
+						<div id="AllocToME" ng-if="(disposeval==25 && (display_allocateToME == 1 || alloc_to_ME_TME == 1))" class="adAltrAddBx" style="float: left;padding-right: 5px;"> 
+							<button class="bt1" id="AllocToME_id" value='1' ng-click="AllocToME()"> Allocate To ME </button>
+						</div>
+						
+						<div id="UnCheck_id" ng-if="(disposeval==25 || disposeval==99)  && timeData.errorCode == 0 && automated_flg == 0" class="adAltrAddBx" style="float: left;padding-right: 5px;"> 
+							<button class="bt1" ng-click="UnCheck_ME()"> UnCheck Slots </button>
+						</div>
+						
+
+						<div ng-if="(allocateToJda == 0 && disposeval==25 && (allME_DELHI == 1 || ME_NA == 1))" class="hide adAltrAddBx" id="GoBack" style="float: left;padding-right: 5px;"> 
+							<button class="bt1" id="allMe_GobackMe" value='1' ng-click="toggleAllMeToMe()"> Go Back </button>
+						</div>
+<!--						
+						<div id="allocateToJda_id" ng-if="backToMEbtn == 0 && allocateToJda == 1 && (disposeval==25 || disposeval==99)" class="adAltrAddBx" style="float: left;padding-right: 5px;"> 
+							<button class="bt1" ng-click="allocateToJdafunc(1,$event)"> Allocate To JDA </button>
+						</div>
+-->
+						<div class="ldeal_outer" ng-if="(disposeval==25 || disposeval==99) && (dealCloseMEDetails.error_code != 1)">
+							<span class="hdl">Last Deal Close Details</span>
+							<span class="dtls"><span class="nm">Executive</span> : <span>{{dealCloseMEDetails.me_details.empname}} | {{dealCloseMEDetails.me_details.empcode}}</span></span>
+							<span class="dtls"><span class="nm">Title</span> : <span>{{dealCloseMEDetails.me_details.Title}}</span></span>
+							<span class="dtls"><span class="nm">Mobile No</span> : <span>{{dealCloseMEDetails.me_details.mobile}}</span></span>
+							<span class="dtls"><span class="nm">Status</span> : <span>{{dealCloseMEDetails.me_details.status}}</span></span>
+						</div>
+						
+		 			</div>
+		 			<div class="wrapper instBx1"> 
+		 				<div class="tx1 wrapper "> Please Enter Instructions </div>
+		 				<textarea placeholder="Enter Instruction" ng-model="apptInstr[0]"> </textarea> 
+		 			</div>
+		 			<div class="timBx wrapper" ng-if="timeData.whichFlow == 'grab'">
+						<ul class="timeSele"> 
+							<div ng-repeat="(key,data) in timeData.data">
+								<li style="margin-left: 2.8%;" ng-if="data.flag == 1"> <label class="control control--checkbox" style="line-height:40px;"> <input type="checkbox" checked="checked" disabled="disabled"> <div class="control__indicator" style="background-color: rgb(163, 163, 163);"> </div> <span class="textlab"> {{key}} </span> </label> </li> 
+								<li style="margin-left: 2.8%;" ng-if="data.flag == 0"> <label class="control control--checkbox" style="line-height:40px;"> <input type="checkbox" checked="checked" ng-click="selectTimingsGrab(key,$index,$event)"> <div class="control__indicator" style="background:#c9e7ff;" > </div> <span class="textlab"> {{key}} </span> </label> </li> 
+							</div>
+						</ul>
+						<div ng-if="timeData.whichFlow == 'grab'" class="wrapper"> <button class="fixAppontmnt" ng-click="saveMktg(textInst,$event)"> Submit </button> </div>
+					</div>
+		 			<div class="timBx wrapper" ng-if="timeData.whichFlow == 'normal' && timeData.errorCode == 0 && automated_flg== 1" id="divDataShow">
+		 				<ul class="timeSele"> 
+							<div ng-repeat="(key,data) in timeData.data">
+								<li style="margin-left: 2.8%;" ng-if="data.flag == 1 && automated_flg == 1 && timeData.errorCode_me == 0"> <label class="control control--checkbox" style="line-height:40px;"> <input type="checkbox" disabled="disabled"> <div class="control__indicator"> </div> <span class="textlab"> {{key}} </span> </label> </li>
+								<li style="margin-left: 2.8%;" ng-if="data.flag == 0 && automated_flg == 1 && timeData.errorCode_me == 0"> <label class="control control--checkbox" style="line-height:40px;"> <input type="checkbox" checked="checked" ng-click="selectTimingsGrab(key,$index,$event)"> <div class="control__indicator" style="background:{{selColor[$index]}}" > </div> <span class="textlab"> {{key}} </span> </label> </li> 
+								<li style="margin-left: 2.8%;" ng-if="data.flag == 3 && automated_flg == 1 && timeData.errorCode_me == 0"> <label class="control control--checkbox" style="line-height:40px;"> <input type="checkbox" checked="checked" ng-click="showbusyPupUp(key,$index,$event)"> <div class="control__indicator" style="background-color: rgb(163, 163, 163);"> </div> <span class="textlab"> {{key}} </span> </label> </li> 
+		 				 	</div>
+		 				</ul>
+		 				<div class="wrapper"> <button class="fixAppontmnt" ng-click="saveMktg(textInst,$event)"> Fix Appointment </button> </div>
+		 			</div>	 			
+	 			</div>
+	 			<div class="timBx wrapper" ng-if="(timeData.whichFlow == 'normal' && timeData.errorCode == 0) && (automated_flg == 0)" id="divDataShow">
+		 				<div class="tblBxIn1"> 		 					
+			 				<table class="table table-bordered" cellspacing="0"> 
+				 				<thead> 
+				 				<tr>
+					 				<th>Time Slots</th>
+				 				</tr> 
+				 				</thead> 
+				 				<tbody> 
+				 				<tr ng-repeat="(key1,data) in timeData.data.timeArr"> 
+				 					<td class="time">{{key1}}</td>
+				 				</tr>
+				 				</tbody> 
+			 				</table>
+		 				</div> 
+		 			<div class="wrapper tblBx-main">
+		 				<div class="tblBxIn"> 		 					
+			 				<table class="table table-bordered" cellspacing="0"> 
+				 				<thead> 
+				 				<tr>
+					 				<th ng-repeat="(key,data) in timeData.data.meInfo | filter : searchMeSt">
+										 <span class="rnkLbl"> Rank #{{data.cumulative_rank_city}}  </span>
+										 <span> {{data.empName}}  <br>  ({{data.mktEmpCode}}) <br>  <span style="cursor:pointer;" ng-click="clickToCallFunc(data.mobile,data.allocID)">{{data.mobile}}</span> </span> 
+									</th>
+				 				</tr> 
+				 				</thead> 
+				 				<tbody> 
+				 				<tr ng-repeat="(key1,data) in timeData.data.timeArr"> 
+				 					<td ng-repeat="(key,dataMe) in timeData.data.meInfo | filter : searchMeSt">
+						 				<span class="radioListWrp" ng-if="(data.flag != 1) && (data.flag != 2)" value="{{dataMe.mktEmpCode}}_{{key1}}">
+							 				<label class="control control--checkbox" style="line-height:40px;"> 
+							        		<input name="row1" type="radio" ng-model="radioMod" value="{{dataMe.mktEmpCode}}_{{key1}}" ng-click="selectTimingsGrab(key1,dataMe.mktEmpCode,$event)"> 
+							        		<div class="control__indicator" ng-model="radioMod"> </div> 
+						        			</label>
+					        			</span>
+					        			<span class="radioListWrp" ng-if="((data.flag == 1) && data.allocData[dataMe.mktEmpCode] == undefined)" value="{{dataMe.mktEmpCode}}_{{key1}}" ng-disabled="true">
+							 				<label class="control control--checkbox" style="line-height:40px;"> 
+							        		<input name="row1" type="radio" ng-model="radioMod" value="{{dataMe.mktEmpCode}}_{{key1}}" disabled=true> 
+							        		<div class="control__indicator" style="border-radius: 20px;" ng-model="radioMod"> </div> 
+						        			</label>
+					        			</span>
+					        			<span class="radioListWrp" ng-if="((data.flag == 2) && data.allocData[dataMe.mktEmpCode] == undefined)" value="{{dataMe.mktEmpCode}}_{{key1}}" ng-model="radioMod">
+							 				<label class="control control--checkbox" style="line-height:40px;"> 
+							        		<input name="row1" type="radio" ng-model="radioMod" value="{{dataMe.mktEmpCode}}_{{key1}}" ng-click="selectTimingsGrab(key1,dataMe.mktEmpCode,$event)"> 
+							        		<div class="control__indicator" ng-model="radioMod"> </div> 
+						        			</label>
+					        			</span>
+					        			<span ng-repeat="(key2,dataAlloc) in data.allocData" ng-if="data.allocData != undefined && key2 == dataMe.mktEmpCode">
+											<span class="radioListWrp" ng-if="((data.flag == 1 || data.flag == 2) && key2 == dataMe.mktEmpCode)" ng-disabled="true" value="{{dataMe.mktEmpCode}}_{{key1}}"> 		
+												<label class="control control--checkbox" style="line-height:40px;"> 
+												<input name="row1" type="radio" ng-model="radioMod" disabled=true> 
+												<div class="control__indicator"  style="border-radius: 20px;" ng-model="radioMod">
+													<span class="blockedData"> {{dataAlloc.parentCode}} </span>
+													</div> 
+												</label>
+											</span>
+											<span class="radioListWrp" ng-if="((data.flag == 2 || data.flag == 1) && key2 != dataMe.mktEmpCode)" value="{{dataMe.mktEmpCode}}_{{key1}}"> 		
+												<label class="control control--checkbox" style="line-height:40px;"> 
+												<input name="row1" type="radio" ng-model="radioMod" value="{{dataMe.mktEmpCode}}_{{key1}}" ng-click="selectTimingsGrab(key1,dataMe.mktEmpCode,$event)">
+												<div class="control__indicator" ng-model="radioMod"></div> 
+												</label>
+											</span>
+										</span>
+				 					</td>
+				 				</tr>
+				 				</tbody> 
+			 				</table>
+		 				</div>
+		 			</div>
+		 				<div class="wrapper"> <button class="fixAppontmnt" ng-click="saveMktg(textInst,$event)"> Fix Appointment </button> </div>
+		 			</div>
+	 		</div>
+	 	</div>
+	 	<div ng-if="timeData.errorCode == 1">
+<!--
+			<h3 ng-if = "timeData.errorStatus != 'no_cat' && timeData.errorStatus != 'DIS'"><b>Data Not Found</b></h3>
+-->
+			<!--Change Done HERE Apoorv Agrawal -->
+			<h3 ng-if = "timeData.errorStatus == 'DIS' "><b>Selected Time is not correct</b></h3> 
+			<h3 ng-if = "timeData.errorStatus == 'no_cat' "><b>No Category Selected. Please Go through the <a ng-if='bypassGeniolite == 0' class="colorRed" ng-href="../newTme/catSearch/{{parentid}}/"><b>Select Category</b></a>
+			<a ng-if='bypassGeniolite == 1' class="colorRed" ng-href="http://lite.genio.in:8100/genio_lite/bypassgeniolite.php?parentid={{parentid}}&user_code={{bypassuserid}}&data_city={{bypasscity}}"><b>Select Category</b></a> and fill the category</b></h3>
+		</div>
+	 </section> 
+</section>

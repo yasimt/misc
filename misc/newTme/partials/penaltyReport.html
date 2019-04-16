@@ -1,0 +1,95 @@
+<section class="penaltypage" style="background-color:#fff;height:vh;">
+<div  class="mid-container">
+	<div class="" style="width:100%;">
+		<div class="" style="color: #000;width:5%;margin:20px;float:left;font-weight:bold;margin-top:50px;font-size:22px;">Defaulters</div>
+		<div class="" style="color: #000;width:5%;margin:20px;float:left;font-weight:bold;margin-top:50px;">
+		<button  ng-click="report_reload();" style="background-color: white; border: 1px solid #cbe0f2;color:#53a1f3;margin: 5px;padding: 5px;width: 100px;margin-left: 40px; height: 35px;margin-top: -6px;">Show All</button></div>
+			<div class=" " style="width:20%;margin-bottom:20px;height:34px;float:right;padding:0px 0px;border-radius: 3px;margin-top: 13px;" >
+				<label >Select Month<sup class="orgindicator">*</sup></label>
+				<select class="form-control"  ng-options="data for data in listyearArray"ng-change="reportdata('month')" ng-model="monthselect[0]"  placeholder="Select Month " style="width:80%;color:black;font-size:15px;padding: 0px 0px 0px 0px !important;height:100%;">
+				</select> 
+			</div>
+			<div class="" style="width:20%;margin-bottom:20px;height:34px;float:right;padding:0px 0px;border-radius: 3px;margin-top: 13px; margin-right: -34px;" >
+				<label >Select city<sup class="orgindicator">*</sup></label>
+				<select class="form-control"  ng-options="data for data in citylistarray" ng-change="reportdata('city')" ng-model="cityselect[0]"  placeholder="Select City " style="width:80%;color:black;font-size:15px;padding: 0px 0px 0px 0px !important;height:100%;background-color: #eef1f8;">
+				</select> 
+		</div>
+		<div style="width:35%;float:right;margin-top:16px;margin-right: -34px;" class=" col-lg-2">
+			<label >Search Employee</label>
+			<input id="employeetext" style="width:80%;font-weight:300;font-size:19px;color:#000"type="text" class="form-control rueep" ng-model="empdata[0]" placeholder="Please Enter Employee Name/ID"/>
+			<span id="searchbu" style="position: relative;top: 37px;left: 150px;cursor:pointer" ng-click="reportdata('city')"  class=" btn-srch"><i class="genio_spr srch_i"></i></span>
+		</div>
+	</div>
+	<div class="horzLine"></div>	
+		<div ng-if="penaltyReportData.errorCodetop==0">
+			<div class="top_heading">Top Three defaulters {{cityselect[0]}}</div>
+			<div ng-repeat="data in penaltyReportData.data |limitTo:3" class="div_img">
+				<img ng-src="{{data.emp_photo}}" style="height:150px;width:150px;border-radius:80%;">
+				<span class="usr_name">{{data.empname}} | {{data.empcode}}</span>
+				<span class="usr_loc">{{data.city}} | {{data.no_of_occurrences}} Strikes</span>
+				<span style="color:red;" ng-if="data.isTerminated==1" class="usr_loc">Terminated</span>
+			</div>
+		</div>
+		<div ng-if="penaltyReportData.errorCode==0">
+		<div style="color:blue;" class="top_heading">Complete list of defaulters in {{cityselect[0]}}</div>
+		<div class="list_table">
+			<table width="100%" cellpadding="0" cellspacing="0">
+				<tr>
+					<th width="4%">Sr. No</th>
+					<th width="12%">TME Name &amp; Employee Code</th>
+					<th width="25%">Company Name &amp; Contract ID</th>
+					<th width="15%">Reason</th>
+					<th width="18%">Remarks</th>
+					<th width="22%">Penalty Amount</th>
+				</tr>
+				<tr ng-repeat="data in penaltyReportData.data">
+					<td>{{data.SNO}}</td>
+					<td>
+						<span class="deful_name">{{data.empname}}</span>
+						<span class="deful_code">{{data.empcode}}</span>
+					</td>
+					<td>
+						<span class="deful_name">{{data.companyname}}</span>
+						<span class="deful_code">{{data.parentid}}</span>
+					</td>
+					<td>
+						<span class="deful_code">{{data.penalty_reason}}</span>
+					</td>
+					<td>
+						<span class="deful_code">{{data.detailed_remarks}}</span>
+					</td>
+					<td>
+						<span class="deful_code">{{data.penalty}}</span>
+					</td>
+				</tr>
+			</table>	
+		</div>
+		
+		<div class="paging">
+			<ul>
+				<li ng-if="currentPage != 1" ng-click="reportdatapage('prev')" ><a   class="disclk">Prev</a></li>
+				<li ng-if="currentPage == 1" ><a   class="disclk">Prev</a></li>
+				<li ng-repeat="page in pagearr track by $index">
+					<a ng-if="currentPage==page" ng-click="reportdatapage(page)" class="act" style="color:#000000;">{{page}}</a>
+					<a ng-if="currentPage!=page"  ng-click="reportdatapage(page)"class="act" >{{page}}</a>
+				</li>
+				<li ng-if="currentPage != numOfpages" ng-click="reportdatapage('next')"><a >Next</a></li>
+				<li ng-if="currentPage == numOfpages"><a >Next</a></li>
+			</ul>
+			
+		</div>
+	</div>
+	
+</div>
+<div ng-if="penaltyReportData.errorCode==1" style="height:700px;margin-top:10%;" class="mid-container">
+<p  style="font-weight:bold;color:#ddd;font-size:70px;text-align:center;">No Defaulters To Show</p>
+</div>
+<!--
+<div style="height:100%;"ng-if="penaltyReportData.errorCode==1">
+-->
+	
+<!--
+</div>
+-->
+</section>
+

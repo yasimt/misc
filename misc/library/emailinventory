@@ -1,0 +1,265 @@
+<?php
+/*set_time_limit(0);
+if(!defined('APP_PATH'))
+{
+    require_once("../library/config.php");
+}
+include_once(APP_PATH."library/path.php");
+require_once(APP_PATH."library/define_virtualnumbers.php");
+
+Global $dbarr;
+$conn_iro=  new DB($dbarr['DB_IRO_SLAVE']); 
+$conn_fnc =  new DB($dbarr['FINANCE_SLAVE']);
+$conn_local =  new DB($dbarr['DB_DECS_SLAVE']);
+//print"<pre>";print_r($dbarr);exit;
+/*
+if(APP_LIVE == 1)
+{
+	$techinfo_url="http://".constant(strtoupper($server_city).'_TECH_API_URL')."/justdial/";
+}
+else
+{
+	$techinfo_url="http://techinfo.jdsoftware.com/justdial/"; 
+}
+//$techinfo_url="http://".constant(strtoupper($server_city).'_TECH_API_URL')."/justdial/";
+$curl_url = $techinfo_url."vrnshow.php";
+$url_type='vnsearch';
+$curl_outout = run_curl_url($curl_url,$url_type);
+$xmlDoc = new DOMDocument();
+$xmlDoc->loadXML($curl_outout);
+$Result = $xmlDoc->getElementsByTagName( "Result" );
+foreach($Result as $obj)
+{
+	$Code = $obj->getElementsByTagName("Code");
+	$Code = $Code->item(0)->nodeValue;
+	$text = $obj->getElementsByTagName("Text");
+	$text = $text->item(0)->nodeValue; 
+	$total_count   = $obj->getElementsByTagName("Count");
+	$total_count   = $total_count->item(0)->nodeValue;
+	$Allocated   = $obj->getElementsByTagName("Allocated");
+	$Allocated   = $Allocated->item(0)->nodeValue;
+}
+$freevncnt = $total_count - $Allocated;
+
+function run_curl_url($curl_url,$url_type)
+{
+	$curl_response_flag = false;
+	$ch = curl_init();
+	$ans = curl_setopt($ch, CURLOPT_URL,$curl_url);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+	curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+	//curl_setopt( $ch, CURLOPT_CONNECTTIMEOUT, self::CURL_TIMEOUT );
+	//curl_setopt( $ch, CURLOPT_TIMEOUT, self::CURL_TIMEOUT );
+	$output =curl_exec($ch);
+	return $output;
+}
+$sql_quarantine_vn_cnt = "SELECT count(distinct businessid) as cnt from d_jds.tbl_quarantine_virtualnumber  where start_date > DATE_SUB(now(), INTERVAL 6 MONTH) and end_date='0000-00-00 00:00:00' and active_flag='1'";
+$res_quarantine_vn_cnt = $conn_local->query_sql($sql_quarantine_vn_cnt);
+if($res_quarantine_vn_cnt && mysql_num_rows($res_quarantine_vn_cnt)>0)
+{
+	$rowcount = mysql_fetch_assoc($res_quarantine_vn_cnt);
+	$quarantine_cnt = $rowcount['cnt'];
+} 
+
+$paridArr = array();
+$sql_get_active_contracts = "SELECT DISTINCT parentid from tbl_companymaster_finance where campaignid in (1,2,10) and freeze!='1' and mask!='1' and expired!='1' and balance>0";
+$res_get_active_contracts = $conn_fnc->query_sql($sql_get_active_contracts);
+if($res_get_active_contracts && mysql_num_rows($res_get_active_contracts) >0)
+{
+	while($row_active_contracts = mysql_fetch_assoc($res_get_active_contracts))
+	{
+		$paridArr[] = $row_active_contracts['parentid'];
+	}
+}
+$Total_Count = count($paridArr);
+$allocateVnoParId = array();
+$unallocateVnoParId = array();
+foreach($paridArr as $parentid)
+{
+	$sql_allocate_vno_contracts = "SELECT parentid from tbl_companymaster_generalinfo where parentid='".$parentid."' and (virtualNumber!='0' OR virtualNumber!='')";
+	$res_allocate_vno_contracts = $conn_iro->query_sql($sql_allocate_vno_contracts);
+	if($res_allocate_vno_contracts && mysql_num_rows($res_allocate_vno_contracts)>0)
+	{
+		while($row_allocate_vno_contracts = mysql_fetch_assoc($res_allocate_vno_contracts))
+		{
+			$allocateVnoParId[]=$row_allocate_vno_contracts['parentid'];
+		}
+	}
+
+	$sql_unallocate_vno_contracts = "SELECT parentid from tbl_companymaster_generalinfo where parentid='".$parentid."' and (virtualNumber='0' OR virtualNumber='')";
+	$res_unallocate_vno_contracts = $conn_iro->query_sql($sql_unallocate_vno_contracts);
+	if($res_unallocate_vno_contracts && mysql_num_rows($res_unallocate_vno_contracts)>0)
+	{
+		while($row_unallocate_vno_contracts = mysql_fetch_assoc($res_unallocate_vno_contracts))
+		{
+			$unallocateVnoParId[]=$row_unallocate_vno_contracts['parentid'];
+		}
+	}
+}
+$blockedVnoParId = array();
+$mappedNoParId = array();
+foreach($unallocateVnoParId as $unallocatepid)
+{
+	$sql_national_listing_cntrct = "SELECT parentid from tbl_companymaster_finance where parentid='".$unallocatepid."' and campaignid='10'";
+	$res_national_listing_cntrct = $conn_fnc->query_sql($sql_national_listing_cntrct);
+	if($res_national_listing_cntrct && mysql_num_rows($res_national_listing_cntrct)>0)
+	{
+		$sql_get_pkg_contract =  "SELECT parentid from tbl_companymaster_finance where parentid='".$unallocatepid."' and campaignid='1'";
+		$res_get_pkg_contract = $conn_fnc->query_sql($sql_get_pkg_contract);
+		if($res_get_pkg_contract && mysql_num_rows($res_get_pkg_contract)>0)
+		{
+			$blocked_for_vno = checkBlockForVirtual($unallocatepid,$conn_iro);
+			if($blocked_for_vno == 1)
+			{
+				$blockedVnoParId[] = $unallocatepid;
+			}
+		}
+	}
+	else
+	{
+		$blocked_for_vno = checkBlockForVirtual($unallocatepid,$conn_iro);
+		if($blocked_for_vno == 1)
+		{
+			$blockedVnoParId[] = $unallocatepid;
+		}
+		else
+		{
+			$sql_get_mapped_no = "SELECT landline_display, mobile_display, tollfree from tbl_companymaster_generalinfo where parentid='".$unallocatepid."'";
+			$res_get_mapped_no = $conn_iro->query_sql($sql_get_mapped_no);
+			if($res_get_mapped_no && mysql_num_rows($res_get_mapped_no)>0)
+			{
+				$row_mapped_no = mysql_fetch_assoc($res_get_mapped_no);
+				$landline_display = $row_mapped_no['landline_display'];
+				$mobile_display = $row_mapped_no['mobile_display'];
+				$tollfree = $row_mapped_no['tollfree'];
+				if($landline_display=='' &&  $mobile_display=='' && $tollfree=='')
+				{
+					$mappedNoParId[] = $unallocatepid;
+				}
+			}
+		}
+	}
+}
+
+function checkBlockForVirtual($unallocatepid,$conn_iro)
+{
+	$sql_blocked_vno_pid = "SELECT parentid from tbl_companymaster_generalinfo where parentid='".$unallocatepid."' and blockforvirtual='1'";
+	$res_blocked_vno_pid = $conn_iro->query_sql($sql_blocked_vno_pid);
+	if($res_blocked_vno_pid && mysql_num_rows($res_blocked_vno_pid)>0)
+	{
+		$block_flag=1;
+	}
+	return $block_flag;
+}
+$pendingArr = array();
+$result = array_diff($unallocateVnoParId,$mappedNoParId,$blockedVnoParId);
+
+foreach ($result as $val)
+{
+	$pendingArr[] = $val;
+}
+$allocateVnoParIdCount = count($allocateVnoParId);
+$unallocateVnoParIdCount = count($unallocateVnoParId);
+$blockedVnoParIdCount = count($blockedVnoParId);
+$mappedNoParIdCount = count($mappedNoParId);
+$affectedCount = count($pendingArr);
+
+//echo "<br>";
+//print"<pre>";print_r($pendingArr);exit;
+
+//print"<pre>";print_r($mappedNoParId);
+//print"<pre>";print_r($blockedVnoParId);
+//print"<pre>";print_r($unallocateVnoParId);
+
+//echo "total count<br>".$Total_Count;
+//echo "allocatecount<br>".$allocateVnoParIdCount;
+//echo "unallocatecount<br>".$unallocateVnoParIdCount;
+//echo "<br>blockedVnoParIdCount<br>".$blockedVnoParIdCount;
+//echo "<br>mapped no Count<br>".$mappedNoParIdCount;
+*/
+
+
+
+
+
+$msg = "<html>
+<head>
+<title>Virtual Number Inventory Count </title>
+</head>
+<div id='header' align='center' >
+<h2 style='margin-bottom:0;'>Virtual Number Inventory Count</h2></div>
+<br>
+<table border='3' align='center' bgcolor='lightseagreen' width='50%' height='40%'>
+<tr><th align='left' style='width:50%;'>&nbsp;Contracts having Virtual Number</th>
+		<th colspan='2' align='right'>".$allocateVnoParIdCount."</td>
+	<tr>
+	</tr>
+		<th rowspan='4' align='left'>&nbsp;Contracts not having Virtual Number</th>
+		<th align='left'>Blocked For Virtual No Count</td>
+		<th align='right'>".$blockedVnoParIdCount."</th>
+	</tr>
+	<tr>
+		<th align='left'>Unmapped No Count</td>
+		<th align='right'>".$mappedNoParIdCount."</td>
+	</tr>
+	<tr>
+		<th align='left'>Affected Cases Count</td>
+		<th align='right'>".$affectedCount."</td>
+	</tr>
+	<tr>
+		<th align='left'>Total Unallocated Count</td>
+		<th align='right'>".$unallocateVnoParIdCount."</td>
+	</tr>
+	<tr>
+		<th align='left'>&nbsp;Quarantine Virtual Number Count</th>
+		<th colspan='2' align='right'>".$quarantine_cnt."</td>
+	<tr>
+	</tr>
+	<th align='left'>&nbsp;Free Inventory Count</th>
+	<th colspan='2' align='right'>".$freevncnt."</td>
+</tr>
+</table>";
+
+echo $msg;
+
+
+//mail($to, $subject, $msg, $headers);
+if(isset($_POST['email'])) 
+{
+    $to = 'imteyaz.raja@justdial.com';
+	$subject = 'My Email';
+	$email_from = $_POST['email']; 
+    
+    $email_exp = '/^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/';
+	if(!preg_match($email_exp,$email_from)) 
+	{
+		$error_message .= 'The Email Address you entered does not appear to be valid.<br />';
+	}
+	$headers  = 'MIME-Version: 1.0' . "\r\n";
+	$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+	$headers .= 'From: My Site Name <me@mysite.com>' . "\r\n";
+	@mail($to, $subject, $msg, $headers);
+}
+
+
+echo "<br>";
+
+?>
+<html>
+<body>
+<form  method="post">
+<table align='center'>
+<tr>
+<td><b>Enter Email Id:</b></td>
+<td>
+<input type="text" name="email" value="" maxlength="100" />
+</td>
+<td>
+<input type="submit" value="Send Mail" />
+</td>
+</tr>
+</table>
+</form>
+</body>
+</html>
+

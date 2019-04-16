@@ -1,0 +1,32 @@
+<div layout="row" layout-sm="column" layout-align="space-around" ng-if="showLoader == 0">
+	<md-progress-circular md-mode="indeterminate"></md-progress-circular>
+</div>
+<section ng-if="areaData.error.code == 0" lazyload>
+	<md-list>
+<!--
+		<div>
+			<md-list-item>
+				<md-checkbox ng-model="selAllCheck[0]" ng-click="selectAll(areaData.results.length,0,selected)"></md-checkbox>
+				<p class="md-hue-1" style="font-weight:bold">Select All Areas</p>
+			</md-list-item>
+		</div>
+-->
+		<div ng-repeat="key in notSorted(areaData.results) | limitTo: limiter">
+			<md-list-item>
+				<md-checkbox ng-model="checkAreas_all_area_new[areaData.results[key].pin]" ng-if='showCatDistSel == 1 && flexiSel == 1' ng-disabled="checkDisabled[area.pin]" ng-click="toggle_all_area_new(areaData.results[key].pin,selected,areaData.results[key].pin)"></md-checkbox>				
+				<md-checkbox ng-model="checkAreas[areaData.results[key].pin]" ng-if='flexiSel == 0' ng-click="toggle(areaData.results[key].pin,selected,areaData.results[key].pin)" ng-disabled="checkDisabled[areaData.results[key].pin]" class="checkPins"></md-checkbox>
+				<p class="blue">{{areaData.results[key].pin}}-{{areaData.results[key].area | split:',':0}}</p>
+				<md-icon class="md-secondary" ng-click="doSecondaryAction($event)" aria-label="Chat" md-svg-icon="img/ic_more_horiz_36px.svg"></md-icon>
+			</md-list-item>
+			<div layout="row" layout-wrap ng-class="{none:!$first}" class="dataAreas" layout-align="end center">
+				<div flex="30" ng-repeat="dataAreas in areaData.results[key].area | splitAll:','">
+					<div style="margin-top:8px; margin-bottom:8px; margin-right:8px; margin-left:35px;">{{ dataAreas }}</div>
+				</div>
+			</div>
+			<md-divider></md-divider>
+		</div>
+	</md-list>
+</section>
+<section ng-if="areaData.error.code == 1">
+	<h2>No Areas Found</h2>
+</section>

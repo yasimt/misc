@@ -1,0 +1,123 @@
+<md-toolbar md-scroll-shrink style="background-color:#FFFFFF" ng-init="onLoadCall()" ng-controller="catPreviewController">
+	<div class="md-toolbar-tools">
+		<md-button class="md-icon-button" aria-label="Settings" style="margin-left:20px;" ng-click="toggleLeft()">
+			<md-icon md-svg-icon="img/ic_menu_36px.svg" style="color:#000000;"></md-icon>
+		</md-button>
+		<h2>
+			<span>Bank Form</span>
+		</h2>
+		<span flex></span>
+	</div>
+</md-toolbar>
+
+<div>
+<div class="fin_container" style="font-family: 'Roboto',sans-serif;color: #747474;margin-top: 60px;width:825px">
+		
+		<div class="right acc_skip_box" ng-click="skipdetails()" ng-if='acc_ecs_flag != 3 && acc_ecs_flag != 4'> Skip</div>
+			
+		<center style="color:red;font-size: 20px;">Account details are mandatory for JD pay</center>	
+		<div style="margin: 0 auto;width: 590px;">
+			
+			<div style=" padding-bottom: 20px;padding-top: 20px;font-size: 30px;">
+				Account Details
+			</div>
+		
+		
+			<div  style='padding-right: 80px;'>
+					<div style='color: #545454;font-size: 15px;padding-bottom: 15px;'>Account Holder's Name</div>
+					<div layout="row">
+						<input type='text' id='acc_name' class="ecs_form_box" ng-model="ecs_form_ip[1]" ng-focus="unmask('acc_name')" ng-blur="confirm_val('acc_name')" alphaonly>
+						<input type='text' id='acc_name_hid' class="ecs_form_box" ng-model="ecs_form_hid[1]" ng-show="show_acc_name_hid" alphaonly ng-cut="$event.preventDefault()" ng-copy="$event.preventDefault()" ng-paste="$event.preventDefault()">
+					</div>
+			</div>
+
+			<div =''>
+					<div style='color: #545454;font-size: 15px;padding-bottom: 15px;'>Account Number</div>
+					<div layout='row'>
+						<input type='text' id='acc_num' class="ecs_form_box" ng-model="ecs_form_ip[2]" ng-focus="unmask('acc_no')" ng-blur="confirm_val('acc_no')" alphanumericonly>
+						<input type='text' id='acc_num_hid' class="ecs_form_box" ng-model="ecs_form_hid[2]" ng-show="show_acc_no_hid" alphanumericonly ng-cut="$event.preventDefault()" ng-copy="$event.preventDefault()" ng-paste="$event.preventDefault()">
+					</div>
+			</div>
+		
+			<div  style='color: #545454;font-size: 15px;padding-bottom: 15px;'>
+				<div style='padding-bottom: 15px;'>Account Type</div>
+				<div>
+					<select class="ecs_form_box" ng-model="ecs_form_ip[3]">
+						 <option value=''>Select account Type </option>
+						 <option value='Current'>Current</option>
+						 <option value='Savings'>Savings</option>
+						 <option value='CashCredit'>Cash Credit</option>
+					</select>
+				</div>
+					
+			</div>
+			<div style=''>
+					<div style='color: #545454;font-size: 15px;padding-bottom: 15px;'>IFSC Code</div>
+					<div layout='row'>
+						<input type='text' id='ifc_code' class="ecs_form_box"  ng-model="ecs_form_ip[4]" ng-focus="unmask('ifsc')" ng-blur="confirm_val('ifsc')" alphanumericonly>
+						<input type='text' id='ifc_code_hid' class="ecs_form_box"  ng-model="ecs_form_hid[4]" ng-show="show_ifsc_hid" ng-blur="getbankdetials()" alphanumericonly ng-cut="$event.preventDefault()" ng-copy="$event.preventDefault()" ng-paste="$event.preventDefault()"> 
+						<img src='img/banner_img/questionmark.png' alt='question mark' ng-click="show_examples($event)"/>
+					</div>
+			</div>
+			
+			<div style=''>
+					<div style='color: #545454;font-size: 15px;padding-bottom: 15px;'>Bank Name</div>
+					<div layout='row'>
+						<input type='text' id='ifc_code' class="ecs_form_box"  ng-model="bank_detail[1]" alphaonly>
+					</div>
+			</div>
+			
+			<div style=''>
+					<div style='color: #545454;font-size: 15px;padding-bottom: 15px;'>Bank City Name</div>
+					<div layout='row'>
+						<input type='text' id='ifc_code' class="ecs_form_box"  ng-model="bank_detail[2]" alphaonly>
+					</div>
+			</div>
+			
+			<div style='color: #545454;font-size: 15px;padding-bottom: 15px;'>
+					<div style='padding-bottom: 15px;'>Bank Branch Name</div>
+					<div layout='row'>
+						<input type='text' id='ifc_code' class="ecs_form_box"  ng-model="bank_detail[3]" alphaonly>
+					</div>
+			</div>
+			
+			
+			<div style=''>
+					<div style='color: #545454;font-size: 15px;padding-bottom: 15px;'>MICR Code</div>
+					<div layout='row'>
+						<input type='text' id='micr_code' class="ecs_form_box"  ng-model="ecs_form_hid[5]"  ng-blur="get_bankdetialsmicr()">
+					</div>
+			</div>
+			
+
+		</div>
+	</div>
+	<div class="wrapper" id="">
+		<div class="wrapper">
+			<div class="button-abs" >
+				<div class="button-wrap" style="bottom: 0px;width:100%; background:#E5E5E5" layout="row" layout-align="space-around" sitbutdown ng-if='acc_ecs_flag != 3 && acc_ecs_flag != 4'>
+					<div style="background: none repeat scroll 0 0 #FFFFFF;border-left: 1px solid #CCCCCC;border-right: 1px solid #CCCCCC;margin: 0 auto;width: 866px;">
+						<a href="#" class="prcpay left"  style="margin: 4px 0 0;width: 140px;" ng-click="$state.go('appHome.budgetsummary',{parid:url_paridInfo,ver:url_ver,page:extraHandler})">Back</a>
+						<a href="#" class="prcpay right"  style="margin: 4px 0 0;" ng-click='saveaccdetails()'>Proceed To Payment</a>
+					</div>
+				</div>
+				<div class="button-wrap" style="bottom: 0px;width:100%; background:#E5E5E5" layout="row" layout-align="space-around" sitbutdown ng-if='acc_ecs_flag == 3 || acc_ecs_flag == 4 '>
+					<div style="background: none repeat scroll 0 0 #FFFFFF;border-left: 1px solid #CCCCCC;border-right: 1px solid #CCCCCC;margin: 0 auto;width: 866px;">
+						<a href="{{businessUrl}}" class="prcpay left"  style="margin: 4px 0 0;width: 140px;" ng-if='acc_ecs_flag == 3'>Back</a>
+						<a ng-click="$state.go('appHome.demopage',{parid:url_paridInfo,ver:url_ver,demo_flg:3,page:extraHandler})" class="prcpay left"  style="margin: 4px 0 0;width: 140px;" ng-if='acc_ecs_flag == 4'>Back</a>
+						<a href="#" class="prcpay right"  style="margin: 4px 0 0;" ng-click='saveaccdetails()'>Send Link</a>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<div class="wrapper" style="background:#F6F6F6; border-top:1px solid #E3E3E3;">
+			<div class="">
+				<div class="jdrr_footer">
+						Copyright 2008-2015 Justdial.com. All Rights Reserved. <a href="#">Privacy</a> I <a href="#">Tearm</a>
+				</div>
+			</div>
+		</div>
+	</div>		
+</div>
+

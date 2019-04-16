@@ -1,0 +1,81 @@
+<md-toolbar md-scroll-shrink style="background-color:#FFFFFF;border-bottom:1px solid #CCCCCC" ng-controller="catPreviewController">
+	<div class="md-toolbar-tools">
+		<md-button class="md-icon-button" aria-label="Settings" style="margin-left:20px;" ng-click="toggleLeft()">
+			<md-icon md-svg-icon="img/ic_menu_36px.svg" style="color:#000000;"></md-icon>
+        </md-button>
+		<h2>
+			<span>Omni Combos Selection</span>
+        </h2>
+		<span flex></span>
+		<div>
+			<md-button aria-label="Open phone interactions menu" class="md-fab md-primary" style="top:30px; right:40px; font-weight:bold; background:#48afde none repeat scroll 0 0;" ng-click="setCustomBudgetPackage($event)">
+				<md-icon  md-menu-origin md-svg-icon="img/ic_arrow_forward_24px.svg"></md-icon>
+			</md-button>
+		</div>
+	</div>
+</md-toolbar>
+
+<section class="" subtract="500">
+	<section class="mainContain">
+		<md-content class='payment_option' style="padding-right: 13%;padding-top: 70px;width: 827px;min-height: 680px;font-family: roboto">	
+			
+			<md-card>
+				<md-card-content style="padding: 21px">
+					
+						<h4 style='color: #FF9A00;font-size: 17px;font-weight: bold;padding-bottom: 20px;'>Bonus amount equivalent to your package value will be credited to your package account depending on your payment plan. <span style='color:#1c33a1;font-weight:normal;cursor:pointer' ng-click="open_combo($event)">Click here for egs.</span></h4>
+						
+						<h3 style='color: #FF9A00;font-family: roboto;font-size: 25px;font-weight: bold;'>Omni Combos (Monthly Amount)</h3>
+						
+						 <md-radio-group ng-model="combotype">
+							
+							<md-radio-button value="omnisupreme" class="md-primary" style='color: #424242;font-size: 15px;display: inline-block;' ng-click="resetcombo()"><span style="font-weight:bold;font-size: 16px;padding-right: 13px;">Omni Supreme(JD Omni + Package)</span>
+							</md-radio-button>
+							<span class="iro-sprite sml-rs"></span>
+							<span style="display: inline-block;">
+								<input type='text' ng-model="combo1price" style="width:55px" ng-show="combo1custom"/>
+								<span ng-hide="combo1custom">{{combo1price}}</span>
+							</span>
+						<span style="display:inline-block;color: #FF9A00;" ng-click="opencombo1custom()">*</span>
+						<span  style="font-size: 14px;margin-left: 15px;">(20,000 upfront and {{combo1price}} per month)</span>
+						
+						<md-radio-button value="omniultima" class="md-primary" style='color: #424242;font-size: 15px;display: inline-block;' ng-click="resetcombo()">
+							<span style="font-weight:bold;font-size: 16px;padding-right: 13px;" >Omni Ultima</span>
+						</md-radio-button>
+						
+						<span class="iro-sprite sml-rs"></span>
+						<span style="display: inline-block;">
+							<span>{{omni_ultimaprice}}</span>
+						</span>
+						
+						<span  style="font-size: 14px;margin-left: 15px;">(JD Omni+ JDS Package Worth Rs 33000 per year for 3 years)</span>
+						
+						
+						<md-radio-button value="combo2" class="md-primary" style='color: #424242;font-size: 15px;display: inline-block;' ng-click="resetcombo()">
+							<span style="font-weight:bold;font-size: 16px;padding-right: 13px;" >Combo 2</span>
+						</md-radio-button>
+						
+						<span class="iro-sprite sml-rs"></span>
+						<span style="display: inline-block;">
+							<input type='text' ng-model="combo2price" style="width:55px" ng-show="combo2custom"/>
+							<span ng-hide="combo2custom">{{combo2main}}</span>
+						</span>
+						<span style="display:inline-block;color: #FF9A00;" ng-click="opencombo2custom()">*</span>
+						</md-radio-group>
+
+
+							
+						<md-checkbox class='md-primary' ng-model="omni_setupfee_waveoff[0]" aria-label="Checkbox" ng-if='show_setupfee_cb == true'>Exclude Omni Set Up Fee</md-checkbox>
+							
+						<div style="padding-top: 42px;text-align: center;">
+							<input type="submit" value="Proceed" class="procced_btn" ng-click="calldomain($event)">
+							<input type="submit" value="Back" class="procced_btn" ng-click="gotobudgettype()" style="float:left">
+						</div>
+						
+				</md-card-content>
+			</md-card>
+			
+		</md-content>
+			
+
+	</section>
+</section>

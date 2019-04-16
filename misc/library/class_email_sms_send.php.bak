@@ -1,0 +1,197 @@
+<?php
+if(!defined('APP_PATH'))
+{
+   require_once("config.php");
+}
+include_once(APP_PATH."library/path.php");
+global $dbarr;
+
+	class email_sms_send
+	{
+        private $conn_messaging;
+            
+        function __construct( $dbarr)
+        {
+            $this->conn_messaging= 	new DB($dbarr['DB_MESSAGING']);
+        }
+		function sendSMS($mobileNo, $smstext, $source)
+		{
+            $smstext= addslashes($smstext);
+            if($mobileNo!='' && $smstext!='')
+			{
+                 $sql_sms="INSERT INTO tbl_common_intimations SET 
+                    mobile = '".$mobileNo."', 
+                    sms_text ='".$smstext."',
+                    source='".$source."'";
+                $result = $this->conn_messaging->query_sql($sql_sms);
+                return $result;
+            }
+			else
+			{
+                return 0;
+            }
+		}
+		function sendEmail($emailid, $from, $subject, $emailtext, $source)
+		{
+            $emailtext= addslashes($emailtext);
+            if($emailid!='' && $emailtext!='' && $subject!='')
+			{
+                 $sql_email="INSERT INTO tbl_common_intimations SET 
+								sender_email  = '".$from."', 
+								email_id      = '".$emailid."',
+								email_subject = '".$subject."',
+								email_text    = '".$emailtext."',
+								source        = '".$source."'";
+                $res_email = $this->conn_messaging->query_sql($sql_email);
+                return $res_email;
+            }
+			else
+			{
+                return 0;
+            }
+		}
+		function sendScheduleSMS($parent_id, $mobileNo, $smstext, $source)
+		{
+            $smstext= addslashes($smstext);
+            if($mobileNo!='' && $smstext!='')
+			{
+				$current_date = date("Y-m-d");
+				$now = date("Y-m-d H:i:s");
+				$next_day_1  = date('Y-m-d ', strtotime(' +1 day'));
+				$next_day_11 = $next_day_1."10:00:00"; 
+				$next_day_2  = date('Y-m-d ', strtotime(' +2 day'));
+				$next_day_22 = $next_day_2."10:00:00";
+				$sqlSMSInfo = "SELECT parent_id, mobile FROM tbl_common_intimations WHERE parent_id = '".$parent_id."' AND date(insert_date) = '".$current_date."' AND sms_sent = '0' AND source = '".$source."'";
+				$resSMSInfo = $this->conn_messaging->query_sql($sqlSMSInfo);
+				if($resSMSInfo && mysql_num_rows($resSMSInfo)>0)
+				{
+					$updtSMSInfo = "UPDATE tbl_common_intimations SET mobile = '".$mobileNo."', sms_text = '".$smstext."' WHERE parent_id = '".$parent_id."' AND date(insert_date) = '".$now."' AND source = '".$source."'";
+					$resSMSInfo = $this->conn_messaging->query_sql($updtSMSInfo);
+				}
+				else
+				{
+					$sqlSMSMsg	= "INSERT INTO tbl_common_intimations SET
+									parent_id   = '".$parent_id."',
+									mobile      = '".$mobileNo."', 
+									sms_text    = '".$smstext."',
+									source      = '".$source."'";
+					$resSMSMsg = $this->conn_messaging->query_sql($sqlSMSMsg);
+				}
+				$sqlSMSInfo_1 = "SELECT parent_id, mobile FROM tbl_common_intimations WHERE parent_id = '".$parent_id."' AND date(insert_date) = '".$next_day_1."' AND source = '".$source."'";
+				$resSMSInfo_1 = $this->conn_messaging->query_sql($sqlSMSInfo_1);
+				if($resSMSInfo_1 && mysql_num_rows($resSMSInfo_1)>0)
+				{
+					$updtSMSInfo_1 = "UPDATE tbl_common_intimations SET mobile = '".$mobileNo."', sms_text  = '".$smstext."' WHERE parent_id = '".$parent_id."' AND date(insert_date) = '".$next_day_1."' AND source = '".$source."'";
+					$resUpdtInfo_1 = $this->conn_messaging->query_sql($updtSMSInfo_1);
+				}
+				else
+				{
+					$sqlSMSMsg_1 = "INSERT INTO tbl_common_intimations SET
+									parent_id   = '".$parent_id."',
+									mobile      = '".$mobileNo."', 
+									sms_text    = '".$smstext."',
+									source      = '".$source."',
+									insert_date = '".$next_day_11."'";
+					$resSMSMsg_1 = $this->conn_messaging->query_sql($sqlSMSMsg_1);
+				}
+				$sqlSMSInfo_2 = "SELECT parent_id, mobile FROM tbl_common_intimations WHERE parent_id = '".$parent_id."' AND date(insert_date) = '".$next_day_2."' AND source = '".$source."'";
+				$resSMSInfo_2 = $this->conn_messaging->query_sql($sqlSMSInfo_2);
+				if($resSMSInfo_2 && mysql_num_rows($resSMSInfo_2)>0)
+				{
+					$updtSMSInfo_2 = "UPDATE tbl_common_intimations SET mobile = '".$mobileNo."', sms_text  = '".$smstext."' WHERE parent_id = '".$parent_id."' AND date(insert_date) = '".$next_day_2."' AND source = '".$source."'";
+					$resUpdtInfo_2 = $this->conn_messaging->query_sql($updtSMSInfo_2);
+				}
+				else
+				{
+					$sqlSMSMsg_2	= "INSERT INTO tbl_common_intimations SET
+									parent_id   = '".$parent_id."',
+									mobile		= '".$mobileNo."', 
+									sms_text	= '".$smstext."',
+									source		= '".$source."',
+									insert_date = '".$next_day_22."'";
+					$resSMSMsg_2 = $this->conn_messaging->query_sql($sqlSMSMsg_2);
+				}
+                return $resSMSMsg;
+            }
+			else
+			{
+                return 0;
+			}
+		}
+		function sendScheduleEmail($parent_id, $emailid, $from, $subject, $emailtext, $source)
+		{
+            $emailtext= addslashes($emailtext);
+            if($emailid!='' && $emailtext!='' && $subject!='')
+			{
+				$current_date = date("Y-m-d");
+				$now = date("Y-m-d H:i:s");
+				$next_day_1  = date('Y-m-d ', strtotime(' +1 day'));
+				$next_day_11 = $next_day_1."10:00:00"; 
+				$next_day_2  = date('Y-m-d ', strtotime(' +2 day'));
+				$next_day_22 = $next_day_2."10:00:00";
+				$sqlEmailInfo = "SELECT parent_id, email_id FROM tbl_common_intimations WHERE parent_id = '".$parent_id."' AND date(insert_date) = '".$current_date."' AND email_sent ='0' AND source = '".$source."'";
+				$resEmailInfo = $this->conn_messaging->query_sql($sqlEmailInfo);
+				if($resEmailInfo && mysql_num_rows($resEmailInfo)>0)
+				{
+					$updtEmailInfo = "UPDATE tbl_common_intimations SET sender_email = '".$from."', email_id = '".$emailid."', email_subject = '".$subject."', email_text = '".$email_text."' WHERE parent_id = '".$parent_id."' AND date(insert_date) = '".$now."' AND source = '".$source."'";
+					$resEmailInfo  = $this->conn_messaging->query_sql($updtEmailInfo);
+				}
+				else
+				{
+					$sqlEmailMsg = "INSERT INTO tbl_common_intimations SET 
+								parent_id     = '".$parent_id."',
+								sender_email  = '".$from."', 
+								email_id      = '".$emailid."',
+								email_subject = '".$subject."',
+								email_text    = '".$emailtext."',
+								source        = '".$source."'";
+					$resEmailMsg = $this->conn_messaging->query_sql($sqlEmailMsg);
+				}
+				$sqlEmailInfo_1 = "SELECT parent_id, email_id FROM tbl_common_intimations WHERE parent_id = '".$parent_id."' AND date(insert_date) = '".$next_day_1."' AND source = '".$source."'";
+				$resEmailInfo_1 = $this->conn_messaging->query_sql($sqlEmailInfo_1);
+				if($resEmailInfo_1 && mysql_num_rows($resEmailInfo_1)>0)
+				{
+					$updtEmailInfo_1 = "UPDATE tbl_common_intimations SET sender_email = '".$from."', email_id = '".$emailid."',
+					email_subject = '".$subject."',	email_text = '".$emailtext."' WHERE parent_id = '".$parent_id."' and date(insert_date) = '".$next_day_1."' AND source = '".$source."'";
+					$resUpdtInfo_1 = $this->conn_messaging->query_sql($updtEmailInfo_1);
+				}
+				else
+				{	
+					$sqlEmailMsg_1	= "INSERT INTO tbl_common_intimations SET 
+								parent_id     = '".$parent_id."',
+								sender_email  = '".$from."', 
+								email_id      = '".$emailid."',
+								email_subject = '".$subject."',
+								email_text    = '".$emailtext."',
+								source        = '".$source."',
+								insert_date   = '".$next_day_11."'";
+					$resEmailMsg_1 = $this->conn_messaging->query_sql($sqlEmailMsg_1);
+				}
+				$sqlEmailInfo_2 = "SELECT parent_id, email_id FROM tbl_common_intimations WHERE parent_id = '".$parent_id."' AND date(insert_date) = '".$next_day_2."' AND source = '".$source."'";
+				$resEmailInfo_2 = $this->conn_messaging->query_sql($sqlEmailInfo_2);
+				if($resEmailInfo_2 && mysql_num_rows($resEmailInfo_2)>0)
+				{
+					$updtSMSInfo_2 = "UPDATE tbl_common_intimations SET sender_email = '".$from."', email_id = '".$emailid."', email_subject = '".$subject."', email_text  = '".$emailtext."' WHERE parent_id = '".$parent_id."' and date(insert_date) = '".$next_day_2."' AND source = '".$source."'";
+					$resUpdtInfo_2 = $this->conn_messaging->query_sql($updtSMSInfo_2);
+				}
+				else
+				{
+					$sqlEmailMsg_2	= "INSERT INTO tbl_common_intimations SET 
+								parent_id     = '".$parent_id."',
+								sender_email  = '".$from."', 
+								email_id      = '".$emailid."',
+								email_subject = '".$subject."',
+								email_text    = '".$emailtext."',
+								source        = '".$source."',
+								insert_date   = '".$next_day_22."'";
+					$resEmailMsg_2 = $this->conn_messaging->query_sql($sqlEmailMsg_2);
+				}
+                return $resEmailMsg;
+            }
+			else
+			{
+                return 0;
+			}
+		}
+    }
+?>

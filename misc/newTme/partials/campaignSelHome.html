@@ -1,0 +1,66 @@
+<md-toolbar md-scroll-shrink style="background-color:#FFFFFF;border-bottom:1px solid #CCCCCC" ng-controller="catPreviewController">
+	<div class="md-toolbar-tools">
+		<md-button class="md-icon-button" aria-label="Settings" style="margin-left:20px;" ng-click="toggleLeft()">
+			<md-icon md-svg-icon="img/ic_menu_36px.svg" style="color:#000000;"></md-icon>
+        </md-button>
+		<h2>
+			<span>Campaign Selection</span>
+        </h2>
+		<span flex></span>
+<!--
+		<md-button aria-label="Open phone interactions menu" class="md-fab md-access" ng-if="tabNo == 3" ng-click="openCustomBudget($event)" style="top:30px; right:40px;">
+			<md-icon md-menu-origin md-svg-icon="img/ic_build_24px.svg"></md-icon>
+		</md-button>
+--> 
+		<md-button ng-if="tabNo != 3" aria-label="Open phone interactions menu" class="md-fab md-primary" ng-click="submitBudget(0)" style="top:30px; right:40px;">
+			<md-icon md-menu-origin md-svg-icon="img/ic_arrow_forward_24px.svg"></md-icon>
+		</md-button>
+		<md-button ng-if="tabNo == 3" aria-label="Open phone interactions menu" class="md-fab md-primary" ng-click="submitBudget(customBudgetVal,$event)" style="top:30px; right:40px;">
+			<md-icon md-menu-origin md-svg-icon="img/ic_arrow_forward_24px.svg"></md-icon>
+		</md-button>
+		<md-fab-speed-dial md-open="demo.isOpen" md-direction="up" ng-class="demo.selectedMode" style="position:fixed; bottom:15px; left:15px;">
+			<md-fab-trigger>
+				<md-button aria-label="menu" class="md-fab md-warn">
+					<md-icon md-svg-src="img/ic_palette_24px.svg"></md-icon>
+				</md-button>
+			</md-fab-trigger>
+			<md-fab-actions>
+				<div class="md-fab-action-item" layout="column">
+					<md-button aria-label="{{legendKey}}" ng-if="legendKey == 'A'" style="background:#FC0404; color:white" class="md-fab md-raised md-mini" ng-repeat="(legendKey,legends) in bestBudget.result.cat_desc" title="{{legends}}">{{legendKey}}</md-button>
+					<md-button aria-label="{{legendKey}}" ng-if="legendKey == 'L'" style="background:#047DFC; color:white" class="md-fab md-raised md-mini" ng-repeat="(legendKey,legends) in bestBudget.result.cat_desc" title="{{legends}}">{{legendKey}}</md-button>
+					<md-button aria-label="{{legendKey}}" ng-if="legendKey == 'NM'" style="background:#FC9804; color:white" class="md-fab md-raised md-mini" ng-repeat="(legendKey,legends) in bestBudget.result.cat_desc" title="{{legends}}">{{legendKey}}</md-button>
+					<md-button aria-label="{{legendKey}}" ng-if="legendKey == 'SZ'" style="background:#14700c; color:white" class="md-fab md-raised md-mini" ng-repeat="(legendKey,legends) in bestBudget.result.cat_desc" title="{{legends}}">{{legendKey}}</md-button>
+					<md-button aria-label="{{legendKey}}" ng-if="legendKey == 'VNM'" style="background:#FC04B1; color:white" class="md-fab md-raised md-mini" ng-repeat="(legendKey,legends) in bestBudget.result.cat_desc" title="{{legends}}">{{legendKey}}</md-button>
+					<md-button aria-label="{{legendKey}}" ng-if="legendKey == 'Z'" style="background:#0A1922; color:white" class="md-fab md-raised md-mini" ng-repeat="(legendKey,legends) in bestBudget.result.cat_desc" title="{{legends}}">{{legendKey}}</md-button>
+				</div>
+			</md-fab-actions>
+		</md-fab-speed-dial>
+	</div>
+</md-toolbar>
+<section class="mainSection" subtract="500">
+	<section class="mainContain">
+		<div>
+			<md-content class="md-padding">
+				<div layout="row" layout-align="space-around" class="md-headline">{{topMsg}}</div>
+				<md-tabs md-dynamic-height md-border-bottom>
+					<md-tab label="best option" tabdivbudget funcval="1"  ng-disabled="showFlexiPkg == 1"">
+						<div style="padding:20px" ng-include src='"partials/bestBudget.html"'></div>
+					</md-tab>
+					<md-tab label="fixed position" tabdivbudget funcval="2"  ng-disabled="showFlexiPkg == 1">
+						<div style="padding:20px" ng-include src='"partials/bestBudget.html"'></div>
+					</md-tab>
+					<md-tab label="package" tabdivbudget funcval="3" ng-disabled="showFlexiPkg == 0"  md-active="showFlexiPkg == 1">
+						<div class="md-padding" ng-include src='"partials/bestBudget.html"'></div>
+					</md-tab>
+					<md-tab label="renewal" tabdivbudget funcval="6" ng-disabled="showRenew || showFlexiPkg == 1">
+						<div style="padding:20px" ng-include src='"partials/bestBudget.html"'></div>
+					</md-tab>
+					<md-tab label="exclusive" tabdivbudget funcval="5" ng-disabled="showFlexiPkg == 1">
+						<div style="padding:20px" ng-include src='"partials/bestBudget.html"'></div>
+					</md-tab>
+				</md-tabs>
+			</md-content>
+		</div>
+	</section>
+</section>
+<div class="loaderMask" ng-if="showOptionLoader == 1"></div>

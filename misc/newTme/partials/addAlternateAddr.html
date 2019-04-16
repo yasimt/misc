@@ -1,0 +1,53 @@
+<md-dialog style="width:30%;">	
+	<md-dialog-content>
+		<md-input-container id="errorContainer">
+			<label><h4 class="AltAddLabel">Add Alternate Address</h4></label>
+		</md-input-container>
+		<md-input-container id="SaveContainer" class="SaveContainer hide">
+			<label><h4 class="SaveLabel" id="SaveContainerText"></h4></label>
+		</md-input-container> 
+		<md-input-container class="success">
+			<label><h3 class="bluecol"><b>Companyname</b></h3></label>
+			<input style=" color: #b0acac;font-weight: bold; font-size:20px;" type="text" id="bcompanyName" ng-model="companyname" ng-disabled="true"/>
+		</md-input-container>
+		<md-input-container class="success">
+			<label><h3 class="bluecol"><b>Building</b></h3></label>
+			<input type="text"  id="bldng" ng-model = "bldingselected"/>
+		</md-input-container>
+		<md-input-container class="success">
+			<label><h3 class="bluecol"><b>Street</b></h3></label>
+			<input streetsearch type="text" id="altStreet" ng-disabled="isDisabled" ng-model="selectedStreet" ng-change="changeStreet()"/>
+		</md-input-container>	
+		<md-input-container class="success">
+			<label><h3 class="bluecol"><b>LandMark: </b></h3></label>
+			<input type="text" id="altLandMark" ng-model = "lanmarkselected"/>
+		</md-input-container>
+		
+		<md-input-container class="md-block area_container success">
+				<select style="margin: 3px 0 0; overflow: hidden; padding: 9px 2px 7px; position: relative; text-transform: none; width: 100%;" name="arealist" ng-model="area_selected" ng-change="areaSelected()">	
+				  <option value="" ng-model="areaDefault">{{areaDefault}}</option>	
+				  <option ng-repeat="area in areaList" value="{{area.mainarea}}" style="background:#FFF;" >
+					{{area.mainarea}}
+				  </option>
+				</select>
+		</md-input-container>
+		<md-input-container class="md-block area_container success">
+			<select style="margin: 3px 0 0; overflow: hidden; padding: 9px 2px 7px; position: relative; text-transform: none; width: 100%;" name="pincodelist" ng-model="pincodeSelected" ng-disabled="pincodeCount==1" ng-change="PincodeSelected()">	
+				  <option value="" ng-model="pincodeDefault" style="background:#FFF;">{{pincodeDefault}}</option>	
+				  <option ng-repeat="pincode in pincodeList" value="{{pincode}}" style="background:#FFF;" >
+					{{pincode}}
+				  </option>
+			</select>
+		</md-input-container>
+		<md-input-container id="errorContainer">
+			<label><h4 class="addressError hide" id="ErrorAddLabel"></h4></label>
+		</md-input-container> 
+		<md-button class="md-raised md-warn success margin_left_27" ng-click="addAlternateAddress()" style="background-color:#0a86ea">
+			<b class="whiteColor">Submit</b>
+		</md-button>
+		
+		<md-button class="md-raised md-warn success" ng-click="ClosepopUpAtlAdd()" style="background-color:#0a86ea">
+			<b class="whiteColor">Cancel</b>
+		</md-button>
+	</md-dialog-content>
+</md-dialog>

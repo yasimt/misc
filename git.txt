@@ -1,0 +1,157 @@
+
+
+http://192.168.12.250:900/users/sign_in
+
+
+http://192.168.12.64/taiga_project_list/
+
+
+git clone http://192.168.12.250:900/root/GENIO_LITE.git
+git clone http://192.168.12.250:900/root/mongo_node.git
+
+imteyaz.raja@justdial.com
+imteyazraja
+
+sumesh.dubey@justdial.com
+5Ume5hdu@b
+
+git checkout filename - to get deleted file
+
+git clone http://192.168.12.250:900/pix/BLR_NGINX_RULES.git
+
+git clone http://192.168.12.250:900/root/MUM_NGINX_RULES.git - imteyaz.raja@justdial.com / imteyazraja
+
+git clone http://imteyaz.raja@192.168.12.250:900/root/JDBOX.git
+
+git clone http://imteyaz.raja:imteyazraja@192.168.12.250:900/root/JDBOX.git
+
+
+
+
+git merge --strategy-option ours
+
+
+git commit -m "TG-S9-P95 converting mktggetcondata & fetchlivedata to node" common/category.class.js
+
+
+git checkout master
+git reset --hard origin/master
+git pull
+
+git status
+git add
+git commit
+git pull
+
+no conflict
+git push
+
+if conflict
+
+git pull
+
+
+
+
+git remote -v
+
+
+
+
+
+
+[imteyazraja@86-26-bangalore htdocs]$ cd project01
+[imteyazraja@86-26-bangalore project01]$ ls
+BLR_NGINX_RULES  GENIO_LITE
+[imteyazraja@86-26-bangalore project01]$ cd BLR_NGINX_RULES
+[imteyazraja@86-26-bangalore BLR_NGINX_RULES]$ git status
+# On branch master
+# Changes not staged for commit:
+#   (use "git add <file>..." to update what will be committed)
+#   (use "git checkout -- <file>..." to discard changes in working directory)
+#
+#	modified:   imteyazraja.d/project01.imteyazraja.rules
+#
+no changes added to commit (use "git add" and/or "git commit -a")
+[imteyazraja@86-26-bangalore BLR_NGINX_RULES]$ git pull
+Username for 'http://172.29.64.48:900': sumesh.dubey@justdial.com
+Password for 'http://sumesh.dubey@justdial.com@172.29.64.48:900': 
+Already up-to-date.
+[imteyazraja@86-26-bangalore BLR_NGINX_RULES]$ cd ../
+[imteyazraja@86-26-bangalore project01]$ git status
+fatal: Not a git repository (or any parent up to mount point /home)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+[imteyazraja@86-26-bangalore project01]$ cd GENIO_LITE/
+[imteyazraja@86-26-bangalore GENIO_LITE]$ git status
+# On branch master
+nothing to commit, working directory clean
+[imteyazraja@86-26-bangalore GENIO_LITE]$ 
+[imteyazraja@86-26-bangalore GENIO_LITE]$ cd ../
+[imteyazraja@86-26-bangalore project01]$ ls
+BLR_NGINX_RULES  GENIO_LITE
+[imteyazraja@86-26-bangalore project01]$ cd BLR_NGINX_RULES/
+[imteyazraja@86-26-bangalore BLR_NGINX_RULES]$ cd imteyazraja.d/
+[imteyazraja@86-26-bangalore imteyazraja.d]$ ls
+project01.imteyazraja.rules  project02.imteyazraja.rules  project03.imteyazraja.rules
+[imteyazraja@86-26-bangalore imteyazraja.d]$ vim project01.imteyazraja.rules
+[imteyazraja@86-26-bangalore imteyazraja.d]$ cd ../
+[imteyazraja@86-26-bangalore BLR_NGINX_RULES]$ git status
+# On branch master
+# Changes not staged for commit:
+#   (use "git add <file>..." to update what will be committed)
+#   (use "git checkout -- <file>..." to discard changes in working directory)
+#
+#	modified:   imteyazraja.d/project01.imteyazraja.rules
+#
+no changes added to commit (use "git add" and/or "git commit -a")
+[imteyazraja@86-26-bangalore BLR_NGINX_RULES]$ git add project01.imteyazraja.rules
+fatal: pathspec 'project01.imteyazraja.rules' did not match any files
+[imteyazraja@86-26-bangalore BLR_NGINX_RULES]$ git add imteyazraja.d/project01.imteyazraja.rules
+[imteyazraja@86-26-bangalore BLR_NGINX_RULES]$ git commit -m "first commit" imteyazraja.d/project01.imteyazraja.rules
+[master 3b3c53e] first commit
+ Committer: imteyazraja <imteyazraja@86-26-bangalore.justdial.com>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 39 insertions(+)
+[imteyazraja@86-26-bangalore BLR_NGINX_RULES]$ git push
+warning: push.default is unset; its implicit value is changing in
+Git 2.0 from 'matching' to 'simple'. To squelch this message
+and maintain the current behavior after the default changes, use:
+
+  git config --global push.default matching
+
+To squelch this message and adopt the new behavior now, use:
+
+  git config --global push.default simple
+
+See 'git help config' and search for 'push.default' for further information.
+(the 'simple' mode was introduced in Git 1.7.11. Use the similar mode
+'current' instead of 'simple' if you sometimes use older versions of Git)
+
+Username for 'http://172.29.64.48:900': sumesh.dubey@justdial.com
+Password for 'http://sumesh.dubey@justdial.com@172.29.64.48:900': 
+Counting objects: 7, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (4/4), 664 bytes | 0 bytes/s, done.
+Total 4 (delta 2), reused 0 (delta 0)
+To http://172.29.64.48:900/pix/BLR_NGINX_RULES.git
+   4aa10fb..3b3c53e  master -> master
+[imteyazraja@86-26-bangalore BLR_NGINX_RULES]$ cd ../GENIO_LITE/
+[imteyazraja@86-26-bangalore GENIO_LITE]$ cd genio_
+-bash: cd: genio_: No such file or directory
+[imteyazraja@86-26-bangalore GENIO_LITE]$ cd genio_lite/
+[imteyazraja@86-26-bangalore genio_lite]$ ls
+dev  freelistdemo.php  index.html  output  package.json  setRedirect.php  Utility  webpack.config.js
+[imteyazraja@86-26-bangalore genio_lite]$ npm install
+[imteyazraja@86-26-bangalore genio_lite]$ npm run dev 
+

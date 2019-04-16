@@ -1,0 +1,154 @@
+<section class="mid_sec_learn" style="display:block;background-color:#eef1f8;overflow-x:hidden;">
+		<div class="mid-otr mid-otr-rel" style="height:500px;padding: 30px 25px 70px;">
+		<div style="font-size:40px;">TME Call Logs
+		</div>
+			    
+		<div class="date_timeDiv">
+			<span>From Date: <input type="text" id="from_date" ng-model="fromdate"></span>
+			<span>To Date: <input type="text" id="to_date" ng-model="todate"></span>&nbsp;
+<!--			<button type="button" class="btn btn-primary sbtbtn" ng-click="fetchCallData();">Submit</button>-->
+			<button type="button" class="btn btn-primary sbtbtn" ng-click="tmeCallData($event);">Submit</button>
+		</div>
+		
+		<div class="loaderDiv" ng-show="showLoader==1">
+			<img src="img/loader.svg" />
+		</div>
+		
+		<!--<div class="wrpfl p0 mt20 mb20 srchbar" style="height:43px;width:76%;">
+			<div class="slct">
+				<div class="wrpfl slctbx">
+					<div layout="row" class="form-control" layout-align="space-between center"style="height:44px;background-color:#eef1f8;padding:0px 0px;">
+					  <select ng-change="filterchange()" ng-model="searchmediatype.searchmediavalue"  placeholder="Search All" style="width:100%;padding:10px;color:black;font-size:15px;background-color:#eef1f8;" >
+						  <option style="font-size:15px;" value="all">Select All</option>
+						  <option style="font-size:15px;"value="audio">Audio</option>
+						  <option style="font-size:15px;" value="video">Video</option>
+						  <option style="font-size:15px;" value="document">Document</option>
+					</select>
+				  </div>
+				</div>
+			</div>
+			<div class="wrpfl p0 srchinpt" style="height:43px;width:97%;">
+				<input id="textsearch" style="height: 25px;" type="text" class="wrpfl inpt" placeholder="Search for audio, video, documents e.g. JD TV Ad (Main) - All in One App" ng-model="search_title.search" ng-disabled="alldata_tmegenio.errorcode==1" searchlist/>
+				<div  class=" btn-srch" style="width:40px;height:43px;position:absolute;left:103%;top:-41%;border-left:0px solid #c1ced7;cursor:pointer;z-index:2;"><img ng-click="upload_module_show(1,searchmediatype.searchmediavalue,search_title.search)" src="img/search.svg" height="40px" width="39px" style="padding:10px;" ></div>
+			</div>
+			
+		</div> -->
+		<p ng-if="fetchData.error.code == 2" style="font-weight:bold;color:#ddd;font-size:70px;text-align:center;">No Call Logs To Show</p>
+		<div class="tblotr">
+			<div class="wrpfl p0 mb10 tablresp">
+				<table class="wrpfl dtatbl" cellpadding="0" cellspacing="0" ng-show="fetchData.error.code == 0 && showData == 1">
+					<thead>
+						<tr>
+							<th>Login Duration</th>
+							<th>Talk Duration</th>
+							<th>Talk Duration Achieved %</th>
+							<th>Break Duration</th>
+							<th>Block Duration</th>
+							<th>Wrapup Duration</th>
+							<th>Idle Duration</th>
+							<th>Average Time Per Call</th>
+							<th>Total Calls</th>
+							<th>Outbound Calls</th>
+							<th>Inbound Calls</th>
+							<th>Manual Calls</th>
+							<th>Talk Time Per Call</th>
+							<th>Wrapup Duration per Call</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>{{avg_login_duration*60 *60 | secondsToDateTime | date:'HH:mm:ss'}}</td>
+							<td>{{trunk_duration / total_empcnt | secondsToDateTime | date:'HH:mm:ss'}}</td>
+							<td>{{(trunk_duration / total_empcnt / 10800) * 100 | ceil}}%</td>
+							<td>{{break_duration / total_empcnt | secondsToDateTime | date:'HH:mm:ss'}}</td>
+							<td>{{block_duration / total_empcnt | secondsToDateTime | date:'HH:mm:ss'}}</td>
+							<td>{{wrapup_duration/total_empcnt|secondsToDateTime | date:'HH:mm:ss'}}</td>
+							<td>{{final_idle_duration | secondsToDateTime | date:'HH:mm:ss'}}</td>
+							<td>{{((total_talk_duration_count/total_call_per_tme_count) + (wrapup_duration/call_count)) | secondsToDateTime | date:'HH:mm:ss'}}</td>
+							<td>{{(total_call_per_tme_count / total_empcnt) | ceil}}</td>
+							<td>{{(dialer_calls / total_empcnt) | ceil}}</td>
+							<td>{{(inbound_calls / total_empcnt) | ceil}}</td>
+							<td>{{(manual_calls / total_empcnt) | ceil}}</td>
+							<td>{{(total_talk_duration_count/total_call_per_tme_count) | secondsToDateTime | date:'HH:mm:ss'}}</td>
+							<td>{{wrapup_duration / call_count |secondsToDateTime | date:'HH:mm:ss'}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		
+		<div class="tblotr" style="margin-top:20px;">
+			<div class="wrpfl p0 mb10 tablresp dt_srch">
+
+<!--				<p ng-if="fetchData.error.code == 2" style="font-weight:bold;color:#ddd;font-size:70px;text-align:center;">No Call Logs To Show</p>-->
+
+				<table id="empDataTable" class="wrpfl dtatbl" cellpadding="0" cellspacing="0" ng-show="showData == 1 && fetchData.error.code == 0">
+					<thead>
+						<tr>
+
+<!--            <th class="lfthd" width="10%" style="text-align:center"><a class="active" style="text-transform:capitalize;" >{{empInfoName | capitalize}}</a></th>-->
+			
+							<th style="text-align:center">#</th>
+							<th style="text-align:center">Start Time</th>
+							<th style="text-align:center">End Time</th>
+							<th style="text-align:center">Dialed Number</th>
+							<th style="text-align:center">Call Type</th>
+							<th style="text-align:center">Disposition</th>
+							<th style="text-align:center">Call Duration</th>
+							<th style="text-align:center">Parent ID</th>
+							<th style="text-align:center">Talk Time</th>
+							<th style="text-align:center">Recording</th>
+					</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="all_data in alldata_call_logs" on-finish-render="ngRepeatFinished">
+						  <td>{{$index + 1}}</td>
+						  <td>{{all_data.disp_call_start_time}}</td>
+						  <td>{{all_data.disp_call_end_time}}</td>
+						  <td>{{all_data.call_cli}}</td>
+						  <td>{{all_data.call_type_name}}</td>
+						  <td>{{all_data.call_disposition}}</td>
+						  <td>{{all_data.call_duration| secondsToDateTime | date:'HH:mm:ss'}}</td>
+						  <td ng-if="all_data.contract_id == 0">NA</td>
+						  <td ng-if="all_data.contract_id != 0">{{all_data.contract_id}}</td>
+						  <td>{{all_data.trunk_duration| secondsToDateTime | date:'HH:mm:ss'}}</td>
+<!--
+						  <td align="center" ng-if="loginCity == ''">
+							  <i class="genio_spr audio_i" ng-click="showmediapopup($index,all_data.call_recording_path,all_data)" style="cursor:pointer">
+							  </i>
+						  </td>
+						  <td align="center" ng-if="loginCity != ''">
+							  NA
+						  </td>
+-->
+                                                <td align="center">NA</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div ng-if="showmediadivaudio==1"class="add_new_overlay" style="display:block;pointer-events:auto !important;z-index:1000"></div>
+		<div id="media_showdiv" ng-if="showmediadivaudio==1"style="display:block;position:fixed;top:20%;left:30%;width:540px;z-index:1001;background-color:white;border: 1px 1px 1px 1px #ccc;box-sizing: border-box;border-radius: 4px;">
+		<div id="media_showdiv_header" class="header_div" style="height:35px;border-bottom:1px solid #ccc;">
+			<span class="close" ng-click="showpopupdiv_close()" style="left:93%;position: absolute;top: 0;cursor:pointer;"> <a  style="font-size:40px;color:#C0C0C0;">&times;</a></span>
+			<div style="margin:20px;">
+				<p style="font-size:22px;font-weight:500;white-space: nowrap;overflow: hidden;text-overflow: ellipsis; width: 21em;">Audio Player</p>
+			</div>
+		</div>
+<!--
+		<div id="media_show_audio" style="height:321px;border-bottom:1px solid #ccc">
+			<audio width="500px" height="300px" style="margin-top:65px;margin-left:100px;" controls>
+				<source src="{{trustSrc(alldata_tmegenio.data[index].media_path)}}" >
+				Your browser does not support the video tag.
+			</audio> 
+		</div>
+-->			
+		<div id="media_show_audio" style="height:165px;border-bottom:1px solid #ccc">
+			<iframe style="position:absolute;top:80px;margin-top:5px;margin-left:50px;z-index: 3000;" width="550px" height="150px" scrolling="auto" frameborder="0" src="{{audio_show}}" >
+			  <p>Your browser does not support iframes.</p>
+			</iframe>
+		</div>
+		</div>
+	</div>
+    
+</section>

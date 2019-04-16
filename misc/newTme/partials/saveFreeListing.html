@@ -1,0 +1,119 @@
+<md-dialog aria-label="Combo Plan Pop up">	
+ 	<md-dialog-content" class="map_content">
+		<div class="sendVCPOPup" style="color:#424242 !important;width:365px;display:inline-block; background:#FFF; position:relative; left:0%; border-radius:3px; -webkit-border-radius:3px; -moz-border-radius:3px;" ng-if="showVal	==	1"><!-- ng-if="showVal	==	1" -->
+			<a  ng-click="closesaveList()" style="background:url('img/close.gif') no-repeat;cursor:pointer;float:right;height:20px; padding: 6px; background-position:0 0; width: 10px; height: 10px; position: absolute; right: 11px; top: 14px; opacity:0.5;"></a>
+			<span  style="width:100%;float:left;padding:10px 15px;border-bottom:1px solid #ccc;box-sizing:border-box;font-size:18px;color:#424242;font-size: 18px;">Mobile & Email verification</span>
+			<div  style="font-size: 17px;width:100%; float:left; padding:15px; box-sizing:border-box; border-bottom:1px solid #ccc; font-size:14px;">
+				<span style="display:table;line-height:20px;font-size:14px;">You just need to verify your listing now and it will be LIVE on Just Dial.com!</span>
+				<span style="display:table;line-height:20px;font-size:14px;">( The verification Code will be sent on the Mobile number & email id)</span>
+			</div>
+			<div class="txtright" style="width:100%; float:left; padding:10px 15px; box-sizing:border-box;">
+				<a class="pred" ng-click="sendVerificationCode()" style="padding:7px 7px;width:auto;">Click to get verification code</a>
+			</div>
+		</div>
+
+		<div  style="color:#424242 !important;width:405px;display:inline-block; background:#FFF; position:relative; left:0%; border-radius:3px; -webkit-border-radius:3px; -moz-border-radius:3px;" ng-if="showVal	==	2">
+				<div  style="display:table; height:100%; width:100%; position:relative;" ng-if="showVal	==	2">
+					<div  style="display:table-cell; width:385px; height:100%; vertical-align:middle;">
+						<div  style="width:400px;display:inline-block; background:#FFF; position:relative; left:0%; border-radius:3px; -webkit-border-radius:3px; -moz-border-radius:3px;">
+							<a class="clse-spite" ng-click="closesaveList()" style="background:url('img/close.gif') no-repeat;cursor:pointer;float:right;height:20px; padding: 15px;margin: 1px -16px 69px;"></a>
+
+							<span style="width:100%; float:left; padding:10px 15px; border-bottom:1px solid #ccc; box-sizing:border-box; font-size:18px;color:#424242;">Verify Code</span>
+							<div  style=" width:100%; float:left; padding:15px; box-sizing:border-box; border-bottom:1px solid #ccc; font-size:14px;">
+								<span  style="display:table;line-height:20px;">
+								You will receive an SMS shortly on "<b style="color:#4E4E4E;">{{mobileForVerification}}</b>" 
+								Please enter the verification code received
+								<form>
+								<label style="float:left;width:90%;font-weight:bold;margin:12px 0 0 0 ;">Verification Code</label>
+								<input type="text" ng-model="enteredVerificationCode.code" placeholder="Enter verification code sent on mobile" style="height:35px;width:370px;" />
+								<a  ng-click="verifyVerificationCode()" style="padding:6px 25px; font-size:14px;text-align:center; float:right; background:#1273c0; border:1px solid #ccc; text-decoration:none; color:#fff;margin-top:6px">Verify</a>
+								</form>
+								</span>
+							</div>
+								<div  style=" width:100%; float:left; padding:15px; box-sizing:border-box; border-bottom:1px solid #ccc; font-size:14px;">Note: Not received verification code even after one minute? Give a missed call on 9152961940 from "<b style="color:#4E4E4E;">{{mobileForVerification}}</b>" and click verify </div>
+						</div>
+					</div>
+				</div>
+
+		</div>
+		
+		<div class="sendVCPOPup_show" style="color:#424242 !important;width:365px;display:inline-block; background:#FFF; position:relative; left:0%; border-radius:3px; -webkit-border-radius:3px; -moz-border-radius:3px;" ng-if="showVal	==	3">
+			<a  ng-click="closesaveList()" style="background:url('img/close.gif') no-repeat;cursor:pointer;float:right;height:20px; padding: 10px; width: 10px; height: 10px; position: absolute; right: 11px; top: 14px; opacity:0.5;"></a>
+			<span style="width:100%;float:left;padding:10px 15px;border-bottom:1px solid #ccc;box-sizing:border-box;font-size:18px;color:#424242;font-size: 18px;">Business Listing Summary</span>
+			<div  style="font-size: 17px;width:100%; float:left; padding:15px; box-sizing:border-box; border-bottom:1px solid #ccc; font-size:14px;">
+				
+				<span style="display:table;line-height:23px;font-size:14px;">The requested changes have been submitted, same will go live after 24-48 hrs.</span>
+				<span style="display:table;line-height:23px;font-size:14px;">Do you want to enter narration :</span>
+				<span><textarea style="font-size: 14px !important; width: 374px !important; height: 57px !important; margin-top: 5px !important; margin-bottom: 5px !important; resize: none !important;border: 1px solid gray !important;" id="narration" name="narration" ng-model="enteredVerificationCode.followUpNarration" placeholder="Enter Narration" cols="45" rows="5"></textarea></span>
+				<span style="display:table;line-height:23px;font-size:14px;">And/Or tag this information as</span>
+				<div style="display:table;line-height:23px;font-size:14px;">
+					<md-button class="md-warn md-raised left" ng-click="submitFreeListingContract('hot')">Hot</md-button>
+					<md-button class="md-raised left" ng-click="submitFreeListingContract('warm')" style="background:none repeat scroll 0 0 #f8d9d1;">Warm</md-button>
+					<md-button class="md-raised md-primary left" ng-click="submitFreeListingContract('cold')">Cold</md-button>
+				</div>
+				<div class="intxt stlin stlin2">
+					<table>
+						<tr>
+							<td>
+								<span style="width:150px;float:left;"><md-datepicker ng-keydown="preventDefaultKeydown($event)" ng-model="enteredVerificationCode.followUpDate"  md-placeholder="Select date"></md-datepicker></span>
+							</td>
+							<td>
+								<md-button class="md-primary md-raised" ng-click="submitFreeListingContract('follow up')" style="float:right; margin-left:60px">Follow Up</md-button>
+							</td>
+						</tr>
+					</table>
+				</div>
+
+			</div>
+		</div> 
+		<div class="show_vc_alerts_back" style="background: none repeat scroll 0 0 grey;height: 100%;display:none; padding: 10px;position: absolute; top: 0;width: 100%;z-index: 100;opacity:0.7;">
+		</div>
+		
+		<div  ng-if="exitFromPage == 'DEMOPAGE'" id="show_vc_alerts" style="display:none;z-index: 100; background: none repeat scroll 0% 0% white; padding: 10px; position: fixed;  top: 22px; margin-left: 10px; height: auto%;width:95%;border-radius:4px;">
+			
+			<div  style="display:table-cell; width:400px; height:100%; vertical-align:middle;">
+				<div style="width:300px;display:inline-block; background:#FFF; position:relative; left:0%; border-radius:3px; -webkit-border-radius:3px; -moz-border-radius:3px;">
+				
+					<div style="width:100%; float:left; padding:15px; box-sizing:border-box; border-bottom:1px solid #ccc; font-size:14px;">
+						<span id='show_vc_alerts_msg' style="color:#4E4E4E;display:block"></span>
+					</div>
+					
+					<div  style="width:100%; float:left; padding:10px 15px; box-sizing:border-box;">
+						<a ng-click="callNextVcDiv(enteredVerificationCode.errorCode)"   style="padding:6px 25px; font-size:14px;text-align:center; float:right; background:#1273c0; border:1px solid #ccc; text-decoration:none; color:#fff;">OK</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div ng-if="exitFromPage == 'BFORMPAGE'" id="show_vc_alerts" style="display:none;z-index: 100; background: none repeat scroll 0% 0% white; padding: 10px; position: fixed; top: 22px;margin-left: 10px; height:auto;width:95%;border-radius:4px;">
+			<div style="display:table-cell; width:400px; height:100%; vertical-align:middle;">
+				<div  style="background:#FFF; position:relative; left:0%; border-radius:3px; -webkit-border-radius:3px; -moz-border-radius:3px;">
+
+					<div style="width:100%; float:left; padding:15px; box-sizing:border-box; border-bottom:1px solid #ccc; font-size:14px;">
+						<span  id='show_vc_alerts_msg' style="display:block"></span>
+					</div>
+					
+					<div style="width:100%; float:left; padding:10px 15px; box-sizing:border-box;">
+						<a ng-click="callNextVcDiv(enteredVerificationCode.errorCode)"   style="padding:6px 25px; font-size:14px;text-align:center; float:right; background:#1273c0; border:1px solid #ccc; text-decoration:none; color:#fff;">OK</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="sendVCPOPup" style="color:#424242 !important;width:365px;display:inline-block; background:#FFF; position:relative; left:0%; border-radius:3px; -webkit-border-radius:3px; -moz-border-radius:3px;" ng-if="showVal	==	5">
+			<span  style="width:100%;float:left;padding:10px 15px;border-bottom:1px solid #ccc;box-sizing:border-box;font-size:18px;color:#424242;font-size: 18px;">Save As Free Listing</span>
+			<div  style="font-size: 17px;width:100%; float:left; padding:15px; box-sizing:border-box; border-bottom:1px solid #ccc; font-size:14px;">
+				<span style="display:table;line-height:20px;font-size:14px;">Saving Data. Please Wait...</span>
+				
+			</div>
+		</div>
+		<div class="sendVCPOPup" style="color:#424242 !important;width:365px;display:inline-block; background:#FFF; position:relative; left:0%; border-radius:3px; -webkit-border-radius:3px; -moz-border-radius:3px;" ng-if="showVal	==	6">
+			<span  style="width:100%;float:left;padding:10px 15px;border-bottom:1px solid #ccc;box-sizing:border-box;font-size:18px;color:#424242;font-size: 18px;">Save Free Listing</span>
+			<div  style="font-size: 17px;width:100%; float:left; padding:15px; box-sizing:border-box; border-bottom:1px solid #ccc; font-size:14px;">
+				<span style="display:table;line-height:20px;font-size:14px;">{}</span>
+				
+			</div>
+		</div>
+	</md-dialog-content>
+</md-dialog>
+
+

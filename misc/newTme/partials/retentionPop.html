@@ -1,0 +1,19 @@
+<form ng-submit="submitComm(retentionData.data[currIndexPop].contractid)" class="colorWhite" ng-if="whichPop==5">
+	<h3 class="colorWhite">Submit Your Comment</h3>
+	<div>{{tmeCommentMsg}}</div>
+	<div class="commentBox">
+		<textarea class="commentText" ng-model="sendDataComment" rows="8" cols="41"></textarea>
+	</div>
+	<div class="butBoxSubComm">
+		<input type="submit" class="butSubRetComm buttonLink button" value="{{tmeCommStat}} Comment" />
+	</div>
+</form>
+<div ng-if="whichPop==6">
+	<div class="catContain">
+		<h3 class="colorWhite">Set TME Status for {{retentionData.data[currIndexPop].companyName|capitalize}}</h3>
+		<div class="catsShow pointer" ng-click="retainContract($event,retentionData.data[currIndexPop].contractid,1,$index)"><h4 class="colorWhite">Activate</h4></div>
+		<div class="catsShow pointer" ng-click="retainContract($event,retentionData.data[currIndexPop].contractid,2,$index)"><h4 class="colorWhite">Not Interested</h4></div>
+		<div class="catsShow pointer" ng-click="retainContract($event,retentionData.data[currIndexPop].contractid,3,$index)"><h4 class="colorWhite">Follow Up</h4></div>
+		<div class="catsShow pointer" ng-click="retainContract($event,retentionData.data[currIndexPop].contractid,4,$index)"><h4 class="colorWhite">Not Contactable</h4></div>
+	</div>
+</div>

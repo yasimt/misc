@@ -1,0 +1,43 @@
+<md-toolbar md-scroll-shrink style="background-color:#FFFFFF;border-bottom:1px solid #CCCCCC" ng-init="onLoadCall()" ng-controller="catPreviewController">
+	<div class="md-toolbar-tools">
+		<md-button class="md-icon-button" aria-label="Settings" style="margin-left:20px;" ng-click="toggleLeft()">
+			<md-icon md-svg-icon="img/ic_menu_36px.svg" style="color:#000000;"></md-icon>
+		</md-button>
+		<h2>
+			<span>Own Website & Mobile site</span>
+		</h2>
+		<span flex></span>
+	</div>
+</md-toolbar>
+
+<section class="mainContain_innr" subtract="500" ng-controller="smsselectionController" >
+	<section class="mainContain">
+		
+		<div class="cntre" style="font-family: 'Roboto', sans-serif;">
+			<span class="tble-title">Bulk SMS Solution </span>
+			<div class="tbl-ottr" style="background: white none repeat scroll 0 0;">
+				<span class="tblt">Would you like to get Bulk SMS Solution for your Own Website & Mobile site?</span>			
+				<div class="optn-div">
+					<md-radio-group ng-model="sms_radio">
+						<md-radio-button  class="md-primary" value="no">I am not interested in the offer</md-radio-button> 
+						<md-radio-button  class="md-primary" value="yes">Let JD Omni provide me with Bulk SMS Solution  for my store</md-radio-button> 
+					</md-radio-group>	
+				</div>
+				<div class="leftbr">
+				<a ng-click="sms_proceed($event)" class="prche">Proceed</a>
+				</div>
+			</div>
+		</div>
+	
+	</section>
+</section>
+
+
+<div class="ftr_wrpper" style="position:relative">
+	<div class="jdrrcontainer">
+		<div class="jdrr_footer">
+				Copyright 2008-2016 Justdial.com. All Rights Reserved. <a href="#">Privacy</a> I <a href="#">Terms</a>
+		</div><!--end of jdrr_footer-->
+	</div>
+</div>
+	

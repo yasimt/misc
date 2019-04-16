@@ -1,0 +1,20 @@
+/etc/apache2/sites-available/000-default.conf
+
+DocumentRoot /var/www/html/
+        <Directory /var/www/html/>
+	    Options Indexes FollowSymLinks MultiViews
+    	    AllowOverride All
+    	    Order allow,deny
+    	    allow from all
+	</Directory>
+	
+	sudo /etc/init.d/apache2 restart
+	
+	
+	sudo service apache2 restart
+	
+	
+	
+	sudo apt-get install php-curl
+	
+	sudo apt-get install lamp-server^

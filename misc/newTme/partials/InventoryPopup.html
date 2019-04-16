@@ -1,0 +1,32 @@
+<div class="center width100 marTop20px inventory_information" ng-if="whichPop == 11 || whichPop==12">
+	<h3>Inventory Data For <span ng-if="compNamePop !='' && compNamePop != null" class="blue">{{compNamePop|capitalize}}</span></h3>
+	<div> 
+			<div ng-repeat='(i,val) in inventory_info' class="Content_invTab">
+				<table class="tb_content" border>
+					<tr><th>Cat Id</th><th ng-repeat='(i,val) in val.Category'>{{i}}</th></tr>
+					<tr><th>Categories</th><th ng-repeat="(i,val) in val.Category">{{val.cat_name}}</th></tr>
+					<tr><th>Pincode</th><th ng-repeat="(i,val) in val.Category"><div class="inv_pos">Inv %</div><div class="inv_pos1">Position</div></th></tr>
+				</table>
+				<div ng-repeat='Pin in pincodes'>
+							<table class="pin_list">
+								<tr>
+									<th>{{Pin}}</th>
+								</tr>
+							</table>
+							<table border style="color:black;border-collapse:collapse;">
+								<tr><td ng-repeat="(i1,val1) in val.Category" style="width:146px;padding: 0px 10px;">
+										<table ng-repeat="(i2,val2) in val1" ng-if="i2 !='cat_name'" >
+												<td style="padding: 0px 33px 0px 0px;" class="left" ng-if="i2	==	Pin"><b>{{formatNumber(val2.Inventory)}}</b></td>
+												<td style="float: left;padding: 0px 24px;border-left: 1px solid;" ng-if="i2	==	Pin"><b>{{val2.poistionflag}}</b></td>
+										</table>
+									</td>
+								</tr>
+							</table>
+				</div>
+			</div>
+	</div>
+</div>
+
+
+
+

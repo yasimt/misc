@@ -1,0 +1,12 @@
+componentWillMount - before render - pre loaded data - onload
+componenetDidMount - after render - after load - background - user logged in or not
+componentWillReceiveProps - compenent communication - passing data from header to all component
+componentWillUnmount - 
+
+<div className={"btn-group pull-right " + (this.props.showBulkActions ? 'show' : 'hidden')}>
+
+
+
+    componentWillMount — please use componentDidMount instead
+    componentWillUpdate — please use componentDidUpdate instead
+    componentWillReceiveProps — a new function, static getDerivedStateFromProps is introduced

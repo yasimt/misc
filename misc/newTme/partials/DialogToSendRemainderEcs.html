@@ -1,0 +1,31 @@
+<md-dialog aria-label="ecsdetailspopup">
+	<md-dialog-content>
+		<div class="innerECSCont">
+					<div class="changedValCont" ng-if="ecs_contract_details.contractid != '' ">
+						
+							<div>
+								<p> This contract is allocated to {{ecs_contract_details.tmename}} ({{ecs_contract_details.tmecode}}).  So you are not allowed to perform any action in it. </p>
+								<span style="color:#337FC3;text-decoration: underline;cursor:pointer;" ng-click= "send_ecs_lead_remainder(ecs_contract_details)"> <p>Click Here If You Want To Send A Reminder To {{ecs_contract_details.tmename}} ({{ecs_contract_details.tmecode}}) </p></span>
+								<p>  Or Ask Your Manager To Re-Allocate This Contract To You. </p>
+							</div>	
+								
+					</div>
+						
+					<div class="butContainerECS" style="float:right" >
+						<div class="butContECS butContECSIgnore"> <md-button class="md-raised md-primary" ng-click="Retention_dialog_hide()">OKAY !!</md-button></div>
+					</div>
+
+						
+		</div>
+				
+		
+	</md-dialog-content>	
+</md-dialog>
+	
+	
+	
+	
+	
+	
+	
+	

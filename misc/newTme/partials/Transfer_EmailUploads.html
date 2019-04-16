@@ -1,0 +1,21 @@
+<md-dialog aria-label="ecsdetailspopup">
+	<md-dialog-content>
+		<div class="innerECSCont">
+			<div ng-if = "total_files > 0">
+				<p style="color: #35358c;font-size: 21px;font-weight: bold;"> No.Of Files Uploaded For This Contract : {{total_files}} </p>
+				<div class="changedValCont" ng-repeat="contract in uploaded_details track by $index">
+					<p ng-click="open_uploadedFile(contract.file)" style="cursor:pointer;color:#ea8400;font-weight:bold;"> {{contract.display_file}} </p>
+				</div>
+			</div>
+			
+			<div  ng-if="total_files <= 0">
+				<p> Sorry !! No Files Found. </p>
+			</div>			
+			
+			<div class="butContainerECS" style="float:right" >
+				<div class="butContECS butContECSIgnore"> <md-button class="md-raised md-primary" ng-click="transfer_mdDialog_hide()">OKAY !!</md-button></div>
+			</div>
+		</div>
+		
+	</md-dialog-content>	
+</md-dialog>

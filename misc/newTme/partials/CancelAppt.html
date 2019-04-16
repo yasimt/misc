@@ -1,0 +1,24 @@
+<md-dialog style="width:32%;background-color:#FFFFFF;">
+	<div ng-if="showcontentone != 2 && showcontentone != 3 && showcontentone != 4">
+		<md-dialog-content style="overflow: hidden ! important;">		
+			<div class="md-toolbar-tools" >
+				<h2>
+					<div style="font-size: 19px;margin-top: 45px;margin-left: 10px;"><b>Company name :<span style="color: #1e84e3;font-size: 21px;">{{companyname}} | ({{cancel_parid}})</span></b></div>
+				</h2>
+			</div>		
+		</md-dialog-content>	
+		<md-dialog-content layout='column'>
+			<md-content layout-padding>
+				<div style="font-size: 21px;font-weight: bold;color: #1e84e3">Do you wish to cancel this appointment ?</div>
+			</md-content>
+			<div style="width:100%;text-align: center;">
+				<md-button class="md-raised md-warn success" ng-click="yes_proceed($event)" style="background-color:#ee4236;width:30%;display:inline-block;">
+					<b class="whiteColor" style="font-size: 18px;">Yes</b>
+				</md-button>
+				<md-button class="md-raised md-warn success" ng-click="no_stop($event)" style="background-color:#ee4236;width:30%;display:inline-block;">
+					<b class="whiteColor" style="font-size: 18px;">No</b>
+				</md-button>
+			</div>
+		</md-dialog-content>
+	</div>
+</md-dialog>

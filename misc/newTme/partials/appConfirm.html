@@ -1,0 +1,486 @@
+<style>
+	@charset "utf-8";
+
+	* {box-sizing: border-box;-moz-box-sizing: border-box; -ms-box-sizing: border-box;-o-box-sizing: border-box;-webkit-box-sizing: border-box; margin: 0;outline: medium none;padding: 0; text-decoration:none;-webkit-text-size-adjust:none;}
+	img {max-width:100%; border: 0;}
+	a{text-decoration: none;border: 0;outline: none; cursor: pointer;}
+	ul, ol, li{ list-style:none; margin:0; padding:0; background:none;}
+	body{margin:0 auto; padding:0;-webkit-text-size-adjust:none; font-family:'Roboto', sans-serif; background:#CCCCCC; height:100%;}
+	hr{ border: none;}
+	body, input, textarea, select, button {font-feature-settings: "liga", "kern";text-rendering: optimizelegibility;   -webkit-text-size-adjust: 100%;}
+	input[type=number].input-number–noSpinners { -moz-appearance: textfield; }input[type=number].input-number–noSpinners::-webkit-inner-spin-button,input[type=number].input-number–noSpinners::-webkit-outer-spin-button {-webkit-appearance: none;margin: 0;}
+	select::-ms-expand {display: none;}
+	/* select { -webkit-appearance: none; -moz-appearance: none; appearance: none; }  */
+
+a:focus {outline: 0 none;}
+::-ms-clear {width : 0;height: 0;} 
+
+.wrapper{float:left; width:100%; position:relative; }
+.container{max-width: 1024px; margin: 0 auto;  }
+
+.bgWht {background: #fff; }
+.text-uppercase{text-transform: uppercase;}
+.text-capitalize{text-transform: capitalize;}
+.text-lowercase{text-transform: lowercase;}
+.text-center{text-align:center;}
+.text-left{text-align:left;}
+.f_left{float:left;}
+.f_right{float:right !important;}
+.pl-0{padding-left:0 !important;}
+.pr-0{padding-right:0 !important;}
+.p-0{padding:0 !important;}
+.mb-0{margin-bottom:0 !important;}
+.mt-5 {margin-top:5px;} .mt-10 {margin-top:10px;}.mt-15 {margin-top:15px;}.mt-20 {margin-top:20px;}.mt-25 {margin-top:25px;}
+.mb-10 {margin-bottom:10px;}.mb-15 {margin-bottom:15px;}.mb-20 {margin-bottom:20px;}.mb-25 {margin-bottom:25px;}
+.ml-10 {margin-left:10px;} .ml-15 {margin-left:15px;} .ml-20 {margin-left:20px;} .ml-25 {margin-left:25px;}
+.pt-5{padding-top: 5px;} .pt-10{padding-top: 10px;} .pt-15{padding-top: 15px;} 
+.pb-5{padding-bottom: 5px;} .pb-10{padding-bottom: 10px;} .pb-15{padding-bottom: 15px;} 
+.pl-5{padding-left:5px;} .pl-10{padding-left: 10px;} .pl-15{padding-left: 15px;} 
+.pr-5{padding-right: 5px;} .pr-10{padding-right: 10px;} .pr-15{padding-right: 15px;} 
+
+
+/* Sprite & icon */
+.sprite { background:url('./img/sprite_1x.png') no-repeat; display: inline-block;} 
+.ic-caln { background-position: -105px -14px; width: 20px;	height: 19px; }
+.ic-cls { background-position: -23px -15px;width: 13px;	height: 13px; }
+.ic-drpdwn { background-position: -67px -23px;	width: 7px;	height: 7px; }
+.ic-lftwrw1 { background-position: -144px -16px; width: 11px; height: 17px; }
+.ic-ritwrw1 { background-position: -162px -16px; width: 11px; height: 17px; }
+.ic-inpUnchk { background-position: -191px -15px;width: 18px;height: 18px; }
+.ic-inpChk { background-position: -222px -15px;	width: 18px;	height: 18px; }
+
+
+/* check box */
+ .control {display: block; position: relative; padding-left: 20px; margin-bottom: 15px; cursor: pointer; font-size: 18px; } 
+ .control input {position: absolute; z-index: -1; opacity: 0; display: none; } 
+ /*.control__indicator {position: absolute; top: 2px; left: 0; height: 20px; width: 20px; background: #e6e6e6; } */
+ .control--radio .control__indicator {border-radius: 50%; } 
+ .control input ~ .control__indicator, .control input:focus ~ .control__indicator {background:url('') no-repeat;display: inline-block; background-position: -175px -21px; width: 14px; height: 13px; position: absolute; top: 0; left: 0; } 
+ .control input:checked ~ .control__indicator {background:url('') no-repeat;display: inline-block; background-position: -127px -21px; width: 14px; height: 13px; position: absolute; top: 0; left: 0; } 
+ .control:hover input:not([disabled]):checked ~ .control__indicator, .control input:checked:focus ~ .control__indicator {background:url('') no-repeat;display: inline-block; background-position: -127px -21px; width: 14px; height: 13px; position: absolute; top: 0; left: 0; } 
+ .control input:disabled ~ .control__indicator {background: #e6e6e6; opacity: 0.6; pointer-events: none; } 
+ .control__indicator:after {content: ''; position: absolute; display: none; } 
+ .control input:checked ~ .control__indicator:after {display: block; } 
+ .control--checkbox .control__indicator:after {/* left: 8px; top: 4px; width: 3px; height: 8px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg);*/ } 
+ .control--checkbox input:disabled ~ .control__indicator:after {border-color: #7b7b7b; } 
+ .control--radio .control__indicator:after {left: 7px; top: 7px; height: 6px; width: 6px; border-radius: 50%; background: #fff; } 
+ .control--radio input:disabled ~ .control__indicator:after {background: #7b7b7b; }
+
+
+/* Time Select checkbox selector */
+.timBx ul.timeSele { width:100%; float:left;margin-top: 20px;}
+.timBx ul.timeSele li {    width: 10%;  height: 41px; text-align: center; line-height: 40px; float: left; margin-left: 2.8%; margin-bottom: 20px}
+.timBx ul.timeSele li:first-child, .timBx ul.timeSele li:nth-child(9), .timBx ul.timeSele li:nth-child(17), .timBx ul.timeSele li:nth-child(25) {margin-left:0;}
+.timBx ul.timeSele label.control--checkbox {   padding: 0;   margin-bottom: 0;}
+.timBx ul.timeSele .textlab { position:relative; z-index: 10;font-size:16px; color:#4182c4;    font-weight: 400;}
+.timBx ul.timeSele label .control__indicator {  width: 100%;  background-image: none;  height: 100%;  z-index: 1; background: #fff;  border: 1px solid #4182c4; color:#4182c4;}
+.timBx ul.timeSele .control input:checked ~ .control__indicator {background-image: none;  background: #c9e7ff;border-radius: 0;     height: 100%; border:1px solid #f0f0f0;}
+.timBx ul.timeSele .control input:checked ~ .textlab {color:#424242; font-size:16px;}
+.timBx ul.timeSele .control:hover input:not([disabled]):checked ~ .control__indicator, .daysPrct ul.daySele .control input:checked:focus ~ .control__indicator { background-image: none; background: #c9e7ff;  width: 100%; height: 100%; border-radius: 0;border:1px solid #f0f0f0;}
+.timBx ul.timeSele .control:hover input:not([disabled]):checked ~ .textlab, .daysPrct ul.daySele .control input:checked:focus ~ .textlab { color:#424242; font-size:16px;}
+.timBx ul.timeSele .control:hover input ~ .control__indicator, .daysPrct ul.daySele .control input:focus ~ .control__indicator { background-image:none; } 
+/* Time Select checkbox selector */
+
+.timBx ul.timeSele .control input:disabled ~ .control__indicator { background: #eaeaea; color:#ccc; border:1px solid #f0f0f0;}
+.timBx ul.timeSele .control input:disabled ~ .textlab {color:#ccc;}
+
+
+.incontainer { width:100%; height:100%; float:left; padding:10px;background: #EDF0F7 } 
+.mainBx { border-radius:10px; background: #fff; padding:20px 40px; min-height:400px;    float: left; width: 100%;}
+.inbx1 {padding-right:60px; }
+.selDtBx { width:230px; height: 60px; float:left;}
+.selDtBx .selDttx1 { color:#424242; font-size:16px; margin-bottom: 7px;}
+.selDtBx .dtBxin { border:1px solid #C0CDD6; border-radius:3px; float:left; width:100%; height:32px; position: relative}
+.selDtBx .dtBxin .tex1 {font-size: 14px; color: #000; width: 22%; float: left; height: 100%; line-height: 30px; padding-left: 10px;} 
+.selDtBx .dtBxin .calinp1 {font-size:14px; color:#777c80; width:75%;float:left;    height: 100%;  line-height: 30px; border:0; cursor: pointer;  z-index: 3;
+    position: relative; background: transparent;}
+.selDtBx .dtBxin .ic-caln { position: absolute; right: 10px; top: 5px; z-index: 2;}
+.adAltrAddBx {   float:right ;  }
+.adAltrAddBx button.bt1 { background: #4182C4;width:202px; height:40px;border-radius:4px; border:0;color: #fff;  font-size: 16px;  margin-top: 15px;cursor:pointer;}
+.instBx1 {margin-top:40px; width:100%!important; }
+.instBx1 textarea {float: left; width:100%; border: 1px solid #C0CDD6; border-radius:3px;height:75px; margin-top:10px; padding:10px; color:#777c80; resize:none; }
+.instBx1 .tx1 { font-size:16px; color:#424242;height:30px;}
+
+.timBx { margin-top:15px; }
+.timBx {overflow-x: hidden; }
+.fixAppontmnt {width:202px; height:40px; border-radius:4px;background: #ffa500; font-size:16px; color:#fff;text-align:center; border:0; cursor:pointer; margin-top:10px;}
+
+
+
+/* Popup */ 
+#appointmentWith .modal-dialog {width: 420px;}
+#alocateOption .modal-dialog {width: 490px;}
+#alocateConfirm .modal-dialog {width: 490px;}
+#apointsuccesful .modal-dialog {width: 370px;}
+
+.modal-body {display: inline-block;width:100%; font-size:14px; color:#424242;}
+.modal-header .modal-title { font-size:18px; color:#424242; font-weight: 400;}
+.modal-header button.ic-cls { float: right; border:0;    margin-top: 5px;}
+.modal-footer .btn { border-radius:2px; background: #4082c4; border:1px solid #d5dde3; font-size:14px; color:#fff; padding: 6px 15px; min-width:80px; }
+.modal-footer .btn.nobt { border:1px solid #4082c4; background: #fff; color:#4082c4;}
+
+.prefixBx { display: table-cell; border-radius: 3px; border:1px solid #c1cdd7; padding:6px 5px;  width:63px; height:35px; float: left;}
+.prefixBx select { border:0; font-size:14px; color:#424242;}
+.conNmBx {display: table-cell; width:75%; border: 1px solid #c1cdd7;float: left;margin-left:15px; height: 35px; border-radius: 3px; }
+.conNmBx input { width:100%; height: 100%; border: 0; padding: 0 10px; border-radius: 5px; color:#777c80; font-size:14px; font-weight: 300}
+.subhd1 {font-size:15px; color:#ff9a00; width:100%; float:left; }
+.radioListWrp { width:100%; float:left;    margin-top: 10px;}
+.radioListWrp .textlab { font-size:15px; color:#747474; font-weight: 300;    margin-left: 10px;}
+.radioListWrp label.control { margin-bottom:10px;}
+.radioListWrp label .control__indicator   {margin-top: 3px;}
+.radioListWrp label .control__indicator {   z-index: 1; background:url('./img/sprite_1x.png') no-repeat; display: inline-block; background-position: -191px -15px;width: 18px;height: 18px;}
+.radioListWrp .control input:checked ~ .control__indicator { background:url('./img/sprite_1x.png') no-repeat; display: inline-block; background-position:-222px -15px;width: 18px;	height: 18px;}
+.radioListWrp .control input:checked ~ .textlab {color:#424242; font-size:15px;}
+.radioListWrp .control:hover input:not([disabled]):checked ~ .control__indicator, .radioListWrp .control input:checked:focus ~ .control__indicator { background:url('./img/sprite_1x.png') no-repeat; display: inline-block; background-position:-222px -15px;width: 18px;	height: 18px;}
+.radioListWrp .control:hover input:not([disabled]):checked ~ .textlab, .daysPrct ul.daySele .control input:checked:focus ~ .textlab { color:#424242; font-size:15px;}
+.confAloctDetail { margin-bottom:10px;}
+.confAloctDetail .col1 {float:left;width:160px;font-size:15px; color:#222;}
+.confAloctDetail .col2 {float:left;font-size:15px; color:#747474;}
+
+.exe_head2 { border-bottom:1px solid #C8C6C7;padding: 20px 0 10px;    margin-bottom: 30px;}
+.exe_head2 .leftBx1 { font-size:22px; color:#424242; font-weight:600;}
+.exe_head2 .ritBx1 { font-size:20px; color:#424242; }
+.exe_head2 .ritBx1 button { color:#4182c4; font-size:18px; background: transparent; border: 0; float:right; font-weight:500; }
+
+
+.tblBx-main { width:830px; overflow-x:scroll;    padding-bottom: 20px;} 
+.tblBxIn {width:auto;margin-left: 90px;z-index: 8;}
+
+.timBx .table-bordered { border:1px solid #cecece;}
+.timBx .table-bordered th,.timBx .table-bordered td { width:148px;border:1px solid #cecece; padding:8px; border-right:0; border-top:0;    text-align: center;} 
+.timBx .table-bordered th:first-child,.timBx .table-bordered td:first-child {border-left:0;}
+.timBx .table-bordered tbody tr:last-child th, .timBx .table-bordered tr:last-child td {border-bottom:0;}
+.timBx .table-bordered tr {background: #FFFFFF; height:85px; }
+.timBx .table-bordered tr:nth-child(even) {background: #F6F6F6 }
+.timBx .table-bordered th { width:148px;min-width:148px; font-size:14px; color:#ff730d; font-weight:400; height:130px;    position: relative; line-height: 18px;background:#f1fafe;   vertical-align: middle; }
+.timBx .table-bordered th .rnkLbl { position: absolute; top:0; left:0; width:100%; text-align: center; color:#5C93CB; background: #D5EDF9; font-weight: 500; padding: 2px 5px;line-height: 15px}
+.timBx .table-bordered .radioListWrp label.control { padding-left:0; }
+.timBx .table-bordered .radioListWrp label .control__indicator { position:relative;}
+.timBx .table-bordered .radioListWrp .control:hover input:not([disabled]):checked ~ .control__indicator { position:relative;}
+.timBx .table-bordered .radioListWrp .control:hover input:not([disabled]):checked ~ .control__indicator { position:relative;}
+
+.timBx .table-bordered .time {font-size:15px; color:#424242;}
+.tblBxIn1 {width:90px; position: absolute;top:0;left:0;    z-index: 10;}
+.timBx .tblBxIn1 .table-bordered th, .timBx .tblBxIn1 .table-bordered td {width:85px;min-width:90px;}
+
+
+.tblBx-main::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: #E6E6E6;
+}
+
+.tblBx-main::-webkit-scrollbar
+{
+	width: 12px;
+	background-color: #E6E6E6;
+	border-radius: 10px;
+	height: 12px
+}
+
+.tblBx-main::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #C1C1C1;
+}
+</style>
+<md-dialog style="width:28%;background-color:#FFFFFF;">
+	<div ng-if="showcontentone == 6">	
+		<div class="modal-dialog">
+			<div class="modal-content" style="background-clip: padding-box;background-color: #fff;border: 1px solid rgba(0, 0, 0, 0.2);border-radius: 6px;box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);outline: 0 none;position: relative;">
+				<div class="modal-header" style="border-bottom: 1px solid #e5e5e5;padding: 15px;">
+				  <button type="button" class="sprite ic-cls" data-dismiss="modal" ng-click="no_stop($event)"> </button>
+				  <h4 class="modal-title" style="color: #424242;font-size: 18px;font-weight: 400;"> Allocate Appointment </h4>
+				</div>
+				<div class="modal-body" style="padding: 15px;position: relative;color: #424242;display: inline-block;font-size: 14px;width: 100%;">
+					<span class="confAloctDetail wrapper" style="margin-bottom: 10px;float: left;position: relative;width: 100%;">	
+						<span class="col1"> Company Name </span>
+						<span class="col2"> {{contractData.companyname}} </span>
+					</span>
+					<span class="confAloctDetail wrapper" style="margin-bottom: 10px;float: left;position: relative;width: 100%;">	
+						<span class="col1"> Appointment Date </span>
+						<span class="col2"> {{displayDate}} </span>
+					</span>
+					<span class="confAloctDetail wrapper" style="margin-bottom: 10px;float: left;position: relative;width: 100%;">
+						<span class="col1"> Appointment Time </span>
+						<span class="col2" style="color: #747474;float: left;font-size: 15px;"> {{timearr}} </span>
+					</span>
+					<span class="subhd1 mt-15 mb-10">
+						Are you sure you wish to allocate this appointment?
+					</span>					
+				</div>
+				<div class="modal-footer" style=" border-top: 1px solid #e5e5e5;padding: 15px;text-align: right;">
+				  <button type="button" class="nobt btn btn-primary" ng-click="no_stop($event)">  No </button>
+				  <button type="button" class="btn btn-primary" ng-click="yes_proceed($event)">  Yes </button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div ng-if="showcontentone == 2">
+		<div class="modal-dialog">
+			<div class="modal-content" style="background-clip: padding-box;background-color: #fff;border: 1px solid rgba(0, 0, 0, 0.2);border-radius: 6px;box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);outline: 0 none;position: relative;">
+				<div class="modal-header" style="border-bottom: 1px solid #e5e5e5;padding: 15px;">
+				  <h4 class="modal-title" style="color: #424242;font-size: 18px;font-weight: 400;">Allocate Appointment </h4>
+				</div>
+				<div class="modal-body" style="padding: 15px;position: relative;color: #424242;display: inline-block;font-size: 14px;width: 100%;">
+					<span class="wrapper mt-5 mb-5"> Appointment allocated successfully to {{eligibleResp.final_me_elig.empName}} </span>
+				</div>
+				<div class="modal-footer"  style=" border-top: 1px solid #e5e5e5;padding: 15px;text-align: right;">
+				  <button type="button" class="btn btn-primary"  ng-click="final_proceed($event)">OK</button>
+				</div>	
+			</div>
+		</div>
+	</div>
+	<div ng-if="showcontentone != 2 && showcontentone != 3 && showcontentone != 4 && showcontentone != 6 && showcontentone !=7 && showcontentone !=8 && showcontentone !=9">
+		<div class="modal-dialog">
+	      <div class="modal-content" style="background-clip: padding-box;background-color: #fff;border: 1px solid rgba(0, 0, 0, 0.2);border-radius: 6px;outline: 0 none;position: relative;box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5)">
+	        <div class="modal-header" style="border-bottom: 1px solid #e5e5e5;padding: 15px;">
+	          <button type="button" class="sprite ic-cls" data-dismiss="modal" style="border: 0 none;float: right;margin-top: 5px;" ng-click="no_stop($event)"></button>
+	          <h4 class="modal-title" style="color: #424242;font-size: 18px;font-weight: 400;line-height: 1.42857;margin: 0;"> Allocate Appointment </h4>
+	        </div>
+	        <div class="modal-body" style="color: #424242;display: inline-block;font-size: 14px;width: 100%; padding: 15px;position: relative;">
+	        	<span class="subhd1" style="color: #ff9a00;float: left;font-size: 15px;width: 100%;">
+	        		Chooose the appropriate option from below and click OK to proceed
+	        	</span>
+	        	<span class="radioListWrp" style="float: left;margin-top: 10px;width: 100%;"> 
+					<span ng-click="set_flag('FIP',$event)">
+						<label class="control control--checkbox"> 						
+							<input name="radio1" type="radio"> 
+							<div class="control__indicator"> </div> 
+							<span class="textlab"> Allocate to follow-up executive {{eligibleResp.final_me_elig.empName}} </span>
+						</label>
+					</span>
+					<span ng-click="set_flag('ALF',$event)">
+						<label class="control control--checkbox">
+							<input name="radio1" type="radio"> 
+							<div class="control__indicator"> </div> 
+							<span class="textlab" > Let System Auto Allocate </span>
+						</label>
+					</span>
+					<span ng-click="set_flag('VLM',$event)">	
+						<label class="control control--checkbox">							
+							<input name="radio1" type="radio"> 
+							<div class="control__indicator"> </div> 
+							<span class="textlab" > View Executives in Client's pin code and allocate </span>
+						</label>
+					</span>
+<!--
+					<span ng-click="set_flag('VAM',$event)">
+						<label class="control control--checkbox">
+							<input name="radio1" type="radio"> 
+							<div class="control__indicator"> </div> 
+							<span class="textlab"> View All Executives in Mumbai and Allocate </span>
+						</label>
+	        		</span>
+-->
+	        	</span>
+	        </div>
+	        <div class="modal-footer" style="border-top: 1px solid #e5e5e5;padding: 15px;text-align: right;">
+	          <button type="button" class="btn btn-primary" ng-click="decide_appt_flow($event)">  OK </button>
+	        </div>
+	      </div>	      
+	    </div>
+	</div>
+	<div ng-if="showcontentone == 7">
+		<div class="modal-dialog">
+	      <div class="modal-content" style="background-clip: padding-box;background-color: #fff;border: 1px solid rgba(0, 0, 0, 0.2);border-radius: 6px;outline: 0 none;position: relative;box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5)">
+	        <div class="modal-header" style="border-bottom: 1px solid #e5e5e5;padding: 15px;">
+	          <button type="button" class="sprite ic-cls" data-dismiss="modal" style="border: 0 none;float: right;margin-top: 5px;" ng-click="no_stop($event)"></button>
+	          <h4 class="modal-title" style="color: #424242;font-size: 18px;font-weight: 400;line-height: 1.42857;margin: 0;"> Allocate Appointment </h4>
+	        </div>
+	        <div class="modal-body" style="color: #424242;display: inline-block;font-size: 14px;width: 100%; padding: 15px;position: relative;">
+	        	<span class="subhd1" style="color: #ff9a00;float: left;font-size: 15px;width: 100%;">
+	        		Chooose the appropriate option from below and click OK to proceed
+	        	</span>
+	        	<span class="radioListWrp" style="float: left;margin-top: 10px;width: 100%;"> 
+					<span ng-click="set_flag('FIP',$event)">
+						<label class="control control--checkbox"> 						
+							<input name="radio1" type="radio"> 
+							<div class="control__indicator"> </div> 
+							<span class="textlab"> Allocate to Prospect executive {{eligibleResp.final_me_elig.empName}} </span>
+						</label>
+					</span>
+					<span ng-click="set_flag('ALF',$event)">
+						<label class="control control--checkbox">
+							<input name="radio1" type="radio"> 
+							<div class="control__indicator"> </div> 
+							<span class="textlab" > Let System Auto Allocate </span>
+						</label>
+					</span>
+					<span ng-click="set_flag('VLM',$event)">	
+						<label class="control control--checkbox">							
+							<input name="radio1" type="radio"> 
+							<div class="control__indicator"> </div> 
+							<span class="textlab" > View Executives in Client's pin code and allocate </span>
+						</label>
+					</span>
+<!--
+					<span ng-click="set_flag('VAM',$event)">
+						<label class="control control--checkbox">
+							<input name="radio1" type="radio"> 
+							<div class="control__indicator"> </div> 
+							<span class="textlab"> View All Executives in Mumbai and Allocate </span>
+						</label>
+	        		</span>
+-->
+	        	</span>
+	        </div>
+	        <div class="modal-footer" style="border-top: 1px solid #e5e5e5;padding: 15px;text-align: right;">
+	          <button type="button" class="btn btn-primary" ng-click="decide_appt_flow($event)">  OK </button>
+	        </div>
+	      </div>	      
+	    </div>
+	</div>
+	<div ng-if="showcontentone == 3">
+		<div class="modal-dialog">
+		  <div class="modal-content" style="background-clip: padding-box;background-color: #fff;border: 1px solid rgba(0, 0, 0, 0.2);border-radius: 6px;outline: 0 none;position: relative;box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5)">
+			<div class="modal-header" style="border-bottom: 1px solid #e5e5e5;padding: 15px;">
+			  <button type="button" class="sprite ic-cls" data-dismiss="modal" style="border: 0 none;float: right;margin-top: 5px;" ng-click="no_stop($event)"></button>
+			  <h4 class="modal-title" style="color: #424242;font-size: 18px;font-weight: 400;line-height: 1.42857;margin: 0;"> Allocate Appointment </h4>
+			</div>
+			<div class="modal-body" style="color: #424242;display: inline-block;font-size: 14px;width: 100%; padding: 15px;position: relative;">
+				<span class="subhd1" style="color: #ff9a00;float: left;font-size: 15px;width: 100%;">
+					All ME's are BUSY for this Time Slot, select a Different Time Slot
+				</span>
+			</div>
+			<div class="modal-footer" style="border-top: 1px solid #e5e5e5;padding: 15px;text-align: right;">
+			  <button type="button" class="btn btn-primary" ng-click="closethepopup($event)">  OK </button>
+			</div>
+		  </div>	      
+		</div>
+	</div>
+	
+	<div ng-if="showcontentone == 4">
+		<div class="modal-dialog">
+		  <div class="modal-content" style="background-clip: padding-box;background-color: #fff;border: 1px solid rgba(0, 0, 0, 0.2);border-radius: 6px;outline: 0 none;position: relative;box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5)">
+			<div class="modal-header" style="border-bottom: 1px solid #e5e5e5;padding: 15px;">
+			  <button type="button" class="sprite ic-cls" data-dismiss="modal" style="border: 0 none;float: right;margin-top: 5px;" ng-click="no_stop($event)"></button>
+			  <h4 class="modal-title" style="color: #424242;font-size: 18px;font-weight: 400;line-height: 1.42857;margin: 0;"> Allocate Appointment </h4>
+			</div>
+			<div class="modal-body" style="color: #424242;display: inline-block;font-size: 14px;width: 100%; padding: 15px;position: relative;">
+				<span class="subhd1" style="color: #ff9a00;float: left;font-size: 15px;width: 100%;">
+					Follow-up Executive {{eligibleResp.follow_up_arr.follow_up.empName}} is not available Chooose the appropriate option from below and click OK to proceed
+				</span>
+				<span class="radioListWrp" style="float: left;margin-top: 10px;width: 100%;"> 
+					<span ng-click="set_flag('ALF',$event)">
+						<label class="control control--checkbox">
+							<input name="radio1" type="radio"> 
+							<div class="control__indicator"> </div> 
+							<span class="textlab" > Let System Auto Allocate </span>
+						</label>
+					</span>
+					<span ng-click="set_flag('VLM',$event)">	
+						<label class="control control--checkbox">							
+							<input name="radio1" type="radio"> 
+							<div class="control__indicator"> </div> 
+							<span class="textlab" > View Executives in Client's pin code and allocate </span>
+						</label>
+					</span>
+				</span>
+			</div>
+			<div class="modal-footer" style="border-top: 1px solid #e5e5e5;padding: 15px;text-align: right;">
+			  <button type="button" class="btn btn-primary" ng-click="decide_appt_flow($event)">  OK </button>
+			</div>
+		  </div>	      
+		</div>
+	</div>
+	<div ng-if="showcontentone == 8">
+		<div class="modal-dialog">
+		  <div class="modal-content" style="background-clip: padding-box;background-color: #fff;border: 1px solid rgba(0, 0, 0, 0.2);border-radius: 6px;outline: 0 none;position: relative;box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5)">
+			<div class="modal-header" style="border-bottom: 1px solid #e5e5e5;padding: 15px;">
+			  <button type="button" class="sprite ic-cls" data-dismiss="modal" style="border: 0 none;float: right;margin-top: 5px;" ng-click="no_stop($event)"></button>
+			  <h4 class="modal-title" style="color: #424242;font-size: 18px;font-weight: 400;line-height: 1.42857;margin: 0;"> Allocate Appointment </h4>
+			</div>
+			<div class="modal-body" style="color: #424242;display: inline-block;font-size: 14px;width: 100%; padding: 15px;position: relative;">
+				<span class="subhd1" style="color: #ff9a00;float: left;font-size: 15px;width: 100%;">
+					Chooose the appropriate option from below and click OK to proceed
+				</span>
+				<span class="radioListWrp" style="float: left;margin-top: 10px;width: 100%;"> 
+					<span ng-click="set_flag('CLOSE',$event)">
+						<label class="control control--checkbox"> 						
+							<input name="radio1" type="radio"> 
+							<div class="control__indicator"> </div> 
+							<span class="textlab"> 
+								<span ng-if="follow_up_arr_new.add_to_prosp == 	0">This is a Prospect contract for </span>
+								<span ng-if="follow_up_arr_new.add_to_prosp != 0 && follow_up_arr_new.ecs_mandate != 0">This is Follow-Up contract for </span>
+								<span ng-if="follow_up_arr_new.ecs_mandate == 0">This is an ECS contract for </span>
+								executive {{eligibleResp.final_me_elig.empName}} and he is busy for this time slot. Select a different time for same follow up ME
+
+							</span>
+						</label>
+					</span>
+					<span ng-click="set_flag('ALF',$event)">
+						<label class="control control--checkbox">
+							<input name="radio1" type="radio"> 
+							<div class="control__indicator"> </div> 
+							<span class="textlab" > Let System Auto Allocate </span>
+						</label>
+					</span>
+					<span ng-click="set_flag('VLM',$event)">	
+						<label class="control control--checkbox">							
+							<input name="radio1" type="radio"> 
+							<div class="control__indicator"> </div> 
+							<span class="textlab" > View Executives in Client's pin code and allocate </span>
+						</label>
+					</span>
+				</span>
+			</div>
+			<div class="modal-footer" style="border-top: 1px solid #e5e5e5;padding: 15px;text-align: right;">
+			  <button type="button" class="btn btn-primary" ng-click="decide_appt_flow($event)">  OK </button>
+			</div>
+		  </div>	      
+		</div>
+	</div>
+	<div ng-if="showcontentone == 9">
+		<div class="modal-dialog">
+	      <div class="modal-content" style="background-clip: padding-box;background-color: #fff;border: 1px solid rgba(0, 0, 0, 0.2);border-radius: 6px;outline: 0 none;position: relative;box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5)">
+	        <div class="modal-header" style="border-bottom: 1px solid #e5e5e5;padding: 15px;">
+	          <button type="button" class="sprite ic-cls" data-dismiss="modal" style="border: 0 none;float: right;margin-top: 5px;" ng-click="no_stop($event)"></button>
+	          <h4 class="modal-title" style="color: #424242;font-size: 18px;font-weight: 400;line-height: 1.42857;margin: 0;"> Allocate Appointment </h4>
+	        </div>
+	        <div class="modal-body" style="color: #424242;display: inline-block;font-size: 14px;width: 100%; padding: 15px;position: relative;">
+	        	<span class="subhd1" style="color: #ff9a00;float: left;font-size: 15px;width: 100%;">
+	        		Chooose the appropriate option from below and click OK to proceed
+	        	</span>
+	        	<span class="radioListWrp" style="float: left;margin-top: 10px;width: 100%;"> 
+					<span ng-click="set_flag('FIP',$event)">
+						<label class="control control--checkbox"> 						
+							<input name="radio1" type="radio"> 
+							<div class="control__indicator"> </div> 
+							<span class="textlab"> Allocate to Prospect executive {{eligibleResp.final_me_elig.empName}} </span>
+						</label>
+					</span>
+					<span ng-click="set_flag('ALF',$event)">
+						<label class="control control--checkbox">
+							<input name="radio1" type="radio"> 
+							<div class="control__indicator"> </div> 
+							<span class="textlab" > Let System Auto Allocate </span>
+						</label>
+					</span>
+					<span ng-click="set_flag('VLM',$event)">	
+						<label class="control control--checkbox">							
+							<input name="radio1" type="radio"> 
+							<div class="control__indicator"> </div> 
+							<span class="textlab" > View Executives in Client's pin code and allocate </span>
+						</label>
+					</span>
+<!--
+					<span ng-click="set_flag('VAM',$event)">
+						<label class="control control--checkbox">
+							<input name="radio1" type="radio"> 
+							<div class="control__indicator"> </div> 
+							<span class="textlab"> View All Executives in Mumbai and Allocate </span>
+						</label>
+	        		</span>
+-->
+	        	</span>
+	        </div>
+	        <div class="modal-footer" style="border-top: 1px solid #e5e5e5;padding: 15px;text-align: right;">
+	          <button type="button" class="btn btn-primary" ng-click="decide_appt_flow($event)">  OK </button>
+	        </div>
+	      </div>	      
+	    </div>
+	</div>
+</md-dialog>

@@ -1,0 +1,14 @@
+Creating Screen
+
+sudo screen -S socket
+
+Screen List
+
+sudo screen -ls
+
+To open screen
+
+sudo screen -r 12931.socket
+
+ctrl + a + d   - detached
+

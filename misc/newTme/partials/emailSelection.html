@@ -1,0 +1,43 @@
+<md-toolbar md-scroll-shrink style="background-color:#FFFFFF;border-bottom:1px solid #CCCCCC" ng-init="onLoadCall()" ng-controller="catPreviewController">
+	<div class="md-toolbar-tools">
+		<md-button class="md-icon-button" aria-label="Settings" style="margin-left:20px;" ng-click="toggleLeft()">
+			<md-icon md-svg-icon="img/ic_menu_36px.svg" style="color:#000000;"></md-icon>
+		</md-button>
+		<h2>
+			<span>Own Website & Mobile site</span>
+		</h2>
+		<span flex></span>
+	</div>
+</md-toolbar>
+
+<section class="mainContain_innr" subtract="500" >
+	<section class="mainContain">
+		
+		<div class="cntre" style="font-family: 'Roboto', sans-serif;">
+			<span class="tble-title">Thanks for choosing FREE website & Mobile site </span>
+			<div class="tbl-ottr" style="background: white none repeat scroll 0 0;">
+				<span class="tblt">Would you like to get a Business Email for your website & Mobile site? <br> (Example: name@yourcompany.com)</span>			
+				<div class="optn-div">
+					<md-radio-group ng-model="email_radio">
+						<md-radio-button  class="md-primary" value="own">I have my own business email solutions</md-radio-button> 
+						<md-radio-button  class="md-primary" value="new">Let JD Omni provide me with business email solutions</md-radio-button> 
+					</md-radio-group>	
+				</div>
+				<div class="leftbr">
+				<a ng-click="email_proceed($event)" class="prche">Proceed</a>
+				</div>
+			</div>
+		</div>
+	
+	</section>
+</section>
+
+
+<div class="ftr_wrpper" style="position:relative">
+	<div class="jdrrcontainer">
+		<div class="jdrr_footer">
+				Copyright 2008-2016 Justdial.com. All Rights Reserved. <a href="#">Privacy</a> I <a href="#">Terms</a>
+		</div><!--end of jdrr_footer-->
+	</div>
+</div>
+	

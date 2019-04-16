@@ -1,0 +1,208 @@
+<section class="container relative">
+	<h2>Lineage Data</h2>
+	<div class="ipSearchLin right"><input type="text" ng-model="searchLin" placeholder="Search Employees" /></div>
+	<div class="lin-show-data left" ng-if="showChildren.errorCode	==	0">
+		<div class="linIndi left" ng-repeat="respData in showChildren.data | filter:searchLin">
+			<div class="linImg text-center relative">
+				<!--showData($event,respData.empcode,respData)-->
+				<img ng-click="showWhichDecision(respData.empcode,respData,$event,0,1)" src="{{respData.pro_pic_url == null && 'img/def-lin-img.png' || respData.pro_pic_url}}" alt="pro-pic-img" />
+				<div class="name-text colorWhite text-center">{{respData.empname}}</div>
+			</div>
+		</div>
+	</div>
+	<div class="lin-show-data" ng-if="showChildren.errorCode	==	1">
+		<h3>Sorry You do not have any reportees</h3>
+	</div>
+	<section class="setPopupBotDash absolute">
+		<!--div class="absolute left0 pointer clickMenuOpt" ng-click="clickMenuLineage()"><img ng-src="img/menuLineage.png" alt="menu" /></div-->
+		<div class="absolute closePop right0 pointer" ng-click="closePopMid(1)">Close</div>
+<!--
+		<div class="contentPop" ng-if="allocContracts.errorCode == 1">
+			<h3 class="colorWhite">No data has been allocated to this employee.</h3>
+		</div>
+-->
+		<div class="contentPop">
+			<div ng-if="showLinParam==1" class="animateSlide">
+				<div class="tabMenuLin width100">
+					<ul class="tabMenuUlLin">
+						<li class="tabMenuLiLin pointer selectedLi" ng-class="{'selectedLi':whichOptClick ==1,'':whichOptClick==0}" ng-click="showWhichDecision(showChildren.data[selIndex].empcode,showChildren.data[selIndex],$event,0,0)">Bifurcation of Disposed Data</li><span class="left marTop10px"> / </span>
+						<li class="tabMenuLiLin pointer" ng-class="{'selectedLi':whichOptClick ==0,'':whichOptClick==1}" ng-click="showWhichDecision(showChildren.data[selIndex].empcode,showChildren.data[selIndex],$event,1,0)">Bifurcation of Allocated Data</li>
+					</ul>
+				</div>
+				<!--highchart id="chart1" config="chartConfig" class="left width100" ng-if="selCountContracts.errorCode == 0"></highchart-->
+				<h3 ng-if="selCountContracts.errorCode == 1" class="colorWhite left width100">No data has been disposed by this employee.</h3>
+			</div>
+			<div ng-if="showLinParam==4" class="animateSlide">
+				<div class="tabMenuLin width100">
+					<ul class="tabMenuUlLin">
+						<li class="tabMenuLiLin">Bifurcation of Disposed Data</li>
+						<li class="tabMenuLiLin">Bifurcation of Allocated Data</li>
+					</ul>
+				</div>
+				<!--highchart id="chart1" config="chartConfig" class="left width100" ng-if="selCountContracts.errorCode == 0"></highchart-->
+				<h3 ng-if="selCountContracts.errorCode == 1" class="colorWhite">No data has been disposed by this employee.</h3>
+			</div>
+			<div ng-if="showLinParam==3" class="animateSlide">
+				<div class="center width100"><h3 class="colorWhite">Showing allocated contracts of <span class="blue">{{showChildren.data[selIndex].empname}}({{showChildren.data[selIndex].empcode}})</span></h3></div>
+				<div class="center width100"><input type="text" style="width:30%;height:30px;" ng-model="searchContractsLin" placeholder="Search Contracts" /></div>
+				<div class="callBackcards white width67" ng-repeat="data in allocContracts.data | filter:searchContractsLin">
+					<h3 class="left blueDark pointer" ng-if="data.compname != '' && data.compname != null" ng-click="showContTimeline(data,showChildren.data[selIndex].empcode,data.contractid)">{{data.compname}}</h3>
+					<h3 class="left blueDark pointer" ng-if="data.compname == '' || data.compname == null" ng-click="showContTimeline(data,showChildren.data[selIndex].empcode,data.contractid)">Company Name Not Found</h3>
+					<div class="stripAlloc left width100 pad-top-5 pad-bot-5 border-top-grey">
+						<div class="left blueDark marLeft10px marRt10px">{{data.contractid}}</div>
+						<span class="left margin10"> / </span>
+					</div>
+				</div>
+			</div>
+			<div ng-if="showLinParam==2" class="animateSlideRight">
+				<div class="moveBack width100 pointer"><img src="img/backArrow.png" ng-click="backShowLinConts()" /></div>
+				<div class="width100">
+					<h3 class="colorWhite">Timeline for {{allocContracts.data[timeIndex].compname}}</h3>
+					<p>{{allocContracts.data[timeIndex].contractid}}</p>
+					<div class="lineageLine" ng-if="timeline.errorCode == 0">
+						<div class="leftTrans"></div>
+						<div class="timeLineBay">
+							<ul class="">
+								<li ng-if="timeline.data.appointmentAlloc.errorCode == 0" ng-repeat="data in timeline.data.appointmentAlloc.data">
+									<div class="showTimes">
+										<p ng-switch on="data.allocationType">
+											<span ng-switch-when="25">Allocated to ME  </span>
+											<span ng-switch-when="22">Call Back  </span>
+											<span ng-switch-when="12">Company Closed  </span>
+											<span ng-switch-when="114">Discard Call  </span>
+											<span ng-switch-when="9">Do Not Disturb  </span>
+											<span ng-switch-when="24">Follow Up  </span>
+											<span ng-switch-when="115">Intrested in Justdial Services  </span>
+											<span ng-switch-when="208">Internal Call  </span>
+											<span ng-switch-when="6">Not Contactable  </span>
+											<span ng-switch-when="21">Not Intrested  </span>
+											<span ng-switch-when="98">Not in Business  </span>
+											<span ng-switch-when="63">Other City  </span>
+											<span ng-switch-when="207">Paid Client  </span>
+											<span ng-switch-when="99">Refixed Appointments  </span>
+											<span ng-switch-when="7">Wrg Number  </span>
+											<span ng-switch-when="124">Call back – Ctact details verified  </span>
+											<span ng-switch-when="64">Doctors Intrested in Master App  </span>
+											<span ng-switch-when="65">Doctors Not Intrested in Master App  </span>
+											<span ng-switch-when="123">Hospital Data  </span>
+											<span ng-switch-when="116">Intrested in Master App  </span>
+											<span ng-switch-when="127">No Menu  </span>
+											<span ng-switch-when="119">Not Applicable in Master App  </span>
+											<span ng-switch-when="117">Not Interested in Master App  </span>
+											<span ng-switch-when="90">Not Providing Home Delivery  </span>
+											<span ng-switch-when="128">Not Providing Home Pickup  </span>
+											<span ng-switch-when="61">Year of Establishment Captured  </span>
+											<span ng-switch-when="62">Year of Establishment Not Captured  </span>
+										</p>
+										<a>{{data.allocationTime}}</a>
+									</div>
+								</li>
+								<li ng-if="timeline.data.dealClosed.errorCode == 0" ng-repeat="data in timeline.data.dealClosed.data"><a style="color:#0D96D5">{{data.uptDate}}</a></li>
+							</ul>
+						</div>
+						<div class="rightTrans"></div>
+					</div>
+					<div class="bottomArrowSlide" ng-if="timeline.errorCode == 0"></div>
+					<div class="smoothShowData" ng-if="timeline.errorCode == 0">
+						<div class="smoothContainer">
+							<a class="mLeft mNav" ng-click="shiftRightTimeLine()"></a>
+							<a class="mRight mNav" ng-click="shiftLeftTimeLine()"></a>
+							<div class="detailHolder">
+								<div class="detailTimeline" ng-if="timeline.data.appointmentAlloc.errorCode == 0" ng-repeat="data in timeline.data.appointmentAlloc.data">
+									<div class="detailBody">
+										<h3 ng-switch on="data.allocationType">
+											<span ng-switch-when="25">Allocated to ME  </span>
+											<span ng-switch-when="22">Call Back  </span>
+											<span ng-switch-when="12">Company Closed  </span>
+											<span ng-switch-when="114">Discard Call  </span>
+											<span ng-switch-when="9">Do Not Disturb  </span>
+											<span ng-switch-when="24">Follow Up  </span>
+											<span ng-switch-when="115">Intrested in Justdial Services  </span>
+											<span ng-switch-when="208">Internal Call  </span>
+											<span ng-switch-when="6">Not Contactable  </span>
+											<span ng-switch-when="21">Not Intrested  </span>
+											<span ng-switch-when="98">Not in Business  </span>
+											<span ng-switch-when="63">Other City  </span>
+											<span ng-switch-when="207">Paid Client  </span>
+											<span ng-switch-when="99">Refixed Appointments  </span>
+											<span ng-switch-when="7">Wrg Number  </span>
+											<span ng-switch-when="124">Call back – Ctact details verified  </span>
+											<span ng-switch-when="64">Doctors Intrested in Master App  </span>
+											<span ng-switch-when="65">Doctors Not Intrested in Master App  </span>
+											<span ng-switch-when="123">Hospital Data  </span>
+											<span ng-switch-when="116">Intrested in Master App  </span>
+											<span ng-switch-when="127">No Menu  </span>
+											<span ng-switch-when="119">Not Applicable in Master App  </span>
+											<span ng-switch-when="117">Not Interested in Master App  </span>
+											<span ng-switch-when="90">Not Providing Home Delivery  </span>
+											<span ng-switch-when="128">Not Providing Home Pickup  </span>
+											<span ng-switch-when="61">Year of Establishment Captured  </span>
+											<span ng-switch-when="62">Year of Establishment Not Captured  </span>
+										</h3>
+										<p ng-switch on="data.allocationType">Contract Disposed as 
+											<span ng-switch-when="25">Allocated to ME  </span>
+											<span ng-switch-when="22">Call Back  </span>
+											<span ng-switch-when="12">Company Closed  </span>
+											<span ng-switch-when="114">Discard Call  </span>
+											<span ng-switch-when="9">Do Not Disturb  </span>
+											<span ng-switch-when="24">Follow Up  </span>
+											<span ng-switch-when="115">Intrested in Justdial Services  </span>
+											<span ng-switch-when="208">Internal Call  </span>
+											<span ng-switch-when="6">Not Contactable  </span>
+											<span ng-switch-when="21">Not Intrested  </span>
+											<span ng-switch-when="98">Not in Business  </span>
+											<span ng-switch-when="63">Other City  </span>
+											<span ng-switch-when="207">Paid Client  </span>
+											<span ng-switch-when="99">Refixed Appointments  </span>
+											<span ng-switch-when="7">Wrg Number  </span>
+											<span ng-switch-when="124">Call back – Ctact details verified  </span>
+											<span ng-switch-when="64">Doctors Intrested in Master App  </span>
+											<span ng-switch-when="65">Doctors Not Intrested in Master App  </span>
+											<span ng-switch-when="123">Hospital Data  </span>
+											<span ng-switch-when="116">Intrested in Master App  </span>
+											<span ng-switch-when="127">No Menu  </span>
+											<span ng-switch-when="119">Not Applicable in Master App  </span>
+											<span ng-switch-when="117">Not Interested in Master App  </span>
+											<span ng-switch-when="90">Not Providing Home Delivery  </span>
+											<span ng-switch-when="128">Not Providing Home Pickup  </span>
+											<span ng-switch-when="61">Year of Establishment Captured  </span>
+											<span ng-switch-when="62">Year of Establishment Not Captured  </span>
+										</p>
+										<p ng-if="data.allocationType == 25 || data.allocationType == 99">
+											Contract allocated to {{data.mename}}({{data.empcode}})
+										</p>
+										<p ng-if="data.actionTime != ''">
+											Appointment Time - {{data.actionTime}}
+										</p>
+										<p ng-if="data.instructions != ''">
+											Following instruction were given -  {{data.instructions}}
+										</p>
+									</div>
+								</div>
+								<div class="detailTimeline" ng-if="timeline.data.dealClosed.errorCode == 0" ng-repeat="data in timeline.data.dealClosed.data">
+									<div class="detailBody">
+										<h3>Contract Deal Closed</h3>
+										<p>Deal Closed On - {{data.uptDate}}</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<h3 ng-if="timeline.errorCode == 1" class="colorWhite">No Work has been done by this TME on this contract</h3>
+				</div>
+			</div>
+		</div>
+		<!--aside ng-class="{'none':showMenuLineage ==0, 'block':showMenuLineage ==1}" class="lineageDataMenu absolute left0 top0">
+			<ul>
+				<li ng-click="clickMenu($index,showChildren.data[selIndex].empcode,'22')">Callback</li>
+				<li ng-click="clickMenu($index,showChildren.data[selIndex].empcode,'6')">Not Contactable</li>
+				<li ng-click="clickMenu($index,showChildren.data[selIndex].empcode,'21')">Not Interested</li>
+				<li ng-click="clickMenu($index,showChildren.data[selIndex].empcode,'25')">Appointment Fixed</li>
+				<li ng-click="clickMenu($index,showChildren.data[selIndex].empcode,'22')">Follow Up</li>
+				<li ng-click="clickMenu($index,showChildren.data[selIndex].empcode,'207')">Paid Client</li>
+				<li ng-click="clickMenu($index,showChildren.data[selIndex].empcode,'9')">DND</li>
+				<li ng-click="clickMenu($index,showChildren.data[selIndex].empcode,'22')">Uncalled Data</li>
+			</ul>
+		</aside-->
+	</section>
+</section>

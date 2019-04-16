@@ -1,0 +1,29 @@
+<div layout="row" layout-sm="column" layout-align="space-around" ng-if="showLoader == 0">
+	<md-progress-circular md-mode="indeterminate"></md-progress-circular>
+</div>
+<section ng-if="areaDataZone.error.code == 0" lazyload>
+	<md-list>
+		<div>
+			<md-list-item>
+				<md-checkbox ng-model="selAllCheckZone[0]" ng-click="selectAllZone(areaDataZone.results.length,0,selected)"></md-checkbox>
+				<p class="md-hue-1" style="font-weight:bold">Select All Zones {{areaDataZone.data.length}}</p>
+			</md-list-item>
+		</div>
+		<div ng-repeat="area in areaDataZone.results | limitTo: limiter | filter:filterAreas">
+			<md-list-item>
+				<md-checkbox ng-model="checkZones[$index]" ng-click="stateChangedZone($index,selected)"></md-checkbox>
+				<p class="blue">{{area.znm}}</p>
+				<md-icon class="md-secondary" ng-click="doSecondaryAction($event)" aria-label="Chat" md-svg-icon="img/ic_more_horiz_36px.svg"></md-icon>
+			</md-list-item>
+			<div layout="row" layout-wrap  class="dataAreas" layout-align="end center">
+				<div flex="30" ng-repeat="dataAreas in area.areapin">
+					<span><md-checkbox ng-click="toggle(dataAreas.pincode, selected,dataAreas.pincode)" aria-label="Disabled checked checkbox" ng-model="checkAreas[dataAreas.pincode]"  ng-disabled="checkDisabled[dataAreas.pincode]" class="md-primary">{{ dataAreas.pincode }} - {{ dataAreas.area }}</md-checkbox></span>
+				</div>
+			</div>
+			<md-divider></md-divider>
+		</div>
+	</md-list>
+</section>
+<section ng-if="areaDataZone.error.code == 1">
+	<h2>No Areas Found</h2>
+</section>

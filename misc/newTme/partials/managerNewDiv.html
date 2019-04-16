@@ -1,0 +1,131 @@
+
+<md-dialog style="width: 50%;height:73%;border-radius:40px;">	
+
+<!--
+	<md-button class="md-icon-button closeThis" ng-click="hideManagerPop()">
+			<md-icon md-svg-src="img/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+	</md-button>
+-->
+	
+	<md-dialog-content style="background:white;color:black;height:100%" >
+			<div class="UpdateInfo"  ng-if="showinformationpopup	==	0 ">
+				<div class="headerManagerDiv label_info_pop">Kindly Select Your Manager</div>
+				<form>
+					<div class="first_main_div" style="margin-top:3%;">
+						<div class="left_div"><div style="float:left;padding-right:10px;margin-left:21%;"><h3>Select Manager</h3></div>
+							<input type="text" class="managername"  managerlistauto placeholder="Search Manager" ng-model="getmanname" style="border: 1px solid rgba(0, 0, 0, 0.15);height: 30px;padding-left: 5px;width: 251px;float:left;" /><input type="button"  value="Submit" class="Submit_manDetails" style="background: #33A2E7 !important;" value="Submit" ng-click="submitInfoPopUp(getmanname)">
+						</div>
+					</div>
+				</form>
+				<div class="show_pending_status" style="color: green;display: block;font-weight: bold;margin-left: 120px;margin-top: 100px;display:none;">Your Request Has been Sent to {{getmanname}}.Kindly Wait for his/her Response.</div>
+		  </div>
+		
+		  <div class="DisplayInfo" align="center" style="margin-top:0px;#7e7d7d !important" ng-if="showinformationpopup	==	1">
+			  <div class="headerManagerDiv label_info_pop" align="center" ng-if="showinformationpopup	==	1 ">Manager Information</div>
+				<form name="informPopoupDialogFrm1">
+						 <div flex-xs flex-gt-xs="50" layout="column" style="display: block !important;">
+							  <md-card style=" height: 250px;width: 250px;">
+								<img ng-src="{{SSO_Manager_pic}}" ng-if="SSO_Manager_pic!=''" class="md-card-image"  height="160px" alt="Profile Pic" style="align-self: center;">
+								<img ng-src="img/no_profilePic.png" ng-if="SSO_Manager_pic==''" class="md-card-image" alt="Profile Pic" style="align-self: center;height: 150px;width: 150px;">
+									<md-card-content style="pading:0px;word-wrap: break-word;">
+										<div class="manager_name" ng-if="SSO_Manager_name!=''">{{SSO_Manager_name}}</div>
+										<div class="manager_code" ng-if="SSO_Manager_code!=''">({{SSO_Manager_code}})</div>
+										<div class="manager_email" ng-if="SSO_Manager_email!=''">{{SSO_Manager_email}}</div>
+										<div class="manager_city" ng-if="SSO_Manager_city!=''">{{SSO_Manager_city}}</div>
+									</md-card-content>
+									<md-card-content ng-if="pending_req	==	1"> Request is Still Pending</md-card-content>
+									<md-card-actions layout="row" layout-align="end center" style="justify-content: center;" ng-if="pending_req	==	0">
+										<md-button style="background: #33a2e7 none repeat scroll 0 0;border-radius:0px;color:white;" ng-click="showfile(1)">MODIFY</md-button>
+									</md-card-actions>
+									<md-card-actions layout="row" layout-align="end center" style="justify-content: center;" ng-if="pending_req	==	1">
+										<md-button style="background: #33a2e7 none repeat scroll 0 0;border-radius:0px;color:white;" ng-click="showfile(1)">MODIFY</md-button>
+									</md-card-actions>
+									</md-card>									
+						</div>
+<!--
+						<div flex-xs flex-gt-xs="50" layout="column" style=" color: green;display: block !important;font-size: 26px;font-weight: bold;margin-top: 0px;" ng-if="pending_req	==	1">
+							Request is Still Pending
+							<md-button style="background: #33a2e7 none repeat scroll 0 0;border-radius:0px;color:white;" ng-click="showfile(1)">MODIFY</md-button>
+						</div>
+-->
+				</form>
+		</div>
+		
+		<div class="NewRequestInfo" align="center" style="margin-top:0px;#7e7d7d !important" ng-if="showinformationpopup	==	2 && checkNewReq	==	0">
+			   <div class="headerManagerDiv label_info_pop">New Requests</div>
+				<form name="informPopoupDialogFrm1">
+						 <div  flex-xs flex-gt-xs="40" layout="row" class="outer_div_man" style="display: block !important;height: 535px;overflow: hidden;width:100%;display: block !important;" ng-if="newRequestArr.errorCode	==	0 ">
+							 <div  class="main_div_req{{$index}} inner_div_man" style="float:left;" ng-repeat="request in newRequestArr.data">
+							 <md-card style=" height: 256px;width: 250px;float:left; border: 1px solid lightgrey;"  class="manager_mdgrid">
+									<md-card-content style="height:331px;pading:0px;word-wrap: break-word;">
+										<img src="{{request.img_src}}" class="profile_pic_request" style="align-self: center;height: 118px;width: 118px;">
+										<div class="emp_req_name" ng-if="request.empname!=''">{{request.empname}}</div>
+										<div class="emp_req_code" ng-if="request.empcode!=''">({{request.empcode}})</div>
+										<div class="emp_req_email" ng-if="request.city!=''">{{request.city}}</div>
+										<div class="emp_req_city" ng-if="request.source!=''">{{request.source}}</div>
+										<md-card-actions layout="row" layout-align="end center" style="justify-content: center;">
+											<md-button style="border: 1px solid grey;border-radius: 0;color: grey;font-weight: bold;min-width: 117px; margin: 6px 3px;" ng-click="AcceptRequest(request.emp_emailId,request.manager_name,request.emp_mob,request.manager_code,request.empcode,$index,request.empKey,request.city,request.mobile_num,request.email_id)">ACCEPT</md-button>
+										
+										<md-button style="border: 1px solid grey;border-radius: 0;color: grey;font-weight: bold;min-width: 117px; margin: 6px 3px;" ng-click="RejectRequest(request.emp_emailId,request.manager_name,request.emp_mob,request.manager_code,request.empcode,$index)">REJECT</md-button>
+									</md-card-actions>
+									
+									</md-card-content>
+									</md-card>	
+									
+									
+								</div>
+						</div>
+						
+				</form>
+		</div>
+		
+		<div class="acceptedRequestInfo" align="center" style="margin-top:0px;#7e7d7d !important" ng-if="showinformationpopup	==	2 && checkNewReq	==	1">
+			   
+				<form name="informPopoupDialogFrm1">
+						 <div  flex-xs flex-gt-xs="40" layout="row" class="outer_div_man" style="display: block !important;height: 235px;overflow: auto;width:100%;display: block !important;" ng-if="aceptedArr.errorCode	==	0 ">
+							 <div class="headerManagerDiv label_info_pop"  ng-if="showinformationpopup	==	2 && checkNewReq	==	1">Accepted Requests</div>
+							 <div  class="main_div_req{{$index}} inner_div_man" style="float:left;" ng-repeat="request in aceptedArr.data">
+							 <md-card style=" height: 180px;width: 180px;float:left; border: 1px solid lightgrey;"  class="manager_mdgrid">
+									<md-card-content style="height:331px;pading:0px;word-wrap: break-word;">
+										<img src="{{request.img_src}}" class="profile_pic_request" style="align-self: center;height: 90px;width: 90px;">
+										<div class="emp_req_name" ng-if="request.empname!=''">{{request.empname}}</div>
+										<div class="emp_req_code" ng-if="request.empcode!=''">({{request.empcode}})</div>
+										<div class="emp_req_email" ng-if="request.city!=''">{{request.city}}</div>
+										<div class="emp_req_city" ng-if="request.source!=''">{{request.source}}</div>
+									</md-card-content>
+									</md-card>	
+								</div>
+						</div>
+				</form>
+		</div>
+		
+		<div class="rejectedRequestInfo" align="center" style="margin-top:15px;#7e7d7d !important" ng-if="showinformationpopup	==	2 && checkNewReq	==	1">
+			   
+				<form name="informPopoupDialogFrm1">
+						 <div  flex-xs flex-gt-xs="40" layout="row" class="outer_div_man" style="display: block !important;height: 235px;overflow: auto;width:100%;display: block !important;" ng-if="rejectedArr.errorCode	==	0 ">
+							 <div class="headerManagerDiv label_info_pop"  ng-if="showinformationpopup	==	2 && checkNewReq	==	1">Rejected Requests</div>
+							 <div  class="main_div_req{{$index}} inner_div_man" style="float:left;" ng-repeat="request in rejectedArr.data">
+							 <md-card style=" height: 180px;width: 180px;float:left; border: 1px solid lightgrey;"  class="manager_mdgrid">
+									<md-card-content style="height:331px;pading:0px;word-wrap: break-word;">
+										<img src="{{request.img_src}}" class="profile_pic_request" style="align-self: center;height: 90px;width: 90px;">
+										<div class="emp_req_name" ng-if="request.empname!=''">{{request.empname}}</div>
+										<div class="emp_req_code" ng-if="request.empcode!=''">({{request.empcode}})</div>
+										<div class="emp_req_email" ng-if="request.city!=''">{{request.city}}</div>
+										<div class="emp_req_city" ng-if="request.source!=''">{{request.source}}</div>
+									</md-card-content>
+									</md-card>	
+								</div>
+						</div>
+				</form>
+		</div>
+		
+		<div class="skip_man"><md-button style="border-radius:0px;display:block; position: absolute;bottom: 0;right: 0;" ng-if="showinformationpopup == 0" ng-click="showfile(0)"><h4>SKIP</h4></md-button></div>
+		<div class="skip_man"><md-button style="border-radius:0px;display:block; position: absolute;bottom: 0;right: 0;" ng-if="showinformationpopup == 1 && findReq.errorCode==0" ng-click="showfile(2)"><h4>SKIP</h4></md-button></div>
+
+		<div class="skip_man"><md-button style="border-radius:0px;display:block; position: absolute;bottom: 0;right: 0;" ng-if="showinformationpopup == 1 && findReq.errorCode==1" ng-click="showfile(4)"><h4>CLOSE</h4></md-button></div>
+		
+		<div class="skip_man"><md-button style="border-radius:0px;display:block; position: absolute;bottom: 0;right: 0;" ng-if="showinformationpopup == 2 && checkNewReq	==	1" ng-click="showfile(4)"><h4>CLOSE</h4></md-button></div>
+		<input type="hidden" class="random_Number_gen"/>
+		<input type="hidden" class="auto_select" value="0"/>
+	</md-dialog-content>
+</md-dialog>

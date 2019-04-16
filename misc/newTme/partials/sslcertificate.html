@@ -1,0 +1,70 @@
+<style type="text/css">
+		.mid_sec {display:table;width:50%;padding:20px 0;margin:0 auto;} 			
+		.titl_head{font-size:20px;font-family: 'Roboto', sans-serif;color:#ff9800;text-align:left;font-weight:400;}
+		.certifi_box {width: 100%;padding: 20px;border: 1px solid #ddd;float:left; }
+		.tit_txt{font-size: 18px;font-family: roboto;padding: 10px 0;float: left;width: 100%; }
+		.radio_div{font-size: 14px;font-family: roboto;padding:5px 0;float: left;width: 100%; }
+		.btn_div{font-size: 14px;font-family: roboto;padding:10px 0;float: left;width: 100%;text-align:center; }
+		.btn_div button{font-size: 14px;font-family: roboto;padding:5px 10px;background:#F1F1F1;border:1px solid #5198CE;text-align:center;width:130px;margin:10px;color:#5198CE;cursor:pointer; }
+		.payment_div{float:left;width:27%;border:1px solid #ddd;padding:6px;margin:15px 17px 10px 0;color:#8D8D8D;}
+</style>
+<md-toolbar md-scroll-shrink style="background-color:#FFFFFF;border-bottom:1px solid #CCCCCC" ng-init="onLoadCall()" ng-controller="catPreviewController">
+	<div class="md-toolbar-tools">
+		<md-button class="md-icon-button" aria-label="Settings" style="margin-left:20px;" ng-click="toggleLeft()">
+			<md-icon md-svg-icon="img/ic_menu_36px.svg" style="color:#000000;"></md-icon>
+		</md-button>
+		<h2>
+			<span>Own Website & Mobile site</span>
+		</h2>
+		<span flex></span> 
+<!--
+		<md-button aria-label="Open phone interactions menu" class="md-fab md-primary" style="right:40px; font-weight:bold;" ng-click="$state.go('appHome.omniappdemo',{parid:$stateParams.parid,page:extraHandler,ver:$stateParams.ver});">
+			<md-icon  md-menu-origin md-svg-icon="img/ic_arrow_back_24px.svg"></md-icon>
+		</md-button>
+-->
+	</div>
+</md-toolbar>
+
+<section class="mainContain_innr" subtract="500">
+	<section class="mainContain">
+		
+		<div class="cntre" style="font-family: 'Roboto', sans-serif;">
+			<span class="tble-title">SSL Certificate for security of your website</span>
+			<div class="tbl-ottr" style="background: white none repeat scroll 0 0;">
+				<span class="tblt">Would you like to purchase SSL certificate for your website security?</span>			
+				<div class="optn-div">
+					<md-radio-group ng-model="ssl_radio">
+						<md-radio-button  class="md-primary" value="no">I do not want SSL certificate</md-radio-button> 
+						<md-radio-button  class="md-primary" value="yes">I want to purchase SSL certificate for my website.</md-radio-button> 
+					</md-radio-group>
+				</div>
+				<div class="radio_div" id='purchaseAmt' ng-if="ssl_radio == 'yes'" style="margin-left: 50px;">
+					<div class="payment_div ecs_ssl_div" style="display:none;">
+						<input type="radio" name="ssl_payment" ng-disabled="ssl_disabled == 'upfront'" id="ssl_ECS" class='ssl_payment' ssl_payment_val="6000" ssl_payment_type="ECS"/> <span><b>ECS</b>: Rs.6000/year</span>
+					</div>
+					<div class="payment_div up_ssl_div" >
+						<input type="radio" name="ssl_payment" id="ssl_Upfront" checked="checked" class='ssl_payment' ssl_payment_val="5000" ssl_payment_type="Upfront"/> <span><b>Price</b>: Rs.5000/year</span>
+					</div>
+				</div>
+				<span class="note" style="margin:0;">Due to security reasons, Third party SSL certificate integration is not allowed on YOW.</span>
+				<div class="leftbr">
+<!--
+				<button class="button" style=" background: none repeat scroll 0 0 #f1f1f1;border: 1px solid #1274c0;border-radius: 2px;color: #1274c0;font-size: 14px;font-weight: 400;height: 35px;line-height: 35px;margin: 10px;padding: 0 !important;text-align: center;width: 160px;" ng-click="$state.go('appHome.omnidomainreg',{parid:$stateParams.parid,page:extraHandler,ver:$stateParams.ver});">Prev</button>
+-->
+				
+				<button class="button" style=" background: none repeat scroll 0 0 #f1f1f1;border: 1px solid #1274c0;border-radius: 2px;color: #1274c0;font-size: 14px;font-weight: 400;height: 35px;line-height: 35px;margin: 10px;padding: 0 !important;text-align: center;width: 160px;" ng-click="ssl_proceed($event)">Proceed</button>
+				</div>
+			</div>
+		</div>
+	
+	</section>
+</section>
+<!--
+<div class="ftr_wrpper" style="position:relative">
+	<div class="jdrrcontainer">
+		<div class="jdrr_footer">
+				Copyright 2008-2016 Justdial.com. All Rights Reserved. <a href="#">Privacy</a> I <a href="#">Terms</a>
+		</div>
+	</div>
+</div>	
+-->

@@ -1,0 +1,105 @@
+db.tbl_companymaster_extradetails_shadow.createIndex( { updatedBy: 1, newbusinessflag: 1, updatedOn: -1 }, { background: true, } ) // run in background
+
+
+db.tbl_companymaster_extradetails_shadow.createIndex( { updatedBy: 1, updatedOn: -1 } )
+
+
+db.tbl_companymaster_extradetails_shadow.dropIndex("updatedBy_1_updatedOn_-1")
+
+
+"No suitable servers found (`serverSelectionTryOnce` set): [socket timeout calling ismaster on 'tmedashboard1:27017']",
+
+
+db.createUser({user: "dbuser", pwd: "dbpass123", roles: [ "readWrite" ] });
+
+use admin
+db.createUser({user: "genio" , pwd: "genio@123", roles: [  "userAdminAnyDatabase","readWriteAnyDatabase" ]})
+
+
+db.tbl_temp_intermediate.createIndex({ "parentid": 1 }, { unique: true }); // primary key
+
+
+db.serverStatus().connections
+
+
+db.serverStatus().wiredTiger.cache
+
+
+db.getSiblingDB("admin").runCommand( { getLog : "global" } )
+
+
+db.adminCommand({currentOp: true,"active" : true,"secs_running" : { "$gt" : 10 },"ns" : /^db_jda\./})
+
+
+show log global // to find query running on server
+
+show log rs // to find replica set status
+
+
+rs.status()
+
+
+
+
+
+
+db.api_logs.find({createdat:{$gte:'2017-11-25 00:00:00',$lte:'2017-11-25 23:59:59'}}).count()
+
+
+db.api_logs.find({createdat:{$lte:'201-11-25 00:00:00',$lte:'2017-11-25 23:59:59'}}).count()
+
+
+tmedashboard:SECONDARY> db.api_logs.find().limit(10).pretty()
+
+
+db.api_logs.find({"createdat" : {"$lte": ISODate("2018-05-31T23:59:59.000Z")}}).count()
+
+
+db.api_logs.find({"createdat" : {"$gte": ISODate("2018-06-01T00:00:00.000Z")}}).count()
+
+ISODate("2017-08-10T13:44:52Z")
+
+
+
+db.api_logs.remove({"createdat" : {"$gte": ISODate("2018-06-01T00:00:00.000Z")}})
+
+
+
+use online_regis_pune
+tmedashboard:PRIMARY> db.tbl_companymaster_extradetails_shadow.createIndex({ companyname: 1}, { background: true, })
+{
+	"ok" : 0,
+	"errmsg" : "WiredTigerIndex::insert: key too large to index, failing  11195 { : \"Snook The Snooker Gam\n\t\t\t\tAll/companyname\n\t\t\t\t\t\n\t\t\t\t/Last 1 Week/Last 1 Month\n\t\t\t\n\t\t\t\n\t\t\n\t\t\n\t\t\n\t\t\t\n\t\t\t\n\t\t\t\t1\n\t\t\t\n\t\t\t\n\t\t\n\t\t\n\t\t\n\t\t\n\t\t\t\n\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\t\t...\" }",
+	"code" : 17280
+}
+tmedashboard:PRIMARY> use online_regis_hyderabad
+switched to db online_regis_hyderabad
+tmedashboard:PRIMARY> db.tbl_companymaster_extradetails_shadow.createIndex({ companyname: 1}, { background: true, })
+{
+	"ok" : 0,
+	"errmsg" : "WiredTigerIndex::insert: key too large to index, failing  3090 { : \"\n\n\n\n\t\n\t\n\t\n\t\n\t\n\t\t<!-- \n\t\tBODY,DIV,TABLE,THEAD,TBODY,TFOOT,TR,TH,TD,P { font-family:\"Arial\"; font-size:x-small }\n\t\t -->\n\t\n\t\n\n\n\n\n\t\n\t\n\t\t  Hanuman water ta...\" }",
+	"code" : 17280
+}
+tmedashboard:PRIMARY> use online_regis_ahmedabad
+switched to db online_regis_ahmedabad
+tmedashboard:PRIMARY> db.tbl_companymaster_extradetails_shadow.createIndex({ companyname: 1}, { background: true, })
+{
+	"ok" : 0,
+	"errmsg" : "WiredTigerIndex::insert: key too large to index, failing  1244 { : \"                                                                                                                                                      ...\" }",
+	"code" : 17280
+}
+
+db.tbl_companymaster_extradetails_shadow.createIndex({ companyname: 1}, { background: true, })
+
+db.tbl_companymaster_extradetails_shadow.find({"companyname": /Snook The Snooker/})
+
+
+db.tbl_companymaster_extradetails_shadow.find({$where: "this.companyname.length > 100"}).limit(2);
+
+
+
+db.tbl_companymaster_extradetails_shadow.find({ companyname: { $exists: true },$where: "this.companyname.length > 100" }).limit(2);
+
+
+
+

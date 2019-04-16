@@ -1,0 +1,45 @@
+<md-toolbar md-scroll-shrink style="background-color:#FFFFFF" ng-init="onLoadCall()">  
+	<div class="md-toolbar-tools">
+		<md-button class="md-icon-button" aria-label="Settings" style="margin-left:20px;" ng-click="toggleLeft()">
+			<md-icon md-svg-icon="img/ic_menu_36px.svg" style="color:#000000;"></md-icon>
+		</md-button>
+		<h2>
+			<span>Omni Template Selection - App</span>
+		</h2>
+		<span flex></span>
+	</div>
+</md-toolbar>
+
+
+<section class="" subtract="500" ng-controller="omniappdemoController">
+	<section class="mainContain" style="font-family:roboto" >
+	
+	<div class="wrapper templete-container">
+		<div class="container catcontain cntre" style="width:1000px">
+			<div class="row subC">
+				<div class="heading-tag">Select landing view for your App</div>  
+				<div class="sub_Div" ng-repeat ="temp in template_url">  
+					<div class="innerDiv">
+						<span class="head_sec">{{temp.TEMPLATE_NAME}}</span>
+						<div class=" mid_sec sel_temp{{$index}}">
+							<img class="img-responsive" src="{{temp.IMAGE_URL}}"/>
+							<span class="check_img"></span>
+						</div>
+						<div class="btnotr "><button class="btn btn-primary cusBtn" ng-click="select_this($event,$index,temp.TEMPLATE_ID,temp.TEMPLATE_NAME);">Use this view</button></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="full-layout"><button class="prcpay margeT5" ng-click="save_temp($event)">Proceed</button></div>
+	</div>
+	
+	<div class="ftr_wrpper" style="position:relative">
+		<div class="jdrrcontainer">
+			<div class="jdrr_footer">
+					Copyright 2008-2016 Justdial.com. All Rights Reserved. <a href="#">Privacy</a> I <a href="#">Terms</a>
+			</div>
+		</div>
+	</div>
+	
+	</section>
+</section>

@@ -1,0 +1,20 @@
+<md-dialog aria-label="Combo Plan Pop up" style="height: 250px;width: 560px;">	
+ 	<md-dialog-content layout='column'  style='padding:0px'>
+		<div class="combo_dgn_popup" style="width:auto">
+			<div class="ttle"><div class='ttle_text'>Congratulations!</div></div>
+			<div class='bod'>
+				Against your selected monthly package of {{displayprice | currency : '&#8377;' : 0}}/- Instant monthly bonus @ 10% <br>
+				of your monthly package value will be credited to your package account every month<br>
+				 for 10  consecutive months.
+			</div>
+			<div style="text-align: center;">
+				<input type="submit" value="Ok" class="close_btn" ng-click='closepopup()'>
+			</div>
+			<span class="cls_btn" ng-click="closepopup()">X</span>
+			
+		</div><!--end of bnr_dgn_popup-->
+	</md-dialog-content>
+</md-dialog>	
+
+
+

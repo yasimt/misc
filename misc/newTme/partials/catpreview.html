@@ -1,0 +1,142 @@
+<md-toolbar md-scroll-shrink style="background-color:#FFFFFF;border-bottom:1px solid #CCCCCC">
+	<div class="md-toolbar-tools">
+		<md-button class="md-icon-button" aria-label="Settings" style="margin-left:20px;" ng-click="toggleLeft()">
+			<md-icon md-svg-icon="img/ic_menu_36px.svg" style="color:#000000;"></md-icon>
+        </md-button>
+		<h2>
+			<span>Selected Categories Preview</span>
+        </h2>
+		<span flex></span>
+		<div>
+			<md-button aria-label="Open phone interactions menu" ng-click="$state.go('appHome.category',{parid:parentid,page:''});" class="md-fab md-primary" style="top:30px; right:40px; font-weight:bold;">
+				<md-icon  md-menu-origin md-svg-icon="img/if_back-alt_134226.svg"></md-icon>
+			</md-button>
+			<md-button aria-label="Open phone interactions menu" class="md-fab md-primary" style="top:30px; right:40px; font-weight:bold;" ng-click="submitCats($event,'appHome.areaSel','')">
+				<md-icon  md-menu-origin md-svg-icon="img/ic_arrow_forward_24px.svg"></md-icon>
+			</md-button>
+		</div>
+	</div>
+</md-toolbar>
+<section class="mainSection" subtract="500">
+	<section class="mainContain">
+		<div>
+			<md-content class="md-padding">
+				<md-toolbar md-scroll-shrink style="background-color:transparent">
+					<div class="md-toolbar-tools">
+<!--
+						<span class="pointer" style="color:red" ng-click="showFlagData()">*</span>
+-->
+						<span flex></span>
+						<md-button ng-click="reset_category()" class="md-raised md-warn">
+							<md-icon md-svg-icon="img/ic_restore_24px.svg" style="color:#FFFFFF;"> </md-icon>
+							<span>Reset Category</span>
+						</md-button>
+					</div>
+				</md-toolbar>
+				<md-card>
+					<md-card-content>
+						<section ng-if="catData.error.code == 0">
+							<div layout="row" flex class="text-center greyBack" ng-if="showFlag ==0">
+								<div flex="25" class="borderTakeLeft borderTop pad-top-5">Categories</div>
+								<div flex="25" class="borderTake borderTop pad-top-5 pad-bot-5">Additional Info</div>
+								<div flex="8" class="borderTake borderTop pad-top-5 pad-bot-5">Paid</div>
+								<div flex="5" class="borderTake borderTop pad-top-5 pad-bot-5">B2B</div>
+								<div flex="5" class="borderTake borderTop pad-top-5 pad-bot-5">Natl. Listing</div>
+								<!--div flex="5" class="borderTake borderTop pad-top-5 pad-bot-5">Exc lusive</div>
+								<div flex="5" class="borderTake borderTop pad-top-5 pad-bot-5">Ratio</div-->
+								<div flex="10" class="borderTake borderTop pad-top-5 pad-bot-5">Type</div>
+								<div flex="10" class="borderTake borderTop pad-top-5 pad-bot-5">NonPaid</div>
+								<div flex="11" class="borderTake borderTop pad-top-5 pad-bot-5">Add / Remove</div>
+							</div>
+<!--
+							<div layout="row" flex class="text-center greyBack" ng-if="showFlag ==0">
+								<div flex="25" class="borderTakeLeft borderTop pad-top-5">Categories</div>
+								<div flex="25" class="borderTake borderTop pad-top-5 pad-bot-5">Comment</div>
+								<div flex="10" class="borderTake borderTop pad-top-5 pad-bot-5">B2B</div>
+								<div flex="15" class="borderTake borderTop pad-top-5 pad-bot-5">Exc lusive</div>
+								<div flex="15" class="borderTake borderTop pad-top-5 pad-bot-5">Add / Remove</div>
+								<div flex="9" class="borderTake borderTop pad-top-5 pad-bot-5">NonPaid</div>
+							</div>
+-->
+							<div ng-repeat="(key,bdetls) in catData.data" class="{{key}}" layout="row" class="bestBudgetRow" ng-if="showFlag ==0 && bdetls.show == 1">
+								<div flex="25" class="borderTakeLeft borderTop pad-top-5 padLeft5px" ng-class="{'blue':bdetls.msk == '1','red':bdetls.grnt == '1'}"  ng-if="bdetls.narr == ''">{{bdetls.cnm}}</div>
+								<div flex="25" class="borderTakeLeft borderTop pad-top-5 padLeft5px tooltiptxt" ng-if="bdetls.narr != ''">
+									 <div class="toolwrapper">
+										{{bdetls.cnm}}
+										<div class="tooltipcls">{{showCatNarr[key]}}</div>
+									 </div>
+								</div>
+								<div flex="25" class="borderTake borderTop pad-top-5 pad-bot-5 text-center" ng-if="bdetls.cmnt == 'Show Timings'">
+									{{bdetls.slgn}}
+								</div>
+								<div flex="25" class="borderTake borderTop pad-top-5 pad-bot-5" ng-if="bdetls.cmnt == 'Add Timings'">
+									<md-input-container style="padding:0">
+										<label style="color:#000000">Add Timings</label>
+										<input type="text" style="border-bottom:1px solid #000000" ng-model="movieTimings[key]" />
+									</md-input-container>
+								</div>
+								<div flex="25" class="borderTake borderTop pad-top-5 pad-bot-5" ng-if="bdetls.cmnt == 'Authorised'">
+									<md-checkbox ng-disabled="pushDisabled[key]" aria-label="Disabled checked checkbox" ng-model="checkPins[key]" class="md-primary" style="margin:0;margin-left:8px;" ng-click="toggleCheck(key,selected,bdetls.athcnm,bdetls.athcid)">Authorised</md-checkbox>
+								</div>
+								<div flex="25" class="borderTake borderTop pad-top-5 pad-bot-5" ng-if="bdetls.cmnt != 'Show Timings' && bdetls.cmnt != 'Add Timings' && bdetls.cmnt != 'Authorised'"></div>
+								<div flex="8" class="borderTake borderTop pad-top-5 pad-bot-5 text-center">{{bdetls.paid == "Y" && 'Paid' || 'NonPaid'}}</div>
+								<div flex="5" class="borderTake borderTop pad-top-5 pad-bot-5 text-center">{{bdetls.b2b}}</div>
+								<div flex="5" class="borderTake borderTop pad-top-5 pad-bot-5 text-center">{{bdetls.distr == "1" && "Yes" || "No" }}</div>
+								<!--div flex="5" class="borderTake borderTop pad-top-5 pad-bot-5 text-center">{{bdetls.exlcv}}</div>
+								<div flex="5" class="borderTake borderTop pad-top-5 pad-bot-5 text-center">{{bdetls.tcomp}}</div-->
+								<div flex="10" class="borderTake borderTop pad-top-5 pad-bot-5 text-center">{{bdetls.type}}</div>
+								<div flex="10" class="borderTake borderTop pad-top-5 pad-bot-5 text-center" layout-align="space-around">
+									<md-switch ng-model="showNpSwitch[key]" ng-disabled="switchNpDisabled[key]" aria-label="Switch 2" layout-align="space-around" class="md-warn" ng-change="changeSwitchNp(showNpSwitch[key],key)" style="margin:0px;"></md-switch>
+								</div>
+								<div flex="11" class="borderTake borderTop pad-top-5 pad-bot-5 text-center"><md-icon ng-click="toggle(key)" ng-model="showTogImg[key]" style="color:{{colorCheck[key]}}" md-svg-icon="{{imgSvgTog[key]}}"></md-icon></div>
+							</div>
+<!--
+							<div ng-repeat="(key,bdetls) in catData.data" layout="row" class="bestBudgetRow" ng-if="showFlag ==0 && bdetls.show == 1">
+								<div flex="25" class="borderTakeLeft borderTop pad-top-5 padLeft5px" ng-class="{'blue':bdetls.msk == '1','red':bdetls.grnt == '1'}">{{bdetls.cnm}}</div>
+								<div flex="25" class="borderTake borderTop pad-top-5 pad-bot-5 text-center" ng-if="bdetls.cmnt == 'Show Timings'">
+									{{bdetls.slgn}}
+								</div>
+								<div flex="25" class="borderTake borderTop pad-top-5 pad-bot-5" ng-if="bdetls.cmnt == 'Add Timings'">
+									<md-input-container style="padding:0">
+										<label style="color:#000000">Add Timings</label>
+										<input type="text" style="border-bottom:1px solid #000000" ng-model="movieTimings[key]" />
+									</md-input-container>
+								</div>
+								<div flex="25" class="borderTake borderTop pad-top-5 pad-bot-5" ng-if="bdetls.cmnt == 'Authorised'">
+									<md-checkbox ng-disabled="pushDisabled[key]" aria-label="Disabled checked checkbox" ng-model="checkPins[key]" class="md-primary" style="margin:0;margin-left:8px;" ng-click="toggleCheck(key,selected,bdetls.athcnm,bdetls.athcid)">Authorised</md-checkbox>
+								</div>
+								<div flex="25" class="borderTake borderTop pad-top-5 pad-bot-5" ng-if="bdetls.cmnt != 'Show Timings' && bdetls.cmnt != 'Add Timings' && bdetls.cmnt != 'Authorised'"></div>
+								<div flex="10" class="borderTake borderTop pad-top-5 pad-bot-5 text-center">{{bdetls.b2b}}</div>
+								<div flex="15" class="borderTake borderTop pad-top-5 pad-bot-5 text-center">{{bdetls.exlcv}}</div>
+								<div flex="15" class="borderTake borderTop pad-top-5 pad-bot-5 text-center"><md-icon ng-click="toggle(key)" ng-model="showTogImg[key]" style="color:{{colorCheck[key]}}" md-svg-icon="{{imgSvgTog[key]}}"></md-icon></div>
+								<div flex="9" class="borderTake borderTop pad-top-5 pad-bot-5 text-center" layout-align="space-around">
+									<md-switch ng-model="showNpSwitch[key]" ng-disabled="switchNpDisabled[key]" aria-label="Switch 2" layout-align="space-around" class="md-warn" ng-change="changeSwitchNp(showNpSwitch[key],key)" style="margin:0px;"></md-switch>
+								</div>
+							</div>
+-->
+						</section>
+						<section ng-if="catData.error.code == 1">
+							<h2>No Categories Selected</h2>
+						</section>
+					</md-card-content>
+				</md-card>
+				<div style="float: right;margin-top:3%;text-align:center;" ng-if="showColourCode == 1">
+					<list style="width:100%">
+						<ul style="font-size:18px;font-weight:bolder;width:100%;margin-top:12px;">User Added Categories<div style="border: solid 12px #3CB371;width: 2px;float:left;"><img/></div></ul>
+						<ul style="font-size:18px;font-weight:bolder;width:100%;margin-top:12px;">Existing Categories<div style="border: solid 12px #87CEFA;width: 2px;float:left;"><img/></div></ul>
+						<ul style="font-size:18px;font-weight:bolder;width:100%;margin-top:12px;"> User Removed Categories<div style="border: solid 12px #ff6666;width: 2px;float:left;"><img/></div></ul>
+					</list>
+				</div>
+			</md-content>
+		</div>
+	</section>
+		<!--************************** Instant live*************************************/	-->
+		<div ng-if="instantOverlay == 1" style="z-index:1002;opacity:.5;position:fixed;z-index:999;top:-100px;left:0;bottom:0;right:0;height:125%;width:100%;background:none repeat scroll 0 0 #000;"></div>
+			<div ng-if="instantConfirm == 1"  style="background: white none repeat scroll 0px 0px; border: thin solid rgb(18, 116, 192); height: 124px; position: absolute; width: 714px; z-index: 1000; margin-left: 20%; margin-top: -133px; padding: 20px;">
+				<span>Please make sure you have done the correct entries as changes made by you will be taken live. In case of any wrong feed, you will be penalized</span>
+				<button  ng-click="instant_yes()" class="yes_ins_live" style="float:left;margin-top:40px;position:absolute;cursor:pointer;background: none repeat scroll 0 0 #2d87d3;border: 1px solid #1274c0;border-radius: 2px;color: #f1f1f1;font-size: 16px;font-weight: 400;height: 35px;line-height: 35px;margin-top:40px;text-align: center;width: 125px;float:right;">Yes</button>
+				<button  ng-click="instant_no()"  class="no_ins_live" style="margin-top:40px;float:right;margin-right:112px;cursor:pointer;background: none repeat scroll 0 0 #2d87d3;border: 1px solid #1274c0;border-radius: 2px;color: #f1f1f1;font-size: 16px;font-weight: 400;height: 35px;line-height: 35px;margin-top:40px;text-align: center;width: 125px;float:right;margin-right:170px;">No</button>
+			</div>
+		
+		<!--************************** Instant live *************************************/	-->
+</section>

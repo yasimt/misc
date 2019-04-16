@@ -1,0 +1,42 @@
+<md-dialog aria-label="Categories">
+	<form>
+	<md-toolbar>
+		<div class="md-toolbar-tools">
+			<h2 style="color:#FFFFFF" class="animateSlide" ng-if="confCaptcha==0">Please select an option</h2>
+			<h2 style="color:#FFFFFF" class="animateSlide" ng-if="confCaptcha==1">Please insert captcha value to release the inventory</h2>
+			<span flex></span>
+			<md-button class="md-icon-button" ng-click="answer('not applicable')">
+				<md-icon md-svg-src="img/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+			</md-button>
+		</div>
+	</md-toolbar>
+	<md-dialog-content>
+		<div class="animateSlide" ng-if="confCaptcha==0">
+			Do you want to release the complete inventory of the selected version?
+			<div layout="row" layout-sm="column" layout-align="space-around">
+				<md-button class="md-raised md-accent" ng-click="releaseFullInv()">Complete Inventory</md-button>
+<!--
+				<md-button class="md-raised md-accent" ng-click="releasePincodeWise()">Pincodewise</md-button>
+-->
+			</div>
+		</div>
+		<div class="captchaContent animateSlide" ng-if="confCaptcha==1">
+			<div class="confirmCaptcha text-center">
+				<h2>{{rString}}</h2>
+			</div>
+			<md-input-container>
+				<div layout="column" layout-align="center end">
+					<div class="errorValInv red text-center" ng-if="captchaCorrect == 1">Cannot Submit because {{errorMessage}}</div>
+					<div layout="column" style="width:100%">
+						<label>Insert Captcha as similar to the above value</label>
+						<input required type="text" name="rate" ng-model="$parent.captchaValue">
+					</div>
+					<md-button class="md-fab md-primary" aria-label="Use Android" style="background:#ffc11b none repeat scroll 0 0" ng-click="submitInvRelease()">
+						<md-icon md-svg-src="img/ic_arrow_forward_24px.svg" style="color: #199d25;"></md-icon>
+					</md-button>
+				</div>
+			</md-input-container>
+		</div>
+	</md-dialog-content>
+	</form>
+</md-dialog>

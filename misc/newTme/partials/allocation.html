@@ -1,0 +1,775 @@
+<section class="mainSection" subtract="500" >
+	<section class="mainContain" ng-if="allocContracts.errorCode == 0">
+<!--	<section class="mainContain">-->
+		<h3 class="marBot10px" ng-if="mainPage	==	'search'">Below is your Search Result :</h3>
+		<nav ng-if="mainPage	!=	'search'" class="left margin8 slideIndi">
+			<div class="left arrow marTop10px" ng-if="setArrowPos==1" ng-click="slideright($event)"><img ng-src="img/arrow-left.png" /></div>
+			<div class="navSlider left" style='height:100px'>
+				<ul class="navFilters left marBot30px marTop10px repPop setTotContWidth">
+					<li ng-click="$state.go('appHome.filter',{srchparam:'all',srchWhich:'',currPage:'allocation'})" class="left checkarrownav">All</li><span class="left">/</span>
+
+					<li class="left">
+						<ul class="hide submenuUl">
+							<li class="left" ></li><span class="left">/</span>
+							<li class="left" ></li><span class="left">/</span>
+						</ul>
+					</li><span class="left">/</span>
+<!--
+					<li class="left" ng-click="showSubMenu($event)">Likely Expiry
+						<ul class="hide submenuUl">
+							<li class="left" ng-click="$state.go('appHome.filter',{srchparam:'exp_on',srchWhich:'order-asc',currPage:'allocation'})">ORDER ASC</li><span class="left">/</span>
+							<li class="left" ng-click="$state.go('appHome.filter',{srchparam:'exp_on',srchWhich:'order-desc',currPage:'allocation'})">ORDER DESC</li><span class="left">/</span>
+						</ul>
+					</li><span class="left">/</span>
+-->
+
+					<li ng-click="showSubMenu($event)" class="left">Expiry Type
+						<ul class="hide submenuUl">
+							<div style='width:100%'>
+								<div class='exprd' style='float:left' >
+									<div style="float:left" >
+										<input type='checkbox' ng-click="expiredSub_menu($event)" id='exp' style="float:left"/>
+											<label  style="float:left">Expired</label>
+									</div>
+										
+										<div class="campaign" style='display:none;padding-top:20px'>
+											<ul><li class="left" ng-click="$state.go('appHome.filter',{srchparam:'expired_on',srchWhich:'order-asc',currPage:'allocation'})" >ORDER ASC</li><span class="left">/</span>
+												<li class="left" ng-click="$state.go('appHome.filter',{srchparam:'expired_on',srchWhich:'order-desc',currPage:'allocation'})">ORDER DESC</li><span class="left">/</span>
+											</ul>
+										</div>
+								</div>	
+						
+						
+								<div class='exprd_likely'>
+									<div style="float:left">
+										<input type='checkbox' ng-click="expiredSub_menu($event)" id='likelyexp'/>
+											<label >Likely Expired</label>
+									</div>
+										
+										<div class="campaignlikely" style='display:none;padding-top:20px'>
+											<ul><li class="left" ng-click="$state.go('appHome.filter',{srchparam:'exp_on',srchWhich:'order-asc',currPage:'allocation'})" >ORDER ASC</li><span class="left">/</span>
+												<li class="left" ng-click="$state.go('appHome.filter',{srchparam:'exp_on',srchWhich:'order-desc',currPage:'allocation'})">ORDER DESC</li><span class="left">/</span>
+											</ul>
+										</div>
+								</div>
+							</div>	
+						</ul>
+						
+					</li><span class="left">/</span>
+					
+					<li ng-click="showSubMenu($event)" class="left">Others
+						<ul class="hide submenuUl" style='width:100%'>
+							<div style='width:100%'>
+								<div class='groupid_div commonUpdDiv'>
+									<div style="float:left" >
+										<input type='checkbox' ng-click="expiredSub_menu($event)" id='groupid' style="float:left"/>
+											<label  style="float:left">Group ID</label>
+									</div>
+										
+										<div class="groupid mainUlDiv" style='display:none;padding-top:20px;float:left'>
+											<ul style="left:0"><li class="left" ng-click="$state.go('appHome.filter',{srchparam:'parent_group',srchWhich:'order-asc',currPage:'allocation'})">ORDER ASC</li><span class="left">/</span>
+												<li class="left" ng-click="$state.go('appHome.filter',{srchparam:'parent_group',srchWhich:'order-desc',currPage:'allocation'})">ORDER DESC</li><span class="left">/</span>
+											</ul>
+										</div>
+								</div>	
+						
+						
+								<div class='callcnt_div commonUpdDiv'>
+									<div style="float:left">
+										<input type='checkbox' ng-click="expiredSub_menu($event)" id='callcnt'/>
+											<label >Companycall count</label>
+									</div>
+										
+										<div class="callcnt mainUlDiv" style='display:none;padding-top:20px;float:left'>
+											<ul style="left:110px"><li class="left" ng-click="$state.go('appHome.filter',{srchparam:'callcnt',srchWhich:'order-asc',currPage:'allocation'})">ORDER ASC</li><span class="left">/</span>
+												<li class="left" ng-click="$state.go('appHome.filter',{srchparam:'callcnt',srchWhich:'order-desc',currPage:'allocation'})">ORDER DESC</li><span class="left">/</span>
+											</ul>
+										</div>
+								</div>
+								
+								<div class='createdon_div commonUpdDiv'>
+									<div style="float:left">
+										<input type='checkbox' ng-click="expiredSub_menu($event)" id='createdon'/>
+											<label >Created On</label>
+									</div>
+										
+										<div class="createdon mainUlDiv" style='display:none;padding-top:20px;float:left'>
+											<ul style="left:300px"><li class="left" ng-click="$state.go('appHome.filter',{srchparam:'datasource_date',srchWhich:'order-asc',currPage:'allocation'})">ORDER ASC</li><span class="left">/</span>
+												<li class="left" ng-click="$state.go('appHome.filter',{srchparam:'datasource_date',srchWhich:'order-desc',currPage:'allocation'})">ORDER DESC</li><span class="left">/</span>
+											</ul>
+										</div>
+								</div>
+								
+								<div class='Updatedon_div commonUpdDiv'>
+									<div style="float:left">
+										<input type='checkbox' ng-click="expiredSub_menu($event)" id='Updated_on'/>
+											<label >Updated On</label>
+									</div>
+										
+										<div class="Updated_on mainUlDiv" style='display:none;padding-top:20px;float:left'>
+											<ul style="left:421px"><li class="left" ng-click="$state.go('appHome.filter',{srchparam:'updated_date',srchWhich:'order-asc',currPage:'allocation'})">ORDER ASC</li><span class="left">/</span>
+												<li class="left" ng-click="$state.go('appHome.filter',{srchparam:'updated_date',srchWhich:'order-desc',currPage:'allocation'})">ORDER DESC</li><span class="left">/</span>
+											</ul>
+										</div>
+								</div>
+							</div>	
+						</ul>
+						
+					</li><span class="left">/</span>
+					
+					<li class="left" ng-click="showSubMenu($event)">Campaign						
+									
+									<ul class="hide submenuUl" style='width:100%'>										
+										<li class="left"  ng-repeat="(key1,value2) in checkAttr">
+											<input type='checkbox' id="{{key1}}" ng-click="campaignOrder(key1,allocation)" ng-model="checkAttr[key1]">{{key1}}</input>
+											
+										</li><span class="left"></span>												
+									 </ul>
+															 
+															 
+<!--
+								<li class="left"><input type='checkbox' ng-click="campaignOrder('all')" ng-true-value="true" ng-false-value="false" >ALL</input></li><span class="left">/</span>
+								<li class="left"><input type='checkbox' ng-click="$state.go('appHome.filter',{srchparam:'pdg',srchWhich:'where',currPage:'allocation'})">PDG</input></li><span class="left">/</span>
+								<li class="left"><input type='checkbox' ng-click="$state.go('appHome.filter',{srchparam:'package',srchWhich:'where',currPage:'allocation'})">Package</input></li><span class="left">/</span>
+								<li class="left"><input type='checkbox' ng-click="$state.go('appHome.filter',{srchparam:'h2l',srchWhich:'where',currPage:'allocation'})">H2L</input></li><span class="left">/</span>
+								<li class="left"><input type='checkbox' ng-click="$state.go('appHome.filter',{srchparam:'lpp',srchWhich:'where',currPage:'allocation'})">LPP Package</input></li><span class="left">/</span>
+								<li class="left"><input type='checkbox' ng-click="$state.go('appHome.filter',{srchparam:'jdrr',srchWhich:'where',currPage:'allocation'})">JDRR 2019</input></li>
+-->
+							
+					</li>
+
+					<span class="left">/</span>
+					
+<!--
+					<li class="left" ng-click="$state.go('appHome.filter',{srchparam:'campaignid',srchWhich:'where',currPage:'allocation'})">PDG</li>
+					<span class="left">/</span>
+					<li class="left" ng-click="showSubMenu($event)">Group ID
+						<ul class="hide submenuUl">
+							<li class="left" ng-click="$state.go('appHome.filter',{srchparam:'parent_group',srchWhich:'order-asc',currPage:'allocation'})">ORDER ASC</li><span class="left">/</span>
+							<li class="left" ng-click="$state.go('appHome.filter',{srchparam:'parent_group',srchWhich:'order-desc',currPage:'allocation'})">ORDER DESC</li><span class="left">/</span>
+						</ul>
+					</li><span class="left">/</span>
+					<li class="left" ng-click="showSubMenu($event)">Expired
+						<ul class="hide submenuUl">
+							<li class="left" ng-click="$state.go('appHome.filter',{srchparam:'expired_on',srchWhich:'order-asc',currPage:'allocation'})">ORDER ASC</li><span class="left">/</span>
+							<li class="left" ng-click="$state.go('appHome.filter',{srchparam:'expired_on',srchWhich:'order-desc',currPage:'allocation'})">ORDER DESC</li><span class="left">/</span>
+						</ul>
+					</li><span class="left">/</span>
+-->
+					<li ng-click="$state.go('appHome.filter',{srchparam:'mask',srchWhich:'where',currPage:'allocation'})" class="left">Masked</li><span class="left">/</span>
+					<li ng-click="$state.go('appHome.filter',{srchparam:'freez',srchWhich:'where',currPage:'allocation'})" class="left">Freezed</li><span class="left">/</span>
+<!--
+					<li class="left" ng-click="showSubMenu($event)">Company CallCount
+						<ul class="hide submenuUl">
+							<li class="left" ng-click="$state.go('appHome.filter',{srchparam:'callcnt',srchWhich:'order-asc',currPage:'allocation'})">ORDER ASC</li><span class="left">/</span>
+							<li class="left" ng-click="$state.go('appHome.filter',{srchparam:'callcnt',srchWhich:'order-desc',currPage:'allocation'})">ORDER DESC</li><span class="left">/</span>
+						</ul>
+					</li><span class="left">/</span>
+					<li class="left" ng-click="showSubMenu($event)">Created On
+						<ul class="hide submenuUl">
+							<li class="left" ng-click="$state.go('appHome.filter',{srchparam:'datasource_date',srchWhich:'order-asc',currPage:'allocation'})">ORDER ASC</li><span class="left">/</span>
+							<li class="left" ng-click="$state.go('appHome.filter',{srchparam:'datasource_date',srchWhich:'order-desc',currPage:'allocation'})">ORDER DESC</li><span class="left">/</span>
+						</ul>
+					</li><span class="left">/</span>
+					<li class="left lastLiTop" ng-click="showSubMenu($event)">Updated On
+						<ul class="hide submenuUl">
+							<li class="left" ng-click="$state.go('appHome.filter',{srchparam:'updated_date',srchWhich:'order-asc',currPage:'allocation'})">ORDER ASC</li><span class="left">/</span>
+							<li class="left" ng-click="$state.go('appHome.filter',{srchparam:'updated_date',srchWhich:'order-desc',currPage:'allocation'})">ORDER DESC</li><span class="left">/</span>
+						</ul>
+					</li>
+					</li><span class="left">/</span>
+-->
+					<li class="left lastLiTop" ng-click="showSubMenu($event)">Business Type
+						<ul class="hide submenuUl">
+							<li class="left" ng-click="$state.go('appHome.filter',{srchparam:'business_type',srchWhich:'order-asc',currPage:'allocation'})">ORDER ASC</li><span class="left">/</span>
+							<li class="left" ng-click="$state.go('appHome.filter',{srchparam:'business_type',srchWhich:'order-desc',currPage:'allocation'})">ORDER DESC</li><span class="left">/</span>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div class="left arrow marTop10px" ng-if="setArrowPos==1" ng-click="slideleft($event)"><img ng-src="img/arrow-right.png" /></div>
+		</nav>
+		<div class="left inputIndiSrch marBot30px"><input type="text" class="SearchCompany" ng-model="compFilter" placeholder="Search in loaded Contracts within this page" ></div>
+		<div class="left width50 slideIndi" ng-if="mainPage	!=	'search'">
+			
+			<div class="left arrow marTop10px ng-scope" ng-click="sliderRightPage($event)" ng-if="setArrowPosPage==1">
+				<img ng-src="img/arrow-left.png" src="img/arrow-left.png">
+			</div>
+			
+			<div class="pageSlider left">
+				<ul class="left text-center navFilters setTotContWidthPage repPop">
+					<li ng-class="{selectedPage: $index==selectedIndex || (selectedIndex == '' && n == 0)}" class="left pointer pageLi" ng-repeat="n in [] | range:pageContracts" ng-click="clickLoad(n)">{{n+1}}</li>
+				</ul>
+			</div>
+			<div class="left arrow marTop10px ng-scope" ng-click="slideleftPage($event)" ng-if="setArrowPosPage==1">
+				<img ng-src="img/arrow-right.png" src="img/arrow-right.png">
+			</div>
+		</div>
+		<div class="right marBot10px"><div class="left marRt10px" ng-click="changeView($event,2)"><img ng-src="img/list.png" /></div><div class="left marRt20px" ng-click="changeView($event,1)"><img ng-src="img/grid.png" /></div></div>
+		<div class="marBot10px width100 left blueDark">
+			<div class="left width50 blueDark">Assignments : {{totCountShow}} | Groups : {{totCountShowGr}}</div>
+
+			<div class="right button smsSendButton" ng-click="sendSmsEmailAlloc()">Send</div>
+
+
+			<div class="right blueDark">
+				<div class="left searchByWhat">
+					<div class="left divOne emailDivSel backSelBlue" ng-click="setSendSMSBut(this,1)">Email<div class="divOneBord emailDivSelIn left"></div></div>
+					<div class="left divTwo smsDivSel" ng-click="setSendSMSBut(this,0)"><div class="divTwoBord  smsDivSelIn left"></div>SMS</div>
+				</div>
+			</div>
+
+		</div>
+		<div class='srchCityDiv left marBot10px' ><input type="text" class="searchCity" value="{{remCity}}" cityauto placeholder="Search Contracts By City"/></div>
+		<div class="butnCitySrch left">	
+			<button class="buttonSearchCity left" ng-click="searchCity($event)" ng-disabled="isDisabled"><span ng-if="setNewIcon == 0">GO</span><span ng-if="setNewIcon == 1"><img ng-src="img/search.png" alt="Search" /></span></button>
+		</div>
+		<div class="divbackground" ng-click="compFilter = ''"><img class="very-small-cross" ng-show="compFilter" ng-src="img/blackCross.jpeg"></div>
+		
+		<div class="incDiv left width100">
+<!--			<div class="panelDiv repeat-animation contDivs left " ng-repeat="contract in allocContracts.data | filter: compFilter" ng-if="viewParam	== 1">-->
+			<div class="panelDiv repeat-animation contDivs left " ng-repeat="contract in allocContracts.data | filter: compFilter" ng-if="viewParam	== 1" style="padding-bottom: 24%;">
+				<div class="front">
+					<div class="innerContDiv">
+						<div class="compNameTile pointer" ng-class="{'green':contract.paidstatus=='1','blue':contract.paidstatus!='1'}" ng-click="goToBform(contract)">
+							<img ng-src="img/gridview_verified.png" src="img/gridview_verified.png" class='left' style='margin-right:5px;' ng-if="contract.paidstatus=='1' && (contract.nodays != -1 && contract.nodays >= 0)">
+							<img ng-src="img/expired_gridview.png" src="img/expired_gridview.png" class='left' style='margin-right:5px;' ng-if="contract.paidstatus=='1' && (contract.nodays == -1 || contract.nodays < 0)">
+<!--							<h3 style='width:380px;' ng-if="contract.compname !='' && contract.compname != null">{{contract.compname}}</h3>
+							<h3 style='width:380px;' ng-if="contract.compname =='' || contract.compname == null">Company Name Not Found</h3>-->
+							<h3 style='width:250px;display:inline-block;float:left;' ng-if="contract.compname !='' && contract.compname != null">{{contract.compname}}</h3>
+							<h3 style='width:250px;display:inline-block;float:left;' ng-if="contract.compname =='' || contract.compname == null">Company Name Not Found</h3>
+						</div>
+<!--						<div class="divContContainer overflow | filter : compFilter">-->
+						<div class="divContContainer overflow | filter : compFilter" style="display:inline-block;float:left;width:100%;">
+							<div class="parentidShow arial small-font darkGrey mar-bot-5">{{contract.contractid}}</div>
+							<p class="arial small-font darkGrey mar-bot-5" ng-if="contract.campaignid != null">Campaign Name : {{contract.campaignName}}</p>
+							<p class="arial small-font darkGrey mar-bot-5" ng-if="contract.campaignid == null">Campaign Name : --</p>
+<!--
+							<p class="allocTime arial small-font darkGrey" ng-if="contract.allocationType != null" ng-switch on="contract.allocationType">
+								<span ng-switch-when="25">Allocated to </span>
+								<span ng-switch-when="22">Call Back on </span>
+								<span ng-switch-when="12">Company Closed on </span>
+								<span ng-switch-when="114">Discard Call on </span>
+								<span ng-switch-when="9">Do Not Disturb on </span>
+								<span ng-switch-when="24">Follow Up on </span>
+								<span ng-switch-when="115">Intrested in Justdial Services on </span>
+								<span ng-switch-when="208">Internal Call on </span>
+								<span ng-switch-when="6">Not Contactable on </span>
+								<span ng-switch-when="21">Not Intrested on </span>
+								<span ng-switch-when="98">Not in Business on </span>
+								<span ng-switch-when="63">Other City on </span>
+								<span ng-switch-when="207">Paid Client on </span>
+								<span ng-switch-when="99">Refixed Appointments on </span>
+								<span ng-switch-when="7">Wrong Number on </span>
+								<span ng-switch-when="124">Call back – Contact details verified on </span>
+								<span ng-switch-when="64">Doctors Intrested in Master App on </span>
+								<span ng-switch-when="65">Doctors Not Intrested in Master App on </span>
+								<span ng-switch-when="123">Hospital Data on </span>
+								<span ng-switch-when="116">Intrested in Master App on </span>
+								<span ng-switch-when="127">No Menu on </span>
+								<span ng-switch-when="119">Not Applicable in Master App on </span>
+								<span ng-switch-when="117">Not Interested in Master App on </span>
+								<span ng-switch-when="90">Not Providing Home Delivery on </span>
+								<span ng-switch-when="128">Not Providing Home Pickup on </span>
+								<span ng-switch-when="61">Year of Establishment Captured on </span>
+								<span ng-switch-when="62">Year of Establishment Not Captured on </span>
+								<span ng-switch-default>--</span>
+								<span ng-if="contract.allocationType == 25  && contract.empType">ME on </span>
+								<span>{{contract.allocationtime}}</span>
+							</p>
+-->
+							<p class="allocTime arial small-font darkGrey" ng-if="allocContracts.allocData.errorCode == 0 && allocContracts.allocData.data[contract.contractid].allocationType != null" ng-switch on="allocContracts.allocData.data[contract.contractid].allocationType" title="{{allocContracts.allocData.data[contract.contractid].allocationTime}}">
+									<span ng-switch-when="25">Allocated Appointment on </span>
+									<span ng-switch-when="99">Appointment Refixed on </span>
+									<span ng-switch-when="22">Call Back on </span>
+									<span ng-switch-when="208">Call to ME on </span>
+									<span ng-switch-when="12">Company Closed on </span>
+									<span ng-switch-when="114">Discard Call on </span>
+									<span ng-switch-when="9">Do Not Disturb on </span>
+									<span ng-switch-when="24">Follow up on </span>
+									<span ng-switch-when="244">Jda Demo Appointment Fixed on </span>
+									<span ng-switch-when="6">Not Contactable on </span>
+									<span ng-switch-when="21">Not Interested on </span>
+									<span ng-switch-when="98">Not in Business on </span>
+									<span ng-switch-when="207">Paid Client on </span>
+									<span ng-switch-when="7">Wrong Number on </span>
+									<span ng-switch-when="256">Bank Account Details Updated on </span>
+									<span ng-switch-when="203">Interested for JDFOS AND TR on </span>
+									<span ng-switch-when="205">Interested only for JDFOS on </span>
+									<span ng-switch-when="204">Interested only for JDTRS on </span>
+									<span ng-switch-when="257">No Bank Account on </span>
+									<span ng-switch-when="127">No Menu on </span>
+									<span ng-switch-when="259">Not interested for Online payment on </span>
+									<span ng-switch-when="180"> Shopfront deal closed on </span>
+									<span ng-switch-when="10">Interested for only pickup on </span>
+									<span ng-switch-when="150">Not interested for shop front on </span>
+									<span ng-switch-when="186">SF_B form verified/Updated on </span>
+									<span ng-switch-when="124">Call back – Contact details verified on </span>
+									<span ng-switch-when="116">Interested in Master App on </span>
+									<span ng-switch-when="119">Not Applicable for Master App on </span>
+									<span ng-switch-when="117">Not Interested in Master App on </span>
+									<span ng-switch-when="90">Not providing Home Delivery/Table Reservation on </span>
+									<span ng-switch-when="209">Voice Mail OR IVR on </span>
+									<span ng-switch-when="245">Call Transferred To Helpdesk on </span>
+									<span ng-switch-when="234">Contract Not Found on </span>
+									<span ng-switch-when="225">Doc Not Interested on </span>
+									<span ng-switch-when="238">Doc Using Other Software on </span>
+									<span ng-switch-when="237">Doc Using Pra*** on </span>
+									<span ng-switch-when="221">Doctor Already Active on </span>
+									<span ng-switch-when="241">Doctor Not Tech Savvy on </span>
+									<span ng-switch-when="236">Inbound Activation And Tutorial Done on </span>
+									<span ng-switch-when="224">Incorrect Emailid on </span>
+									<span ng-switch-when="228">Invalid Hospital Data on </span>
+									<span ng-switch-when="239">No Internet Access on </span>
+									<span ng-switch-when="242">Not Getting Leads on </span>
+									<span ng-switch-when="227">Others</span>
+									<span ng-switch-when="211">Outbound Activation And Tutorial Done on </span>
+									<span ng-switch-when="222">Query Addressed on </span>
+									<span ng-switch-when="223">Query Pending on </span>
+									<span ng-switch-when="240">SW Is Time Consuming/Complex on </span>
+									<span ng-switch-when="243">SW Not Required For Walk In Patients on </span>
+									<span ng-switch-when="235">Tutorial Follow Up on </span>
+									<span ng-switch-default>--</span>
+									<span>{{allocContracts.allocData.data[contract.contractid].allocationTime}}</span>
+								</p>
+								<p class="arial small-font darkGrey" ng-if="allocContracts.allocData.errorCode == 1 || allocContracts.allocData.data[contract.contractid].allocationType == null">--</p>
+							<p class="arial small-font darkGrey" ng-if="contract.exp_on != null">Likely Expiry Status: {{contract.expondo()}}</p>
+							<p class="arial small-font darkGrey" ng-if="contract.no_of_days != ''">Active For: {{contract.no_of_days}}</p>
+							<p class="arial small-font darkGrey" ng-if="contract.no_of_days == ''">Active For : 0</p>
+							<p class="arial small-font darkGrey" ng-if="contract.expired==1">This contract is expired</p>
+							<p class="arial small-font darkGrey" ng-if="contract.freez==1">This contract is Freezed</p>
+							<p class="arial small-font darkGrey" ng-if="contract.mask==1">This contract is Masked</p>
+							<p class="arial small-font darkGrey" ng-if="contract.callcnt != null">Company Callcount : {{contract.callcnt}}</p>
+							<p class="arial small-font darkGrey" ng-if="contract.prevAllocTmecode == user">You are the owner of this contract</p>
+							<p class="arial small-font darkGrey" ng-if="contract.lead == 1">This is signed up for GOLD</p>
+							<p class="arial small-font darkGrey" ng-if="contract.lead == 2">This contract is GOLD Expired Contract</p>
+							<p class="arial small-font darkGrey" >Created On  {{contract.datasource_date == null && 'Not Available' || (contract.datasource_date | setDateTime)}}</p>
+							<p class="arial small-font darkGrey"  >Updated On  {{contract.allocationtime == null && "Not Available" || (contract.allocationtime | setDateTime)}}</p>
+						</div>
+<!--						<div class="slideIndi left positionAbs bottom0 width100">-->
+						<div class="slideIndi left bottom0 width100">
+							<div class="left arrow marTop10px" ng-click="slideright($event)"><img ng-src="img/arrow-left.png" /></div>
+<!--							<div class="upperLayerMenu left">-->
+							<div class="upperLayerMenu left" style="width:84%;">
+								<div class="left repPop setTotContWidth">
+									<div ng-click="checkDelProspect($event,contract.contractid,$index)" class="left repDivsIndi very-small-font darkGrey arial text-center marRt10px marTop7px"><div class="marBot10px"><img ng-src="{{(setImageCheck[$index] == 1) && 'img/checkbox-fill.png' || 'img/checkbox-empty.png'}}" style="width:25px;height:25px" /></div><div>Select</div></div>
+									<div class="left repDivsIndi very-small-font darkGrey arial text-center marRt10px" ng-click="checkTrackerRep($event,contract.contractid)"><div class="marBot10px"><h3>{{contract.ecsTrackRep}}</h3></div><div>Tracker Report</div></div>
+									<div ng-click="showCats($event,contract.contractid)" class="left repDivsIndi very-small-font darkGrey arial text-center marRt10px marTop7px"><div class="marBot10px"><img ng-src="img/more.png" /></div><div>Show Cats</div></div>
+									<div ng-if="contract.paidstatus=='1'" ng-click="showDataMode($event,1,contract.contractid,contract.compname)" class="left repDivsIndi very-small-font darkGrey arial text-center marRt10px"><div class="marBot10px"><img ng-src="img/money_balance.png" /></div><div>Check Balance</div></div>
+									<a ng-href="../00_Payment_Rework/add_on_payment/mode_selection.php?parentid={{contract.contractid}}&compname={{contract.compname | urlEncode}}" target="_blank"><div class="left repDivsIndi very-small-font darkGrey arial text-center marRt10px"><div class="marBot10px"><img ng-src="img/add-on.png" /></div><div>AddOn Payment</div></div></a>
+									<a ng-href="../00_Payment_Rework/accounts/mandate_selection.php?parentid={{contract.contractid}}&compname={{contract.compname | urlEncode}}&flag=" target="_blank"><div class="left repDivsIndi very-small-font darkGrey arial text-center marRt10px"><div class="marBot10px"><h3>EM</h3></div><div>Ext. Mandate</div></div></a>
+									<a ng-href="../tmAlloc/companyFeedbackRep.php?contractID={{contract.contractid}}" target="_blank"><div class="left repDivsIndi very-small-font darkGrey arial text-center marRt10px"><div class="marBot10px"><img ng-src="img/phone2.png" /></div><div>Statement/Feed</div></div></a>
+									<a ng-if="cityCode != 35 && cityCode != 17" ng-href="http://172.29.{{cityCode}}.217:81/invoice_data/invoice_data_new.php" target="_blank"><div class="left repDivsIndi very-small-font darkGrey arial text-center marRt10px"><div class="marBot10px"><img ng-src="img/phone2.png" /></div><div>Invoice Generate</div></div></a>
+									<a ng-if="cityCode == 35" ng-href="http://192.168.35.217:81/invoice_data/invoice_data_new.php" target="_blank"><div class="left repDivsIndi very-small-font darkGrey arial text-center marRt10px"><div class="marBot10px"><img ng-src="img/phone2.png" /></div><div>Invoice Generate</div></div></a>
+									<a ng-if="cityCode == 17" ng-href="http://192.168.17.217:81/invoice_data/invoice_data_new.php" target="_blank"><div class="left repDivsIndi very-small-font darkGrey arial text-center marRt10px"><div class="marBot10px"><img ng-src="img/phone2.png" /></div><div>Invoice Generate</div></div></a>
+								</div>
+							</div>
+							<div class="left arrow marTop10px" ng-click="slideleft($event)"><img ng-src="img/arrow-right.png" /></div>
+						</div>
+					</div>
+					<div class="catupeven coverOverlay hide colorWhite">
+						<h3 class="loadingMini hide colorWhite">Loading...</h3>
+						<a><div class="right arial" ng-click="closeOverlay($event)">X</div></a>
+						<div class="catContain" ng-if="categories.errorCode=='0'">
+							<h3 class="colorWhite">Categories for {{contract.compname|capitalize}}</h3>
+							<div class="catsShow" ng-repeat="cats in categories.data">
+								{{cats.category_name}}
+							</div>
+						</div>
+						<div class="catContain" ng-if="categories.errorCode=='1'">
+							<h3 class="colorWhite">Categories Not Present</h3>
+						</div>
+					</div>
+					<div class="trackeroverlay coverOverlay hide colorWhite">
+						<h3 class="loadingMini hide colorWhite">Loading...</h3>
+						<a><div class="right arial" ng-click="closeOverlay($event)">X</div></a>
+						<div class="catContain">
+							<div class="colorWhite text-center" ng-if="trackRepChk.ECS == 1"><a class="colorWhite" ng-click="subECSTrackRep(contract.contractid,employees.hrInfo.data.empcode,1)" target="_blank"><h3 class="colorWhite">Click to see report for ECS</h3></a></div>
+							<div class="colorWhite text-center" ng-if="trackRepChk.SI == 1"><a class="colorWhite" ng-click="subECSTrackRep(contract.contractid,employees.hrInfo.data.empcode,2)" target="_blank"><h3 class="colorWhite">Click to see report for SI</h3></a></div>
+							<div class="colorWhite text-center" ng-if="trackRepChk.SI == 0 && trackRepChk.ECS == 0"><h3 class="colorWhite">Track Report is not available</h3></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="tab-container width100" ng-if="viewParam	==	2">
+				<div class="shiftArrow leftShiftArrow"  ng-click="setPageShiftRight()"></div>
+				<div class="shiftArrow rightShiftArrow"ng-click="setPageShiftLeft()"></div>
+				<div class="headerTable width100 border-bot-grey">
+					<div class="tab-row repeat-animation">
+						<div class="left widthFree blue headFont">
+							<!--div ng-click="checkDelProspect($event,contract.contractid,$index)" class="left repDivsIndi very-small-font darkGrey arial text-center marRt10px"><div class="marBot10px"><img ng-src="{{(setImageCheck[$index] == 1) && 'img/checkbox-fill.png' || 'img/checkbox-empty.png'}}" style="width:20px;height:20px" /></div></div-->
+							<span>Companyname</span>
+						</div>
+						<div class="rotateRight">
+							<div class="left widthFreeSmall text-center blue headFont">Last Called</div>
+							<div class="left widthFreeSmall text-center blue headFont">Categories</div>
+<!--
+							<div class="left widthFreeSmall text-center blue headFont">Expired Status</div>
+-->
+							<div class="left widthFreeSmall text-center blue headFont">Active Till</div>
+							<div class="left widthFreeSmall text-center blue headFont">Likely Expiry</div>
+							<div class="left widthFreeSmall text-center blue headFont">Campaign Name</div>
+							<div class="left widthFreeSmall text-center blue headFont">Group ID</div>
+<!--
+							<div class="left widthFreeSmall text-center blue headFont">Freezed</div>
+							<div class="left widthFreeSmall text-center blue headFont">Masked</div>
+-->
+							<div class="left widthFreeSmall text-center blue headFont">Call Count</div>
+							<div class="left widthFreeSmall text-center blue headFont">Owner</div>
+							<div class="left widthFreeSmall text-center blue headFont">Statement/Feed</div>
+							<div class="left widthFreeSmall text-center blue headFont">Tracker Rep.</div>
+							<div class="left widthFreeSmall text-center blue headFont">Invoice Generate</div>
+<!--						
+							<div class="left widthFreeSmall text-center blue headFont">Gold Status</div>
+-->
+							<div class="left widthFreeSmall text-center blue headFont">Add on Payment</div>
+							<div class="left widthFreeSmall text-center blue headFont">External Mandate</div>
+							<div class="left widthFreeSmall text-center blue headFont">Check Balance</div>
+							
+						</div>
+					</div>
+				</div>
+				<div class="bodyTable width100">
+					<div class="width100 border-bot-grey" ng-repeat="contract in allocContracts.data | filter: compFilter">
+						<div class="tab-row repeat-animation">
+							<div class="left widthFree" ng-class="{'green':contract.paidstatus=='1','blue':contract.paidstatus!='1'}">
+								<div ng-click="checkDelProspect($event,contract.contractid,$index)" class="left repDivsIndi very-small-font darkGrey arial text-center marRt10px"><div class="marBot10px"><img ng-src="{{(setImageCheck[$index] == 1) && 'img/checkbox-fill.png' || 'img/checkbox-empty.png'}}" style="width:20px;height:20px" /></div></div>
+<!--
+								<img ng-src="img/gridview_verified.png" src="img/gridview_verified.png" ng-if="contract.paidstatus=='1'">
+								
+-->
+								<img ng-src="img/gridview_verified.png" src="img/gridview_verified.png" class='left' style='margin-right:5px;' ng-if="contract.paidstatus=='1' && (contract.nodays != -1 && contract.nodays >= 0)">
+								<img ng-src="img/expired_listview.png" src="img/expired_listview.png" class='left' style='margin-right:5px;' ng-if="contract.paidstatus=='1' && (contract.nodays == -1 || contract.nodays < 0)">
+								<span ng-if="contract.compname !='' && contract.compname != null" ng-click="goToBform(contract)" title="{{contract.contractid}}" class="pointer">{{contract.compname}}</span>
+								<span ng-if="contract.compname =='' || contract.compname == null" ng-click="goToBform(contract)" class="pointer">Company Name Not Found</span>
+							</div>
+							<div class="rotateRight">
+								<div class="left widthFreeSmall text-center" ng-if="allocContracts.allocData.errorCode == 0 && allocContracts.allocData.data[contract.contractid].allocationType != null" ng-switch on="allocContracts.allocData.data[contract.contractid].allocationType" title="{{allocContracts.allocData.data[contract.contractid].allocationTime}}">
+									<span ng-switch-when="25">Allocate Appointment</span>
+									<span ng-switch-when="99">Appointment Refixed</span>
+									<span ng-switch-when="22">Call Back</span>
+									<span ng-switch-when="208">Call to ME</span>
+									<span ng-switch-when="12">Company Closed</span>
+									<span ng-switch-when="114">Discard Call</span>
+									<span ng-switch-when="9">Do Not Disturb</span>
+									<span ng-switch-when="24">Follow up</span>
+									<span ng-switch-when="244">Jda Demo Appointment Fixed</span>
+									<span ng-switch-when="6">Not Contactable</span>
+									<span ng-switch-when="21">Not Interested</span>
+									<span ng-switch-when="98">Not in Business</span>
+									<span ng-switch-when="207">Paid Client</span>
+									<span ng-switch-when="7">Wrong Number</span>
+									<span ng-switch-when="256">Bank Account Details Updated</span>
+									<span ng-switch-when="203">Interested for JDFOS AND TR</span>
+									<span ng-switch-when="205">Interested only for JDFOS</span>
+									<span ng-switch-when="204">Interested only for JDTRS</span>
+									<span ng-switch-when="257">No Bank Account</span>
+									<span ng-switch-when="127">No Menu</span>
+									<span ng-switch-when="259">Not interested for Online payment</span>
+									<span ng-switch-when="180"> Shopfront deal closed </span>
+									<span ng-switch-when="10">Interested for only pickup</span>
+									<span ng-switch-when="150">Not interested for shop front</span>
+									<span ng-switch-when="186">SF_B form verified/Updated</span>
+									<span ng-switch-when="124">Call back – Contact details verified</span>
+									<span ng-switch-when="116">Interested in Master App</span>
+									<span ng-switch-when="119">Not Applicable for Master App</span>
+									<span ng-switch-when="117">Not Interested in Master App</span>
+									<span ng-switch-when="90">Not providing Home Delivery/Table Reservation</span>
+									<span ng-switch-when="209">Voice Mail OR IVR</span>
+									<span ng-switch-when="245">Call Transferred To Helpdesk</span>
+									<span ng-switch-when="234">Contract Not Found</span>
+									<span ng-switch-when="225">Doc Not Interested</span>
+									<span ng-switch-when="238">Doc Using Other Software</span>
+									<span ng-switch-when="237">Doc Using Pra***</span>
+									<span ng-switch-when="221">Doctor Already Active</span>
+									<span ng-switch-when="241">Doctor Not Tech Savvy</span>
+									<span ng-switch-when="236">Inbound Activation And Tutorial Done</span>
+									<span ng-switch-when="224">Incorrect Emailid</span>
+									<span ng-switch-when="228">Invalid Hospital Data</span>
+									<span ng-switch-when="239">No Internet Access</span>
+									<span ng-switch-when="242">Not Getting Leads</span>
+									<span ng-switch-when="227">Others</span>
+									<span ng-switch-when="211">Outbound Activation And Tutorial Done</span>
+									<span ng-switch-when="222">Query Addressed</span>
+									<span ng-switch-when="223">Query Pending</span>
+									<span ng-switch-when="240">SW Is Time Consuming/Complex</span>
+									<span ng-switch-when="243">SW Not Required For Walk In Patients</span>
+									<span ng-switch-when="235">Tutorial Follow Up</span>
+									<span ng-switch-default>--</span>
+									<span>{{allocContracts.allocData.data[contract.contractid].allocationTime}}</span>
+								</div>
+								<div class="left widthFreeSmall text-center" ng-if="allocContracts.allocData.errorCode == 1 || allocContracts.allocData.data[contract.contractid].allocationType == null">--</div>
+								<div  ng-click="showDataModeTab($event,2,contract.contractid,contract.compname)" class="left widthFreeSmall pointer text-center"><img ng-src="img/more.png" /></div>
+<!--
+								<div class="left widthFreeSmall pointer text-center" ng-if="contract.expired==1">Expired</div>
+								<div class="left widthFreeSmall pointer text-center" ng-if="contract.expired==0">--</div>
+-->
+								<div class="left widthFreeSmall text-center" ng-if="contract.no_of_days != ''">{{contract.no_of_days}}</div>
+								<div class="left widthFreeSmall text-center" ng-if="contract.no_of_days == ''">--</div>
+								<div class="left widthFreeSmall text-center" ng-if="contract.exp_on != null">{{contract.expondo()}}</div>
+								<div class="left widthFreeSmall text-center" ng-if="contract.exp_on == null">--</div>
+								<div class="left widthFreeSmall text-center" ng-if="contract.campaignid != null" title="{{contract.campaignName}}">{{contract.campaignName}}</div>
+								<div class="left widthFreeSmall text-center" ng-if="contract.campaignid == null">--</div>
+								<div class="left widthFreeSmall 
+								text-center">{{contract.parent_group}}</div>
+<!--
+								<div class="left widthFreeSmall text-center" ng-if="contract.freez==1">Freezed</div>
+								<div class="left widthFreeSmall text-center" ng-if="contract.freez==0">--</div>
+								<div class="left widthFreeSmall text-center" ng-if="contract.mask==1">Masked</div>
+								<div class="left widthFreeSmall text-center" ng-if="contract.mask==0">--</div>
+-->
+								<div class="left widthFreeSmall text-center" ng-if="contract.callcnt != null">{{contract.callcnt}}</div>
+								<div class="left widthFreeSmall text-center" ng-if="contract.callcnt == null">--</div>
+								<div class="left widthFreeSmall text-center" ng-if="contract.prevAllocTmecode == user">Owned</div>
+								<div class="left widthFreeSmall text-center" ng-if="contract.prevAllocTmecode != user">Not Owned</div>
+								<div class="left widthFreeSmall pointer text-center"><a ng-href="../tmAlloc/companyFeedbackRep.php?contractID={{contract.contractid}}" target="_blank"><img ng-src="img/phone2.png" /></a></div>
+								<div class="left widthFreeSmall pointer text-center" ng-if="contract.ecsTrackRep == 'ECS'" ng-click="subECSTrackRep(contract.contractid,employees.hrInfo.data.empcode,1)">{{contract.ecsTrackRep}}</div>
+								<div class="left widthFreeSmall pointer text-center" ng-if="contract.ecsTrackRep == 'SI'" ng-click="subECSTrackRep(contract.contractid,employees.hrInfo.data.empcode,2)">{{contract.ecsTrackRep}}</div>
+								<div class="left widthFreeSmall text-center" ng-if="contract.ecsTrackRep == 'NECS'">--</div>
+<!--
+								<div class="left widthFreeSmall pointer text-center" ng-if="contract.lead == 1">GOLD</div>
+								<div class="left widthFreeSmall pointer text-center" ng-if="contract.lead == 2">GOLD Expired</div>
+								<div class="left widthFreeSmall pointer text-center" ng-if="contract.lead == 0 || contract.lead == null">--</div>
+-->
+								<div class="left widthFreeSmall text-center pointer" ng-if="cityCode != 35 && cityCode != 17" target="_blank">
+									<a  ng-href="http://172.29.{{cityCode}}.217:81/invoice_data/invoice_data_new.php" target="_blank"><img ng-src="img/phone2.png" /></a>
+								</div>
+								<div class="left widthFreeSmall text-center pointer" ng-if="cityCode == 35" target="_blank">
+									<a  ng-href="http://192.168.35.217:81/invoice_data/invoice_data_new.php" target="_blank"><img ng-src="img/phone2.png" /></a>
+								</div>	
+								<div class="left widthFreeSmall text-center pointer" ng-if="cityCode == 17" target="_blank">
+									<a  ng-href="http://192.168.17.217:81/invoice_data/invoice_data_new.php" target="_blank"><img ng-src="img/phone2.png" /></a>
+								</div>
+								
+								<div class="left widthFreeSmall pointer text-center"><a ng-href="../00_Payment_Rework/add_on_payment/mode_selection.php?parentid={{contract.contractid}}&compname={{contract.compname | urlEncode}}" target="_blank"><img ng-src="img/add-on.png" /></a></div>
+								<div class="left widthFreeSmall pointer text-center"><a ng-href="../00_Payment_Rework/accounts/mandate_selection.php?parentid={{contract.contractid}}&compname={{contract.compname | urlEncode}}&flag=" target="_blank"><div class="marBot10px blue">EM</div></a></div>
+								<div ng-if="contract.paidstatus=='1'" ng-click="showDataModeTab($event,1,contract.contractid,contract.compname)" class="left widthFreeSmall pointer text-center"><img ng-src="img/money_balance.png" /></div>
+								<div ng-if="contract.paidstatus=='0'" class="left widthFreeSmall text-center">--</div>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<form name="tracker_report_ecs" action="../00_Payment_Rework/accounts/ecs_tracker_report_tme.php" target="_blank" method="post" class="trackRepEcs">
+			<input type="hidden" name="parentid" value="{{parentIdTrackRep}}" />
+			<input type="hidden" name="flag" value="{{flagTrackRep}}" />
+			<input type="hidden" name="me_tme" value="{{empCodeTrackRep}}" />
+		</form>
+		<form name="tracker_report_si" action="../00_Payment_Rework/accounts/si_tracker_report_tme.php" target="_blank" method="post" class="trackRepSI">
+			<input type="hidden" name="parentid" value="{{parentIdTrackRep}}" />
+			<input type="hidden" name="flag" value="{{flagTrackRep}}" />
+			<input type="hidden" name="me_tme" value="{{empCodeTrackRep}}" />
+		</form>
+	</section>
+	<section ng-if="allocContracts.errorCode == 1" class="text-center">
+<!--		<div style="font-size:294px;">:(</div>-->
+		<div style="float:left;display:block;width:100%;font-size:294px;">:(</div>
+<!--		<h2>Sorry! No contracts are allocated to you.</h2>-->
+		<h2 style="float:left;display:block;width:100%;">Sorry! No contracts are allocated to you.</h2>
+	</section>
+	<div class='melist_div' ng-show=showdeclarationpopup>
+		<div class ='decalaration_pop'>
+			<b>
+			<center><h3 class='red'><b>PLEASE ENTER & EDIT DATA RESPONSIBLY</b></h3></center><br><br>
+			For any kind of wrong entry that you do , the following penalties shall apply:<br><br>
+			<div class="red" style="margin-left:100px">
+				<ul style='list-style:disc'>
+					<li class="black"><span class="red">1st Occurrence - Rs 1000<br>
+						2nd Occurrence - Rs 3000 (Rs 2000 will get added to the previous Penalty Amount)<br>
+						3rs Occurrence - Rs 5000 (3000+2000) and so on.</span></li><br>
+					<li class="black"><span class="red">These wrong doings will affect your Appraisal as well and the same will also reflect in your Experience Letter. </span></li>
+				</ul>
+			</div><br>
+			To know about Wrong Entries,<a href="regulation" target='_blank' class='blue' style='text-decoration:underline'>Click Here</a><br><br>
+			Immediate reporting heads of the TME will be also held responsible for such errors.  The  Team Leader / Group Leader and the Manager of the defaulter(s) will be penalized Rs.500/- for each error.<br><br><br>
+			Note :	<ol>
+					 <li> <b>The penalty schema is subject to change as per management discretion, as need be.</li>
+			         <li>Geocode is a must for every Paid Listing without which Incentives of respective sales personnel shall not be released.</li></b>
+			     </ol>
+			<b><input type="checkbox" class="accept_flag" name="accept_flag" ng-model="AcceptFlag"><span style="color:black;">I have read and understood the above rules and I accept the same</span></b><br>
+			<center>
+				<div class='decalaration_button' ng-click='storeemp()'>SUBMIT</div> 
+			</center>
+		</div>
+	</div>
+
+	<div class='melist_div' ng-show=showpaymentpopup>
+		<div class ='decalaration_pop'>
+		<center><h2 class='red'><b>Payment Option</b></h2></center><br>
+		Online payment link has been enabled in genio in JDA/ JDS- TME and JDS-ME,<br>
+		First priority to receive full payment /part payment /advance payment for ECS should be through this.<br>
+		Hence when you come to the payment screen the PayU option opens by default and the email and mobile number of the contract gets automatically populated.<a href="payuflow" target='_blank' class='blue' style='text-decoration:underline'>Click Here to see the flow</a><br><br>
+
+			Incentive policy 
+			<div class="red" style="margin-left:100px">
+				<ul style='list-style:disc'>
+					<li class="black">
+						<span class="red">ME deal closes , he gets 1% extra .TME dosent get anything.</span>
+					</li><br>
+					<li class="black">
+						<span class="red">TME deal closes without ME help , TME gets 2% extra.</span>
+					</li><br>
+					<li class="black">
+						<span class="red">ME does a cold call sale and closes through this mode he gets 2% extra.
+						</span>
+					</li><br>
+				</ul>
+
+			</div><br>
+			<center>
+				<div class='decalaration_button' ng-click='storefinanceemp()'>OK</div> 
+			</center>
+		</div>
+	</div>
+
+	<div class='melist_div' ng-show=showaudiopopup>
+		<div class ='decalaration_pop' style='top:35%'>
+			<center>
+		  		<h3>Must listen audio from Mr. Mani on how to present Fixed positions.</h3> <br>
+		  	</center>
+		  	<div style="margin-left:29%">
+		  		<div style='width:145px' class='decalaration_button left' ng-click='alreadyheard()'>Already heard</div> 
+		  		<div style='width:190px' class='decalaration_button left' ng-click='listenlater()'>Will listen to it later</div> 
+		  	</div>
+		</div>
+	</div>
+	
+	
+<!--
+	<div class='melist_div' ng-show=showloyaltypop>
+		<div class ='decalaration_pop' style="height: 520px;overflow-y: auto;" >
+			<center><h3 style="font-weight:bold">LOYALTY BONUS EXPLANATION</h3></center>
+			
+			<div class="marTop10px">
+				In simple terms, package value keeps increasing 10% every month and monthly visibility becomes 2x of amount paid by end of 10 months.
+				If renewal not done or ECS bounced, loyalty bonus becomes 0.
+			</div>
+			
+			<div class='red marTop10px'>Loyalty bonus benefit is SAME for ECS and non-ECS client. As long as you continue the contract, loyalty bonus will keep getting added.</div>
+			
+			<h4>Explanation with example:</h4> 
+			
+			<h3>Case 1: Non-ECS client signs up for Rs3K/month package, pays Rs36K upfront</h3> <br>
+			
+			<div class="marTop10px">
+				As part of 10% monthly loyalty bonus addition, we will give visibility for Rs3000 in month 1, Rs3300 in month 2, Rs3600 in month 3, ……, Rs6000 in month 11 and thereafter.Basically, package value of client 	goes up by 10% (Rs300) every month and effective package value becomes 2x of sign-up amount by month 10 end! 
+			</div>
+			
+			<div class="marTop10px">
+				<span style='font-weight: bold;'>Renewal</span> - If client renews the contract next year,from day 1 next year, client will get visibility for double the value. IF client does not renew,loyalty bonus will become 0. 
+			</div>
+			
+			<h3>Case 2: ECS client signs up for Rs3K/month package, pays Rs6K upfront and rest in monthly installments of Rs3K per month</h3> <br>
+			
+			<div class="marTop10px">
+				AME loyalty bonus will work as above TILL THE TIME client continues to honor ECS. <span style='font-weight:bold'>At any point of time if client’s ECS bounces, loyalty bonus will become 0</span>.
+			</div>
+			
+			<table style='border-collapse: collapse;color: #0c366e;font-size: 18px;' class='marTop10px' border='1'>
+					<tr>
+						<td></td>
+						<td>Monthly package value</td>
+						<td>Loyalty Bonus earned this month (10%)</td>
+						<td>Accumulated Loyalty Bonus</td>
+						<td>Effective package value at month end</td>
+					</tr>
+					<tr>
+						<td>Month 1</td>
+						<td>3,000</td>
+						<td>300</td>
+						<td>300</td>
+						<td>3,300</td>
+					</tr>
+					<tr>
+						<td>Month 2</td>
+						<td>3,000</td>
+						<td>300</td>
+						<td>600</td>
+						<td>3,600</td>
+					</tr>
+					<tr>
+						<td>Month 3</td>
+						<td>3,000</td>
+						<td>300</td>
+						<td>900</td>
+						<td>3,900</td>
+					</tr>
+					<tr>
+						<td>Month 4</td>
+						<td>3,000</td>
+						<td>300</td>
+						<td>1,200</td>
+						<td>4,200</td>
+					</tr>
+					<tr>
+						<td>Month 5</td>
+						<td>3,000</td>
+						<td>300</td>
+						<td>1,500</td>
+						<td>4,500</td>
+					</tr>
+					<tr>
+						<td>Month 6</td>
+						<td>3,000</td>
+						<td>300</td>
+						<td>1,800</td>
+						<td>4,800</td>
+					</tr>
+					<tr>
+						<td>Month 7</td>
+						<td>3,000</td>
+						<td>300</td>
+						<td>2,100</td>
+						<td>5,100</td>
+					</tr>
+					<tr>
+						<td>Month 8</td>
+						<td>3,000</td>
+						<td>300</td>
+						<td>2,400</td>
+						<td>5,400</td>
+					</tr>
+					<tr>
+						<td>Month 9</td>
+						<td>3,000</td>
+						<td>300</td>
+						<td>2,700</td>
+						<td>5,700</td>
+					</tr>
+					<tr>
+						<td>Month 10</td>
+						<td>3,000</td>
+						<td>300</td>
+						<td>3000</td>
+						<td>6,000</td>
+					</tr>
+					<tr>
+						<td>Month 11</td>
+						<td>3,000</td>
+						<td>300</td>
+						<td>3000</td>
+						<td>6,000</td>
+					</tr>
+					<tr>
+						<td>Month 12</td>
+						<td>3,000</td>
+						<td>300</td>
+						<td>3000</td>
+						<td>6,000</td>
+					</tr>
+				</table><br>
+			<center>
+				<div style='background: #0d96d5 none repeat scroll 0 0;color: white;height: 23px;padding: 5px;width: 100px;cursor: pointer;margin-top: 15px;'  ng-click='closepopup()'>Close</div>
+			</center>	
+			
+			
+		</div>
+	</div>
+-->
+
+
+
+
+</section>

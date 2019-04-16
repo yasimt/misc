@@ -1,0 +1,27 @@
+<form name="commentForm" ng-submit="setComment($event,workedForECSData.data[currIndexPop].contractid,currIndexPop,workedForECSData.data[currIndexPop].tme_comments)" ng-if="whichPop==3">
+	<div class="colorWhite">
+		<center>
+			<div class="commentDiv">
+				<h3 class="colorWhite">
+					<span ng-if="workedForECSData.data[currIndexPop].tme_comments == '' || workedForECSData.data[currIndexPop].tme_comments == null">Add</span>
+					<span ng-if="workedForECSData.data[currIndexPop].tme_comments != '' && workedForECSData.data[currIndexPop].tme_comments != null">Edit</span>
+					Your Comment Here
+				</h3>
+				<div>{{workedForECSData.data[currIndexPop].tme_comments}}</div>
+				<div class="add_commentDiv">
+					<textarea  cols="100" rows="16"  ng-model="setCommentWorked" class="add_comment_cont"></textarea>
+					<br/>
+					<input type="submit" class="btn_add_comment" value="{{workedForECSData.data[currIndexPop].tme_comments == '' || workedForECSData.data[currIndexPop].tme_comments == null && 'Add' || 'Edit'}}" />
+				</div>
+			</div>
+		</center>
+	</div>
+</form>
+<div class="showAction" ng-if="whichPop==4">
+	<h3 class="colorWhite">Request To :</h3>
+	<div class="catsShow pointer" ng-click="requestToDo($event,contract.contractid,1,1,contract.compname,$index,0)"><h4 class="colorWhite">Stop</h4></div>
+	<div class="catsShow pointer" ng-click="requestToDo($event,contract.contractid,5,0,contract.compname,$index,0)"><h4 class="colorWhite">Retain</h4></div>
+	<div class="catsShow pointer" ng-click="requestToDo($event,contract.contractid,4,0,contract.compname,$index,0)"><h4 class="colorWhite">Follow Up</h4></div>
+	<div class="catsShow pointer" ng-click="requestToDo($event,contract.contractid,7,0,contract.compname,$index,0)"><h4 class="colorWhite">Upgrade</h4></div>
+	<div class="catsShow pointer" ng-click="requestToDo($event,contract.contractid,8,0,contract.compname,$index,0)"><h4 class="colorWhite">Degrade</h4></div>
+</div>

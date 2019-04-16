@@ -1,0 +1,36 @@
+<md-dialog aria-label="Combo Plan Pop up">	
+ 	<md-dialog-content layout='column'  style='padding:0px'>
+		<div class="combo_dgn_popup">
+			<div class="ttle"><div class='ttle_text'>ECS Plan</div></div>
+			<div class='bod'>
+				For ECS plan:
+				Against your selected monthly package Instant Bonus at the rate of 10% of Monthly ECS amount will be added to your JD Search package every month for 10
+				consecutive months.<br><br>
+			</div>
+			<div class="ttle_two">Upfront Plan</div>
+			<div class='bod'>
+			For Upfront plan:
+
+			Instant bonus equivalent to yearly Package amount will be credited to your yearly package.<br>
+			<b>Example:</b><br> Yearly package worth Rs. 24000/- will be equal to 48000/- (Yearly Package 24000/- + Bonus 24000/-)
+			</div>
+			<div style="text-align: center;">
+				<input type="submit" value="Close" class="close_btn" ng-click='showbannerpopup()'>
+			</div>
+			<span class="cls_btn" ng-click="closepopup()">X</span>
+			
+		</div><!--end of bnr_dgn_popup-->
+	</md-dialog-content>
+</md-dialog>	
+
+
+<!--
+Bonus amount at the rate of 10% of the monthly package amount will be credited every month to your monthly package for 10 consecutive months.
+				If any ECS bounces, bonus will be set to zero. Bonus cycle will start all over again.<br><br>
+				<b>Example</b>: <br>Package contract worth Rs.3000/- pm will be equal to 6000/- (ECS 3000/- + Bonus 3000/-).<br>
+				If 11th ECS bounces then Bonus cycle reset to zero (ECS zero+bonus zero).
+				Subsequently if ECS clears then it starts all over again (ECS 3000+300bonus=3300).<br>
+				Hence it’s extremely important to honour Every ECS amount to earn optimum bonus.
+-->
+
+

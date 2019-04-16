@@ -1,0 +1,46 @@
+<div class="right-slidbx">			
+	<div class="conboxSlide"> 
+	<div class="whtUget-bx" ng-click="slide_menu()" > What you get?  </div>
+		<ul> 
+			<li> Reach your business to 1.8 million JD users everyday. </li>
+			<li> Priority lisitng on Justdial.com & App. </li>
+			<li> Get preference on search & calls for business related keywords. </li>
+			<li> Get business leads via instant SMS/Email. </li>
+			<li> JD verified stamp. </li>
+			<li> Upload photos and videos. </li>
+			<li> Enable online transaction. </li>
+		</ul>
+	</div>
+</div>
+
+<div class="main-imgConBx wrpr text-center" id="tabs" ng-if="demo_flag==1"> 
+	<div class="tabBx wrpr"> 
+		<ul class="wrpr">  
+			<li ng-class="{'selected_demo' : show_listing == 'free'}"><a ng-class="{'selected_demo_title' : show_listing == 'free'}"  ng-click="show_listing_img('free')"> Sample Free Listing </a></li>
+			<li ng-class="{'selected_demo' : show_listing == 'paid'}"> <a ng-class="{'selected_demo_title' : show_listing == 'paid'}" ng-click="show_listing_img('paid')"> Sample Paid Listing  </a> </li>
+		</ul>  
+	</div>
+	<div class="con-bx wrpr" ng-if="show_listing == 'free'"> 
+		<img src="img/banner_img/jdserach_free.jpg" />
+	</div>
+	<div class="con-bx wrpr" ng-if="show_listing == 'paid'"> 
+		<img src="img/banner_img/jdserach_paid.jpg" />
+	</div>
+</div>
+
+<div class="main-imgConBx wrpr text-center" id="tabs" ng-if="demo_flag=='jdsearch_demo'"> 
+	<div class="wrpr"> 
+		<p style="font-size: 22px;padding-bottom: 12px;padding-top: 10px;float:left">Your Business Competitors</p>  
+		<img src="img/banner_img/search_demo.jpg" />
+	</div>
+</div>	
+
+<div id="posi_fx"></div>
+<div class="prnt">
+	<div class="wrpr text-center butn-bx _fixed" id="btnSec"> 
+		<button class="sendLink" ng-click='showlivephoneserach()' style="width: 140px;"> Go To Website </button> 
+		<button class="sendLink mrg-left-15" style="width: 160px;" ng-click="showcompetitors()" > View competitors </button>
+		<button class="proceed mrg-left-15" ng-click="gotoseljdomni()" > Proceed </button> 
+	</div>
+</div>
+

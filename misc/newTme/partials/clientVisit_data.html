@@ -1,0 +1,38 @@
+<md-dialog aria-label="ecsdetailspopup">
+	<md-dialog-content>
+		<div class="innerECSCont" ng-if="clent_show_flag != 0">
+				<div class="changedValCont" ng-repeat="contract in client_data">
+					<div class="mainEcsDEt"  ng-if="contract.contractid != ''">
+						<p class="ecs_details" style="cursor:pointer;" ng-click="ClientBform_Redirect(contract.contractid)">{{contract.contractid}} | {{contract.companyname}} </p>
+					</div>
+				</div>
+				
+				<div  ng-if="client_data == ''">
+					<p> Sorry !! No Details Found. </p>
+				</div>
+							
+				<div class="butContainerECS" style="float:right" >
+					<div class="butContECS butContECSIgnore"> <md-button class="md-raised md-primary" ng-click="ecs_mdDialog_hide()">OKAY !!</md-button></div>
+				</div>
+		</div>
+		
+		<div class="innerECSCont" ng-if="clent_show_flag == 0">
+				<div class="changedValCont">
+					<p class="ecs_details"> Kindly go back to Allocation Page to View the Contracts and Meet the Client !! </p>
+				</div>
+					
+				<div class="butContainerECS" style="float:right" >
+					<div class="butContECS butContECSIgnore"> <md-button class="md-raised md-primary" ng-click="ecs_mdDialog_hide()">OKAY !!</md-button></div>
+				</div>
+		</div>
+		
+	</md-dialog-content>	
+</md-dialog>
+	
+	
+	
+	
+	
+	
+	
+	

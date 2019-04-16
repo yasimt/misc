@@ -1,0 +1,77 @@
+<div class="center width100 marTop20px" ng-if="whichPop == 8">
+	<h3 class="colorWhite">Showing History For <span ng-if="compNamePop !='' && compNamePop != null" class="blue">{{compNamePop|capitalize}}</span></h3>
+	<div> 
+		<div ng-repeat='history in history_list' class='retention_popup'>
+			<div>{{history.display_text}} </div>
+		</div>
+	</div>
+</div>
+
+
+<form ng-submit="setComment($event,retention.data[currIndexPop].contractid,currIndexPop,retention.data[currIndexPop].tme_comments)" class="colorWhite" ng-if="whichPop == 9">
+	<div class="colorWhite">
+		<center>
+			<div class="commentDiv">
+				<h3 class="colorWhite"> 
+					<span ng-if="retention.data[currIndexPop].tme_comments == '' || retention.data[currIndexPop].tme_comments == null">Add</span>
+					<span ng-if="retention.data[currIndexPop].tme_comments != '' && retention.data[currIndexPop].tme_comments != null">Edit</span>
+					Your Comment Here 
+				</h3>
+				<div>{{retention.data[currIndexPop].tme_comments}}</div>
+				<div class="add_commentDiv">
+					<textarea  cols="100" rows="16"  ng-model="setCommentWorked" class="add_comment_cont"></textarea>
+					<br/>
+					<input type="submit" class="btn_add_comment" value="{{retention.data[currIndexPop].tme_comments == '' || retention.data[currIndexPop].tme_comments == null && 'Add' || 'Edit'}}" />
+				</div>
+			</div>
+		</center>
+	</div>
+	
+<!--
+	<h3 class="colorWhite">Submit Your Comment</h3>
+	<div>{{tmeCommentMsg}}</div>
+	<div class="commentBox">
+		<textarea class="commentText" ng-model="sendDataComment" rows="8" cols="41"></textarea>
+	</div>
+	<div class="butBoxSubComm">
+		<input type="submit" class="butSubRetComm buttonLink button" value="{{tmeCommStat}} Comment" />
+	</div>
+-->
+</form>
+
+
+<div ng-if="whichPop == 7">
+	<div class="catContain">
+		<h3 class="colorWhite">Request To :</h3>
+		<div class="catsShow pointer" ng-click="requestToDo($event,retention.data[currIndexPop],9,1,currIndexPop,0)"><h4 class="colorWhite">Stop</h4></div>
+		<div class="catsShow pointer" ng-click="requestToDo($event,retention.data[currIndexPop],5,0,currIndexPop,0)"><h4 class="colorWhite">Retain</h4></div>
+		<div class="catsShow pointer" ng-click="requestToDo($event,retention.data[currIndexPop],4,0,currIndexPop,0)"><h4 class="colorWhite">Follow Up</h4></div>
+		<div class="catsShow pointer" ng-click="requestToDo($event,retention.data[currIndexPop],16,0,currIndexPop,0)"><h4 class="colorWhite">Upgrade</h4></div>
+		<div class="catsShow pointer" ng-click="requestToDo($event,retention.data[currIndexPop],17,0,currIndexPop,0)"><h4 class="colorWhite">Degrade</h4></div>
+		<div class="catsShow pointer" ng-click="requestToDo($event,retention.data[currIndexPop],21,0,currIndexPop,0)"><h4 class="colorWhite">Ringing</h4></div>
+		<div class="catsShow pointer" ng-click="requestToDo($event,retention.data[currIndexPop],23,0,currIndexPop,0)"><h4 class="colorWhite">Not Contactable-ECS Continued</h4></div>
+		<div class="catsShow pointer" ng-click="requestToDo($event,retention.data[currIndexPop],25,0,currIndexPop,0)"><h4 class="colorWhite">Ignore Request</h4></div>
+		<div class="catsShow pointer" ng-click="requestToDo($event,retention.data[currIndexPop],26,0,currIndexPop,0)"><h4 class="colorWhite">Invalid Data</h4></div>
+		<div class="catsShow pointer" ng-click="showdatepopup(retention.data[currIndexPop])"><h4 class="colorWhite">Retained-Skip ECS 1/2 month</h4></div>
+	</div>
+</div>
+
+
+<form name="ReactivatecommentForm" ng-submit="setReactivateComment($event,retention.data[currIndexPop],currIndexPop)" ng-if="whichPop == 10">
+	<div class="colorWhite">
+		<center>
+			<div class="commentDiv">
+				<h3 class="colorWhite">Please enter the reason for Re-activation</h3>
+				<div class="add_commentDiv">
+					<textarea  cols="41" rows="8"  ng-model="ReactivateComment" class="add_comment_cont"></textarea>
+					<br/>
+					<input type="submit" class="btn_reactivate_comment" value="submit" />
+				</div>
+			</div>
+		</center>
+	</div>
+</form>
+
+
+
+

@@ -1,0 +1,29 @@
+<hr>
+<section class="speedContainer" ng-controller="speedLinksController">
+	<div class="main_head"><h1>Speed Links</h1></div>
+	<div class="left error_msg_speed_lnk" >Your speed link has been set to {{display_name}}</div>
+	<div class="menu_lnk_head"><h2>Menu Links :</h2></div>
+	<div class="menu_links" ng-repeat="menu in linksData" ng-if="menu.display_menu==1"  namemenu="{{menu.menu_name}}" >
+		<a class="speedlinks left skyBlueBack marRt15px marBot10px text-center" >
+			<div class="data linkBox" 	ng-click="toggle($event)" valSet_link_name="{{menu.menu_name}}" valSet_link="{{menu.menu_link}}" valset_display="{{menu.display_menu}}" valset_extraVals="{{menu.extraVals}}" ng-class="{active: (currSpeedLink.indexOf(menu.menu_link) > -1)}">{{menu.menu_name}}</div>
+		</a>
+	</div>
+	<br>
+	<div class="rpt_lnk_head"><h2>Report Links :</h2></div>
+	<br>
+	<div class="report_links" ng-repeat="menu in linksReportIn" ng-if="menu.display_menu==2" namemenu="{{menu.menu_name}}">
+		<a ng-if="menu.menu_link!='tmeCallRep'"  class=" speedlinks left skyBlueBack marRt15px marBot10px text-center">
+			<div class="data linkBox" ng-click="toggle($event)" valSet_link_name="{{menu.menu_name}}" valSet_link="{{menu.menu_link}}" valset_display="{{menu.display_menu}}" valset_extraVals="{{menu.extraVals}}"  ng-class="{active: (currSpeedLink.indexOf(menu.menu_link) > -1)}">{{menu.menu_name}}
+			</div>
+		</a>
+		<a ng-if="menu.menu_link=='tmeCallRep'"  class="speedlinks left skyBlueBack marRt15px marBot10px text-center">
+			<div class="data linkBox" ng-click="toggle($event)" valSet_link_name="{{menu.menu_name}}" valSet_link="{{menu.menu_link}}" valset_display="{{menu.display_menu}}" valset_extraVals="{{menu.extraVals}}"  ng-class="{active: (currSpeedLink.indexOf(menu.menu_link) > -1)}" >{{menu.menu_name}}
+			</div>
+		</a>
+	</div>
+	<div class="subm_speed_links">
+		<input class=" button buttonLink width10" onfocus="if(this.blur)this.blur()" type="submit" ng-click="setSpeedLink()" value="SUBMIT"/>
+	</div>
+</section>
+
+ 

@@ -1,0 +1,262 @@
+<md-toolbar md-scroll-shrink style="background-color:#FFFFFF" ng-init="onLoadCall()">
+	<div class="md-toolbar-tools">
+		<md-button class="md-icon-button" aria-label="Settings" style="margin-left:20px;" ng-click="toggleLeft()">
+			<md-icon md-svg-icon="img/ic_menu_36px.svg" style="color:#000000;"></md-icon>
+		</md-button>
+		<h2>
+			<span>Own Website & Mobile site</span>
+		</h2>
+		<span flex></span>
+	</div>
+</md-toolbar>
+
+
+<section class="" subtract="500" style="font-family: roboto;">
+	<section class="mainContain">
+	
+	<div class="mainContain_innr" style='margin-bottom:150px !important;'>	
+		<div class="cnt-wrp">
+			<h4 class="box-heading roboto" >Thank you for choosing free website and mobile site</h4>
+			<div class="cnt-wrp-in" style="box-sizing: unset !important;margin-bottom:30px !important;">
+				<span class="box-titletxt">Revamp your own website or create new website & mobile site</span>
+				<div class="rdo-optn-wrp" style="padding-bottom: 10px;">
+					<div class="rdo-wrp own_borBtm" ng-click="switch_option('myown')" style="cursor:pointer;">
+						<span class="rdo-lable">I have my own website</span>
+					</div>
+					<div class="rdo-wrp new_borBtm" ng-click="switch_option('new')" style="cursor:pointer;">
+						<span class="rdo-lable">Let JD Omni create my website</span>
+					</div>
+				</div>
+				
+				<div class='skip_domain_options' style="padding:15px 0 0;" ng-if="domain_type == 'myown' || domain_type == 'own'">
+					<br>
+						<a href="javascript:void(0);" class="jd-domain-sprite rdo-btn myown_rad" style="height:16px;width:16px;" id="own_rdo" ng-click="switch_skipdomain('own')"></a>
+							<span class="rdo-lable" ng-click="switch_skipdomain('own')" >Enter existing domain details right now</span><br><br>
+						<a href="javascript:void(0);" class="jd-domain-sprite rdo-btn myown_rad" style="height:16px;width:16px;" id="skip1_rdo" ng-click="switch_skipdomain('skip1_rdo')"></a>
+							<span class="rdo-lable" ng-click="switch_skipdomain('skip1_rdo')">I will provide my existing domain detials later</span><br><br>
+						<a href="javascript:void(0);" class="jd-domain-sprite rdo-btn myown_rad" style="height:16px;width:16px;" id="skip2_rdo" ng-click="switch_skipdomain('skip2_rdo')"></a>
+							<span class="rdo-lable" ng-click="switch_skipdomain('skip2_rdo')">I want to book other domains like .net,co.in etc. I will book it & give you details later.</span><br>
+				</div>
+				<div class="from-wrp" ng-if="domain_type == 'own'">
+					<label class="from-lbl">Existing Domain</label>
+					<div class="dmn-input-wrp">
+						<div class="input-gruop">
+							<span class="domin-input">
+<!--
+								<span class="htpwrp">http://</span>
+-->
+								<input type="text" class="entrdmn" placeholder="Enter existing domain name" id="entrDomain" ng-model="omniregip[1]" domainreg>
+							</span>
+							<span class="errmsg" ng-if="domaincheckErr == 1">Domain does not exist. Please enter valid domain name or buy from JD.</span>
+						</div>
+					</div>
+					<div class="from-wrp">
+						<label class="from-lbl from-lbl2">Domain Register Name</label>
+						<div class="dmn-input-wrp">
+							<div class="input-gruop">
+								<span class="domin-input">
+									<input type="text" ng-model="domain_registerName[0]" class="entrdmn" placeholder="Email Register name" id="domain_register_name"  ng-blur="getforgetLink()" domainregisterauto>
+								</span>
+							</div>
+						</div>
+					</div>
+					<div class="from-wrp">
+						<label class="from-lbl">Domain Registrant Email ID</label>
+						<div class="dmn-input-wrp">
+							<div class="input-gruop">
+								<span class="domin-input">
+									<input type="text" ng-model="domain_registrant_email[0]" class="entrdmn" placeholder="Email ID provided by you during registration" id="domain_registrant_email">
+								</span>
+							</div>
+						</div>
+					</div>	
+					<div class="from-wrp">
+						<label class="from-lbl">Domain Userid</label>
+						<div class="dmn-input-wrp">
+							<div class="input-gruop">
+								<span class="domin-input">
+									<input type="text" ng-model="domain_uerid[0]" class="entrdmn" placeholder="" id="domain_uerid">
+								</span>
+							</div>
+							<a style="margin-left: 258px;color: #0d96d5;" class="forget_user_pass_a" ng-click="getUserPass_link()">Forgot UserId</a>
+						</div>
+
+					</div>	
+
+					<div class="from-wrp">
+						<label class="from-lbl">Domain Password</label>
+						<div class="dmn-input-wrp">
+							<div class="input-gruop">
+								<span class="domin-input">
+									<input type="password" ng-model="domain_pass[0]" class="entrdmn" placeholder="" id="domain_pass">
+								</span>
+							</div>
+							<a style="margin-left: 238px;color: #0d96d5;" class="forget_user_pass_a" ng-click="getUserPass_link()">Forgot Password</a>
+						</div>
+					</div>				
+				</div>
+				
+				
+
+				
+				<div class="from-wrp" ng-if="domain_type == 'new'">
+					<label class="from-lbl">Desired Domain</label>
+					<div class="dmn-input-wrp">
+						<div class="input-gruop">
+							<span class="domin-input" style="width: 315px">
+<!--
+								<span class="htpwrp">http://</span>
+-->
+								<input type="text" class="entrdmn" placeholder="Enter existing domain name" id="entrDomain" ng-model="omniregip[2]" ng-keyup="clear_flag()" domainreg>
+								<span class="extnwrp" ng-click="show_domainoption()" style="width: 14%;">
+									<span class="getxttxt">.com</span>
+									<i class="jd-domain-sprite dwnawr extndrop"></i>
+								</span>
+								<span class="drop-extns" ng-show="domain_option">
+									<span class="poplrextn-wrp">
+										<span class="drop-headig">Popular Extensions</span>
+											<ul class="exnlist-wrp">
+												<li ng-repeat ="(name,price) in popular_domain">
+													<input type="checkbox"class="checkboxdflt" ng-model="domain_cb[name]" id="{{name}}">
+													<label for="{{name}}">
+													<span class="doqnextn">{{name}}</span>
+													<span class="extnprce-wrp"><i class="jd-domain-sprite2 exnt-price"></i>
+													<span class="prctxtx">{{price}}</span></span>
+													</label>
+												</li>
+											</ul>
+										</span>
+									</span>
+								</span>
+							<input type="button" class="domin-input chek-avbl-input boder-text" value="Check Availability" ng-click="check_availability(omniregip[2],$event)">
+						</div>
+						
+					</div>
+				</div>
+				
+				<div ng-if="domain_type == 'available'">
+					<div class="rgtrrk-wrp paddT20 paddR15 paddB20 paddL15" ng-if="avail_no >= 1">
+						<i class="jd-domain-sprite2 rghmrk"></i>
+						<span class="rgt-text domavltext">Your domain is available.Buy it now</span>
+					</div>
+					
+					<div class="avbldomn-info" ng-repeat="(key,value) in available_list">
+						<span class="avlchekwrp" ng-if="value.error.code  == 0">
+							<input type="radio" class="bigchek" name="domain_avl[]" ng-model="avilable_domain" value="{{key}}"> 
+							<span class="avldmtxt">{{key}}</span>
+						</span>
+					
+						<span class="avlchekwrp fbbg" ng-if="value.error.code == 1">
+							<a href="#" class="jd-domain-sprite2 new-cros"></a>
+							<span class="avldmtxt">{{key}}</span>
+						</span>
+						
+						<span class="vali-wrp">
+							<span class="vali-yrwrp" ng-if="value.error.code == 0">
+								<span class="valiyrs">1 year(s) at</span>
+								<span class="valiyr-price">
+									<i class="jd-domain-sprite2 big-price"></i>
+									<span class="valiyr-price">{{value.result.price}}</span>
+								</span>
+<!--
+								<i class="jd-domain-sprite2 bigdrop-icn"></i>
+-->
+							</span>
+							
+							<span class="vali-yrwrp" ng-if="value.error.code == 1">
+								<span class="valiyrs">Not Available</span>
+							</span>
+							
+						</span>
+					</div>
+					
+					<div class="rdo-lable paddT20" style="cursor: pointer;font-weight: bold;" ng-click="change_domain()">Check other domain name</div>
+				</div>
+				
+				<div class="from-wrp" style="padding-top:18px" ng-if="show_email == 1 && domain_type != 'myown'">
+					<label class="from-lbl">Email id</label>
+					<div class="dmn-input-wrp">
+						<div class="input-gruop">
+							<span class="domin-input">
+								<input type="text" class="entrdmn" placeholder="Enter email id"  ng-model="omniregip['email_id']" id="email_id" ng-focus="show_data('email_id')" ng-blur="hide_data('email_id')">
+							</span>
+						</div>
+						<div class="input-gruop" style="margin-top:10px">
+							<span class="domin-input">
+								<input type="text" class="entrdmn" placeholder="Email ID Confirmation" id="entrDomain" ng-model="omniregip['email_id_confirm']" ng-copy="$event.preventDefault()" ng-paste="$event.preventDefault()">
+							</span>
+						</div>
+						<md-checkbox ng-model="omniregip['emailid_search']" aria-label="Checkbox 1" class="md-primary" style="font-size: 14px;margin-top: 12px;display: inline-block;">
+							Display In Search
+						 </md-checkbox>
+						 <md-checkbox ng-model="omniregip['emailid_feedback']" aria-label="Checkbox 1" class="md-primary" style="font-size: 14px;display: inline-block;">
+							Notify Via Email
+						 </md-checkbox>
+					</div>
+				</div>
+				
+				<div class="from-wrp" style="padding-top:18px" ng-if="show_mobile == 1 && domain_type != 'myown'">
+					<label class="from-lbl">Mobile No</label>
+					<div class="dmn-input-wrp">
+						<div class="input-gruop">
+							<span class="domin-input">
+								<input type="text" class="entrdmn" placeholder="Enter mobile no"  ng-model="omniregip['mob_no']" id="mob_no" ng-blur="hide_data('mob_no')" ng-focus="show_data('mob_no')" numbersonly>
+							</span>
+						</div>
+						<div class="input-gruop" style="margin-top:10px">
+							<span class="domin-input">
+								<input type="text" class="entrdmn" placeholder="Mobile Confirmation" id="entrDomain" ng-model="omniregip['mob_no_confirm']" numbersonly ng-copy="$event.preventDefault()" ng-paste="$event.preventDefault()">
+							</span>
+						</div>
+						<md-checkbox ng-model="omniregip['mob_search']" aria-label="Checkbox 1" class="md-primary" style="font-size: 14px;margin-top: 12px;display: inline-block;">
+							Display In Search
+						</md-checkbox>
+						<md-checkbox ng-model="omniregip['mob_feedback']" aria-label="Checkbox 1" class="md-primary" style="font-size: 14px;display: inline-block;">
+							Feedback Via SMS
+						</md-checkbox>
+					</div>
+				</div>
+				
+				<div class="from-wrp" style="padding-top:18px" ng-if="show_contactperson == 1 && domain_type != 'myown'">
+					<label class="from-lbl">Contact Person</label>
+					<div class="dmn-input-wrp">
+						<div class="input-gruop"> 
+							<md-select ng-model="omniregip['contact_person_no']" style="width: 81px; display: inline-block; float: left;margin-top: 2px;margin-right: 15px;">
+								<md-option value='Dr'>DR</md-option>
+								<md-option value='Ms'>MS</md-option>
+								<md-option value='Mr'>MR</md-option>
+							</md-select>
+							<span class="domin-input" style="width: 242px;">
+								<input type="text" class="entrdmn" placeholder="Enter contact person" ng-model="omniregip['contact_person']" id="contact_person" ng-blur="hide_data('contact_person')" ng-focus="show_data('contact_person')" alphaonly>
+							</span>
+						</div>
+						<div class="input-gruop" style="margin-top: -8px;">
+							<span class="domin-input" style="width: 242px;margin-left: 95px;">
+								<input type="text" class="entrdmn" placeholder="Contact Confirmation" id="entrDomain" ng-model="omniregip['contact_person_confirm']" alphaonly ng-copy="$event.preventDefault()" ng-paste="$event.preventDefault()">
+							</span>
+						</div>
+					</div>
+				</div>
+			<span class="note" ng-if="domain_type != 'myown'">Please inform client that after updating new website by JD, old website will be replaced by new website by JD.</span>
+				<div class="domain-btn-wrp" style='width:88% !important;'>
+
+					<input type="button" value="Proceed" class="domin-btn" ng-click="goto_domain_options($event)">
+<!--
+					<input type="button" value="SKIP" class="domin-btn" ng-click="addjdomniskip()">
+-->
+				</div>
+			</div>
+		</div>
+	</div>	
+		
+	<div class="ftr_wrpper" style="position:relative">
+		<div class="jdrrcontainer">
+			<div class="jdrr_footer">
+					Copyright 2008-2016 Justdial.com. All Rights Reserved. <a href="#">Privacy</a> I <a href="#">Terms</a>
+			</div><!--end of jdrr_footer-->
+		</div>
+	</div>
+			
+		
+	</section>
+</section>

@@ -1,0 +1,255 @@
+<md-toolbar md-scroll-shrink style="background-color:#FFFFFF" ng-init="onLoadCall()" ng-controller='catPreviewController'>
+	 <div class="add_new_overlay" style="pointer-events:auto !important;" ng-show="show_overlay"></div>
+	<div id="modal3" class="modal custom-modal add-business add_new_business_overlay" style="z-index:999;top:22%;border-radius:6px;width:485px;display:block;position: fixed;left: 0;right: 0;background-color: #fafafa;padding: 0;max-height: 100%;margin: auto;will-change: top, opacity;" ng-show="show_warning">
+        <div style="text-align:center">
+            <p style="color:red">Warning!!</p>
+            <p style="font-size:25px;margin: 0;margin-top: 5px;margin-bottom: 5px;color: black;"> It is an ongoing ECS contract</p>
+            <md-button class="md-raised md-primary" ng-click="show_warning = false;show_overlay= false;">Ok</div>
+        </div>
+    </div>
+    
+    
+    <div id="modal3" class="modal custom-modal add-business add_new_business_overlay" style="z-index:999;top:22%;border-radius:6px;width:485px;display:block;position: fixed;left: 0;right: 0;background-color: #fafafa;padding: 0;max-height: 100%;margin: auto;will-change: top, opacity;" ng-show="show_Block">
+        <div style="text-align:center">
+            <p style="color:red">Warning!!</p>
+            <p style="font-size:25px;margin: 0;margin-top: 5px;margin-bottom: 5px;color: black;"> It is an ongoing ECS contract ..!! You are not allowed to edit !!</p>
+            <md-button class="md-raised md-primary" ng-click="show_Block = false;show_Block= false;go_to_bform();">Ok</div>
+        </div>
+    </div>
+    
+    
+    
+     <div id="error_popup"  style=" background: white none repeat scroll 0 0;border-radius: 6px;left: 0;margin: auto;position: fixed;right: 0; width: 570px;z-index: 10000 !important;" ng-show="show_data_error" >
+        <div id="error_content"></div>
+        <center><md-button class="md-raised md-primary" style="" ng-click="go_to_bform()">Ok</div></center>
+    </div>
+<!--div class="natnl_container"  style='padding-bottom:160px;'-->
+	<div class="md-toolbar-tools">
+		<md-button class="md-icon-button" aria-label="Settings" style="margin-left:20px;" ng-click="toggleLeft()">
+			<md-icon md-svg-icon="img/ic_menu_36px.svg" style="color:#000000;"></md-icon>
+		</md-button>
+		<h2>
+			<span>Bform Multicity</span>
+		</h2>
+		<span flex></span>
+	</div>
+</md-toolbar>
+<section class="mid_sec">
+	<div class="container mid-otr mb20 pb30">
+		<div class="newNation_tab">
+			<ul>
+				<li><a href="#"  ng-class="{selted:national_val['listing_type'] == 'local'}" ng-model="national_val['listing_type']"  ng-click="show_listings('city',$event,1)" >Local City Signup</a></li>				 
+				<li><a href="#" ng-class="{selted:national_val['listing_type'] == 'national'}" ng-model="national_val['listing_type']"  ng-click="show_listings('national',$event,1)" >National Registration Signup</a></li>
+				
+			</ul>	
+		</div>		
+	</div>
+
+
+	<div class="container mid-otr">
+		<div ng-show="national_val['listing_type'] == 'local' && disable != 'local'">
+		This section contain no data, to go ahead with "Local city sign up",simply click "proceed"
+		</div>
+		<div>
+			<span ng-if="national_val['listing_type'] == 'local' && disable == 'local'">{{disabled_msg}}</span>
+		</div>	
+		<div>
+			<span ng-if="disable == 'mul' && national_val['listing_type'] == 'national'">{{disabled_msg}}</span>
+		</div>	
+		<div class="sgn_prnt">
+            <!--div class="nation_radio">
+                <ul>
+                    <li><a href="#" ng-class="{act_sgn:national_val['listing_type'] =='local'}" style="margin-left:55px;">Local City Signup</a></li>
+					 <li>
+                        <label for="ntl_local" style="padding:20px">
+                            <input type="radio" name="sgn" value="local" style="left: 0;position: relative;visibility: visible;font-size: 100%;box-sizing: unset;height:20px;width:20px;margin-left: 200px;" ng-model="national_val['listing_type']" ng-if="disable != 'local'" ng-click="show_listings('city')" id="ntl_local">
+                            <span ng-if="disable == 'local'">{{disabled_msg}}</span>
+                        </label>
+                    </li>
+                    <li><a href="#" ng-class="{act_sgn:national_val['listing_type'] =='national'}" style="margin-left:55px;">National Registration Signup</a></li>
+					 <li>
+                        <label for="ntl_nat" style="padding:20px">
+                            <input type="radio" name="sgn" value="national" style="left: 0;position: relative;visibility: visible;font-size: 100%;box-sizing: unset;height:20px;width:20px;margin-left: 200px;" ng-model="national_val['listing_type']" ng-if="disable != 'mul'" ng-click="show_listings('national')" id="ntl_nat">
+                            <span ng-if="disable == 'mul'">{{disabled_msg}}</span>
+                        </label>
+                    </li>
+                </ul>
+            </div-->		
+                   
+     <div ng-show="national_val['listing_type'] == 'national' && disable!='mul'">       
+		<h2 class="nati_list">National Listing</h2>		
+		<div class="col-md-12 col-sm-12 col-xs-12 mt20 mb20 mop0 ntnllsting">
+			<div class="divFloat">
+				<span class="text-center pull-left bg-warning wrngotr">CURRENT BUDGET -&nbsp; <i class="genio_spr rup_2"></i> {{min_upfront_cost}}</span>
+				<div class="sech_optn">
+					<label class="divflot50 sgnup">Signup City</label>
+					<div class="divflot50">
+						<input type="text" class="form-control inpt" style="color: #424242;font-size: 15px;" placeholder="{{data_city}}" disabled>
+					</div>
+				</div>
+			</div>
+			<div class="divFloat">
+				<div class="divFloat panel-group"  ng-repeat="(key,val) in zoneData">
+				  <div class="panel panel-default divflot" ng-click="show_zone(key); isReplyForm[key] = !isReplyForm[key];show_crid(key,1,'');">
+					<div class="panel-heading" >
+					  <h4 class="panel-title">
+						<span class = "ottbl">
+							<span class="col-md-1 col-sm-1 col-xs-1 text-center tbl"><label class="chkbx"><input type="checkbox" style="display: none;" ng-click="show_zone(key);isReplyForm[key] = !isReplyForm[key];show_crid(key,1,'');" ng-model="zone_type[key];"><span class="genio_spr chk_i" ></span></label></span>
+							<span class="col-md-10 col-sm-10 col-xs-10 tbl p0">
+								<span class="col-md-12 col-sm-12 col-xs-12 p0 hdtxt"> {{key | capitalize}} <br>({{state_name[key]}}) </span>
+								<span class="col-md-12 col-sm-12 col-xs-12 p0 subtxt"></span>
+							</span>
+							<span class="col-md-1 col-sm-1 col-xs-1 text-center tbl">
+							<span class="genio_spr pm_i plsmin" ng-if="isReplyForm22[key] == false || isReplyForm22[key] == undefined"> <!--ng-class="{plsmin1:isReplyForm[key],plsmin:!isReplyForm[key]}"--> </span>
+							<span class="genio_spr pm_i plsmin1" ng-if="isReplyForm22[key] == true"><!--ng-class="{plsmin1:isReplyForm[key],plsmin:!isReplyForm[key]}"--> </span>
+						</span>
+					  </h4>
+					</div>
+					</div>
+					
+						
+					  <div class="panel-body"  ng-show="clicked_zone == key && (isReplyForm[key] == undefined || isReplyForm[key] == true)" >
+						<span class="col-md-12 col-sm-12 col-xs-12 p0 mt10 mb20 srttxt lftFlot"  >
+							<span class="col-md-11 col-sm-11 col-xs-11 p0 lftFlot">Clicking on icon on right will sort the list of states alphabetically except for the parent state</span>
+							<span class="col-md-1 col-sm-1 col-xs-1 p0"><a class="genio_spr aplha_srt pull-right" href="javascript:void(0)"></a></span>
+						</span>
+						
+						<div class="lftFlot p0 divflot" ng-repeat="(key2,val2) in val" >
+							<div class="panel-group divflot">
+							  <div class="panel panel-default" ng-click="show_states(key2,key); isReplyForm[key2] = !isReplyForm[key2];show_crid(key2,2,val)">
+								<div class="panel-heading subhd">
+								  <h4 class="panel-title">
+									<span>
+										<span class="col-md-1 col-sm-1 col-xs-1 text-center tbl"><label class="chkbx"><input type="checkbox" style="display: none;"   ng-model="zone_type[key2]" ng-click="state_checked(key,key2);isReplyForm[key2] = !isReplyForm[key2];show_crid(key2,2,val)"><span class="genio_spr chk_i"></span></label></span>
+										<span class="col-md-10 col-sm-10 col-xs-10 tbl p0">
+											<span class="col-md-12 col-sm-12 col-xs-12 p0 hdtxt">{{key2 | capitalize}}</span>
+										</span>
+										<span class="col-md-1 col-sm-1 col-xs-1 text-center tbl">
+										
+										<span class="genio_spr pm_i plsmin" style="margin-left: 23.5px;" ng-if="isReplyForm22[key2] == false || isReplyForm22[key2] == undefined" ></span>
+										<span class="genio_spr pm_i plsmin1" style="margin-left: 23.5px;" ng-if="isReplyForm22[key2] == true" ></span>
+										</span>
+									</span>
+								  </h4>
+								</div>
+							</div>	
+							</div>
+							<div ng-show="clicked_states == key2 && (isReplyForm[key2] == undefined || isReplyForm[key2] == true)" >
+								<span class="col-md-4 col-sm-4 col-xs-12 mt10 mb10">
+									<label class="chkbx">
+										<input type="checkbox" style="display: none; " ng-model="zone_cb[key][key2]" ng-click="select_all(key,key2)">
+										<span class="genio_spr chk_i">
+										</span>
+											<span class="pull-right lbltxt citi cithd ml10" >Select All
+										</span>
+									</label>
+							</span>
+							
+							<span class="col-md-4 col-sm-4 col-xs-12 mt10 mb10"  ng-repeat="(in_key,in_val) in val2">
+								<label class="chkbx">
+									<input type="checkbox" style="display: none;" ng-model="zone_cb[in_val.city]" ng-click="selected_zone_cities(in_val.city,key,key2)">
+										<span class="genio_spr chk_i">
+										</span>
+											<span class="pull-right lbltxt citi"  >{{in_val.city | capitalize }}
+										</span>
+								</label>
+							</span>
+							</div>
+					</div>
+								<!--div id="collapseOnesub1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOnesub1">
+								  <div class="panel-body">
+									<span class="col-md-4 col-sm-4 col-xs-12 mt10 mb10"><label class="chkbx"><input type="checkbox"><span class="genio_spr chk_i"></span><span class="pull-right lbltxt citi cithd ml10">Select All</span></label></span>
+									<span class="col-md-4 col-sm-4 col-xs-12 mt10 mb10"><label class="chkbx"><input type="checkbox"><span class="genio_spr chk_i"></span><span class="pull-right lbltxt citi ml10">Ahmednagar</span></label></span>
+									<span class="col-md-4 col-sm-4 col-xs-12 mt10 mb10"><label class="chkbx"><input type="checkbox"><span class="genio_spr chk_i"></span><span class="pull-right lbltxt citi ml10">Akola</span></label></span>
+									<span class="col-md-4 col-sm-4 col-xs-12 mt10 mb10"><label class="chkbx"><input type="checkbox"><span class="genio_spr chk_i"></span><span class="pull-right lbltxt citi ml10">Amravati</span></label></span>
+									<span class="col-md-4 col-sm-4 col-xs-12 mt10 mb10"><label class="chkbx"><input type="checkbox"><span class="genio_spr chk_i"></span><span class="pull-right lbltxt citi ml10">Aurangabad</span></label></span>
+									<span class="col-md-4 col-sm-4 col-xs-12 mt10 mb10"><label class="chkbx"><input type="checkbox"><span class="genio_spr chk_i"></span><span class="pull-right lbltxt citi ml10">Chandanpur</span></label></span>
+									<span class="col-md-4 col-sm-4 col-xs-12 mt10 mb10"><label class="chkbx"><input type="checkbox"><span class="genio_spr chk_i"></span><span class="pull-right lbltxt citi ml10">Dhule</span></label></span>
+									<span class="col-md-4 col-sm-4 col-xs-12 mt10 mb10"><label class="chkbx"><input type="checkbox"><span class="genio_spr chk_i"></span><span class="pull-right lbltxt citi ml10">Jalgaon</span></label></span>
+									<span class="col-md-4 col-sm-4 col-xs-12 mt10 mb10"><label class="chkbx"><input type="checkbox"><span class="genio_spr chk_i"></span><span class="pull-right lbltxt citi ml10">Kolhapur</span></label></span>
+									<span class="col-md-4 col-sm-4 col-xs-12 mt10 mb10"><label class="chkbx"><input type="checkbox"><span class="genio_spr chk_i"></span><span class="pull-right lbltxt citi ml10">Mumbai</span></label></span>
+									<span class="col-md-4 col-sm-4 col-xs-12 mt10 mb10"><label class="chkbx"><input type="checkbox"><span class="genio_spr chk_i"></span><span class="pull-right lbltxt citi ml10">Nagpur</span></label></span>
+									<span class="col-md-4 col-sm-4 col-xs-12 mt10 mb10"><label class="chkbx"><input type="checkbox"><span class="genio_spr chk_i"></span><span class="pull-right lbltxt citi ml10">Nanded</span></label></span>
+									<span class="col-md-4 col-sm-4 col-xs-12 mt10 mb10"><label class="chkbx"><input type="checkbox"><span class="genio_spr chk_i"></span><span class="pull-right lbltxt citi ml10">Nashik</span></label></span>
+									<span class="col-md-4 col-sm-4 col-xs-12 mt10 mb10"><label class="chkbx"><input type="checkbox"><span class="genio_spr chk_i"></span><span class="pull-right lbltxt citi ml10">Palghar</span></label></span>
+									<span class="col-md-4 col-sm-4 col-xs-12 mt10 mb10"><label class="chkbx"><input type="checkbox"><span class="genio_spr chk_i"></span><span class="pull-right lbltxt citi ml10">Parbhani</span></label></span>
+								  </div>
+								</div>
+							  </div>
+							  <div class="panel panel-default">
+								<div class="panel-heading subhd" role="tab" id="headingOnesub2">
+								  <h4 class="panel-title">
+									<a role="button" data-toggle="collapse" data-parent="#accordionsub1" href="#collapseOnesub2" aria-expanded="true" aria-controls="collapseOnesub1" class="ottbl collapsed">
+										<span class="col-md-1 col-sm-1 col-xs-1 text-center tbl"><label class="chkbx"><input type="checkbox"><span class="genio_spr chk_i"></span></label></span>
+										<span class="col-md-10 col-sm-10 col-xs-10 tbl p0">
+											<span class="col-md-12 col-sm-12 col-xs-12 p0 hdtxt">Goa (247 Cities)</span>
+										</span>
+										<span class="col-md-1 col-sm-1 col-xs-1 text-center tbl"><span class="genio_spr pm_i plsmin"></span></span>
+									</a>
+								  </h4>
+								</div>
+								<div id="collapseOnesub2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOnesub2">
+								  <div class="panel-body">
+									<span class="col-md-4 col-sm-4 col-xs-12 mt10 mb10"><label class="chkbx"><input type="checkbox"><span class="genio_spr chk_i"></span><span class="pull-right lbltxt citi cithd ml10">Select All</span></label></span>					
+								  </div>
+								</div>
+							  </div>
+							  <div class="panel panel-default">
+								<div class="panel-heading subhd" role="tab" id="headingOnesub3">
+								  <h4 class="panel-title">
+									<a role="button" data-toggle="collapse" data-parent="#accordionsub1" href="#collapseOnesub3" aria-expanded="true" aria-controls="collapseOnesub1" class="ottbl collapsed">
+										<span class="col-md-1 col-sm-1 col-xs-1 text-center tbl"><label class="chkbx"><input type="checkbox"><span class="genio_spr chk_i"></span></label></span>
+										<span class="col-md-10 col-sm-10 col-xs-10 tbl p0">
+											<span class="col-md-12 col-sm-12 col-xs-12 p0 hdtxt">Gujarat (247 Cities)</span>
+										</span>
+										<span class="col-md-1 col-sm-1 col-xs-1 text-center tbl"><span class="genio_spr pm_i plsmin"></span></span>
+									</a>
+								  </h4>
+								</div>
+								<div id="collapseOnesub3" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOnesub3">
+								  <div class="panel-body">
+									<span class="col-md-4 col-sm-4 col-xs-12 mt10 mb10"><label class="chkbx"><input type="checkbox"><span class="genio_spr chk_i"></span><span class="pull-right lbltxt citi cithd ml10">Select All</span></label></span>						
+								  </div>
+								</div>
+							  </div>
+							  <div class="panel panel-default">
+								<div class="panel-heading subhd" role="tab" id="headingOnesub4">
+								  <h4 class="panel-title">
+									<a role="button" data-toggle="collapse" data-parent="#accordionsub1" href="#collapseOnesub4" aria-expanded="true" aria-controls="collapseOnesub1" class="ottbl collapsed">
+										<span class="col-md-1 col-sm-1 col-xs-1 text-center tbl"><label class="chkbx"><input type="checkbox"><span class="genio_spr chk_i"></span></label></span>
+										<span class="col-md-10 col-sm-10 col-xs-10 tbl p0">
+											<span class="col-md-12 col-sm-12 col-xs-12 p0 hdtxt">Dadara and Nagar Haveli (247 Cities)</span>
+										</span>
+										<span class="col-md-1 col-sm-1 col-xs-1 text-center tbl"><span class="genio_spr pm_i plsmin"></span></span>
+									</a>
+								  </h4>
+								</div>
+								<div id="collapseOnesub4" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOnesub4">
+								  <div class="panel-body">
+									<span class="col-md-4 col-sm-4 col-xs-12 mt10 mb10"><label class="chkbx"><input type="checkbox"><span class="genio_spr chk_i"></span><span class="pull-right lbltxt citi cithd ml10">Select All</span></label></span>						
+								  </div>
+								</div>
+							  </div>
+							</div>
+						</div>
+						
+					  </div>
+					</div-->
+				  </div>
+				  
+				</div>
+			</div>
+		</div>
+	</div>
+		
+		<div class="btn_wrpp">
+			<button class="btn btn-default mr10" style="margin-top: 33px;" ng-click="go_to_bform();">Back</button>
+			<button class="btn btn-primary" ng-click="save_type($event)">Proceed</button>
+		</div>
+	</div>
+</section>
+
+		
+
+
+

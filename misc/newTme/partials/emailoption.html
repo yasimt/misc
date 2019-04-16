@@ -1,0 +1,104 @@
+<md-toolbar md-scroll-shrink style="background-color:#FFFFFF;border-bottom:1px solid #CCCCCC" ng-init="onLoadCall()" ng-controller="catPreviewController">
+	<div class="md-toolbar-tools">
+		<md-button class="md-icon-button" aria-label="Settings" style="margin-left:20px;" ng-click="toggleLeft()">
+			<md-icon md-svg-icon="img/ic_menu_36px.svg" style="color:#000000;"></md-icon>
+		</md-button>
+		<h2>
+			<span>Own Website & Mobile site</span>
+		</h2>
+		<span flex></span>
+	</div>
+</md-toolbar>
+
+
+<section class="mainContain_innr" subtract="500" >
+	<section class="mainContain" style="font-family: 'Roboto', sans-serif;">
+		
+		<div class="cntre">
+			<span class="tble-title">Email Package</span>
+			<div class="tbl-ottr">
+				<span class="tblt">Please select the email package</span>
+				<table class="eml-pkgtbl" cellspacing="0" cellpadding="0">
+					<tr>
+						<td width="20%" class="tdhedign">Description</td>
+<!--
+							<td width="40%" class="tdhedign"> 
+
+
+								<md-radio-group ng-model="email_package">
+									<md-radio-button value="google" class="md-primary">
+										<span class="rdtxtx">Gmail for your domain</span>
+									</md-radio-button>
+								</md-radio-group>
+
+							</td>
+-->							
+							<td width="40%" class="tdhedign"> 
+								<md-radio-group ng-model="email_package">
+									<md-radio-button value="directi" class="md-primary">
+										<span class="rdtxtx">Direct_I</span>
+									</md-radio-button>
+								</md-radio-group>
+							</td>
+						
+						
+					</tr>
+					<tr>
+						<td valign="top">Features</td>
+<!--
+						<td valign="top">
+							<ul>
+								<li><span>Business email address</span></li>
+								<li><span>30GB of online storage for file syncing and sharing</span> </li>
+								<li><span>Security and admin controls</span></li>
+								<li><span>24/7 phone and email support</span></li>
+								<li><span>video and voice calls</span></li>
+								<li><span>Online text documents, spreadsheets and slides</span> </li>
+								<li><span>Easy to create project sites</span></li>
+							</ul>
+						</td>
+-->						
+						<td valign="top">
+							<ul>
+								<li><span>Business email address</span></li>
+								<li><span>5GB of storage</span> </li>
+								<li><span>Security and admin controls</span></li>
+								<li><span>24/7 phone and email support</span></li>
+							</ul>
+						</td>
+					</tr>
+					<tr>
+						<td valign="top">Price per mail box</td>
+<!--
+						<td valign="top">
+							<ul>
+								<li><span>{{google_price}} Rupees per year</span></li>
+							</ul>
+						</td>
+-->						
+						<td valign="top">
+							<ul>
+								<li><span>{{directi_price}} Rupees per year</span></li>
+							</ul>
+						</td>
+					</tr>
+				</table>
+				<div class="leftbr">
+				<a href="#" class="prche" ng-click="proceed($event)">Proceed</a>
+			</div>
+			</div>
+		</div>
+	
+	</section>
+</section>
+
+
+<div class="ftr_wrpper" style="position:relative">
+	<div class="jdrrcontainer">
+		<div class="jdrr_footer">
+				Copyright 2008-2016 Justdial.com. All Rights Reserved. <a href="#">Privacy</a> I <a href="#">Terms</a>
+		</div><!--end of jdrr_footer-->
+	</div>
+</div>
+	
+		

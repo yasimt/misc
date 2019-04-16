@@ -1,0 +1,248 @@
+<section class="mainSection" subtract="500">
+	<section class="mainContain" ng-if="reportData.errorCode == 0">
+		<h3 class="marBot10px" ng-if="mainPage	==	'search'">Below is your Search Result :</h3>
+		<nav ng-if="mainPage	!=	'search'" class="left margin8 slideIndi" >
+			<div class="left arrow marTop10px" ng-if="setArrowPos==1" ng-click="slideright($event)"><img ng-src="img/arrow-left.png" /></div>
+			<div class="navSlider left">
+				<ul class="navFilters left width100 marBot30px marTop10px repPop setTotContWidth">
+					<li ng-if="currentPage != 'dealClosedRep'" ng-click="reportOrder('all','')" class="left">All</li>
+				<li ng-if="currentPage == 'dealClosedRep'" ng-click="reportOrder('all','')" class="left">All</li><span class="left">/</span>
+				<li ng-click="showSubMenu($event)" class="left lastLiTop">companyname
+					<ul class="hide submenuUl">
+						<li ng-if="currentPage != 'dealClosedRep'" class="left" ng-click="reportOrder('compname','order-asc')">ORDER ASC</li>
+						<li ng-if="currentPage == 'dealClosedRep'" class="left" ng-click="reportOrder('companyName','order-asc')">ORDER ASC</li><span class="left">/</span>
+						<li class="left" ng-if="currentPage != 'dealClosedRep'" ng-click="reportOrder('compname','order-desc')">ORDER DESC</li>
+						<li class="left" ng-if="currentPage == 'dealClosedRep'" ng-click="reportOrder('companyName','order-desc')">ORDER DESC</li>
+					</ul>
+				</li><span class="left">/</span>
+				<li class="left lastLiTop" ng-click="$state.go('appHome.filter',{srchparam:'1week',srchWhich:'where',currPage:'appointmentRep',extraVals:'25'})">Last 1 Week</li><span class="left">/</span>
+				<li class="left lastLiTop" ng-click="$state.go('appHome.filter',{srchparam:'1month',srchWhich:'where',currPage:'appointmentRep',extraVals:'25'})">Last 1 Month</li>
+				</ul>
+			</div>
+			<div class="left arrow marTop10px" ng-if="setArrowPos==1" ng-click="slideleft($event)"><img ng-src="img/arrow-right.png" /></div>
+		</nav>
+		<div class="left inputIndiSrch marBot30px"><input type="text" class="SearchCompany" ng-model="compFilter" placeholder="Search in loaded Contracts within this page" ></div>
+		<div class="left width50 slideIndi" ng-if="mainPage	!=	'search'">
+			<div class="left arrow marTop10px ng-scope" ng-click="sliderRightPage($event)" ng-if="setArrowPosPage==1">
+				<img ng-src="img/arrow-left.png" src="img/arrow-left.png">
+			</div>
+			<div class="pageSlider left">
+				<ul class="left text-center navFilters setTotContWidthPage repPop">
+					<li ng-class="{selectedPage: $index==selectedIndex || (selectedIndex == '' && n == 0)}" class="left pointer pageLi" ng-repeat="n in [] | range:pageContracts" ng-click="clickLoad(n)">{{n+1}}</li>
+				</ul>
+			</div>
+			<div class="left arrow marTop10px ng-scope" ng-click="slideleftPage($event)" ng-if="setArrowPosPage==1">
+				<img ng-src="img/arrow-right.png" src="img/arrow-right.png">
+			</div>
+		</div>
+		<div class="right marBot10px"><div class="left marRt10px" ng-click="changeView($event,2)"><img ng-src="img/list.png" /></div><div class="left marRt20px" ng-click="changeView($event,1)"><img ng-src="img/grid.png" /></div></div>
+		<div class="divbackground" ng-click="compFilter = ''"><img class="very-small-cross" ng-show="compFilter" ng-src="img/blackCross.jpeg"></div>
+		<div class="incDiv left width100">
+			<div class="panelDiv repeat-animation left contDivs" ng-repeat="contract in reportData.data | filter:compFilter" ng-if="viewParam	==	1">
+				<div class="front">
+					<!-- Code Added Here By Apoorv Agrawal Start-->
+						<div ng-if="(extraVals == 25 || extraVals == 99) && contract.cancel_flag == 1" id="" style="color: #ff0101;cursor: pointer;float: right;font-size: 26px;padding-top: 0;position: relative;z-index: 999999999;text-decoration: underline;">Appt Canceled</div>										
+						<div ng-if="(extraVals == 25 || extraVals == 99)" style="color: #ffffff;float: right;font-size: 26px;padding-top: 0;position: relative;z-index: 999999999;">X</div>
+					<!-- Code Added Here By Apoorv Agrawal Ends-->
+					<div class="innerContDiv">
+						<div class="compNameTile blue pointer" ng-click="goToBform(contract)"><h3>{{(contract.companyname == '' || contract.companyname == null) && 'Company Name Not Found' || contract.companyname }}</h3> </div>
+<!--
+						<div class="grab_status" ng-if="contract.appoint_grab_status!='' && contract.appoint_grab_status=='0'" style="color:green;font-weight:bold;">Not Grabed</div>
+						<div class="grab_status" ng-if="contract.appoint_grab_status!='' && contract.appoint_grab_status=='1'" style="color:red;font-weight:bold;">Grabed</div>
+-->
+						<div class="divContContainer overflow">
+							<p class="parentidShow arial small-font darkGrey mar-bot-5 | filter:compFilter">{{contract.contractid}}</p>
+							<p class="parentidShow arial small-font darkGrey mar-bot-5" ng-if="contract.empcode != '' && contract.empcode != null">TME - {{contract.parentCode}}</p>
+							<p class="parentidShow arial small-font darkGrey mar-bot-5" ng-if="contract.empcode != '' && contract.empcode != null && (contract.allocationType=='25' || contract.allocationType=='99')">Appointment To - {{contract.tmename}}({{contract.empcode}}) &nbsp;&nbsp;<img src='img/green_active_grid_icon.png' ng-if='imgctiCall[$index]	==	0' ng-src='img/green_active_grid_icon.png' ng-click='ctiCallfunction(contract.empcode,contract.contractid,$index)' style='cursor:pointer;'/>
+							<img src='img/gray_inactive_grid_icon.png' ng-if='imgctiCall[$index]	==	1' ng-src='img/gray_inactive_grid_icon.png' ng-click='callfn_function($index)' style='cursor:pointer;'/></p>
+							<p class="parentidShow arial small-font darkGrey mar-bot-5" ng-if="contract.instruction != '' && contract.instruction != null">Appointment Inst. - {{contract.instruction}}</p>
+							<p class="parentidShow arial small-font darkGrey mar-bot-5" ng-if="contract.actionTime != '' && contract.actionTime != null">
+								<span ng-if="contract.allocationType=='25' || contract.allocationType=='99' || contract.allocationType=='22' || contract.allocationType=='24'">Appointment Time. - {{contract.actionTime}}</span>
+							</p>
+							<p class="parentidShow arial small-font darkGrey mar-bot-5" ng-if="contract.allocationTime != '' && contract.allocationTime != null">
+								<span ng-if="contract.allocationType=='25' || contract.allocationType=='99'">Allocated On.</span><span ng-if="contract.allocationType !='25' && contract.allocationType !='99'">Disposed On </span> - {{contract.allocationTime}}
+							</p>
+							<p class="parentidShow arial small-font darkGrey mar-bot-5" ng-if="contract.dispositon_type != '' && contract.dispositon_type != null">
+								<span ng-if="contract.allocationType=='25' || contract.allocationType=='99'">Disposition Type - {{contract.dispositon_type}}</span>
+							</p>
+							<p class="parentidShow arial small-font darkGrey mar-bot-5" ng-if="contract.diposition_date != '' && contract.diposition_date != null">
+								<span ng-if="contract.allocationType=='25' || contract.allocationType=='99'">Disposition Date - {{contract.diposition_date}}</span>
+							</p>
+							<p class="parentidShow arial small-font darkGrey mar-bot-5" ng-if="contract.uptDate != '' && contract.uptDate != null">Deal Closed Date. - {{contract.uptDate}}</p>
+						</div>
+						<div class="slideIndi left positionAbs bottom0 width100">
+							<div class="left arrow marTop10px" ng-click="slideright($event)"><img ng-src="img/arrow-left.png" /></div>
+							<div class="upperLayerMenu left">
+								<div class="left repPop setTotContWidth">
+									<form name="add_multicity_cheque" action="../00_Payment_Rework/accounts/multicity_single_cheque.php" target="_blank" method="post">
+										<input type="hidden" name="parentid" value="" />
+										<input type="hidden" name="compname" value="" />
+									</form>
+									<a ng-href="../paid/showPymtHistory.php?parentID={{contract.contractid}}" target="payHist"><div ng-if="currentPage == 'dealClosedRep'" class="left repDivsIndi very-small-font darkGrey arial text-center marRt10px marTop7px"><div class="marBot10px"><img ng-src="img/ruppee.png" style="width:25px; height:25px;" /></div><div>Show Payment</div></div></a>
+									<div ng-if="currentPage == 'dealClosedRep'" ng-click="showDataMode($event,1,contract.contractid,contract.companyname)" class="left repDivsIndi very-small-font darkGrey arial text-center marRt10px"><div class="marBot10px"><img ng-src="img/money_balance.png" /></div><div>Check Balance</div></div>
+									<a ng-if="contract.flag" ng-href="../00_Payment_Rework/accounts/multicity_single_cheque.php?parentid={{contract.contractid}}" target="_blank">
+										<div ng-if="currentPage == 'dealClosedRep'" class="left repDivsIndi very-small-font darkGrey arial text-center marRt10px">
+											<div class="marBot10px" ><img ng-src="img/cheque.png" ng-if="contract.flag" style="width:25px; height:25px;"/></div>
+											<div class="marBot10px"><img ng-src="img/dealCross.jpeg" ng-if="!contract.flag" style="width:25px; height:25px;"/></div>
+											<div>Single Cheque</div>
+										</div>
+									</a>
+									<a ng-if="!contract.flag">
+										<div ng-if="currentPage == 'dealClosedRep'" class="left repDivsIndi very-small-font darkGrey arial text-center marRt10px">
+											<div class="marBot10px" ><img ng-src="img/cheque.png" ng-if="contract.flag" style="width:25px; height:25px;"/></div>
+											<div class="marBot10px"><img ng-src="img/dealCross.jpeg" ng-if="!contract.flag" style="width:25px; height:25px;"/></div>
+											<div>Single Cheque</div>
+										</div>
+									</a>
+									<!-- Code Added Here By Apoorv Agrawal Start-->
+									<div class="left repDivsIndi very-small-font darkGrey arial text-center marRt10px marTop7px" ng-if="(extraVals == 25 || extraVals == 99) && contract.showCancel == 1  && contract.cancel_flag == 0">
+										<div class="marBot10px" style="color: #7e7d7d;cursor: pointer;font-size: 24px;padding-top: 0;z-index: 999999999;display:block;" ng-click="cancel_appt($event,contract.contractid,contract.companyname,contract.parentCode,contract.empcode,contract.actionTime)">X</div>
+										<div>Cancel Appt.</div>
+									</div>
+									<!-- Code Added Here By Apoorv Agrawal Ends-->
+									<div ng-click="showCats($event,contract.contractid)" class="left repDivsIndi very-small-font darkGrey arial text-center marRt10px marTop7px"><div class="marBot10px"><img ng-src="img/more.png" /></div><div>Show Cats</div></div>
+									<a ng-href="../00_Payment_Rework/add_on_payment/mode_selection.php?parentid={{contract.contractid}}&compname={{contract.companyname | urlEncode}}" target="_blank"><div class="left repDivsIndi very-small-font darkGrey arial text-center marRt10px"><div class="marBot10px"><img ng-src="img/add-on.png" /></div><div>AddOn Payment</div></div></a>
+									<a ng-href="../00_Payment_Rework/accounts/mandate_selection.php?parentid={{contract.contractid}}&compname={{contract.companyname | urlEncode}}&flag=" target="_blank"><div class="left repDivsIndi very-small-font darkGrey arial text-center marRt10px"><div class="marBot10px"><h3>EM</h3></div><div>Ext. Mandate</div></div></a>
+									<div class="left repDivsIndi very-small-font darkGrey arial text-center marRt10px" ng-click="checkTrackerRep($event,contract.contractid)"><div class="marBot10px"><img ng-src="img/report-small.png" /></div><div>Tracker Report</div></div>
+									<a ng-href="../tmAlloc/companyFeedbackRep.php?contractID={{contract.contractid}}" target="_blank"><div class="left repDivsIndi very-small-font darkGrey arial text-center marRt10px"><div class="marBot10px"><img ng-src="img/phone2.png" /></div><div>Statement/Feed</div></div></a>
+									<a ng-if="currentPage == 'dealClosedRep'" ng-href="http://genio.in/jdrr/index.php?m=search&module=cs&ucode={{userid}}&fld_type=parentid&search_type={{contract.contractid}}" target="_blank"><div class="left repDivsIndi very-small-font darkGrey arial text-center marRt10px"><div class="marBot10px"><img ng-src="img/ic_view_headline_24px.svg" /></div><div>JDRR Status</div></div></a>
+									<a ng-if="cityCode != 35 && cityCode != 17" ng-href="http://172.29.{{cityCode}}.217:81/invoice_data/invoice_data_new.php" target="_blank"><div class="left repDivsIndi very-small-font darkGrey arial text-center marRt10px"><div class="marBot10px"><img ng-src="img/report-small.png" /></div><div>Invoice Generate</div></div></a>
+									<a ng-if="cityCode == 35" ng-href="http://192.168.35.217:81/invoice_data/invoice_data_new.php" target="_blank"><div class="left repDivsIndi very-small-font darkGrey arial text-center marRt10px"><div class="marBot10px"><img ng-src="img/report-small.png" /></div><div>Invoice Generate</div></div></a>
+									<a ng-if="cityCode == 17" ng-href="http://192.168.17.217:81/invoice_data/invoice_data_new.php" target="_blank"><div class="left repDivsIndi very-small-font darkGrey arial text-center marRt10px"><div class="marBot10px"><img ng-src="img/report-small.png" /></div><div>Invoice Generate</div></div></a>
+								</div>
+							</div>
+							<div class="left arrow marTop10px" ng-click="slideleft($event)"><img ng-src="img/arrow-right.png" /></div>
+						</div>
+					</div>
+					<div class="catupeven coverOverlay hide colorWhite">
+						<h3 class="loadingMini hide colorWhite">Loading...</h3>
+						<a><div class="right arial" ng-click="closeOverlay($event)">X</div></a>
+						<div class="catContain" ng-if="categories.errorCode=='0'">
+							<h3 class="colorWhite">Categories for {{contract.companyname|capitalize}}</h3>
+							<div class="catsShow" ng-repeat="cats in categories.data">
+								{{cats.category_name}}
+							</div>
+						</div>
+						<div class="catContain" ng-if="categories.errorCode=='1'">
+							<h3 class="colorWhite">Categories Not Present</h3>
+						</div>
+					</div>
+					<div class="trackeroverlay coverOverlay hide colorWhite">
+						<h3 class="loadingMini hide colorWhite">Loading...</h3>
+						<a><div class="right arial" ng-click="closeOverlay($event)">X</div></a>
+						<div class="catContain">
+							<div class="colorWhite text-center" ng-if="trackRepChk.ECS == 1"><a class="colorWhite" ng-href="../00_Payment_Rework/accounts/ecs_tracker_report_tme.php?parentid={{contract.contractid}}&flag=1&me_tme={{employees.hrInfo.data.empcode}}" target="_blank"><h3 class="colorWhite">Click to see report for ECS</h3></a></div>
+							<div class="colorWhite text-center" ng-if="trackRepChk.SI == 1"><a class="colorWhite" ng-href="../00_Payment_Rework/accounts/si_tracker_report_tme.php?parentid={{contract.contractid}}&flag=2&me_tme={{employees.hrInfo.data.empcode}}" target="_blank"><h3 class="colorWhite">Click to see report for SI</h3></a></div>
+							<div class="colorWhite text-center" ng-if="trackRepChk.SI == 0 && trackRepChk.ECS == 0"><h3 class="colorWhite">Track Report is not available</h3></div>
+						</div>
+					</div>
+					<div class="singleChkoverlay coverOverlay hide colorWhite">
+						<h3 class="loadingMini hide colorWhite">Loading...</h3>
+						<a><div class="right arial" ng-click="closeOverlay($event)">X</div></a>
+						<div class="catContain">
+							<div class="colorWhite text-center" ng-if="trackRepChk.ECS == 1"><a class="colorWhite" ng-href="../00_Payment_Rework/accounts/ecs_tracker_report_tme.php?parentid={{contract.contractid}}&flag=1&me_tme={{employees.hrInfo.data.empcode}}" target="_blank"><h3 class="colorWhite">Click for Single Cheque</h3></a></div>
+							<div class="colorWhite text-center" ng-if="trackRepChk.SI == 0 && trackRepChk.ECS == 0"><h3 class="colorWhite">Single Cheque is not available</h3></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="tab-container width100" ng-if="viewParam	==	2">
+				<div class="shiftArrow leftShiftArrow"  ng-click="setPageShiftRight()"></div>
+				<div class="shiftArrow rightShiftArrow"ng-click="setPageShiftLeft()"></div>
+				<div class="headerTable width100 border-bot-grey">
+					<div class="tab-row repeat-animation">
+						<div class="left widthFree blue headFont">
+							<span>Companyname</span>
+						</div>
+						<div class="rotateRight">
+							<div class="left widthFreeSmall text-center blue headFont" style="width:200px;">Company Id</div>
+<!--
+							<div class="left widthFreeSmall text-center blue headFont" ng-if="currentPage != 'dealClosedRep'">Grab Status</div>
+-->
+							<div class="left widthFreeSmall text-center blue headFont" ng-if="currentPage != 'dealClosedRep'">TME</div>
+							<div class="left widthFreeSmall text-center blue headFont" ng-if="currentPage != 'dealClosedRep'">Appt. To</div>
+							<div class="left widthFreeSmall text-center blue headFont" ng-if="currentPage != 'dealClosedRep'">Appt. Time</div>
+							<div class="left widthFreeSmall text-center blue headFont" ng-if="currentPage != 'dealClosedRep'">Allocated On</div>
+							<div class="left widthFreeSmall text-center blue headFont" ng-if="currentPage == 'dealClosedRep'">Deal Closed Date</div>
+							<div class="left widthFreeSmall text-center blue headFont" ng-if="currentPage != 'dealClosedRep'">Instructions</div>
+							<div class="left widthFreeSmall text-center blue headFont" ng-if="(extraVals == 25 || extraVals == 99)">Cancel Status</div>
+							<div class="left widthFreeSmall text-center blue headFont" ng-if="(extraVals == 25 || extraVals == 99)">Disposition Type</div>
+							<div class="left widthFreeSmall text-center blue headFont" ng-if="(extraVals == 25 || extraVals == 99)">Disposition Date</div>
+							<div class="left widthFreeSmall text-center blue headFont" ng-if="currentPage == 'dealClosedRep'">Show Payment</div>
+							<div class="left widthFreeSmall text-center blue headFont" ng-if="currentPage == 'dealClosedRep'">Add On Payment</div>
+							<div class="left widthFreeSmall text-center blue headFont" ng-if="currentPage == 'dealClosedRep'">Ext. Mandate</div>
+							<div class="left widthFreeSmall text-center blue headFont" ng-if="currentPage == 'dealClosedRep'">Single Cheque</div>
+							<div class="left widthFreeSmall text-center blue headFont" ng-if="currentPage == 'dealClosedRep'">Check Balance</div>
+						</div>
+					</div>
+				</div>
+				<div class="bodyTable width100">
+					<div class="width100 border-bot-grey" ng-repeat="contract in reportData.data | filter:compFilter">
+						<div class="tab-row repeat-animation">
+							<div class="left widthFree" ng-class="{'green':contract.paidstatus=='1','blue':contract.paidstatus!='1'}">
+								<span ng-if="contract.companyname !='' && contract.companyname != null" ng-click="goToBform(contract)" title="{{contract.contractid}}" class="pointer">{{contract.companyname}}</span>
+								<span ng-if="contract.companyname =='' || contract.companyname == null" ng-click="goToBform(contract)" class="pointer">Company Name Not Found</span>
+							</div>
+							<div class="rotateRight">
+								<div class="left widthFreeSmall pointer text-center" style="width:200px;">{{contract.contractid}}</div>
+<!--
+								<div class="left widthFreeSmall pointer text-center grab_status" ng-if="(contract.appoint_grab_status!='' && contract.appoint_grab_status=='0') && currentPage != 'dealClosedRep'" style="color:green;font-weight:bold;">Not Grabed</div>
+								<div class="left widthFreeSmall pointer text-center grab_status" ng-if="(contract.appoint_grab_status!='' && contract.appoint_grab_status=='1') && currentPage != 'dealClosedRep'" style="color:red;font-weight:bold;">Grabed</div>
+								<div class="left widthFreeSmall pointer text-center grab_status" ng-if="(contract.appoint_grab_status=='' && currentPage != 'dealClosedRep')" >--</div>
+-->
+								<div class="left widthFreeSmall pointer text-center" ng-if="contract.parentCode != '' && contract.parentCode != null && currentPage != 'dealClosedRep'">{{contract.parentCode}}</div>
+								<div class="left widthFreeSmall pointer text-center" ng-if="(contract.parentCode == '' || contract.parentCode == null) && currentPage != 'dealClosedRep'">--</div>
+								<div class="left widthFreeSmall pointer text-center" title='{{contract.tmename}}({{contract.empcode}})' ng-if="contract.empcode != '' && contract.empcode != null && (contract.allocationType=='25' || contract.allocationType=='99') &&  currentPage != 'dealClosedRep'" style='margin-top:0px;'>
+									<img src='img/green_active_list_icon.png' ng-if='imgctiCall[$index]	==	0' ng-src='img/green_active_list_icon.png' ng-click='ctiCallfunction(contract.empcode,contract.contractid,$index)' style='cursor:pointer;'/>
+									<img src='img/gray_inactive_list_icon.png' ng-if='imgctiCall[$index]	==	1' ng-src='img/gray_inactive_list_icon.png' ng-click='callfn_function($index)' style='cursor:pointer;'/>{{contract.tmename}}({{contract.empcode}})
+								</div>
+								<div class="left widthFreeSmall pointer text-center" ng-if="(contract.empcode == '' || contract.empcode == null || (contract.allocationType!='25' && contract.allocationType!='99')) && currentPage != 'dealClosedRep'">--</div>
+								<div class="left widthFreeSmall pointer text-center" ng-if="contract.actionTime != '' && contract.actionTime != null && currentPage != 'dealClosedRep'">
+									<span ng-if="contract.allocationType=='25' || contract.allocationType=='99' || contract.allocationType=='22' || contract.allocationType=='24'">{{contract.actionTime}}</span>
+								</div>
+								<div class="left widthFreeSmall pointer text-center" ng-if="(contract.actionTime == '' || contract.actionTime == null) && currentPage != 'dealClosedRep'">--</div>
+								<div class="left widthFreeSmall pointer text-center" ng-if="contract.allocationTime != '' && contract.allocationTime != null && currentPage != 'dealClosedRep'">{{contract.allocationTime}}</div>
+								<div class="left widthFreeSmall pointer text-center" ng-if="(contract.allocationTime == '' || contract.allocationTime == null) && currentPage != 'dealClosedRep'">--</div>
+								<div class="left widthFreeSmall pointer text-center" ng-if="contract.instruction != '' && contract.instruction != null && currentPage != 'dealClosedRep'">{{contract.instruction}}</div>
+								<div class="left widthFreeSmall pointer text-center" ng-if="(contract.instruction == '' || contract.instruction == null) && currentPage != 'dealClosedRep'">--</div>
+								<!-- Code Added Here By Apoorv Agrawal Start-->
+									<div class="left widthFreeSmall pointer text-center" style="text-decoration: underline; color: rgb(255, 0, 0) ! important;" ng-if="(extraVals == 25 || extraVals == 99) && contract.showCancel == 1  && contract.cancel_flag == 0" ng-click="cancel_appt($event,contract.contractid,contract.companyname,contract.parentCode,contract.empcode,contract.actionTime)">Cancel Appt.
+									</div>
+									<div class="left widthFreeSmall pointer text-center" style="text-decoration: underline; color: rgb(255, 0, 0) ! important;" ng-if="(extraVals == 25 || extraVals == 99) && contract.cancel_flag == 1">Appt. Canceled</div>
+									<div class="left widthFreeSmall pointer text-center" ng-if="(extraVals == 25 || extraVals == 99) && contract.showCancel == 0 && contract.cancel_flag == 0">--</div>
+								<!-- Code Added Here By Apoorv Agrawal Ends-->
+								
+								<div class="left widthFreeSmall pointer text-center" ng-if="(extraVals == 25 || extraVals == 99) && (contract.dispositon_type != '' && contract.dispositon_type != null)">{{contract.dispositon_type}}</div>
+								<div class="left widthFreeSmall pointer text-center" ng-if="(extraVals == 25 || extraVals == 99) && (contract.dispositon_type == '' || contract.dispositon_type == null)">--</div>
+								
+								<div class="left widthFreeSmall pointer text-center" ng-if="(extraVals == 25 || extraVals == 99) && (contract.diposition_date != '' && contract.diposition_date != null)">{{contract.diposition_date}}</div>
+								<div class="left widthFreeSmall pointer text-center" ng-if="(extraVals == 25 || extraVals == 99) && (contract.diposition_date == '' || contract.diposition_date == null)">--</div>
+								
+								<div class="left widthFreeSmall pointer text-center" ng-if="contract.uptDate != '' && contract.uptDate != null && currentPage == 'dealClosedRep'">{{contract.uptDate}}</div>
+								<div class="left widthFreeSmall pointer text-center" ng-if="(contract.uptDate == '' || contract.uptDate == null) && currentPage == 'dealClosedRep'">--</div>
+								<a ng-href="../paid/showPymtHistory.php?parentID={{contract.contractid}}" target="payHist" ng-if="currentPage == 'dealClosedRep'"><div class="left widthFreeSmall pointer text-center"><img ng-src="img/ruppee.png" style="width:20px; height:20px;" /></div></a>
+								<a ng-href="../00_Payment_Rework/add_on_payment/mode_selection.php?parentid={{contract.contractid}}&compname={{contract.companyname | urlEncode}}" ng-if="currentPage == 'dealClosedRep'" target="_blank"><div class="left widthFreeSmall pointer text-center"><img ng-src="img/add-on.png" /></div></a>
+								<a ng-href="../00_Payment_Rework/accounts/mandate_selection.php?parentid={{contract.contractid}}&compname={{contract.companyname | urlEncode}}&flag=" target="_blank" ng-if="currentPage == 'dealClosedRep'"><div class="left widthFreeSmall pointer text-center">EM</div></a>
+								<a ng-if="contract.flag && currentPage == 'dealClosedRep'" ng-href="../00_Payment_Rework/accounts/multicity_single_cheque.php?parentid={{contract.contractid}}" target="_blank">
+									<div class="left widthFreeSmall pointer text-center">
+										<img ng-src="img/cheque.png" ng-if="contract.flag" style="width:25px; height:25px;"/>
+									</div>
+								</a>
+								<a ng-if="!contract.flag && currentPage == 'dealClosedRep'">
+									<div class="left widthFreeSmall pointer text-center">
+										<img ng-src="img/dealCross.jpeg" ng-if="!contract.flag" style="width:25px; height:25px;"/>
+									</div>
+								</a>
+								<div ng-if="currentPage == 'dealClosedRep'" ng-click="showDataModeTab($event,1,contract.contractid,contract.compname)" class="left widthFreeSmall pointer text-center"><img ng-src="img/money_balance.png" /></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section ng-if="reportData.errorCode == 1" class="text-center">
+		<div style="font-size:294px;">:(</div>
+		<h2>Sorry! No contracts found in this report</h2>
+	</section>
+</section>

@@ -1,0 +1,701 @@
+<?php
+require_once(APP_PATH.'common/dbconnection/config.php');
+require_once(APP_PATH.'common/dbconnection/db.class.php');
+
+class Geocode
+{
+		var $conn_iro, $conn_local, $conn_idc, $conn_tme;
+		var $new_flag, $module;
+		var $tag_name, $tag_number;
+		var $parentid, $lat, $lon, $latitude_primary, $ongitude_primary;
+
+	public function __construct($dbarr, $pid, $module, $new_contract = '0', $POST = '', $IsTMENonpaid = '0')
+	{
+		$this -> parentid	= $pid;
+		$this -> new_flag	= $new_contract;
+		$this -> module		= $module;
+		$this ->IsTMENonpaid=$IsTMENonpaid;
+		if(!(empty($POST)))
+		{
+			$this -> tag_name 					= $POST['locationtype'];
+			$this -> tag_number 				= $POST['geocodetagging'];
+			$this -> lat						= $POST['latitude'];
+			$this -> lon						= $POST['longitude'];
+			$this -> latitude_primary			= $POST['latitude_primary'];
+			$this -> longitude_primary			= $POST['longitude_primary'];
+			$this -> locationtype_apprvd		= $POST['locationtype_apprvd'];
+		}
+		$this -> conn_iro  	  = new DB($dbarr['DB_IRO']);		/* connection object to de/cs server */
+		$this -> conn_local	  = new DB($dbarr['LOCAL']);		/* connection object to d_jds */
+		$this -> conn_tme	  = new DB($dbarr['DB_TME']);		/* connection object to tme_jds */
+		if(strtolower($this -> module) == 'me' || strtolower($this -> module) == 'tme')
+			$this -> conn_idc	  = new DB($dbarr['IDC']);			/* connection object to online_regis */
+	}
+	
+	function geocode_approval_processing_and_compgeocodes($postarr)
+	{
+		$mapPointerFlag = $postarr[map_pointer_flags];
+		$flagsValue 	= $postarr[flagsValue];
+		$flgs 			= '';
+		$PinChanged = 0;
+		if($this -> ISNewContract())	/* when a new contract is created - inserting into both tables */
+		{
+			define('GEO_ACC_LEVEL', '4'); 							/* since by default pincode for new contracts */
+			$postarr[apprvd_tagging]	= "pincode";				/* By default pincode for new contracts */
+			$primaryGeo = $this -> select_pincode_wise_geocodes($postarr['pincode'], $postarr['area']);
+			$postarr[latitude_primary] = $postarr[latitude];	$postarr[longitude_primary]= $postarr[longitude];
+			if($postarr[locationtype] != 'pincode') {
+				$this -> insert_unpproved_building_geocodes($postarr[locationtype], $postarr[apprvd_tagging], $postarr[latitude], $postarr[longitude], $primaryGeo[0], $primaryGeo[1]);
+			}
+			$this -> insert_tbl_compgeocodes_shadow($postarr[locationtype], $postarr[apprvd_tagging], $postarr[latitude], $postarr[longitude], $primaryGeo[0], $primaryGeo[1]);
+			$flgs = $this -> set_flagsvalue($mapPointerFlag, $flagsValue, GEO_ACC_LEVEL);
+			array_push($flgs, $PinChanged);
+			return $flgs;
+		}
+		else
+		{
+			if(($postarr[latitude_primary] != $postarr[latitude] && $postarr[longitude_primary] != $postarr[longitude]) || $postarr[locationtype] != $postarr[apprvd_tagging]) //if geocodes are changed
+			{
+				$mainInfo = $this -> select_generalinfo_main();
+				if($mainInfo['pincode'] != $postarr['pincode'] || strtolower($mainInfo['area']) != strtolower($postarr['area'])) /* IF PINCODE OR AREA IS CHANGED */
+				{
+					$PinChanged = 1;
+					$pinAreaGeocodes = $this -> select_pincode_wise_geocodes($postarr['pincode'], $postarr['area']);
+					if($postarr[locationtype] != 'pincode') {
+						$this -> insert_unpproved_building_geocodes($postarr[locationtype], 'pincode', $postarr[latitude], $postarr[longitude], $pinAreaGeocodes[0], $pinAreaGeocodes[1]);
+					}
+					else {
+						$this -> delete_from_approval('0');
+					}
+					$this->insert_tbl_compgeocodes_shadow($postarr[locationtype], 'pincode', '', '', $pinAreaGeocodes[0], $pinAreaGeocodes[1]);
+					$AccLevel ='4';
+				}
+				else
+				{
+					$this -> insert_unpproved_building_geocodes($postarr[locationtype], $postarr[apprvd_tagging], $postarr[latitude], $postarr[longitude], $postarr[latitude_primary], $postarr[longitude_primary]);
+					$AccLevel ='0';   /* setting it to zero, since there is no need to update */
+				}
+				define('GEO_ACC_LEVEL', $AccLevel);
+				$flgs = $this -> set_flagsvalue($mapPointerFlag, $flagsValue, $AccLevel);
+				array_push($flgs, $PinChanged);
+				return  $flgs;
+			}
+			else
+			{
+				$this->insert_tbl_compgeocodes_shadow($postarr[locationtype], $postarr[apprvd_tagging], $postarr[latitude], $postarr[longitude], $postarr[latitude_primary], $postarr[longitude_primary]);
+				$flgs = $this -> set_flagsvalue($mapPointerFlag, $flagsValue, $postarr['geocodetagging']);
+
+				if($this -> check_unapproved_record())  //if geocode and tagging to be sent for approval is already the as that approved
+					$this -> delete_from_approval('0');  //zero bcoz wanna delete it from temp table
+
+				define('GEO_ACC_LEVEL', $postarr['geocodetagging']);
+				array_push($flgs, $PinChanged);
+				return  $flgs;
+			}
+		}
+	}
+	
+	function insert_tbl_compgeocodes_shadow($location, $apprvd_location, $lat, $lon, $lat_pri, $lon_pri) /* 4a - for storing latlong */
+	{
+		$column_to_be_updated = "";
+		$mapped = $_SESSION['ucode']." - ".$_SESSION['uname'];
+		$lat_pri = $lat_pri == '' ? $lat : $lat_pri;
+		$lon_pri = $lon_pri == '' ? $lon : $lon_pri;
+		
+		switch(strtolower($apprvd_location))
+		{
+			case 'building'	:	$latitude_bldg = $lat_pri;
+								$longitude_bldg = $lon_pri;
+								$column_to_be_updated = " latitude_bldg = '".$latitude_bldg."', longitude_bldg = '".$longitude_bldg."', "; 
+								break;
+								
+			case 'landmark'	:	$latitude_landmark = $lat_pri;
+								$longitude_landmark = $lon_pri;
+								$column_to_be_updated = " latitude_bldg = 0, longitude_bldg = 0, latitude_landmark = '".$latitude_landmark."', longitude_landmark	= '".$longitude_landmark."', "; 
+								break;
+								
+			case 'street'	:	$latitude_street = $lat_pri;
+								$longitude_street = $lon_pri;
+								$column_to_be_updated = " latitude_bldg = 0, longitude_bldg = 0, latitude_landmark = 0, longitude_landmark = 0, latitude_street = '".$latitude_street."', longitude_street = '".$longitude_street."', ";
+								break;
+								
+			case 'pincode'	:	$latitude_pincode = $lat_pri;
+								$longitude_pincode = $lon_pri;
+								$column_to_be_updated = " latitude_bldg = 0, longitude_bldg = 0, latitude_landmark = 0, longitude_landmark = 0, latitude_street = 0, longitude_street = 0, latitude_pincode	= '".$latitude_pincode."',	longitude_pincode = '".$longitude_pincode."',";
+								break;
+								
+			case 'area'		:	$latitude_area = $lat_pri;
+								$longitude_area = $lon_pri;
+								$column_to_be_updated = " latitude_bldg = 0, longitude_bldg = 0, latitude_landmark = 0, longitude_landmark = 0, latitude_street = 0, longitude_street = 0, latitude_pincode	= 0, longitude_pincode = 0, latitude_area = '".$latitude_area."', longitude_area = '".$longitude_area."',";
+								break;
+		}
+			
+			$sql="INSERT INTO tbl_compgeocodes_shadow SET
+			parentid			= '".$this -> parentid."',
+			".$column_to_be_updated."
+			latitude_final		= '".$lat_pri."',
+			longitude_final		= '".$lon_pri."',
+			logdatetime			= now(),
+			mappedby			= '".addslashes($mapped)."'
+			  
+			ON DUPLICATE KEY UPDATE
+			
+			".$column_to_be_updated."
+			latitude_final		= '".$lat_pri."',
+			longitude_final		= '".$lon_pri."',
+			logdatetime			= now(),
+			mappedby			= '".addslashes($mapped)."'";
+			
+			if(strtolower($this -> module) == 'cs')
+				$res1 = $this -> conn_local -> query_sql($sql);
+			else if(strtolower($this -> module) == 'tme')
+				$res1 = $this -> conn_tme -> query_sql($sql);
+			else if(strtolower($this -> module) == 'me')
+				$res1 = $this -> conn_idc -> query_sql($sql);
+				
+				
+			
+	}
+
+	function insert_unpproved_building_geocodes($temp_tagging, $original_tagging, $lat, $lon, $lat_pri, $lon_pri)
+	{
+			$sql = "INSERT INTO unapproved_building_geocodes 
+					SET
+					parentid		=	'".$this -> parentid."',
+					username		=	'".$_SESSION['uname']."',
+					userid			=	'".$_SESSION['ucode']."',
+					temp_latitude	=	'".$lat."',
+					temp_longitude	=	'".$lon."',
+					approved_latitude=  '".$lat_pri."',
+					approved_longitude= '".$lon_pri."',
+					temp_tagging	=	'".$temp_tagging."',
+					original_tagging=	'".$original_tagging."',
+					approval_flag	=	'0',
+						date		=	now() 
+						
+					ON DUPLICATE KEY UPDATE
+					
+					username		=	'".$_SESSION['uname']."',
+					userid			=	'".$_SESSION['ucode']."',
+					temp_latitude	=	'".$lat."',
+					temp_longitude	=	'".$lon."',
+					approved_latitude=  '".$lat_pri."',
+					approved_longitude= '".$lon_pri."',
+					temp_tagging	=	'".$temp_tagging."',
+					original_tagging=	'".$original_tagging."',
+					approval_flag	=	'0',
+						date		=	now() ";
+						
+			if(strtolower($this -> module) == 'cs')
+				$res = $this -> conn_local -> query_sql($sql);
+			else if(strtolower($this -> module) == 'tme')
+				$res = $this -> conn_tme -> query_sql($sql);
+			else if(strtolower($this -> module) == 'me')
+				$res = $this -> conn_idc -> query_sql($sql);
+			
+			
+	}
+	
+	function select_level($unapproved = '', $table ='', $flag ='')
+	{	
+		$returnstring = "";
+		$table	= ($table == 'main_table') ? 'unapproved_building_geocodes_main' : 'unapproved_building_geocodes';
+		$flag	= ($flag == '') ? 'approval_flag = 0 ': '(approval_flag = 1  or approval_flag = 2)';
+		if($unapproved == 'unapproved')
+		{
+			$query = "SELECT temp_tagging, temp_latitude, temp_longitude, approved_latitude, approved_longitude, original_tagging from ".$table." where parentid = '".$this -> parentid."' AND ".$flag." ORDER BY date DESC LIMIT 1";
+			
+			if(strtolower($this -> module) == 'cs')
+				$resultset = $this -> conn_local -> query_sql($query);
+			else if(strtolower($this -> module) == 'tme')
+				$resultset = $this -> conn_tme -> query_sql($query);
+			else if(strtolower($this -> module) == 'me')
+				$resultset = $this -> conn_idc -> query_sql($query);
+				
+			if($resultset && mysql_num_rows($resultset))
+			{
+				$res = mysql_fetch_assoc($resultset);
+				$returnstring =  $res['temp_tagging'].'##'.$res['temp_latitude'].'##'.$res['temp_longitude'].'##'.$res['approved_latitude'].'##'.$res['approved_longitude'].'##'.$res['original_tagging'];
+			}
+		}
+		else
+		{
+			$sql1="SELECT * FROM tbl_compgeocodes_shadow WHERE parentid = '".$this -> parentid."'"; 
+			if(strtolower($this -> module) == 'cs')
+				$result = $this -> conn_local -> query_sql($sql1);
+			else if(strtolower($this -> module) == 'tme')
+				$result = $this -> conn_tme -> query_sql($sql1);
+			else if(strtolower($this -> module) == 'me')
+				$result = $this -> conn_idc -> query_sql($sql1);
+			
+			
+			if($result && mysql_num_rows($result))
+			{
+				$res=mysql_fetch_assoc($result);
+				$lat = $res[latitude_final];
+				$lon = $res[longitude_final];
+				
+				if($lat == $res[latitude_bldg] && $lon == $res[longitude_bldg])
+					$returnstring.= 'building';
+				else if($lat == $res[latitude_landmark] && $lon == $res[longitude_landmark])
+					$returnstring.= 'landmark';
+				else if($lat == $res[latitude_street] && $lon == $res[longitude_street])
+					$returnstring.= 'street';
+				else if($lat == $res[latitude_area] && $lon == $res[longitude_area])
+					$returnstring.= 'area';
+				else/*if($lat == $res[latitude_pincode] && $lon == $res[longitude_pincode]) - COMMENTING THIS BCOZ IF NOTHING FOUND IN COMPGEOCODES THEN - PINCODE */
+					$returnstring.= 'pincode';
+			}
+			$returnstring = ($returnstring == '') ? 'pincode' : $returnstring;
+		}
+	//	echo $returnstring;
+			return $returnstring;
+
+		//1-Building, 2-Landmark 3-Street 4-Pincode 5-locality 6-Area
+	}
+
+	function GetCompgeocodesShadow()
+	{
+		$qry_geocodes_shadow = "SELECT * FROM tbl_compgeocodes_shadow WHERE parentid = '".$this -> parentid."' ";
+		if(strtolower($this -> module) == 'cs')
+			$res_geocodes_shadow = $this -> conn_local -> query_sql($qry_geocodes_shadow);
+		else if(strtolower($this -> module) == 'tme')
+			$res_geocodes_shadow = $this -> conn_tme -> query_sql($qry_geocodes_shadow);
+		else if(strtolower($this -> module) == 'me')
+			$res_geocodes_shadow = $this -> conn_idc -> query_sql($qry_geocodes_shadow);
+
+		$ReturnVal = mysql_fetch_assoc($res_geocodes_shadow);
+		return $ReturnVal;
+	}
+
+	function InsertCompgeocodes($getGeocodesArr)
+	{
+		if(strtolower($this -> module) == 'tme')
+		{
+			global $dbarr;
+			$this -> conn_idc	  = new DB($dbarr['IDC']);			/* connection object to online_regis */
+		}
+		$qry_geocodes_main = "INSERT INTO tbl_compgeocodes 
+			SET
+			parentid			= '".$getGeocodesArr[parentid]."',
+			latitude_landmark	= '".$getGeocodesArr[latitude_landmark]."',
+			longitude_landmark	= '".$getGeocodesArr[longitude_landmark]."',
+			latitude_area		= '".$getGeocodesArr[latitude_area]."',
+			longitude_area		= '".$getGeocodesArr[longitude_area]."',
+			latitude_street		= '".$getGeocodesArr[latitude_street]."',
+			longitude_street	= '".$getGeocodesArr[longitude_street]."',
+			latitude_bldg		= '".$getGeocodesArr[latitude_bldg]."',
+			longitude_bldg		= '".$getGeocodesArr[longitude_bldg]."',
+			latitude_pincode	= '".$getGeocodesArr[latitude_pincode]."',
+			longitude_pincode	= '".$getGeocodesArr[longitude_pincode]."',
+			latitude_final		= '".$getGeocodesArr[latitude_final]."',
+			longitude_final		= '".$getGeocodesArr[longitude_final]."',
+			logdatetime			= '".$getGeocodesArr[logdatetime]."',
+			mappedby			= '".addslashes($getGeocodesArr[mappedby])."'
+			  
+			ON DUPLICATE KEY UPDATE
+			
+			latitude_landmark	= '".$getGeocodesArr[latitude_landmark]."',
+			longitude_landmark	= '".$getGeocodesArr[longitude_landmark]."',
+			latitude_area		= '".$getGeocodesArr[latitude_area]."',
+			longitude_area		= '".$getGeocodesArr[longitude_area]."',
+			latitude_street		= '".$getGeocodesArr[latitude_street]."',
+			longitude_street	= '".$getGeocodesArr[longitude_street]."',
+			latitude_bldg		= '".$getGeocodesArr[latitude_bldg]."',
+			longitude_bldg		= '".$getGeocodesArr[longitude_bldg]."',
+			latitude_pincode	= '".$getGeocodesArr[latitude_pincode]."',
+			longitude_pincode	= '".$getGeocodesArr[longitude_pincode]."',
+			latitude_final		= '".$getGeocodesArr[latitude_final]."',
+			longitude_final		= '".$getGeocodesArr[longitude_final]."',
+			logdatetime			= '".$getGeocodesArr[logdatetime]."',
+			mappedby			= '".addslashes($getGeocodesArr[mappedby])."' ";
+			
+			if(strtolower($this -> module) == 'cs' || $this -> IsTMENonpaid =='1')
+				$res_geocodes_main = $this -> conn_local -> query_sql($qry_geocodes_main);
+			else if(strtolower($this -> module) == 'tme')
+				$res_geocodes_main = $this -> conn_idc -> query_sql($qry_geocodes_main);
+			else if(strtolower($this -> module) == 'me')
+				$res_geocodes_main = $this -> conn_idc -> query_sql($qry_geocodes_main);
+				
+				//echo "<pre>".$qry_geocodes_main;
+				if($res_geocodes_main)
+					return true;
+				else
+					return false;
+	}
+	
+	function geocode_approval_temp_to_main() {
+		$main_data = $this->select_level('unapproved', 'main_table', '');
+		$main_data = explode('##', $main_data);
+		
+		$row = $this -> GetUnapprovedGeocodes();
+						
+		if($row[approval_flag] == '0')
+		{
+			if(!($main_data[0] == $row['temp_tagging'] && $main_data[1] == $row['temp_latitude'] && $main_data[2] == $row['temp_longitude'] && $main_data[3] == $row['approved_latitude'] && $main_data[4] == $row['approved_longitude'] && $main_data[5] == $row['original_tagging']))
+			{
+				return $this -> InsertUnapprovedGeocodes($row);
+			}
+		}
+		return false;
+	}
+	
+	function GetUnapprovedGeocodes() {
+		if(strtolower($this -> module) == 'tme')
+		{
+			global $dbarr;
+			$this -> conn_idc	  = new DB($dbarr['IDC']);			/* connection object to online_regis */
+		}
+		$qry = "SELECT * FROM unapproved_building_geocodes WHERE parentid = '".$this -> parentid."' ";
+		if(strtolower($this -> module) == 'cs')
+			$res = $this -> conn_local -> query_sql($qry);
+		else if(strtolower($this -> module) == 'tme')
+			$res = $this -> conn_tme -> query_sql($qry);
+		else if(strtolower($this -> module) == 'me')
+			$res = $this -> conn_idc -> query_sql($qry);
+			
+		$row = mysql_fetch_assoc($res);
+		return $row;
+	}
+	
+	function InsertUnapprovedGeocodes($row) {
+		// before insertion we remove all pending data ie approval_flag = 0
+		$qry_del = "DELETE FROM unapproved_building_geocodes_main where parentid ='".$row[parentid]."' AND approval_flag = 0";
+		
+		
+		$qry_main = "INSERT INTO unapproved_building_geocodes_main
+				SET 
+				parentid			=	'".$row[parentid]."',
+				username			=	'".$row[username]."',
+				userid				=	'".$row[userid]."',
+				temp_latitude		=	'".$row[temp_latitude]."',
+				temp_longitude		=	'".$row[temp_longitude]."',
+				approved_latitude	=	'".$row[approved_latitude]."',
+				approved_longitude	=	'".$row[approved_longitude]."',
+				temp_tagging		=	'".$row[temp_tagging]."',
+				original_tagging	=	'".$row[original_tagging]."',
+				approval_flag		=	'".$row[approval_flag]."',
+				date				=	'".$row[date]."',
+				old_address			=	'".addslashes($row[old_address])."',
+				new_address			=	'".addslashes($row[new_address])."',
+				approve_reject_date =	'".$row[approve_reject_date]."',
+				approve_reject_by	=	'".addslashes($row[approve_reject_by])."'	";
+			
+				if(strtolower($this -> module) == 'cs' || $this -> IsTMENonpaid == '1')
+				{
+					$this -> conn_local -> query_sql($qry_del);
+					$res = $this -> conn_local -> query_sql($qry_main);
+				}
+				else /* for tme and me */
+				{
+					$this -> conn_idc -> query_sql($qry_del);
+					$res = $this -> conn_idc -> query_sql($qry_main);					
+				}
+
+				if($res && strtolower($this -> module) == 'cs') {
+						$this -> delete_from_approval('0');
+						return true;
+					}
+				else
+					return false;
+	}
+	
+	function set_flagsvalue($mapPointerFlag, $flagsValue, $tagging)
+	{
+		if($tagging == 0) {
+			return array($flagsValue, $mapPointerFlag);
+		}
+		//echo "===>>>".$mapPointerFlag."===".$flagsValue."===".$tagging;
+		if(trim($mapPointerFlag) == '')
+		{	//echo"<br>1--".
+			$mapPointerFlag= 0;
+		}
+		if( $tagging == 1 ) //means building - have to set the 2nd bit
+		{	//echo"<br>2--".
+			$mapPointerFlag = ($mapPointerFlag | 2);
+		}	 
+		else
+		{	//echo"<br>3--".$postarr[map_pointer_flags];
+			if(($mapPointerFlag & 2) == 2) // have to unset the 2nd bit
+			{	//echo"<br>4--".
+				$mapPointerFlag = ($mapPointerFlag ^ 2) ; 
+			}
+		}
+		
+		if(trim($flagsValue) == '')
+		{	//echo"<br>1--".
+			$flagsValue= 0;
+		}
+		if( $tagging == 1 )
+		{	//echo"<br>2--".
+			$flagsValue = ($flagsValue | 2);
+		}	 
+		else
+		{	//echo"<br>3--".$flagsValue;
+			if(($flagsValue & 2) == 2)
+			{	//echo"<br>4--".
+				$flagsValue = ($flagsValue ^ 2) ; 
+			}
+		}
+		$returnarray = array($flagsValue, $mapPointerFlag);
+		return $returnarray;
+	}
+
+	function set_locationtype($acc_level)
+	{
+		if(is_numeric($acc_level))
+		{
+			switch($acc_level)
+			{
+				case '1' : $level = 'building'; break;
+				case '2' : $level = 'landmark'; break;
+				case '3' : $level = 'street'; 	break;
+				case '4' : $level = 'pincode';	break;
+				case '6' : $level = 'area';	 	break;
+			}
+		}
+		else
+		{
+			switch($acc_level)
+			{
+				case 'building' : $level = '1'; break;
+				case 'landmark' : $level = '2'; break;
+				case 'street' 	: $level = '3';	break;
+				case 'pincode' 	: $level = '4';	break;
+				case 'area' 	: $level = '6';	break;
+			}
+		}
+		return $level;
+	}
+
+	function delete_from_approval($table)
+	{
+		$tableName = $table == 1 ? '_main' : '';
+		$qry = "DELETE FROM unapproved_building_geocodes".$tableName." WHERE parentid = '".$this -> parentid."' ";
+
+		if(strtolower($this -> module) == 'cs')
+			$res = $this -> conn_local -> query_sql($qry);
+		else if(strtolower($this -> module) == 'tme') 
+		{
+			if($table ==0)
+				$res = $this -> conn_tme -> query_sql($qry);
+			else
+				$res = $this -> conn_idc -> query_sql($qry);
+		}
+	}
+	
+	/* THIS FUNCTION RETURNS GEOCODES ACCORDING TO PINCODE WHICH WILL BE STORED IN GENERALINFO_SHADOW */
+	function select_pincode_wise_geocodes($pincode, $area)
+	{
+		$geo_arr = array();
+		$got_area_master = false;
+		$qry = "SELECT latitude_final, longitude_final FROM tbl_area_master WHERE pincode = '".$pincode."' AND area = '".$area."' AND type_flag=1 AND display_flag=1 AND deleted=0 ";
+		$res = $this -> conn_local -> query_sql($qry);
+		if(mysql_num_rows($res) > '0')
+		{
+			$row = mysql_fetch_assoc($res);
+			if($row['latitude_final']!=0 || $row['longitude_final']!=0)
+			{
+				$got_area_master = true;
+				array_push($geo_arr, $row['latitude_final'], $row['longitude_final']);
+			}
+		}
+		if(!$got_area_master)		
+		{
+			$qry = "SELECT latitude, longitude FROM geocode_pincode_master WHERE pincode = '".$pincode."' ";
+			$res = $this -> conn_local -> query_sql($qry);
+			$row = mysql_fetch_assoc($res);
+			array_push($geo_arr, $row['latitude'], $row['longitude']);
+		}
+		return $geo_arr;
+	}
+
+	function select_contract_geocodes($genralInfoArr)
+	{
+		$geo_arr = array();
+		$got_area_master = false;
+		$qry = "SELECT latitude,longitude,geocode_accuracy_level,area,pincode FROM tbl_companymaster_generalinfo WHERE  parentid= '".$genralInfoArr[parentid]."'";
+		$res = $this -> conn_iro -> query_sql($qry);
+		if($res)
+		{
+			$resultarr = mysql_fetch_assoc($res);
+		}
+		if($resultarr && ($genralInfoArr[area]==$resultarr[area] && $genralInfoArr[pincode]==$resultarr[pincode] )) // contract found in local and same area and pincode
+		{
+			 // if local table has more accurate then IDC so we will restrict this entry to write into local
+			if(intval($resultarr[geocode_accuracy_level]) <= intval($genralInfoArr[geocode_accuracy_level]))
+			{
+				$geo_arr[latitude]=$resultarr[latitude];
+				$geo_arr[longitude]=$resultarr[longitude];
+				$geo_arr[geocode_accuracy_level]=$resultarr[geocode_accuracy_level];				
+				
+				$geocodes_idc_localsql = "INSERT INTO geocodes_idc_local SET
+				parentid='".$genralInfoArr[parentid]."',
+				latitude_idc ='".$genralInfoArr[latitude]."',
+				longitude_idc ='".$genralInfoArr[longitude]."',
+				accuracy_level_idc ='".$genralInfoArr[geocode_accuracy_level]."',
+				latitude_local ='".$resultarr[latitude]."',
+				longitude_local ='".$resultarr[longitude]."',
+				accuracy_level_local ='".$resultarr[geocode_accuracy_level]."',
+				entry_source= 'approval',
+				approval_flag =0 ";
+				$res = $this -> conn_iro -> query_sql($geocodes_idc_localsql);
+			}
+			else // more accurate enrty of IDC data
+			{
+				$geo_arr[latitude]=$genralInfoArr[latitude];
+				$geo_arr[longitude]=$genralInfoArr[longitude];
+				$geo_arr[geocode_accuracy_level]=$genralInfoArr[geocode_accuracy_level];
+			}
+			
+		}
+		else // fresh enrty  because no entry found in local or area pincode changed
+		{
+			$geo_arr[latitude]=$genralInfoArr[latitude];
+			$geo_arr[longitude]=$genralInfoArr[longitude];
+			$geo_arr[geocode_accuracy_level]=$genralInfoArr[geocode_accuracy_level];
+		}
+		
+		
+		return $geo_arr;
+	}
+	
+	
+
+	function ISNewContract()
+	{
+		$qry = " SELECT count(*) as cnt FROM tbl_compgeocodes WHERE parentid = '".$this -> parentid."' ";
+		if(strtolower($this -> module) == 'cs')
+			$res = $this -> conn_local -> query_sql($qry);
+		else
+			$res = $this -> conn_idc -> query_sql($qry);
+		$row = mysql_fetch_assoc($res);
+		$recordsfound = $row[cnt];
+		if($recordsfound == 0)
+				return true;
+		
+		return false;
+	}
+
+	function ISAddresschanged($area,$pincode)
+	{
+		$changed=0;
+		$areapincodeqry="select area,pincode from tbl_companymaster_generalinfo where parentid='".$this -> parentid."'";
+			
+		if(strtolower($this -> module) == 'cs')
+		$areapincoders = $this -> conn_iro -> query_sql($areapincodeqry);
+		
+		if(mysql_num_rows($areapincoders)>0)
+		{
+			$areapincodearr = mysql_fetch_assoc($areapincoders);
+			
+			if(strtolower(trim($area))!=strtolower(trim($areapincodearr[area])) || strtolower(trim($pincode))!=strtolower(trim($areapincodearr[pincode])))
+			{
+				$changed=1;
+			}
+		}
+				
+		return $changed;	
+		
+		
+	}
+	function UpdateOldNewAddress($IsPincodeChanged)
+	{
+		$old_address='';
+		$row_old = $this -> select_generalinfo_main();
+				
+		$new = " SELECT building_name, landmark, street, area, pincode, city, state FROM tbl_companymaster_generalinfo_shadow WHERE parentid = '".$this -> parentid."' ";
+		if(strtolower($this -> module) == 'cs')
+			$res_new = $this -> conn_iro -> query_sql($new);
+		else
+			$res_new = $this -> conn_tme -> query_sql($new);
+
+		if(mysql_num_rows($res_new)) {
+			$row_new = mysql_fetch_assoc($res_new);
+			$new_address = json_encode($row_new);
+		
+			if(trim($row_old))  {
+				if($IsPincodeChanged) {
+					$old_address = json_encode($row_new);
+				}
+				else {
+					$old_address = json_encode($row_old);
+				}
+			}
+		
+			$up = " Update unapproved_building_geocodes SET
+						old_address		=	'".addslashes(stripslashes($old_address))."',
+						new_address		=	'".addslashes(stripslashes($new_address))."'
+							WHERE parentid = '".$this -> parentid."' AND approval_flag = 0";
+			$res = $this -> conn_local -> query_sql($up);
+			if(strtolower($this -> module) == 'cs')
+				$res = $this -> conn_local -> query_sql($up);
+			else
+				$res = $this -> conn_tme -> query_sql($up);
+			
+		}
+	}
+		
+	function select_generalinfo_main()
+	{
+		$returnValue = '';
+		$old = " SELECT building_name, landmark, street, area, pincode, city, state,latitude, longitude,geocode_accuracy_level FROM tbl_companymaster_generalinfo WHERE parentid = '".$this -> parentid."' ";
+		if(strtolower($this -> module) == 'cs')
+			$res_old = $this -> conn_iro -> query_sql($old);
+		else if(strtolower($this -> module) == 'tme')
+			$res_old = $this -> conn_idc -> query_sql($old);
+			
+		if(mysql_num_rows($res_old)) {
+			$row_old = mysql_fetch_assoc($res_old);
+			if(!empty($row_old))
+				$returnValue = $row_old;
+		}
+		return $returnValue;
+	}
+	
+	function update_general_info_accuracy_level($accuracy_level, $table)
+	{
+		$tableName = $table == 0 ? '_shadow' : '' ;
+		$qry = "UPDATE tbl_companymaster_generalinfo".$tableName." SET geocode_accuracy_level = '".$accuracy_level."' WHERE parentid = '".$this -> parentid."' ";
+		if(strtolower($this -> module) == 'cs')
+			$res = $this -> conn_iro -> query_sql($qry);
+		else if(strtolower($this -> module) == 'tme') 
+		{
+			if($table ==0)
+				$res = $this -> conn_tme -> query_sql($qry);
+			else
+				$res = $this -> conn_idc -> query_sql($qry);
+		}
+	}
+	
+	function check_unapproved_record()  //if geocode and tagging to be sent for approval is the same as that approved
+	{
+		$unapproved_main = $this -> select_level('unapproved','main_table','1');
+		$unapproved_temp = $this -> select_level('unapproved','','');
+		
+		if(!is_null($unapproved_main) && !is_null($unapproved_temp))
+		{
+			$unapproved_main_array = explode('##', $unapproved_main);
+			$unapproved_temp_array = explode('##', $unapproved_temp);
+			if($unapproved_temp_array[temp_tagging] == $unapproved_main_array[original_tagging] && $unapproved_temp_array[temp_latitude] == $unapproved_main_array[approved_latitude] && $unapproved_temp_array[temp_longitude] == $unapproved_main_array[approved_longitude])
+				return true;
+		}
+		return false;
+	}
+
+    function reject_geocodes_PinChanged($parentId) {
+        $update = "  UPDATE unapproved_building_geocodes_main 
+                    SET
+                        approval_flag   = -1,
+                        approve_reject_date = now(),
+                        approve_reject_by    = 'AUTO_REJECT' 
+                    WHERE parentid = '".$parentId."' AND approval_flag = 0  ";
+            if(strtolower($this -> module) == 'cs' || $this -> IsTMENonpaid == '1')
+				$res = $this -> conn_local -> query_sql($update);
+			else
+				$res = $this -> conn_idc -> query_sql($update);
+				
+		/* INSERTING AN APPROVED ENTRY FOR PINCODE CHANGED AUTO_APPROVED RECORD */
+	}
+}
+?>

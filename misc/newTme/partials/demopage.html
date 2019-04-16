@@ -1,0 +1,61 @@
+<md-toolbar md-scroll-shrink style="background-color:#FFFFFF;border-bottom:1px solid #CCCCCC" ng-init="onLoadCall()" ng-controller="catPreviewController">
+	<div class="md-toolbar-tools">
+		<md-button class="md-icon-button" aria-label="Settings" style="margin-left:20px;" ng-click="toggleLeft()">
+			<md-icon md-svg-icon="img/ic_menu_36px.svg" style="color:#000000;"></md-icon>
+		</md-button>
+		<h2>
+			<span ng-if="demo_flag == 1">JD Search Engine : Get Recommended By Justdial To Increase Your Business </span>
+			<span ng-if="demo_flag == 2">JD Social : Free Software Offered To Increase Your Business Ratings </span>
+			<span ng-if="demo_flag == 3">JD Digital Payments : Free Software Offered To Accept Online Payments From Your Customers </span>
+			<span ng-if="demo_flag == 4">JD Banner</span>
+			<span ng-if="demo_flag == 5">JDRR : Ratings Certificate With Brand Ambassador Amitabh Bachchan</span>
+			<span ng-if="demo_flag == 6"> Your Own Website powered by JD </span>
+<!--
+			<span ng-if="demo_flag == 6">Own Website/ App : Your Digital Business Manager </span>
+-->
+		</h2>
+		<span flex></span>
+		<md-button ng-click="saveAsNonPaid()" class="md-raised md-primary" >Save As Free Listing</md-button>
+		<md-button class="md-primary md-raised" style="font-size: 19px;margin-right: 25px;" ng-click="skip_demo()">Skip</md-button>
+	</div>
+</md-toolbar>
+
+<div id="jdrr-wrapper">
+	<div class="demo_container ">
+		<div class="in-container wrpr" jdrrbutton>
+			
+			<div class="nav-label wrpr">  
+				<span class="nav-border"> </span> 
+				<ul class="wrpr"> 
+					<li class="bxA" ng-class="{'demo_active' : demo_flag == 1 || demo_flag=='jdsearch_demo'}" ng-click="switch_demo(1)"> <span class="nav-circl"> 1 </span> <span class="nav-title"> JD Search Engine  </span> </li>
+					<li class="bxA" ng-class="{'demo_active' : demo_flag == 2}" ng-click="switch_demo(2)"> <span class="nav-circl"> 2 </span> <span class="nav-title"> JD Social </span> </li>
+					<li class="bxA" ng-class="{'demo_active' : demo_flag == 3}" ng-click="switch_demo(3)"> <span class="nav-circl"> 3 </span> <span class="nav-title"> JD Digital Payments </span> </li>
+					<li class="bxA" ng-class="{'demo_active' : demo_flag == 4}" ng-click="switch_demo(4)"> <span class="nav-circl"> 4 </span> <span class="nav-title"> JD Banner </span> </li>
+					<li class="bxA" ng-class="{'demo_active' : demo_flag == 5}" ng-click="switch_demo(5)"> <span class="nav-circl"> 5 </span> <span class="nav-title"> JDRR </span> </li>
+					<li class="bxA" ng-class="{'demo_active' : demo_flag == 6}" ng-click="switch_demo(6)"> <span class="nav-circl"> 6 </span> <span class="nav-title"> Your Own Website powered by JD </span> </li>
+				</ul>
+			</div>
+			
+			<div ng-if="demo_flag==1 || demo_flag=='jdsearch_demo'" ng-controller="searchdemoController" >
+				<section ng-include src="'partials/searchdemo.html'"></section>
+			</div>
+			<div ng-if="demo_flag==2" ng-controller="jdratingController" >
+				<section ng-include src="'partials/jdrating.html'"></section>
+			</div>  
+			<div ng-if="demo_flag==3" ng-controller="jdpayController" >
+				<section ng-include src="'partials/jdpay.html'"></section>
+			</div>
+			<div ng-if="demo_flag==4" ng-controller="bannerdemoController" >
+				<section ng-include src="'partials/bannerdemo.html'" style="height: 650px;"></section>
+			</div>
+			<div ng-if="demo_flag==5" ng-controller="jdrrdemoController" >
+				<section ng-include src="'partials/jdrrdemo.html'"></section>
+			</div>
+			<div ng-if="demo_flag==6" ng-controller="selljdomniController" >
+				<section ng-include src="'partials/selljdomni.html'"></section>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div ng-include src="'partials/footer_new.html'"></div>

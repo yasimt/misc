@@ -1,0 +1,174 @@
+<md-dialog aria-label="Categories">	
+	<md-toolbar>
+		<div class="md-toolbar-tools">
+			<h2 ng-if="blockCatPop == 1" style="color:#FFFFFF">Categories tagged as “Restaurants in 5 Star Hotel” & categories under the parent of “Home Delivery Restaurants” are not allowed in single contract.</h2>
+			<h2 ng-if="blockCatPop == 2" style="color:#FFFFFF">Sorry!!  You cannot select multiple Brands, please select any one brand and proceed<br>Following categories are tagged as restrict for single brand.</h2>
+			<h2 ng-if="blockCatPop == 3" style="color:#FFFFFF">Kindly select any 2 Price Range from Below Mentioned Categories.</h2>
+			<h2 ng-if="blockCatPop == 4" style="color:#FFFFFF">Landline Number is mandatory for following category/s.<br>You can proceed either by entering Landline Number or removing below category/s?</h2>
+			<h2 ng-if="blockCatPop == 5" style="color:#FFFFFF">Category is marked as exclusive hence you are not able to sell this category. Exclusive category/s is/are</h2>
+			<h2 ng-if="blockCatPop == 6" style="color:#FFFFFF">You Can take only one Star Rating category. Star Rating Tagged category/s is/are</h2>
+			<h2 ng-if="blockCatPop == 7" style="color:#FFFFFF">&nbsp;Category tagged for Chemist is not allowed with Doctor / Hospital tagged category/s.</h2>
+			<h2 ng-if="blockCatPop == 8" style="color:#FFFFFF">&nbsp;Category tagged for Hotel is not allowed with Restaurant tagged category/s.</h2>
+			<span flex></span>
+		</div>
+	</md-toolbar>
+	<md-dialog-content>
+		<div ng-if="blockCatPop == 1">
+			<div layout="row" layout-sm="column" layout-align="space-around" ng-if="showLoader==1">
+				<md-progress-circular class="md-hue-2" md-mode="indeterminate"></md-progress-circular>
+			</div>
+			<div layout="column" layout-sm="column" layout-align="space-around">
+				<md-list>
+					<h2 class="md-no-sticky md-headline">Categories tagged as Restaurant in 5 Star Hotels are: </h2>
+					<md-list-item ng-repeat="(key2,dataCheck) in FiveStarHotelCategory | splitAll:'|~|'" class="blue">{{dataCheck}}</md-list-item>
+				</md-list>
+				<md-divider></md-divider>
+				<md-list>
+					<h2 class="md-no-sticky md-headline">Categories tagged under Home Delivery Restaurants parent are: </h2>
+					<md-list-item ng-repeat="(key2,dataCheck) in HomeDeliveryRestaurant | splitAll:'|~|'" class="blue">{{dataCheck}}</md-list-item>
+				</md-list>
+				<div layout="row" layout-sm="column" layout-align="space-around">
+					<md-button class="md-raised md-accent" ng-click="hide()">OK</md-button>
+				</div>
+			</div>
+			<div layout="row" layout-sm="column" layout-align="space-around" ng-if="showLoader==0 && dataDialog.error.code	==	1">
+				No Categories Found
+			</div>
+		</div>
+		<div ng-if="blockCatPop == 2">
+			<div layout="row" layout-sm="column" layout-align="space-around" ng-if="showLoader==1">
+				<md-progress-circular class="md-hue-2" md-mode="indeterminate"></md-progress-circular>
+			</div>
+			<div layout="column" layout-sm="column" layout-align="space-around">
+				<md-list>
+					<md-list-item ng-repeat="(key2,dataCheck) in SingleBrandCategoryArr | splitAll:'|~|'" class="blue">{{dataCheck}}</md-list-item>
+				</md-list>
+				<md-divider></md-divider>
+				<div layout="row" layout-sm="column" layout-align="space-around">
+					<md-button class="md-raised md-accent" ng-click="hide()">OK</md-button>
+				</div>
+			</div>
+			<div layout="row" layout-sm="column" layout-align="space-around" ng-if="showLoader==0 && dataDialog.error.code	==	1">
+				No Categories Found
+			</div>
+		</div>
+		<div ng-if="blockCatPop == 3">
+			<div layout="row" layout-sm="column" layout-align="space-around" ng-if="showLoader==1">
+				<md-progress-circular class="md-hue-2" md-mode="indeterminate"></md-progress-circular>
+			</div>
+			<div layout="column" layout-sm="column" layout-align="space-around">
+				<md-list>
+					<md-list-item ng-repeat="(key2,dataCheck) in RestPriceRangeCategory | splitAll:'|~|'" class="blue">{{dataCheck}}</md-list-item>
+				</md-list>
+				<md-divider></md-divider>
+				<div layout="row" layout-sm="column" layout-align="space-around">
+					<md-button class="md-raised md-accent" ng-click="hide()">OK</md-button>
+				</div>
+			</div>
+			<div layout="row" layout-sm="column" layout-align="space-around" ng-if="showLoader==0 && dataDialog.error.code	==	1">
+				No Categories Found
+			</div>
+		</div>
+		<div ng-if="blockCatPop == 4">
+			<div layout="row" layout-sm="column" layout-align="space-around" ng-if="showLoader==1">
+				<md-progress-circular class="md-hue-2" md-mode="indeterminate"></md-progress-circular>
+			</div>
+			<div layout="column" layout-sm="column" layout-align="space-around">
+				<md-list>
+					<md-list-item ng-repeat="(key2,dataCheck) in LandlineMandatoryCategory | splitAll:'|~|'" class="blue">{{dataCheck}}</md-list-item>
+				</md-list>
+				<md-divider></md-divider>
+				<div layout="row" layout-sm="column" layout-align="space-around">
+					<md-button class="md-raised md-accent" ng-if='moduleType != "CS"' ng-href="../business/bform.php?navibar=yes" >Go Back to Bform</md-button>
+					<md-button class="md-raised md-accent" ng-href="../genio-i/url_convert.php?genio-i=redirect&parentid={{parentid}}" ng-if='moduleType == "CS"'>Go Back to Bform</md-button>
+					<md-button class="md-raised md-accent" ng-click="hide()">OK</md-button>
+				</div>
+			</div>
+			<div layout="row" layout-sm="column" layout-align="space-around" ng-if="showLoader==0 && dataDialog.error.code	==	1">
+				No Categories Found
+			</div>
+		</div>
+		<div ng-if="blockCatPop == 5">
+			<div layout="row" layout-sm="column" layout-align="space-around" ng-if="showLoader==1">
+				<md-progress-circular class="md-hue-2" md-mode="indeterminate"></md-progress-circular>
+			</div>
+			<div layout="column" layout-sm="column" layout-align="space-around">
+				<md-list>
+					<md-list-item ng-repeat="(key2,dataCheck) in ExclusiveTaggedCategory | splitAll:'|~|'" class="blue">{{dataCheck}}</md-list-item>
+				</md-list>
+				<md-divider></md-divider>
+				<div layout="row" layout-sm="column" layout-align="space-around">
+					<md-button class="md-raised md-accent" ng-click="hide()">OK</md-button>
+				</div>
+			</div>
+			<div layout="row" layout-sm="column" layout-align="space-around" ng-if="showLoader==0 && dataDialog.error.code	==	1">
+				No Categories Found
+			</div>
+		</div>
+		<div ng-if="blockCatPop == 6">
+			<div layout="row" layout-sm="column" layout-align="space-around" ng-if="showLoader==1">
+				<md-progress-circular class="md-hue-2" md-mode="indeterminate"></md-progress-circular>
+			</div>
+			<div layout="column" layout-sm="column" layout-align="space-around">
+				<md-list>
+					<md-list-item ng-repeat="(key2,dataCheck) in StarRatingTaggedCategory | splitAll:'|~|'" class="blue">{{dataCheck}}</md-list-item>
+				</md-list>
+				<md-divider></md-divider>
+				<div layout="row" layout-sm="column" layout-align="space-around">
+					<md-button class="md-raised md-accent" ng-click="hide()">OK</md-button>
+				</div>
+			</div>
+			<div layout="row" layout-sm="column" layout-align="space-around" ng-if="showLoader==0 && dataDialog.error.code	==	1">
+				No Categories Found
+			</div>
+		</div>
+		<div ng-if="blockCatPop == 7">
+			<div layout="row" layout-sm="column" layout-align="space-around" ng-if="showLoader==1">
+				<md-progress-circular class="md-hue-2" md-mode="indeterminate"></md-progress-circular>
+			</div>
+			<div layout="column" layout-sm="column" layout-align="space-around">
+				<md-list>
+					<h2 class="md-no-sticky md-headline" ng-if="PharmTaggedCount == 1">Category tagged as Chemist is : </h2>
+					<h2 class="md-no-sticky md-headline" ng-if="PharmTaggedCount != 1">Categories tagged as Chemist are : </h2>
+					<md-list-item ng-repeat="(key2,dataCheck) in PharmTaggedCategory | splitAll:'|~|'" class="blue">{{dataCheck}}</md-list-item>
+				</md-list>
+				<md-divider></md-divider>
+				<md-list>
+					<h2 class="md-no-sticky md-headline" ng-if="DocHospTaggedCount == 1">Category tagged as Doctor / Hospital is : </h2>
+					<h2 class="md-no-sticky md-headline" ng-if="DocHospTaggedCount != 1">Categories tagged as Doctor / Hospital are : </h2>
+					<md-list-item ng-repeat="(key2,dataCheck) in DocHospTaggedCategory | splitAll:'|~|'" class="blue">{{dataCheck}}</md-list-item>
+				</md-list>
+				<div layout="row" layout-sm="column" layout-align="space-around">
+					<md-button class="md-raised md-accent" ng-click="hide()">OK</md-button>
+				</div>
+			</div>
+			<div layout="row" layout-sm="column" layout-align="space-around" ng-if="showLoader==0 && dataDialog.error.code	==	1">
+				No Categories Found
+			</div>
+		</div>
+		<div ng-if="blockCatPop == 8">
+			<div layout="row" layout-sm="column" layout-align="space-around" ng-if="showLoader==1">
+				<md-progress-circular class="md-hue-2" md-mode="indeterminate"></md-progress-circular>
+			</div>
+			<div layout="column" layout-sm="column" layout-align="space-around">
+				<md-list>
+					<h2 class="md-no-sticky md-headline" ng-if="HotelTaggedCount == 1">Category tagged as Hotel is : </h2>
+					<h2 class="md-no-sticky md-headline" ng-if="HotelTaggedCount != 1">Categories tagged as Hotel are : </h2>
+					<md-list-item ng-repeat="(key2,dataCheck) in HotelTaggedCategory | splitAll:'|~|'" class="blue">{{dataCheck}}</md-list-item>
+				</md-list>
+				<md-divider></md-divider>
+				<md-list>
+					<h2 class="md-no-sticky md-headline" ng-if="RestTaggedCount == 1">Category tagged as Restaurant is : </h2>
+					<h2 class="md-no-sticky md-headline" ng-if="RestTaggedCount != 1">Categories tagged as Restaurant are : </h2>
+					<md-list-item ng-repeat="(key2,dataCheck) in RestTaggedCategory | splitAll:'|~|'" class="blue">{{dataCheck}}</md-list-item>
+				</md-list>
+				<div layout="row" layout-sm="column" layout-align="space-around">
+					<md-button class="md-raised md-accent" ng-click="hide()">OK</md-button>
+				</div>
+			</div>
+			<div layout="row" layout-sm="column" layout-align="space-around" ng-if="showLoader==0 && dataDialog.error.code	==	1">
+				No Categories Found
+			</div>
+		</div>
+	</md-dialog-content>
+</md-dialog>

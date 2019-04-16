@@ -1,0 +1,12 @@
+redis-server
+
+redis-cli monitor
+
+
+Live
+
+redis-cli -h 192.168.51.204 monitor 
+
+Development
+
+redis-cli -h 127.0.0.1 monitor 

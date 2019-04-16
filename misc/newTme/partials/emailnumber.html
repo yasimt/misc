@@ -1,0 +1,63 @@
+<md-toolbar md-scroll-shrink style="background-color:#FFFFFF;border-bottom:1px solid #CCCCCC" ng-init="onLoadCall()" ng-controller="catPreviewController">
+	<div class="md-toolbar-tools">
+		<md-button class="md-icon-button" aria-label="Settings" style="margin-left:20px;" ng-click="toggleLeft()">
+			<md-icon md-svg-icon="img/ic_menu_36px.svg" style="color:#000000;"></md-icon>
+		</md-button>
+		<h2>
+			<span>Own Website & Mobile site</span>
+		</h2>
+		<span flex></span>
+	</div>
+</md-toolbar>
+
+
+<section class="mainContain_innr" subtract="500" >
+	<section class="mainContain" style="font-family: 'Roboto', sans-serif;">
+
+		<div class="cntre" >
+			<span class="tble-title">Cost of Email Package</span>
+			<div class="tbl-ottr">
+				<span class="tblt">Please select the desired email package</span>
+				<form name="emailform">
+					
+					<div class="fld-ottr">
+						<label>Cost per mail box</label>
+						<span class="inptgrop"><input type="text" class="inpt-rdonl" placeholder="{{email_price}} Rupees per month " disabled></span>
+					</div>
+					<div class="fld-ottr">
+						<label>Number of mail box</label>
+						<span class="inptgrop"><input type="text" placeholder="0" ng-model="email_number" numbersonly></span>
+					</div>
+					<div class="fld-ottr">
+						<label>Total cost of mail box</label>
+						<span class="inptgrop"><input type="text" class="inpt-rdonl" placeholder="{{email_number * email_price}} Rupees per month" disabled></span>
+					</div>
+					<div class="fld-ottr" ng-show="email_type==2">    
+						<label>Admin Username</label>
+						<span class="inptgrop"><input type="text"  placeholder="eg bhuvangupta" ng-model="admin_username" ></span>
+
+						
+					</div>
+					<div class="fld-ottr">
+						<label>&nbsp;</label>
+						<span class="inptgrop"><a href="#" class="prche" ng-click="save_email_package()">Proceed</a></span>
+					</div>
+				</form>
+				
+			</div>
+			
+		</div> 
+		
+		
+	</section>
+</section>
+
+
+<div class="ftr_wrpper" style="position:relative">
+	<div class="jdrrcontainer">
+		<div class="jdrr_footer">
+				Copyright 2008-2016 Justdial.com. All Rights Reserved. <a href="#">Privacy</a> I <a href="#">Terms</a>
+		</div><!--end of jdrr_footer-->
+	</div>
+</div>
+	

@@ -1,0 +1,55 @@
+<md-toolbar md-scroll-shrink style="background-color:#FFFFFF;border-bottom:1px solid #CCCCCC" ng-init="onLoadCall()" ng-controller="catPreviewController">
+	<div class="md-toolbar-tools">
+		<md-button class="md-icon-button" aria-label="Settings" style="margin-left:20px;" ng-click="toggleLeft()">
+			<md-icon md-svg-icon="img/ic_menu_36px.svg" style="color:#000000;"></md-icon>
+		</md-button>
+		<h2>
+			<span>Own Website & Mobile site</span>
+		</h2>
+		<span flex></span>
+	</div>
+</md-toolbar>
+
+
+<section class="mainContain_innr" subtract="500" ng-controller="smsnumberController">
+	<section class="mainContain" style="font-family: 'Roboto', sans-serif;">
+
+		<div class="cntre" >
+			<span class="tble-title">Bulk SMS Solution</span>
+			<div class="tbl-ottr">
+				<form>
+					<div class="fld-ottr">
+						<label>Cost per SMS</label>
+						<span class="inptgrop"><input type="text" class="inpt-rdonl" placeholder="{{sms_price}} Rupees" disabled></span>
+					</div>
+					<div class="fld-ottr">
+						<label>Number requested</label>
+						<span class="inptgrop"><input type="text" placeholder="0" ng-model="sms_number" numbersonly></span>
+					</div>
+					<div class="fld-ottr">
+						<label>Total cost of Sms</label>
+						<span class="inptgrop"><input type="text" class="inpt-rdonl" placeholder="{{sms_number * sms_price}} Rupees" disabled></span>
+					</div>
+					<div class="fld-ottr">
+						<label>&nbsp;</label>
+						<span class="inptgrop"><a href="#" class="prche" ng-click="save_sms_package()">Proceed</a></span>
+					</div>
+				</form>
+				
+			</div>
+			
+		</div>
+		
+		
+	</section>
+</section>
+
+
+<div class="ftr_wrpper" style="position:relative">
+	<div class="jdrrcontainer">
+		<div class="jdrr_footer">
+				Copyright 2008-2016 Justdial.com. All Rights Reserved. <a href="#">Privacy</a> I <a href="#">Terms</a>
+		</div><!--end of jdrr_footer-->
+	</div>
+</div>
+	

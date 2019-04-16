@@ -1,0 +1,21 @@
+<div class="callBackTab width100 left">
+	<div class="absolute closePop right0 pointer" ng-click="closePopTop(1)">Close</div>
+	<div class="callBackcards width50 repeat-animation" ng-repeat="data in callBackData">
+		<h3 class="left blueDark" ng-if="data.allocationType==22">Call Back</h3>
+		<h3 class="left blueDark" ng-if="data.allocationType==24">Follow Up</h3>
+		<h3 class="left blueDark" ng-if="data.allocationType!=24 && data.allocationType!=22">--</h3>
+		<h5 class="right">Act. Time :{{data.actionTime}}</h5>
+		<div class="allocationType left width100 marBot5px pointer" ng-click="gotToBformCallBack(data.contractCode,2,1,'*','')">{{data.compname |capitalize}} ({{data.contractCode}})</div>
+		<div class="stripAlloc left width100 pad-top-5 pad-bot-5 border-top-grey">
+			<div class="left">
+				<a class="blueDark uppercase marRt10px" ng-href="../tmAlloc/mktgJrPage.php?parentIdSt={{data.contractCode}}&stVal={{data.allocationType}}&compname={{data.compname}}">Rescedule</a> / 
+			</div>
+			<div class="left">
+				<a class="blueDark uppercase marLeft10px marRt10px" ng-click="removeAll(data.allocationId,$event)">Cancel</a> / 
+			</div>
+			<div class="left" ng-if="data.pop_flag==0">
+				<a class="blueDark uppercase marLeft10px marRt10px" ng-click="remindLater(data.allocationId,$event)">Remind Later</a>
+			</div>
+		</div>
+	</div>
+</div>

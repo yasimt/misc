@@ -1,0 +1,75 @@
+<md-toolbar md-scroll-shrink style="background-color:#FFFFFF" ng-init="onLoadCall()" ng-controller="catPreviewController">
+	<div class="md-toolbar-tools">
+		<md-button class="md-icon-button" aria-label="Settings" style="margin-left:20px;" ng-click="toggleLeft()">
+			<md-icon md-svg-icon="img/ic_menu_36px.svg" style="color:#000000;"></md-icon>
+		</md-button>
+		<h2>
+			<span>Campaign Selection</span>
+		</h2>
+		<span flex></span>
+	</div>
+</md-toolbar>
+
+
+<section class="" subtract="500">
+	<section class="mainContain">
+		<md-content class='payment_option' style="padding-right: 13%;padding-top: 70px;width: 855px;min-height: 680px;">	
+			<md-card>
+			<md-card-content style="padding: 20px 20px 0px 50px;">	
+					<h4 style='color: #FF9A00;font-size: 17px;font-weight: bold;'>
+					Bonus amount equivalent to your package value will be credited to your package account depending on your payment plan. <span style='color:#1c33a1;font-weight:normal;cursor:pointer' ng-click="open_combo($event)">Click here for egs.</span></h4>
+					
+			</md-card-content>
+				<md-card-content style="padding: 10px 50px 50px;">	
+					<md-button class="md-warn md-raised right" ng-click="reset_campaign($event)">Reset Campaign</md-button>
+<!--
+						<span style='font-weight: bold;color: #ff9a00;float:right;cursor: pointer;' ng-click='show_omni_3k()' ng-if="sel_city == 'mumbai'">*</span>
+-->
+						<h3 style='font-weight: bold;color: #545454;'>Select the desired option and click proceed</h3>
+						
+						 <md-radio-group ng-model="budget_option_sel">
+							<md-radio-button value="omni1" class="md-primary"><span style='font-weight: bold;color: #424242;'>Omni</span><sup style='color: #E48B08;font-size: 13px;'>NEW</sup></md-radio-button>
+								<span style="padding-left: 43px;;color: #747474;">Your personalised business management software</span>
+							<md-radio-button value="omni2" class="md-primary"><span style='font-weight: bold;color: #424242;'>Omni 3K</span><sup style='color: #E48B08;font-size: 13px;'>NEW</sup></md-radio-button>
+								<span style="padding-left: 43px;;color: #747474;">Your personalised business management software</span>
+							<md-radio-button value="fixed" class="md-primary" style='font-weight: bold;color: #424242;'>Best / Fixed Position</md-radio-button>
+								<span style="padding-left: 43px;color: #747474;">Select best position recommended by JD or choose between 1 to 3 Position</span>
+							<md-radio-button value="package" class="md-primary" style='font-weight: bold;color: #424242;'>Package Listing</md-radio-button>
+								<span style="padding-left: 43px;color: #747474;">Choose suggested JD packages or customize your own package</span>
+							<md-radio-button value="omni_combo" class="md-primary" style='font-weight: bold;color: #424242;'>Omni Combos</md-radio-button>
+							<md-radio-button value="jdrr" class="md-primary" style='font-weight: bold;color: #424242;'>Jdrr Certificate</md-radio-button>
+							<md-radio-button value="banner" class="md-primary" style='font-weight: bold;color: #424242;'>Banner</md-radio-button>
+							<md-radio-button value="jdrrplus" class="md-primary" style='font-weight: bold;color: #424242;'>Jdrr Plus</md-radio-button>
+							</md-radio-button>
+							
+
+						</md-radio-group>
+					
+						<div class="wrapper" style="padding-top: 50px;text-align: center;">
+							<div class="button-abs" >
+								<div class="button-wrap" style="bottom: 0px;width:800px;" layout="row" layout-align="space-around" sitbutdowntwo>
+									<div style="background: none repeat scroll 0 0 #FFFFFF;margin: 0 auto;width: 750px;">
+											<input type="submit" value="Proceed" class="procced_btn" ng-click="selected_option($event)">
+											<input type="submit" value="Back" class="procced_btn" ng-click="gotobannerdemo()" style="float:left">
+									</div>
+								</div>
+							</div>
+						</div>
+						
+	
+				</md-card-content>
+			</md-card>
+		</md-content>	
+		
+		<div class="ftr_wrpper" style="position:relative">
+			<div class="jdrrcontainer">
+				<div class="jdrr_footer">
+						Copyright 2008-2016 Justdial.com. All Rights Reserved. <a href="#">Privacy</a> I <a href="#">Terms</a>
+				</div><!--end of jdrr_footer-->
+			</div>
+		</div>
+		
+	</section>
+</section>
+
+

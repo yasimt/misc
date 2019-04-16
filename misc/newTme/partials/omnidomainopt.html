@@ -1,0 +1,205 @@
+<md-toolbar md-scroll-shrink style="background-color:#FFFFFF" ng-init="onLoadCall()">
+	<div class="md-toolbar-tools">
+		<md-button class="md-icon-button" aria-label="Settings" style="margin-left:20px;" ng-click="toggleLeft()">
+			<md-icon md-svg-icon="img/ic_menu_36px.svg" style="color:#000000;"></md-icon>
+		</md-button>
+		<h2>
+			<span>Own Website & Mobile site(Domain Capturing)</span>
+		</h2>
+		<span flex></span>
+	</div>
+</md-toolbar>
+
+
+<section class="" subtract="500" style="font-family: roboto;" ng-controller="omnidomainoptController">
+	<section class="mainContain">
+	
+	<div class="mainContain_innr">
+		<div class="cnt-wrp">
+			<h4 class="box-heading roboto">Domain Options</h4>
+			<div class="cnt-wrp-in">
+				<div class="from-wrp from-wrp2 ">
+					<div class="forgrybg">
+						<label class="from-lbl from-lbl-bg">Desired Domain</label>
+						<div class="dmn-input-wrp">
+							<div class="input-gruop">
+								<span class="domin-input">
+									<input type="text" class="entrdmn" placeholder="Enter existing domain name" id="entrDomain" ng-model="omnioptip[0]" ng-keyup="clear_flag(0)" domainreg>
+								</span>
+							</div>
+						</div>
+					</div>
+					<input type="button" class="domin-input chek-avbl-input margeT5 boder-text" value="Check Availability" ng-click="check_availability(omnioptip[0],0,$event)">
+					
+					<div class="rgtrrk-wrp" ng-show="omnicheckflg[0]">
+						<i class="jd-domain-sprite2 rghmrk"></i>
+						<span class="rgt-text rgt-text2">Congratulations !! The requested domain is available</span>
+					</div>
+					<div class="rgtrrk-wrp" ng-show="omnicheckmsg[0]">
+						<i class="jd-domain-sprite2 new-cros new-cros2"></i>
+						<span class="rgt-text rgt-text2 rgt-text3">Sorry domain is not available, Try another one</span>
+					</div>
+					
+				</div>
+				<h4 class="clrnststx roboto">In case desired domain name is not available post cheque clearance</h4>
+				<div class="from-wrp from-wrp2 margeT15">
+					<div class="forgrybg forgrybg2">
+						<label class="from-lbl from-lbl-bg from-lbl-bg2">01</label>
+						<div class="dmn-input-wrp">
+							<div class="input-gruop">
+								<span class="domin-input domin-input2">
+									<input type="text" class="entrdmn" placeholder="Enter existing domain name" id="entrDomain" ng-model="omnioptip[1]" ng-keyup="clear_flag(1)" domainreg>
+									
+									<span class="drop-extns" ng-show="domain_option[1]">
+										<span class="poplrextn-wrp">
+											<span class="drop-headig">Popular Extensions</span>
+												<ul class="exnlist-wrp">
+													<li ng-repeat ="(name,price) in popular_domain">
+														<input type="radio"  class="checkboxdflt" ng-model="type[1]" value="{{name}}">
+														<span class="doqnextn">{{name}}</span>
+														<span class="extnprce-wrp"><i class="jd-domain-sprite2 exnt-price"></i>
+														<span class="prctxtx">{{price}}</span></span>
+													</li>
+												</ul>
+											</span>
+										</span>
+									</span>
+						
+								</span>
+							</div>
+						</div>
+						
+						<span class="extnwrp" ng-click="show_domainoption(1)" style="padding: 9px;border: 1px solid #C1CDD7;cursor: pointer;">
+							<span class="getxttxt">{{type[1]}}</span>
+							<i class="jd-domain-sprite dwnawr extndrop" style="margin-right: 10px;"></i>
+						</span>
+								
+
+					</div>
+					<input type="button" class="domin-input chek-avbl-input margeT5 boder-text" value="Check Availability" ng-click="check_availability(omnioptip[1],1,$event)">
+					<div class="rgtrrk-wrp" ng-show="omnicheckflg[1]">
+						<i class="jd-domain-sprite2 rghmrk"></i>
+						<span class="rgt-text rgt-text2">Congratulations !! The requested domain is available</span>
+					</div>
+					<div class="rgtrrk-wrp" ng-show="omnicheckmsg[1]">
+						<i class="jd-domain-sprite2 new-cros new-cros2"></i>
+						<span class="rgt-text rgt-text2 rgt-text3">Sorry domain is not available, Try another one</span>
+					</div>
+					
+				</div>
+				
+				<div class="from-wrp from-wrp2 margeT10">
+					<div class="forgrybg forgrybg2">
+						<label class="from-lbl from-lbl-bg from-lbl-bg2">02</label>
+						<div class="dmn-input-wrp">
+							<div class="input-gruop">
+								<span class="domin-input domin-input2">
+									<input type="text" class="entrdmn" placeholder="Enter existing domain name" id="entrDomain" ng-model="omnioptip[2]" ng-keyup="clear_flag(2)" domainreg>
+									
+									<span class="drop-extns" ng-show="domain_option[2]">
+										<span class="poplrextn-wrp">
+											<span class="drop-headig">Popular Extensions</span>
+												<ul class="exnlist-wrp">
+													<li ng-repeat ="(name,price) in popular_domain">
+														<input type="radio"  class="checkboxdflt" ng-model="type[2]" value="{{name}}">
+														<span class="doqnextn">{{name}}</span>
+														<span class="extnprce-wrp"><i class="jd-domain-sprite2 exnt-price"></i>
+														<span class="prctxtx">{{price}}</span></span>
+													</li>
+												</ul>
+											</span>
+										</span>
+									</span>
+									
+								</span>
+							</div>
+						</div>
+						
+						<span class="extnwrp" ng-click="show_domainoption(2)" style="padding: 9px;border: 1px solid #C1CDD7;cursor: pointer;">
+							<span class="getxttxt">{{type[2]}}</span>
+							<i class="jd-domain-sprite dwnawr extndrop" style="margin-right: 10px;"></i>
+						</span>
+						
+						
+					</div>
+					<input type="button" class="domin-input chek-avbl-input margeT5 boder-text" value="Check Availability" ng-click="check_availability(omnioptip[2],2,$event)">
+					<div class="rgtrrk-wrp" ng-show="omnicheckflg[2]">
+						<i class="jd-domain-sprite2 rghmrk"></i>
+						<span class="rgt-text rgt-text2">Congratulations !! The requested domain is available</span>
+					</div>
+					<div class="rgtrrk-wrp" ng-show="omnicheckmsg[2]">
+						<i class="jd-domain-sprite2 new-cros new-cros2"></i>
+						<span class="rgt-text rgt-text2 rgt-text3">Sorry domain is not available, Try another one</span>
+					</div>
+					
+				</div>
+				
+				<div class="from-wrp from-wrp2 margeT10" style="display:none">
+					<div class="forgrybg forgrybg2">
+						<label class="from-lbl from-lbl-bg from-lbl-bg2">03</label>
+						<div class="dmn-input-wrp">
+							<div class="input-gruop">
+								<span class="domin-input domin-input2">
+									<input type="text" class="entrdmn" placeholder="Enter existing domain name" id="entrDomain" ng-model="omnioptip[3]" ng-keyup="clear_flag(3)" domainreg>
+									
+									<span class="drop-extns" ng-show="domain_option[3]">
+										<span class="poplrextn-wrp">
+											<span class="drop-headig">Popular Extensions</span>
+												<ul class="exnlist-wrp">
+													<li ng-repeat ="(name,price) in popular_domain">
+														<input type="radio"  class="checkboxdflt" ng-model="type[3]" value="{{name}}">
+														<span class="doqnextn">{{name}}</span>
+														<span class="extnprce-wrp"><i class="jd-domain-sprite2 exnt-price"></i>
+														<span class="prctxtx">{{price}}</span></span>
+													</li>
+												</ul>
+											</span>
+										</span>
+									</span>
+									
+									
+								</span>
+							</div>
+						</div>
+						
+						<span class="extnwrp" ng-click="show_domainoption(3)" style="padding: 9px;border: 1px solid #C1CDD7;cursor: pointer;">
+							<span class="getxttxt">{{type[3]}}</span>
+							<i class="jd-domain-sprite dwnawr extndrop" style="margin-right: 10px;"></i>
+						</span>
+						
+						
+					</div>
+					<input type="button" class="domin-input chek-avbl-input margeT5 boder-text" value="Check Availability" ng-click="check_availability(omnioptip[3],3,$event)">
+					
+					<div class="rgtrrk-wrp" ng-show="omnicheckflg[3]">
+						<i class="jd-domain-sprite2 rghmrk"></i>
+						<span class="rgt-text rgt-text2">Congratulations !! The requested domain is available</span>
+					</div>
+					<div class="rgtrrk-wrp" ng-show="omnicheckmsg[3]">
+						<i class="jd-domain-sprite2 new-cros new-cros2"></i>
+						<span class="rgt-text rgt-text2 rgt-text3">Sorry domain is not available, Try another one</span>
+					</div>
+					
+				</div>
+				
+				<div class="domain-btn-wrp">
+					<input type="button" value="Proceed" class="domin-btn" ng-click="goto_bannerpg($event)">
+				</div>
+				
+			</div>
+		</div>
+	
+	
+	
+	</div>	
+		
+		<div class="ftr_wrpper" style="position:relative">
+			<div class="jdrrcontainer">
+				<div class="jdrr_footer">
+						Copyright 2008-2016 Justdial.com. All Rights Reserved. <a href="#">Privacy</a> I <a href="#">Terms</a>
+				</div><!--end of jdrr_footer-->
+			</div>
+		</div>
+		
+	</section>
+</section>

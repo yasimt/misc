@@ -1,0 +1,49 @@
+<md-dialog aria-label="Banner Popup" style="max-height:500px">	
+ 	<md-dialog-content layout='column' style='padding:0px'>
+		<div id='demo_link_wrapper' class="combo_dgn_popup" style="height: 500px; width: 470px;">
+			<span class="cls_btn" ng-click="closepopup()">X</span>
+			
+			<div class="ttle" style='color: #fe980f;margin-top: 10px;'>
+				Send Ratings Link
+			</div>
+			
+			<div  id='mobile_wrapper' style="height: 342px;overflow-y: auto;padding-left: 35px;" >
+				
+				<div style="float:left;width: 360px;">
+					<p style="font-size: 16px;font-weight: bold;">Mobile No</p>
+					<p style='font-size: 14px;font-weight: bold;'>Please check mobile number to send rating link.</p>
+					<div style="margin-top:10px;margin-bottom: 8px;" ng-repeat='mob in mobile_arr'>
+						<input type="text" style='width:40px;height:40px;background:#f0f0f0 none repeat scroll 0 0;border: 2px solid #f1f1f1;text-align:center;float: left;color:black' value='+91' readonly/>
+						<input type="text" style='border: 2px solid #f1f1f1;font-size: 16px;height: 40px;width: 200px;;color:black' placeholder="Enter Mobile Number" id="entrmob" ng-value='mob' readonly/>
+						<md-checkbox ng-model="selected_number[mob]" style='display:inline' class='md-primary'></md-checkbox>
+					</div>
+					<div ng-if="mobile_err == true" style="color: red;padding: 9px;">Please add Mobile No to Send Rating Link on mobile</div>
+					<a ng-href="{{businessUrl}}" style="color: #4484c5;padding: 10px;cursor: pointer;font-size: 17px;">Add More Mobile Numbers</a>
+				</div>
+				
+				<div style="float:left;width: 360px;">
+					<p style="font-size: 16px;font-weight: bold;margin-top: 30px;">Email Id</p>
+					<p style='font-size: 14px;font-weight: bold;float:left'>Please check email id to send rating link.</p>
+					<div style="margin-top:10px;margin-bottom: 8px;color:black" ng-repeat='email in email_arr'>
+						<input type="text" class="entrdmn"   placeholder="Enter EmailId" id="entrmob"  ng-value='email' style="border: 2px solid #f1f1f1;font-size: 16px;height: 40px;width: 256px;;margin-top:10px;color:black" readonly>
+						<md-checkbox ng-model="selected_email[email]" style='display:inline' class='md-primary'></md-checkbox>
+					</div>
+					<div ng-if="email_err == true" style="color: red;padding: 9px;">Please add Email id to Send Rating Link on email</div>
+					<a ng-href="{{businessUrl}}" style="color: #4484c5;padding: 10px;cursor: pointer; width:100%;font-size: 17px;"  ng-click="addemail()">Add More Email</a>
+				</div>
+			</div>
+			
+			<div id='demo_button_wrapper' style="border-top: 1px solid #adadad;bottom: 0;width: 100%;">
+				<div style="margin-top:25px">
+					<center>
+<!--
+						<span class="" style="float:right;background: #e58a00 none repeat scroll 0 0;width: 116px;text-align: center;padding: 10px;margin-right: 8px;font-size: 20px;color: white;margin-bottom: 25px;cursor: pointer;" ng-click='send_ratings($event)'>Send Link</span>
+-->
+						<div class="send_rating" ng-click='send_ratings($event)'>Send Link</div>
+					</center>
+				</div>
+			</div>
+			
+		</div>
+	</md-dialog-content>
+</md-dialog>	

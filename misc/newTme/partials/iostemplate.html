@@ -1,0 +1,24 @@
+<md-dialog aria-label="Combo Plan Pop up">	
+ 	<md-dialog-content layout='column'  style='padding:0px'>
+		<div style="padding: 15px; font-weight: bold; font-size: 18px;">
+			Congratulations!!
+			<span style="float:right" ng-click="closepopup()">X</span>
+		</div>
+		
+		<div style="border-top: 1px solid #adadad; border-bottom: 1px solid #adadad; height: 130px;">
+			<div style="padding: 18px; font-weight: bold; font-size: 16px;">
+				You have successfully selected APP template for your store.
+			</div>
+			<div style="font-weight: bold; padding: 5px 5px 5px 26px; color: rgb(255, 108, 2); font-size: 16px;">
+				Would you like this template for iOS as well? <br>
+				You will be charged 2000 Extra for this
+			</div>
+		</div>
+		
+		<div>
+			<input class="close_btn" style="margin: 15px; color: rgb(18, 116, 192); font-weight: bold; font-size: 15px; width: 215px;" type="submit"  value="Yes, I would like the iOS App" tabindex="0" ng-click="addios()">
+			<input class="close_btn" style="margin: 15px; color: rgb(18, 116, 192); font-weight: bold; font-size: 15px; width: 170px;" type="submit"  value="Only Android is fine" tabindex="0" ng-click="removeios()">
+		</div>
+		
+	</md-dialog-content>
+</md-dialog>	

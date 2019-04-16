@@ -1,0 +1,17 @@
+<md-dialog aria-label="Banner Popup">	
+ 	<md-dialog-content layout='column' ng-if="popupcond == 'banner'" style='padding:0px'>
+		<div class="bnr_dgn_popup">
+			<div class="ttle">Any Special Instructions Related To Banner Design</div>
+			
+			<textarea rows="6" cols="50" class="type_area" ng-model="banner_specification[0]" value='banner_specification[0]'> {{banner_specification[0]}}</textarea>
+			
+			<div class="popup_btns">
+				<input type="submit" value="Cancel" class="submit_btn cncl" ng-click="closepopup()">
+				<input type="submit" value="Submit" class="submit_btn" ng-click='addbanner()'>
+			</div>
+			
+			<span class="cls_btn" ng-click="closepopup()">X</span>
+			
+		</div><!--end of bnr_dgn_popup-->
+	</md-dialog-content>
+</md-dialog>	

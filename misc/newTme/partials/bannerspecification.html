@@ -1,0 +1,22 @@
+<md-content class='payment_option' style="padding-right: 13%;padding-top: 70px;width: 855px;min-height: 680px;background: rgba(0, 0, 0, 0) url('img/banner_img/details_01.jpg') no-repeat fixed center center;0;" ng-controller="bannerspecificationController">	
+			
+	<md-card>
+		<md-card-content style="padding: 21px">
+			<div class="bnr_dgn_popup">
+					<div class="ttle">Your package includes banner,Please provide any special instruction for banner design.</div>
+					
+					<textarea rows="6" cols="50" class="type_area" ng-model="banner_specification[0]" value='banner_specification[0]'> {{banner_specification[0]}}</textarea>
+					
+					<div class="popup_btns">
+						<input type="submit" value="Skip" class="submit_btn cncl" ng-click="addbanner()">
+						<input type="submit" value="Submit" class="submit_btn" ng-click='addbanner()'>
+					</div>
+					
+			</div>
+			
+		</md-card-content>
+	</md-card>
+
+</md-content>	
+
+

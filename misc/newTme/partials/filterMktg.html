@@ -1,0 +1,21 @@
+<nav>
+	<ul class="navFilters left width100 marBot20px marTop10px">
+		<li ng-click="$state.go('appHome.filter',{srchparam:'all',srchWhich:'',currPage:'page'})" class="left">All</li><span class="left">/</span>
+		<li ng-click="showSubMenu($event)" class="left">CompanyName
+			<ul class="hide submenuUl">
+				<li class="left" ng-click="$state.go('appHome.filter',{srchparam:'compname',srchWhich:'order-asc',currPage:'allocation'})">ORDER ASC</li><span class="left">/</span>
+				<li class="left" ng-click="$state.go('appHome.filter',{srchparam:'compname',srchWhich:'order-desc',currPage:'allocation'})">ORDER DESC</li><span class="left">/</span>
+			</ul>
+		</li><span class="left">/</span>
+		<li ng-click="$state.go('appHome.filter',{srchparam:'mask',srchWhich:'where',currPage:'allocation'})" class="left">Masked</li><span class="left">/</span>
+		<li ng-click="$state.go('appHome.filter',{srchparam:'freez',srchWhich:'where',currPage:'allocation'})" class="left">Freezed</li><span class="left">/</span>
+		<li class="left lastLiTop" ng-click="showSubMenu($event)">Company CallCount
+			<ul class="hide submenuUl">
+				<li class="left" ng-click="$state.go('appHome.filter',{srchparam:'compCallCount',srchWhich:'order-asc',currPage:'allocation'})">ORDER ASC</li><span class="left">/</span>
+				<li class="left" ng-click="$state.go('appHome.filter',{srchparam:'compCallCount',srchWhich:'order-desc',currPage:'allocation'})">ORDER DESC</li><span class="left">/</span>
+			</ul>
+		</li><span class="left">/</span>
+		<li class="left">Created On</li><span class="left">/</span>
+		<li class="left">Updated On</li>
+	</ul>
+</nav>

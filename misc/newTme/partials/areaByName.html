@@ -1,0 +1,24 @@
+<div layout="row" layout-sm="column" layout-align="space-around" ng-if="showLoader == 0">
+	<md-progress-circular md-mode="indeterminate"></md-progress-circular>
+</div>
+<section ng-if="areaDataName.error.code == 0" lazyload>
+	<md-list>
+		<div ng-if="dataFilter == 'all'">
+			<md-list-item>
+				<md-checkbox ng-model="selAllCheckName[0]" ng-click="selectAllName(areaDataName.results.length,0,selected)"></md-checkbox>
+				<p class="md-hue-1" style="font-weight:bold">Select All Areas</p>
+			</md-list-item>
+		</div>
+		<div ng-repeat="area in areaDataName.results  | firstLetterArea : dataFilter | filter:filterAreas | limitTo: limiter">
+			<md-list-item>
+				<md-checkbox ng-if='showCatDistSel == 1 && flexiSel == 1' ng-model="checkAreas_all_area_new[area.pincode]" ng-disabled="checkDisabled[area.pincode]" ng-click="toggle_all_area_new(area.pincode,selected,area.pincode)"></md-checkbox>
+				<md-checkbox ng-if='flexiSel == 0' ng-model="checkAreas[area.pincode]" ng-disabled="checkDisabled[area.pincode]" ng-click="toggle(area.pincode,selected,area.pincode)"></md-checkbox>
+				<p class="blue">{{area.area}} - {{area.pincode}}</p>
+			</md-list-item>
+			<md-divider></md-divider>
+		</div>
+	</md-list>
+</section>
+<section ng-if="areaDataName.error.code == 1">
+	<h2>No Areas Found</h2>
+</section>

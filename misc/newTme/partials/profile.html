@@ -1,0 +1,60 @@
+<section class="showUpdates">
+	<div class="imageContainDash left">
+		<img ng-src="{{employees.hrInfo.data.pro_pic_url == '' && 'img/defaultUser.png' || employees.hrInfo.data.pro_pic_url}}" alt="profilee_pic" class="small-img pro-pic-welcome" />
+	</div>
+	<div class="userInfoDash left">
+		<h2>{{employees.hrInfo.data.empname}}</h2>
+		<p>{{employees.hrInfo.data.designation}}</p>
+		<hr>
+		<div class="firstSectionDash left">
+			<div class="sectionDiv left">
+				<p ng-switch on="employees.results.allocId">
+					<span ng-switch-when="A">You belong to A Team</span>
+					<span ng-switch-when="A_">You belong to A_ Team</span>
+					<span ng-switch-when="BD">You belong to Bounce Data Team</span>
+					<span ng-switch-when="BE">You belong to Expiry Data Team</span>
+					<span ng-switch-when="BP">You belong to Quality Data Team</span>
+					<span ng-switch-when="C">You belong to Fresh Data Team</span>
+					<span ng-switch-when="D">You belong to Differed Data Team</span>
+					<span ng-switch-when="M">You belong to Manager Team</span>
+					<span ng-switch-when="MD">You belong to MD Team</span>
+					<span ng-switch-when="O">You belong to Online Team</span>
+					<span ng-switch-when="RC">You belong to Remote City Team</span>
+					<span ng-switch-when="Se">You belong to Se Team</span>
+					<span ng-switch-when="SJ">You belong to Super Cat Team</span>
+					<span ng-switch-when="TL">You belong to TeleMarketing Manager Team</span>
+					<span ng-switch-when="_1">You belong to _1 Team</span>
+					<span ng-switch-when="_2">You belong to _2 Team</span>
+					<span ng-switch-when="_3">You belong to _3 Team</span>
+					<span ng-switch-when="RD">You belong to Retention Team</span>
+					<span ng-switch-when="">Team Not Found</span>
+					<span ng-switch-default>Belongs To {{employees.results.allocId}} Team</span>
+				</p>
+			</div>
+			<div class="sectionDiv left">
+				<p>Works in {{employees.hrInfo.data.city}}</p>
+			</div>
+			<div class="sectionDiv left">
+				<p>Your Employee Code is {{employees.results.mktEmpCode}}</p>
+			</div>
+			<div class="sectionDiv left">
+				<p>Reporting To {{employees.hrInfo.data.reporting_head}}</p>
+			</div>
+		</div>
+		<div class="clear"></div>
+		<hr>
+		<div class="left width100">
+			<div class="sectionDiv left">
+				<p>{{employees.hrInfo.data.email_id}}</p>
+			</div>
+			<div class="sectionDiv left">
+				<p>{{employees.hrInfo.data.mobile_num}}</p>
+			</div>
+		</div>
+		<div class="clear"></div>
+		<hr>
+		<div class="left">
+			<div class="button floatLeft"><a ng-href="http://accounts.justdial.com/hrmodule/profile/edit_profile/" target="_blank" class="buttonLink">Edit Your Profile</a></div>
+		</div>
+	</div>
+</section>

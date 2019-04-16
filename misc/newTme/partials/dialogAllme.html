@@ -1,0 +1,41 @@
+<md-dialog>	
+	<md-dialog-content>
+		<md-input-container id="errorContainer" class="hide">
+			<label><h4 class="ErrorLabel">Error label</h4></label>
+		</md-input-container>
+		<div ng-if="dialogAllme_show == '1'">
+			<md-input-container ng-if="dialogAllme_show_otp == 0">
+				<span style="color: rgb(74, 74, 74); font-family: Arial; font-size: 22px;">Sending OTP. Please Wait. . .</span>
+			</md-input-container>
+			<div ng-if="dialogAllme_show_otp == 1">
+			<md-input-container ng-if="dialogAllme_show_otp == 1">
+				<label><h3>Enter OTP</h3></label>
+				<input type="text" ng-model="all_me_otp" id="otpId" ng-required="true" />
+			</md-input-container>
+			<md-button class="md-raised md-warn" ng-click="checkOTP(all_me_otp,$event)">
+				<b class="whiteColor">Enter OTP</b>
+			</md-button>
+			</div>
+		</div>
+		<div ng-if="dialogAllme_show == '0'">
+			<md-input-container>
+				<label><h3>Please Enter loginId</h3></label>
+				<input type="text" ng-model="all_me_loginid" id="melogId" ng-required="true" />
+			</md-input-container>
+			<md-input-container>
+				<label><h3>Please Enter password</h3></label>
+				<input type="password" ng-model="all_me_password" id="mePassword" ng-required="true"/>
+			</md-input-container>
+			<md-button class="md-raised md-warn" ng-click="loginMe(all_me_loginid,all_me_password)">
+				<b class="whiteColor">Login</b>
+			</md-button>
+			<md-button class="md-raised md-warn" ng-click="resetMe(all_me_loginid,all_me_password)">
+				<b class="whiteColor">Reset</b>
+			</md-button>
+			<md-button class="md-raised md-warn" ng-click="cancelAllMe()">
+				<b class="whiteColor">Cancel</b>
+			</md-button>
+		</div>
+		
+	</md-dialog-content>
+</md-dialog>

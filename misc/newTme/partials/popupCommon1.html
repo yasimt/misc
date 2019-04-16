@@ -1,0 +1,1114 @@
+<style>
+body{margin:0;padding:0;}.popup_blck_ovrly{width:100%;height:100%;position:fixed;background:#000;opacity:.6}.popup_blck_inn{display:table;height:100%;width:100%;position:relative}.popup_blck_inr{display:table-cell;width:370px;height:100%;vertical-align:middle}.popup_pp_box{width:365px;display:inline-block;background:#FFF;position:relative;border-radius:3px;left:0%;-webkit-border-radius:3px;-moz-border-radius:3px}.popup_pp_title{width:100%;float:left;padding:10px 15px;border-bottom:1px solid #ccc;box-sizing:border-box;font-size:16px;color:#424242}.popup_pp_infotxt{width:100%;float:left;padding:15px;box-sizing:border-box;border-bottom:1px solid #ccc;font-size:14px}.popup_pp_btn_wrp{width:100%;float:left;padding:10px 15px;box-sizing:border-box}.clse-n-n,.popup_nonact_new{padding:6px 25px;font-size:14px;text-align:center;float:right;background:#1273c0;border:1px solid #ccc;text-decoration:none;color:#fff}.popup_clse_spite{background-position:0 0;width:15px;height:10px;position:absolute;right:11px;top:14px;opacity:.5}.intxt{width:100%;float:left;margin-bottom:12px}.popup_pp_infotxt p{padding:4px 0;color:#ff6b01;margin:0;font-size:19px}.yesbtn{background:#fdfbfc;border:1px solid #ccc;text-decoration:none;color:#1274c0;width:56%;float:left;margin-right:10px;padding:6px 0;text-align:center}.onlybtn{background:#fdfbfc;border:1px solid #ccc;text-decoration:none;color:#1274c0;width:40%;float:left;padding:6px 0;text-align:center}.popup_org_txt{color:#4E4E4E;display:block}.txt_outer{display:table;line-height:20px}#adprf .popup_pp_box,#upld .popup_pp_box{width:510px}.popup_nonact_new{color:#1274C0;background:#fdfbfc;margin:0 5px 0 0;float:right}.uvlc,.svlc{display:table;float:none;padding:6px 25px;font-size:14px;text-align:center;background:#1273c0;border:1px solid #ccc;text-decoration:none;color:#fff;margin:0 auto;width:70%}.uvlc{color:#1274C0;background:#fdfbfc}
+.popup_lft_button{margin:0 5px 0 0}.list{display:table}.list b{font-size:26px;color:#FF6C00;margin:0 5px 0 0;vertical-align:middle}.or{display:table;color:#FF6C00;text-align:center;font-size:14px;width:90%;margin:15px auto;float:none}
+#catgr .popup_pp_box,#popup_pare_new .popup_pp_box{width:640px}#catgr .popup_pp_box li{color:#FF6C00;line-height:28px}#catgr .popup_pp_infotxt ul{margin:0 0 0 16px;padding:0}#popup_pare_new ul{margin:0 0 0 2px;padding:0}#catgr .popup_txt{color:#424242;float:left;margin:0 0 0 5px}#catgr .popup_rtxt_new,#popup_pare_new .popup_rtxt_new{font-size:16px;float:left;margin:20px 0 0}#catgr .clse-n-n,.popup_nonact_new{float:right;padding:6px 16px;margin:0;margin-right:5px;}#catgr .clse-n-n{margin:0 10px 0 0}#popup_pare_new li{float:left;list-style-type:none;margin:0 0 10px;width:100%}#popup_pare_new .popup_txt{font-size:14px;float:left;width:100%;line-height:20px;margin:0 0 0 28px}#popup_pare_new label{width:auto;margin:0 10px 0 0}.pop_lft_button_skip{margin:2px 7px 10px 10px}
+
+.rsul { display: table; table-layout: fixed; width: 100%; padding:10px 0; } 
+.rsul li{display:inline-block;vertical-align:middle;text-align:left;width:50%;padding:0;margin:20px 0;box-shadow:none;float:left;} 
+.rsul li span.bxsection { border:1px solid #1274c0; padding:12px 59px; text-align: center; font-size: 16px; border-radius: 50px; background:#eff5fc; color: #1274c0;cursor: pointer; } 
+.custdiv{ display: table; margin: 0 auto; width:30%; text-align: center; } 
+.cmamt { color: #747474; font-size: 16px; font-weight: 400; padding: 10px 0; display: block;line-height:20px; } 
+.rupdiv { position: relative; display: block; } 
+.rupdiv .form-control { border: 0; border-bottom: #ccc solid 1px; border-radius: 0; padding: 6px 30px; background: transparent; font-size: 28px; color: #9e9898;width:100%; } 
+.imgurl {
+	background: url(img/rupee_symbol.png) no-repeat;width: 20px;height: 25px;position: absolute;top: 45px;left: 0;	
+}
+
+</style>
+
+<div class="popup_blck_ovrly"  ng-if="showCommonPop=='ahmdlineage'" style='z-index:9999;'>
+</div>
+<div class="popup_blck_inn " ng-if="showCommonPop=='ahmdlineage'" style='z-index:99999; position: fixed; padding: 15% 10% 25% 32%; left: 0%;top: -40%;'>
+	<div class="popup_blck_inr" >
+		<div class="popup_pp_box changeCityToast" style="width:500px !important;">
+			<span class="popup_pp_title">{{commonTitle}}</span>
+			<div class="popup_pp_infotxt" style="font-size:20px;">
+				<span class="txt_outer">{{commonShowContent}}</span>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="popup_blck_ovrly"  ng-if="showCommonPop==1" style='z-index:9999;'>
+</div>
+<div class="popup_blck_inn"  ng-if="showCommonPop==1" style='z-index:99999; position: fixed; padding: 0% 10% 25% 35%; left: 0%;font-family:roboto'>
+	<div class="popup_blck_inr" >
+		<div class="popup_pp_box">
+			<a ng-click="hide_commonPopup()" class="popup_clse_spite" style="background:url('img/close.gif') no-repeat;"></a>
+			<span class="popup_pp_title">{{commonTitle}}</span>
+			<div class="popup_pp_infotxt">
+				<span class="popup_org_txt">{{commonShowContent}}</span>
+			</div>
+			
+			<div class="popup_pp_btn_wrp">
+				<a ng-click="hide_commonPopup()" class="clse-n-n popup_lft_button">OK</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="popup_blck_ovrly"  ng-if="showCommonPop=='attr_invalid'" style='z-index:9999;'>
+</div>
+<div class="popup_blck_inn"  ng-if="showCommonPop=='attr_invalid'" style='z-index:99999; position: fixed; padding: 0% 0% 0% 35%; left: 0%;'>
+	<div class="popup_blck_inr" >
+		<div class="popup_pp_box" style="width:450px;">
+			<a ng-click="hide_commonPopup()" class="popup_clse_spite" style="background:url('img/close.gif') no-repeat;"></a>
+			<span class="popup_pp_title">{{commonTitle}}</span>			
+			<div class="popup_pp_infotxt" >						
+				<ul  style="margin:0 0 0 0;padding:0;list-style-type: disc; !important;color:#FF6C00;">
+					<li ng-repeat="(key, value) in attr_result" style="margin: 0 0 0;width: 100%;list-style-type: disc; !important;color:#FF6C00;margin-left:5px;">					
+						<span class="popup_txt" style="font-size:14px;color:#969696;width:100%;line-height:20px;margin:0 0 0 0;word-wrap: break-word;" ng-if="key=='Serves Alcohol'">Not Supposed to Select <b>{{value}}</b> when <b>{{key}}</b> is selected as 'No'</span>
+						
+						<span class="popup_txt" style="font-size:14px;color:#969696;width:100%;line-height:20px;margin:0 0 0 0;word-wrap: break-word;" ng-if="key!='Serves Alcohol'">Not Supposed to Select <b>{{value}}</b> when <b>{{key}}</b> is selected</span>
+					</li>
+				</ul>				
+			</div>
+			<div class="popup_pp_btn_wrp">
+				<a class="clse-n-n popup_lft_button" ng-click="hide_commonPopup()" >OK</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="popup_blck_ovrly"  ng-if="showCommonPop=='attr_condition'" style='z-index:9999;'>
+</div>
+<div class="popup_blck_inn"  ng-if="showCommonPop=='attr_condition'" style='z-index:99999; position: fixed; padding: 0% 10% 25% 35%; left: 0%;font-family:roboto'>
+	<div class="popup_blck_inr" >
+		<div class="popup_pp_box" style="width:450px;">
+			<a ng-click="hide_commonPopup()" class="popup_clse_spite" style="background:url('img/close.gif') no-repeat;"></a>
+			<span class="popup_pp_title">{{commonTitle}}</span>
+			<div class="popup_pp_infotxt">
+				<span class="popup_org_txt">{{commonShowContent}}</span>
+			</div>
+			
+			<div class="popup_pp_btn_wrp">
+				<a ng-click="submit_attrs()" class="clse-n-n popup_lft_button">OK, I agree</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="popup_blck_ovrly"  ng-if="showCommonPop=='multi_grp1'" style='z-index:9999;'>
+</div>
+<div class="popup_blck_inn"  ng-if="showCommonPop=='multi_grp1'" style='z-index:99999; position: fixed; padding: 15% 10% 25% 35%; left: 0%;'>
+	<div class="popup_blck_inr_multi_grp1" style="width:370px;height:100%;">
+		<div class="popup_pp_box">
+			<a ng-click="hide_commonPopup()" class="popup_clse_spite" style="background:url('img/close.gif') no-repeat;"></a>
+			<span class="popup_pp_title">{{commonTitle}}</span>
+			<div class="popup_pp_infotxt">
+				<span class="popup_org_txt">{{commonShowContent}}</span>
+			</div>
+			
+			<div class="popup_pp_btn_wrp">
+				<a ng-click="proceed_to_demopage()" class="clse-n-n popup_lft_button">OK</a>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="popup_blck_ovrly"  ng-if="showCommonPop=='multi_grp'" style='z-index:9999;'>
+</div>
+<div class="popup_blck_inn"  ng-if="showCommonPop=='multi_grp'" style='z-index:99999; position: fixed; padding: 15% 10% 25% 35%; left: 0%;'>
+	<div class="popup_blck_inr_multi_grp" style="width:370px;height:100%;vertical-align:middle">
+		<div class="popup_pp_box">
+			<a ng-click="hide_commonPopup()" class="popup_clse_spite" style="background:url('img/close.gif') no-repeat;"></a>
+			<span class="popup_pp_title">{{commonTitle}}</span>
+			<div class="popup_pp_infotxt">
+				<span class="popup_org_txt">{{commonShowContent}}</span>
+			</div>
+			
+			<div class="popup_pp_btn_wrp">
+				<a ng-click="proceed_to_demopage()" class="clse-n-n popup_lft_button">OK</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="popup_blck_ovrly"  ng-if="showCommonPop=='tick'" style='z-index:9999;'>
+</div>
+<div class="popup_blck_inn"  ng-if="showCommonPop=='tick'" style='z-index:99999; position: fixed; padding: 15% 10% 25% 35%; left: 0%;'>
+	<div class="popup_blck_inr" >
+		<div class="popup_pp_box">
+			<a ng-click="hide_commonPopup()" class="popup_clse_spite" style="background:url('img/close.gif') no-repeat;"></a>
+			<span class="popup_pp_title">{{commonTitle}}</span>
+			<div class="popup_pp_infotxt">
+				<span class="popup_org_txt">{{commonShowContent}}</span>
+			</div>
+			
+			<div class="popup_pp_btn_wrp">
+				<a ng-click="proceed_to_demopage()" class="clse-n-n popup_lft_button">OK</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="popup_blck_ovrly"  ng-if="showCommonPop=='omni_link'" style='z-index:9999;'>
+</div>
+<div  class="popup_blck_inn" ng-if="showCommonPop=='omni_link'" style='z-index:99999;position: fixed; padding: 15% 10% 25% 35%; left: 0%;'>
+	
+	<div class="popup_blck_inr_omni" style="width:370px;height:100%;vertical-align:middle;">
+		<div class="popup_pp_box" >
+			<a  class="popup_clse_spite"  style="background:url('img/close.gif') no-repeat;" ng-click="hide_commonPopup()"></a>
+			<span class="popup_pp_title">You have not sent  Your Own Website  Link.</span>
+			<div class="popup_pp_infotxt">
+				<span class="popup_org_txt">Are you sure you want to proceed without sending  Your Own Website  Link ?</span>
+			</div>			
+			
+			<div class="popup_pp_btn_wrp">
+				
+				<a class="popup_nonact_new" ng-click="proceed_omni()" style="margin-left:7px;">Proceed</a>&nbsp;&nbsp;&nbsp;
+				<a class="clse-n-n"  ng-click='hide_commonPopup()' style="padding:6px 25px;font-size:14px;text-align:center;float:right;border:1px solid #ccc;text-decoration:none;color:#fff'">Cancel</a>			
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="popup_blck_ovrly"  ng-if="showCommonPop=='multiParentage'" style='z-index:9999;'>
+</div>
+<div class="popup_blck_inn"   ng-if="showCommonPop=='multiParentage'" style='z-index:99999; position: absolute; padding: 10% 10% 25% 34%; left: 0%;'>
+	<div class="popup_blck_inr_multiparentage" id="popup_pare_new" style="width:370px;height:100%;vertical-align:middle">
+		<div class='popup_pp_box' style="left:-5%">
+			<a ng-click="hide_commonPopup()" class="popup_clse_spite" style="background:url('img/close.gif') no-repeat;"></a>
+			
+			<span class="popup_pp_title" ng-if="dialogMulti == 1 || dialogMulti == 2">You cannot enter below categories as it belongs to a seperate parentage</span>
+			<span class="popup_pp_title" ng-if="dialogMulti == 3">Your Request has been sent.The category status can be seen in Requested Category Link</span>
+			<span class="popup_pp_title" ng-if="dialogMulti == 4">&nbsp;The de-selected Category/s has/have been sent for moderation&nbsp;</span>
+		
+			
+			<div ng-if="dialogMulti == 1">
+				<div class="popup_pp_infotxt" >
+						
+							<ul   style="margin:0 0 0 15px;padding:0;list-style-type: disc; !important;color:#FF6C00;">
+								<li  ng-repeat="catname in CatnameToBeModerated | splitAll:'|~|'" style="float: left;margin: 0 0 10px;width: 100%;list-style-type: disc; !important;color:#FF6C00;">
+									
+									<span class="popup_txt" style="font-size:14px;float:left;width:100%;line-height:20px;margin:0 0 0 28px;">{{catname}}</span>
+								</li>
+							</ul>
+							<span class="popup_rtxt_new">Click on Send Request, If you want above category/s to be entered in this contract.</span>
+				</div>
+				<div class="popup_pp_btn_wrp">
+					<a ng-click="sendCatsForMultiParentageMod($event)" class="popup_nonact_new">Send Request</a>
+					<a ng-click="answer('not applicable')" class="clse-n-n" style="width:92px;margin-right:5px;">Cancel</a>
+				</div>
+				
+				<div  ng-if="showLoader==0 && dataDialog.error.code	==	1">
+					No Categories Found
+				</div>
+			</div>
+	
+			<div ng-if="dialogMulti == 2"> 
+				<div class="popup_pp_infotxt" >
+						<ul   >
+							<li ng-repeat="(parentage,catdetails) in ParentageInfo">
+								<input type="radio" value="{{parentage}}" ng-model="$parent.selectedCats" id="selectedCats" name="response" style="font-weight:700;margin:12px 0 0;border:1px solid #d4dbe1;padding:10px 12px;color:#c7c7c7;margin:8px 0"/> <label for="selectedCats" ><span></span></label>{{parentage}}
+								<span class="popup_txt" style="color:black !import;">{{catdetails.catname | replace:'/\|~\|/g':','}}</span>
+							</li>
+						</ul>
+				</div>
+				<span class="popup_pp_title">Please select any one parentage (Business Segment) & click Continue to proceed</span>
+				<div class="popup_pp_btn_wrp">
+					<a ng-click="submitMultiParentage(selectedCats,$event)" class="clse-n-n" style="width:90px;">Continue</a>
+					<a ng-click="hide_commonPopup('not applicable')"  style="width:92px;margin-right:5px;" class="popup_nonact_new">Cancel</a>
+				</div>
+				<div  ng-if="showLoader==0 && dataDialog.error.code	==	1">
+					No Categories Found
+				</div>
+				
+			</div>
+	
+			<div ng-if="dialogMulti == 3">
+				<div class="popup_pp_btn_wrp">
+					<a ng-click="hide_commonPopup()" class="clse-n-n" style="width:90px;">Ok</a>
+				</div>
+			</div>
+		
+			<div ng-if="dialogMulti == 4">
+				<span class="popup_pp_title">Added Category/s</span>
+				<div class="popup_pp_infotxt" >
+						<ul>
+							<li ng-repeat="catname in multiparentAddedCat | splitAll:','">
+								<span class="popup_txt">{{catname}}</span>
+							</li>
+						</ul>
+				</div>
+				
+				<span class="popup_pp_title">Rejected Category/s</span>
+				<div class="popup_pp_infotxt" >
+						<ul>
+							<li ng-repeat="catname in multiparentRemoveCat | splitAll:','">
+								<span class="popup_txt">{{catname}}</span>
+							</li>
+						</ul>
+				</div>
+				
+				<span class="popup_pp_title">You may check the status of rejected category/s in the CCR Module</span>
+				<div class="popup_pp_btn_wrp" style="height:135px;">
+					<a ng-click="hide_commonPopup()" class="clse-n-n" style="width:90px;">Ok</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="popup_blck_ovrly"  ng-if="showCommonPop==2" style='z-index:9999;'>
+</div>
+<div class="popup_blck_inn" ng-if="showCommonPop==2" style='z-index:99999; position: fixed; padding: 15% 10% 25% 35%; left: 0%;'>
+	<div class="popup_blck_inr" >
+		<div class="popup_pp_box">
+			<a href="#" class="popup_clse_spite" style="background:url('img/close.gif') no-repeat;" ng-click="hide_commonPopup()"></a>
+			<span class="popup_pp_title">{{commonTitle}}</span>
+			<div class="popup_pp_infotxt">
+				<span class="txt_outer">{{commonShowContent}}</span>
+			</div>
+			
+			<div class="popup_pp_btn_wrp">
+				<a ng-click="hide_commonPopup()" class="clse-n-n popup_lft_button">Cancel</a>
+				<a  ng-click="proceed()" class="popup_nonact_new">Proceed</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="popup_blck_ovrly"  ng-if="showCommonPop_can_pro==1" style='z-index:99999987;'>
+</div>
+<div class="popup_blck_inn"  ng-if="showCommonPop_can_pro==1" style='z-index:99999995; position: fixed; padding: 15% 10% 25% 35%; left: 0%;'>
+	<div class="popup_blck_inr" >
+		<div class="popup_pp_box">
+			<a ng-click="hide_commonPopupBform_extra()" class="popup_clse_spite" style="background:url('img/close.gif') no-repeat;"></a>
+			<span class="popup_pp_title">{{commonTitleBform}}</span>
+			<div class="popup_pp_infotxt">
+				<span class="popup_org_txt">{{commonShowContentBform}}</span>
+			</div>
+			
+			<div class="popup_pp_btn_wrp">
+				<a ng-click="hide_commonPopupBform_extra()" class="clse-n-n popup_lft_button">OK</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="popup_blck_ovrly"  ng-if="showCommonPop=='chooseDemo'" style='z-index:9999;'>
+</div>
+<div class="popup_blck_inn"  ng-if="showCommonPop=='chooseDemo'" style='z-index:99999; position: absolute; padding: 10% 10% 25% 34%; left: 0%;'>
+	<div   style="display:table-cell; width:400px; height:100%; vertical-align:middle;">
+		<div  style="width:495px;display:inline-block; background:#FFF; position:relative;  border-radius:3px; -webkit-border-radius:3px; -moz-border-radius:3px;">
+			<a href="#" class="popup_clse_spite" ng-click="hide_commonPopup()" style="background:url('img/close.gif') no-repeat;"></a>
+			<span  style="width:100%; float:left; padding:10px 15px; border-bottom:1px solid #ccc; box-sizing:border-box; font-size:18px;color:#424242;">Demo store for your category is not available at this time.</span>
+			<div  style="width:100%; float:left; padding:15px; box-sizing:border-box; border-bottom:1px solid #ccc; font-size:14px;">
+				<span  style="color:#ff6c00;display:block">Please select any one category from below.</span>
+				
+				<div class="popup_pp_infotxt" style='width:100%;float:left;padding:15px;box-sizing:border-box;border-bottom:1px solid #ccc;font-size:14px'>
+							<ul   >
+								<li ng-repeat="(key,value) in demo_categories" >
+									<input type="radio" value="{{key}}"  ng-model="$parent.budget_option_sel" name="response" style="border:1px solid #d4dbe1;padding:10px 12px;color:#c7c7c7;margin:8px 0"/> {{value}}
+									
+								</li>
+							</ul>
+				</div>
+				<div class="popup_pp_btn_wrp">
+					<a  class="clse-n-n" style="padding:6px 25px; font-size:14px;text-align:center; float:right; background:#1273c0; border:1px solid #ccc; text-decoration:none; color:#fff;width:90px;" ng-click='sendlink(budget_option_sel,$event)'>Got It</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="popup_blck_ovrly"  ng-if="showCommonPop==101 || showCommonPop=='101'" style='z-index:9999;'>
+</div>
+<div class="popup_blck_inn"   ng-if="showCommonPop==101 || showCommonPop=='101'" style='z-index:99999; position: fixed; padding: 15% 10% 25% 35%; left: 0%;'>
+	<div class="popup_blck_inr" >
+		<div class="popup_pp_box">
+			<a ng-click="hide_commonPopup()" class="popup_clse_spite" style="background:url('img/close.gif') no-repeat;"></a>
+			<span class="popup_pp_title">{{commonTitle}}</span>			
+			<div class="popup_pp_btn_wrp">
+				<a ng-click="skipPackageVal($event)" style="margin-left:0px;margin-right:7px;margin-top:6px;margin-bottom:10px;background: #1273c0 none repeat scroll 0 0;     border: 1px solid #ccc;     color: #fff;     float: right;     font-size: 14px;     padding: 6px 29px;     text-align: center;     text-decoration: none;">Yes, I want to Skip the package postions</a>
+				<a ng-click="hide_commonPopup()" class="popup_nonact_new">No, I want to proceed with package positions</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="popup_blck_ovrly"  ng-if="showCommonPop==102 || showCommonPop=='102'" style='z-index:9999;'>
+</div>
+<div class="popup_blck_inn"   ng-if="showCommonPop==102 || showCommonPop=='102'" style='z-index:99999; position: fixed; padding: 15% 10% 25% 35%; left: 0%;'>
+	<div class="popup_blck_inr" >
+		<div class="popup_pp_box">
+			<a ng-click="hide_commonPopup()" class="popup_clse_spite" style="background:url('img/close.gif') no-repeat;"></a>
+			<span class="popup_pp_title">{{commonTitle}}</span>		
+			<div class="popup_pp_infotxt">
+				<span class="txt_outer">Enter the package amount</span>
+				<span><input required type="text" name="rate" ng-model="customMixPackageVal" numbersonly="numbersonly" autocomplete="off" style="height:30px;width:200px;"></span></span>
+				
+				<div class="errorValInv red text-center" ng-if="captchaCorrect == 1">Cannot Submit because {{errorMessage}}</div>
+			</div>	
+			
+			<div class="popup_pp_btn_wrp">
+				<a ng-click="submitCustomMixPackage_new(customMixPackageVal)" class="clse-n-n popup_lft_button">Proceed</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="popup_blck_ovrly"  ng-if="showCommonPop==103 || showCommonPop=='103'" style='z-index:9999;'>
+</div>
+<div class="popup_blck_inn"   ng-if="showCommonPop==103 || showCommonPop=='103'" style='z-index:99999; position: fixed; padding: 10% 10% 25% 25%; left: 0%;'>
+	<div class="popup_blck_inr" >
+		<div class="popup_pp_box" style="width:800px;position:fixed;left:11%;top:177px;">
+			<span class="popup_pp_title"  ng-if="companyTempInfo.errorCode == 0">Showing Existing Bidders for <b>{{catArea}}({{catPin}})</b> with <b>{{catPopup | capitalize}}</b> category</span>			
+			
+			<div style="font-size:14px;padding:15px">
+				
+				<div class="dataPinsInt" style="max-height: 415px !important;padding-left: 15px;margin-top: 56px;">
+					<div style="position:absolute;width: 92.9%;background: white;top:47px;z-index:2;" ng-if="tabNoPop != 3">
+						<div layout="row" flex  class="text-center bold">
+							<div flex="50" class="borderTakeLeft borderTop pad-top-5" style="font-size:13px !important;text-align:left;padding:2%;max-width:44%;height:35px;padding-top:5px">Companyname</div>
+							<div flex="25" class="borderTake borderTop pad-top-5 pad-bot-5" style="max-width:44%;font-size:13px !important;text-align:left;padding:2%;height:35px;padding-top:5px">Inventory Percentage</div>
+							<div flex="24" class="borderTake borderTop pad-top-5 pad-bot-5" style="font-size:13px !important;text-align:left;padding:2%;max-width:44%;height:35px;padding-top:5px">Position</div>
+						</div>
+					</div>
+					<div style="position:absolute;width: 92.9%;background: white;top:47px;z-index:2;" ng-if="tabNoPop == 3">
+						<div layout="row" flex  class="text-center bold" style="position: relative">
+							<div flex="30" class="borderTakeLeft borderTop pad-top-5" style="font-size:13px !important;text-align:left;padding:2%;max-width:44%;padding-top:5px">Companyname</div>
+							<div flex="10" class="borderTake borderTop pad-top-5 pad-bot-5" style="font-size:13px !important;text-align:center;max-width:44%;padding-top:5px">Position</div>
+							<div flex="15" class="borderTake borderTop pad-top-5 pad-bot-5" style="max-width:44%;font-size:13px !important;text-align:left;padding:2%;padding-top:5px">Cat. Budget</div>
+							<div flex="15" class="borderTake borderTop pad-top-5 pad-bot-5" style="max-width:44%;font-size:13px !important;text-align:left;padding:2%;padding-top:5px">Monthly Budget</div>
+							<div flex="15" class="borderTake borderTop pad-top-5 pad-bot-5" style="max-width:44%;font-size:13px !important;text-align:left;padding:2%;padding-top:5px">Category Taken</div>
+							<div flex="15" class="borderTake borderTop pad-top-5 pad-bot-5" style="max-width:44%;font-size:13px !important;text-align:left;padding:2%;padding-top:5px">Pincode Taken</div>
+						</div>
+					</div>
+					<div style="position: relative;top:20px" ng-if="tabNoPop != 3">
+						<div layout="row" class="bestBudgetRow" ng-repeat="(key,dataBidder) in bidArrVal">
+							<div layout="row" flex class="text-center" layout-wrap>
+								<div flex="50" class="borderTakeLeft" style="text-align:left;max-width:44%;padding:2%;">{{(sendCompNameBidData[$index] == "" || sendCompNameBidData[$index] == null) && 'Companyname Not Found' || sendCompNameBidData[$index]}} ({{dataBidder.data | split:'-':0}})</div>
+								<div flex="25" class="borderTakeLeft" style="text-align:left;max-width:44%;padding:2%;">{{(dataBidder.data | split:'-':2) *100 | setDecimal:0}}</div>
+								<div flex="24" class="borderTakeLeft" style="text-align:left;max-width:44%;padding:2%;">{{dataBidder.pos}}</div>
+							</div>
+						</div>
+					</div>
+					<div style="position: relative;top:47px" ng-if="tabNoPop == 3">  
+						<div layout="row" class="bestBudgetRow" ng-repeat="key in notSorted(bidArrVal)">
+							<div layout="row" flex class="text-center" layout-wrap> 
+								<div flex="30" class="borderTakeLeft" style="text-align:left;max-width:44%;padding:2%;">{{(bidArrVal[key].data.c == "" || bidArrVal[key].data.c == null) && 'Companyname Not Found' || bidArrVal[key].data.c}}</div>
+								<div flex="10" class="borderTakeLeft" style="text-align:left;max-width:44%;padding:2%;">{{(bidArrVal[key].pos)}}</div>
+								<div flex="15" class="borderTakeLeft" style="text-align:left;max-width:44%;padding:2%;">{{(bidArrVal[key].data.bpd == 0 && '--' || (((bidArrVal[key].data.bpd) * 365)/12)) | setDecimal:0}}</div>
+								<div flex="15" class="borderTakeLeft" style="text-align:left;max-width:44%;padding:2%;">{{(((bidArrVal[key].data.c_bpd) * 365)/12) == 0 && '--' || (((bidArrVal[key].data.c_bpd) * 365)/12) | setDecimal:0}}</div>
+								<div flex="15" class="borderTakeLeft" style="text-align:left;max-width:44%;padding:2%;">{{(bidArrVal[key].data.c_c == "" || bidArrVal[key].data.c_c == null) && '--' || bidArrVal[key].data.c_c}}</div>
+								<div flex="15" class="borderTakeLeft" style="text-align:left;max-width:44%;padding:2%;">{{(bidArrVal[key].data.p_c == "" || bidArrVal[key].data.p_c == null) && '--' || bidArrVal[key].data.p_c}}</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div layout="row" layout-sm="column" layout-align="space-around" ng-if="dataExistCats.error.code	==	1">
+					No Categories Found
+				</div>
+				
+			</div>	
+			<div style="width:100%;margin-bottom:10px;text-align:center">
+				<button ng-click="hide_commonPopup()" style="padding:10px">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!--premium category check  -->
+<div class="popup_blck_ovrly"  ng-if="showCommonPop=='premium_cat_check'" style='z-index:9999;'>
+</div>
+<div class="popup_blck_inn"  ng-if="showCommonPop=='premium_cat_check'" style='z-index:99999; position: absolute; padding: 15% 10% 25% 30%; left: 0%;'>
+	<div class="popup_blck_inr_premium" style="width:370px;height:100%;vertical-align:middle">
+		<div class="popup_pp_box" style="width:500px !important;">
+			<a ng-click="hide_commonPopup()" class="popup_clse_spite" style="background:url('img/close.gif') no-repeat;"></a>
+			
+			<span class="popup_pp_title" ng-if="proceedStopFlag == 1" >Following categories are premium category. <br>Are you sure to continue?</span>
+			<span class="popup_pp_title" ng-if="proceedStopFlag == 2" >&nbsp;Following generic categories  are missing in the contract.<br>&nbsp;    Hence they will be added through the system by default.
+				<span ng-if="premium_flag == 1">&nbsp;Premium Category will go for Moderation.</span>
+			</span>
+			<span class="popup_pp_title" ng-if="proceedStopFlag == 3" >&nbsp;Received authorization letter?</span>
+			<span class="popup_pp_title" ng-if="proceedStopFlag == 4" >Following categories are tagged as restricted category. Kindly upload the following documents.</span>
+			<span class="popup_pp_title" ng-if="proceedStopFlag == 5" >&nbsp;Non-Ratable category found !!!</span>
+			<span class="popup_pp_title" ng-if="proceedStopFlag == 6" >&nbsp;Exclusive booking present in following category/s !!!</span>
+			<span class="popup_pp_title" ng-if="proceedStopFlag == 10" >&nbsp;Cuisine Price Filter Missing !!!</span>			
+			
+			<div ng-if="proceedStopFlag == 1">
+				<div class="popup_pp_infotxt" >
+					
+					<ul>
+						<li  ng-repeat="(key2,dataCheck) in PremiumTaggedCategory | splitAll:'|~|'"  style="float: left;margin: 0 0 10px;width: 100%;">
+							
+							<span class="popup_txt" style="font-size:14px;float:left;width:100%;line-height:20px;margin:0 0 0 5px;">{{dataCheck}}</span>
+						</li>
+					</ul>
+				
+				</div>
+				<div class="popup_pp_btn_wrp">
+					<a ng-click="hide_commonPopup()" class="popup_nonact_new" style="width:92px;margin-right:5px;">No</a>
+					<a ng-click="restFunctionCheck(counterProceedStop,$event,secTargetUrl)" class="clse-n-n" style="margin-right:6px !important;">Yes</a>
+					
+				</div>
+				
+<!--
+				<div  ng-if="showLoader==0 && dataExistCats.error.code	==	1">
+					No Categories Found
+				</div>
+-->
+			</div>
+			
+			<div ng-if="proceedStopFlag == 2">
+				<div class="popup_pp_infotxt" >
+					
+					<ul>
+						<li  ng-repeat="(key2,dataCheck) in RestaurantMissingCategory | splitAll:'|~|'"  style="float: left;margin: 0 0 10px;width: 100%;">
+							
+							<span class="popup_txt" style="font-size:14px;float:left;width:100%;line-height:20px;margin:0 0 0 5px;">{{dataCheck | indexReplace}}</span>
+						</li>
+					</ul>
+				
+				</div>
+				<div class="popup_pp_btn_wrp">
+					<a ng-click="hide_commonPopup()" class="popup_nonact_new" style="width:92px;margin-right:5px;">Cancel</a>
+					<a ng-click="restFunctionCheck(counterProceedStop,$event,secTargetUrl)" class="clse-n-n" style="margin-right:6px !important;">Proceed</a>
+				</div>
+				
+<!--
+				<div  ng-if="showLoader==0 && dataExistCats.error.code	==	1">
+					No Categories Found
+				</div>
+-->
+			</div>
+	
+			<div ng-if="proceedStopFlag == 3">
+				<div class="popup_pp_infotxt" >					
+					<span style="font-size: 14px;" >&nbsp;Have you received authorization letter?</span>
+				</div>
+				<div class="popup_pp_btn_wrp">
+					<a ng-click="hide_commonPopup()" class="popup_nonact_new" style="width:92px;margin-right:5px;">No</a>
+					<a ng-click="checkAuthFlag(2,$event)" class="clse-n-n" style="margin-right:6px !important;">Yes</a>
+					
+				</div>
+				
+<!--
+				<div  ng-if="showLoader==0 && dataExistCats.error.code	==	1">
+					No Categories Found
+				</div>
+-->
+			</div>
+			
+			<div ng-if="proceedStopFlag == 5">
+				<div class="popup_pp_infotxt" >
+					<span class="popup_org_txt">
+						Sorry..! This is a non-ratable category & proceeding with this will lead to  deactivation of Rating & Reviews on 	the website. 
+						<br>
+						Kindly click on CONTINUE to proceed or click on EDIT to edit category & proceed
+					</span>
+					<br>
+					<ul>
+						<li  ng-repeat="(key2,dataCheck) in PromtRatingsCategory | splitAll:'|~|'"  style="float: left;margin: 0 0 10px;width: 100%;">
+							<span class="popup_txt" style="font-size:14px;float:left;width:100%;line-height:20px;margin:0 0 0 5px;">{{dataCheck}}</span>
+						</li>
+					</ul>
+				</div>
+				<div class="popup_pp_btn_wrp">
+					<a ng-click="hide_commonPopup()" class="popup_nonact_new" style="width:92px;margin-right:5px;">Edit</a>
+					<a ng-click="restFunctionCheck(counterProceedStop,$event,secTargetUrl)" class="clse-n-n" style="margin-right:6px !important;">Continue</a>
+					
+				</div>
+				
+<!--
+				<div  ng-if="showLoader==0 && dataExistCats.error.code	==	1">
+					No Categories Found
+				</div>
+-->
+			</div>		
+			
+			<div  ng-if="proceedStopFlag == 4">
+				<div class="popup_pp_infotxt" >
+					
+					<ul>
+						<li  ng-repeat="(key2,dataCheck) in RestrictedTaggedCategory | splitAll:'|~|'"  style="float: left;margin: 0 0 10px;width: 100%;">
+							<span class="popup_txt" style="font-size:14px;float:left;width:100%;line-height:20px;margin:0 0 0 5px;">{{dataCheck}}</span>
+						</li>
+					</ul>
+					<span>Document Needed : {{DocumentList}}</span>
+				</div>
+				<div class="popup_pp_btn_wrp">
+					<a  ng-click="uploadRedirect()" class="popup_nonact_new" style="margin-right:5px;">Go For Upload</a>
+					<a ng-click="restFunctionCheck(counterProceedStop,$event,secTargetUrl)" class="clse-n-n" style="margin-right:6px !important;">Proceed Further</a>
+					
+				</div>
+				<!--<div  ng-if="showLoader==0 && dataExistCats.error.code	==	1">
+					No Categories Found
+				</div>-->
+				
+			</div>
+			<div  ng-if="proceedStopFlag == 6">
+				<div class="popup_pp_infotxt" >
+					<ul>
+						<li  ng-repeat="(key2,dataCheck) in ExclCategory | splitAll:'|~|'"  style="float: left;margin: 0 0 10px;width: 100%;">
+							<span class="popup_txt" style="font-size:14px;float:left;width:100%;line-height:20px;margin:0 0 0 5px;">{{dataCheck}}</span>
+						</li>
+					</ul>
+					<span class="popup_pp_infotxt">
+						<span style="color:#1273c0;font-weight:bold;font-size:16px;">Note : </span><br>
+						<span style="color:#1273c0;font-size:16px;">Package clients will only get presence on web/wap/app.<br>Package client name will not appear in a category search on Phone.<br>Package client will not be shared any feedback from phone/web/app.</span>
+					</span>
+				</div>
+				<div class="popup_pp_btn_wrp">
+					<a  ng-click="hide_commonPopup()" class="popup_nonact_new" style="margin-right:5px;">No</a>
+					<a ng-click="restFunctionCheck(counterProceedStop,$event,secTargetUrl)" class="clse-n-n" style="margin-right:6px !important;">Yes</a>					
+				</div>
+			</div>
+			<div  ng-if="proceedStopFlag == 7">
+				<div class="popup_pp_infotxt" >
+					<ul>
+						<li  ng-repeat="(key2,dataCheck) in _24hrsCategory | splitAll:'|~|'"  style="float: left;margin: 0 0 10px;width: 100%;">
+							<span class="popup_txt" style="font-size:14px;float:left;width:100%;line-height:20px;margin:0 0 0 5px;">{{dataCheck}}</span>
+						</li>
+					</ul>
+					<span class="popup_pp_infotxt">
+						<span style="color:#1273c0;font-weight:bold;font-size:16px;">Note : </span><br>
+						<span style="color:#1273c0;font-size:16px;">24 Hours tagged category found !!<br>Contract timmings will be changed to Open 24 hrs ! </span>
+					</span>
+				</div>
+				<div class="popup_pp_btn_wrp">
+					<a  ng-click="hide_commonPopup()" class="popup_nonact_new" style="margin-right:5px;">No</a>
+					<a ng-click="restFunctionCheck(counterProceedStop,$event,secTargetUrl)" class="clse-n-n" style="margin-right:6px !important;">Yes</a>					
+				</div>
+			</div>
+			<div  ng-if="proceedStopFlag == 8">
+				<div class="popup_pp_infotxt" >
+					<ul>
+						<li  ng-repeat="(key2,dataCheck) in cinemaHallsCategory | splitAll:'|~|'"  style="float: left;margin: 0 0 10px;width: 100%;">
+							<span class="popup_txt" style="font-size:14px;float:left;width:100%;line-height:20px;margin:0 0 0 5px;">{{dataCheck}}</span>
+						</li>
+					</ul>
+					<span class="popup_pp_infotxt">
+						<span style="color:#1273c0;font-weight:bold;font-size:16px;">Note : </span><br>
+						<span style="color:#1273c0;font-size:16px;">Cinema Hall category is found !<br>Hours of Operation will not be displayed.</span>
+					</span>
+				</div>
+				<div class="popup_pp_btn_wrp">
+					<a  ng-click="hide_commonPopup()" class="popup_nonact_new" style="margin-right:5px;">No</a>
+					<a ng-click="restFunctionCheck(counterProceedStop,$event,secTargetUrl)" class="clse-n-n" style="margin-right:6px !important;">Yes</a>					
+				</div>
+			</div>
+			<div  ng-if="proceedStopFlag == 9">
+				<div class="popup_pp_infotxt" >					
+					<span class="popup_pp_infotxt">
+						<span style="color:#1273c0;font-weight:bold;font-size:16px;">Note : Premium Approved Categories found !<br></span>						
+						<span style="color:#1273c0;font-size:16px;">Following categories are Premium Approved Categories.Are you sure you want to delete it ?.</span>
+					</span>
+					<ul>
+						<li  ng-repeat="(key2,dataCheck) in ApprovedModerateCat | splitAll:'|~|'"  style="float: left;margin: 0 0 10px;width: 100%;">
+							<span class="popup_txt" style="font-size:14px;float:left;width:100%;line-height:20px;margin:0 0 0 5px;">{{dataCheck}}</span>
+						</li>
+					</ul>
+				</div>
+				<div class="popup_pp_btn_wrp">
+					<a  ng-click="hide_commonPopup()" class="popup_nonact_new" style="margin-right:5px;">No</a>
+					<a ng-click="restFunctionCheck(counterProceedStop,$event,secTargetUrl)" class="clse-n-n" style="margin-right:6px !important;">Yes</a>					
+				</div>
+			</div>
+			
+			<div  ng-if="proceedStopFlag == 10">
+				<div class="popup_pp_infotxt" >					
+					<span class="popup_pp_infotxt" style="border-bottom:0px;">
+						<span style="color:#1273c0;font-size:16px;">Please make sure Price Filter categories have been updated for all Cuisines.</span>
+					</span>
+				</div>
+				<div class="popup_pp_btn_wrp">
+					<a ng-click="restFunctionCheck(counterProceedStop,$event,secTargetUrl)" class="clse-n-n" style="margin-right:6px !important;">OK</a>					
+				</div>
+			</div>
+						
+		</div>
+	</div>
+</div>
+
+<!-- here fr blocked cat's block_for_cat-->
+<div class="popup_blck_ovrly"  ng-if="showCommonPop=='block_for_cat'" style='z-index:9999;'>
+</div>
+<div class="popup_blck_inn"  ng-if="showCommonPop=='block_for_cat'" style='z-index:99999; position: absolute; padding: 15% 10% 25% 30%; left: 0%;'>
+	<div class="popup_blck_inr_block" style="width:370px;height:100%;vertical-align:middle">
+		<div class="popup_pp_box" style="width:500px;">
+			<a ng-click="hide_commonPopup()" class="popup_clse_spite" style="background:url('img/close.gif') no-repeat;margin:-2px -10px 2px 5px !important;"></a>
+			
+			<span class="popup_pp_title" ng-if="blockCatPop == 1" style="font-size:15px !important;">Categories tagged as “Restaurants in 5 Star Hotel” & categories under the parent of “Home Delivery Restaurants” are not allowed in single contract.</span>
+			<span class="popup_pp_title" ng-if="blockCatPop == 2" style="font-size: 16px !important;">Sorry!!  You cannot select multiple brands, please select any one brand and proceed<br>Following categories are tagged as restrict for single brand.</span>
+			<span class="popup_pp_title" ng-if="blockCatPop == 3" style="font-size: 16px !important;">Kindly select any 2 Price Range from Below Mentioned Categories.</span>
+			<span class="popup_pp_title" ng-if="blockCatPop == 4" style="font-size: 16px !important;">Landline Number is mandatory for following category/s.<br>You can proceed either by entering Landline Number or removing below category/s?</span>
+			<span class="popup_pp_title" ng-if="blockCatPop == 5" style="font-size: 16px !important;">Category is marked as exclusive hence you are not able to sell this category. Exclusive category/s is/are</span>
+			<span class="popup_pp_title" ng-if="blockCatPop == 6" style="font-size: 16px !important;">You can take only one star rating category. Star Rating Tagged category/s is/are</span>
+			<span class="popup_pp_title" ng-if="blockCatPop == 7" style="font-size: 16px !important;">&nbsp;Category tagged for chemist is not allowed with doctor / hospital tagged category/s.</span>
+			<span class="popup_pp_title" ng-if="blockCatPop == 8" style="font-size: 16px !important;">&nbsp;Category tagged for Hotel is not allowed with Restaurant tagged category/s.</span>
+			<span class="popup_pp_title" ng-if="blockCatPop == 9" style="font-size: 16px !important;">&nbsp;Category Brand <span style="font-size:25px;fon-weight:bold;">{{PizzaoutletsBrand}}</span> doesn't match with companyname.<br>&nbsp;You can proceed either by changing company name or removing below category.</span>
+			<span class="popup_pp_title" ng-if="blockCatPop == 10" style="font-size: 16px !important;">&nbsp;You are not allowed to add following Liquor Tagged category/s in dry states.<br>&nbsp;Kindly Remove below category/s to proceed.</span>
+			<span class="popup_pp_title" ng-if="blockCatPop == 11" style="font-size: 16px !important;">&nbsp;Its mandatory to select Cinema Halls category with the movie tagged categories.</span>
+			<span class="popup_pp_title" ng-if="blockCatPop == 12" style="font-size: 16px !important;">&nbsp;You can not proceed with below combination.</span>
+			<span class="popup_pp_title" ng-if="blockCatPop == 14" style="font-size: 16px !important;">&nbsp;Veterinary/Non Veterinary related categories cannot be clubbed in a contract. </span>
+			<div ng-if="blockCatPop == 1">
+				<div class="popup_pp_infotxt" >
+					<span class="popup_pp_title" style="font-size:15px !important;padding:0 3px 10px 0px !important;list-style-type: disc; !important;">Categories tagged as Restaurant in 5 Star Hotels are:</span>
+					<ul style="margin:0 0 0 15px;padding:0;list-style-type: disc; !important;color:#FF6C00;">
+						<li ng-repeat="(key2,dataCheck) in FiveStarHotelCategory | splitAll:'|~|'"  style="float: left;margin: 0 0 0 15px;width: 100%;list-style-type: disc; !important;color:#FF6C00;">
+							<span class="popup_txt" style="font-size:14px;line-height:20px;">{{dataCheck}}</span>
+						</li>	
+					</ul>
+					<span class="popup_pp_title" style="font-size:15px !important;padding:5px 3px 10px 0px !important;list-style-type: disc; !important;">Categories tagged under Home Delivery Restaurants parent are:</span>
+					<ul style="margin:0 0 0 15px;padding:0;list-style-type: disc; !important;color:#FF6C00;">
+						<li ng-repeat="(key2,dataCheck) in HomeDeliveryRestaurant | splitAll:'|~|'" style="float: left;margin: 0 0 0 15px;width: 100%;list-style-type: disc; !important;color:#FF6C00;">
+							<span class="popup_txt" style="font-size:14px;line-height:20px;" >{{dataCheck}}</span>
+						</li>
+					</ul>
+				</div>
+				<div class="popup_pp_btn_wrp">
+					<a ng-click="hide_commonPopup()" class="clse-n-n" style="width:92px;margin-right:5px;">Ok</a>
+				</div>
+				<!--<div  ng-if="showLoader==0 && dataExistCats.error.code	==	1">
+					No Categories Found
+				</div>-->
+			</div>
+			<div ng-if="blockCatPop == 2">
+				<div class="popup_pp_infotxt" >
+					<ul>
+						<li ng-repeat="(key2,dataCheck) in SingleBrandCategoryArr | splitAll:'|~|'" style="float: left;margin: 0 0 10px;width: 100%;">
+							<span class="popup_txt" style="font-size:14px;float:left;width:100%;line-height:20px;margin:0 0 0 5px;">{{dataCheck}}</span>
+						</li>
+					</ul>
+				</div>
+				<div class="popup_pp_btn_wrp">
+					<a ng-click="hide_commonPopup()" class="clse-n-n" style="width:92px;margin-right:5px;">Ok</a>
+				</div>
+				<!--<div  ng-if="showLoader==0 && dataExistCats.error.code	==	1">
+					No Categories Found
+				</div>-->
+			</div>
+			
+			<div ng-if="blockCatPop == 3">
+				<div class="popup_pp_infotxt" >
+					<ul style="margin:0 0 0 15px;padding:0;list-style-type: disc; !important;color:#FF6C00;">
+						<li ng-repeat="(key2,dataCheck) in RestPriceRangeCategory | splitAll:'|~|'"  style="float: left;margin: 0 0 0 15px;width: 100%;list-style-type: disc; !important;color:#FF6C00;">
+							<span class="popup_txt" style="font-size:16px;line-height:20px;color:black !important;">{{dataCheck}}</span>
+						</li>
+					</ul>
+				</div>
+				<div class="popup_pp_btn_wrp">
+					<a ng-click="hide_commonPopup()" class="clse-n-n" style="width:92px;margin-right:5px;">Ok</a>
+				</div>
+				<!--<div  ng-if="showLoader==0 && dataExistCats.error.code	==	1">
+					No Categories Found
+				</div>-->
+			</div>
+			
+			<div ng-if="blockCatPop == 4">
+				<div class="popup_pp_infotxt" >
+					<ul>
+						<li ng-repeat="(key2,dataCheck) in LandlineMandatoryCategory | splitAll:'|~|'" style="float: left;margin: 0 0 10px;width: 100%;">
+							<span class="popup_txt" style="font-size:16px;float:left;width:100%;line-height:20px;margin:0 0 0 5px;">{{dataCheck}}</span>
+						</li>
+					</ul>
+				</div>
+				<div class="popup_pp_btn_wrp">
+					<a ng-click="hide_commonPopup()" class="popup_nonact_new" style="width:92px;margin-right:5px;">No</a>
+					<a ng-if='moduleType != "CS"' ng-href="../business/bform.php?navibar=yes" class="clse-n-n" style="margin-right:6px !important;">Go Back to Bform</a>
+					<a ng-href="../genio-i/url_convert.php?genio-i=redirect&parentid={{parentid}}" ng-if='moduleType == "CS"' class="clse-n-n" style="margin-right:6px !important;">Go Back to Bform</a>					
+				</div>
+				<!--<div  ng-if="showLoader==0 && dataExistCats.error.code	==	1">
+					No Categories Found
+				</div>-->
+			</div>
+			
+			<div ng-if="blockCatPop == 5">
+				<div class="popup_pp_infotxt" >
+					<ul style="margin:0 0 0 15px;padding:0;list-style-type: disc; !important;color:#FF6C00;">
+						<li ng-repeat="(key2,dataCheck) in ExclusiveTaggedCategory | splitAll:'|~|'" style="float: left;margin: 0 0 0 15px;width: 100%;list-style-type: disc; !important;color:#FF6C00;">
+							<span class="popup_txt" style="font-size:14px;line-height:20px;">{{dataCheck}}</span>
+						</li>
+					</ul>
+				</div>
+				<div class="popup_pp_btn_wrp">
+					<a ng-click="hide_commonPopup()" class="clse-n-n" style="width:92px;margin-right:5px;">Ok</a>
+				</div>
+				<!--<div  ng-if="showLoader==0 && dataExistCats.error.code	==	1">
+					No Categories Found
+				</div>-->
+			</div>
+			<div ng-if="blockCatPop == 6">
+				<div class="popup_pp_infotxt" >
+					<ul style="margin:0 0 0 15px;padding:0;list-style-type: disc; !important;color:#FF6C00;">
+						<li ng-repeat="(key2,dataCheck) in StarRatingTaggedCategory | splitAll:'|~|'" style="float: left;margin: 0 0 0 15px;width: 100%;list-style-type: disc; !important;color:#FF6C00;">
+							<span class="popup_txt" style="font-size:14px;line-height:20px;">{{dataCheck}}</span>
+						</li>
+					</ul>
+				</div>
+				<div class="popup_pp_btn_wrp">
+					<a ng-click="hide_commonPopup()" class="clse-n-n" style="width:92px;margin-right:5px;">Ok</a>
+				</div>
+				
+			</div>
+			
+			<div ng-if="blockCatPop == 7">
+				<div class="popup_pp_infotxt" >					
+					<span class="popup_pp_title" style="font-size:15px !important;padding:0 3px 10px 0px !important;list-style-type: disc; !important;" ng-if="PharmTaggedCount == 1">Category tagged as Chemist is : </span>
+					<span class="popup_pp_title" style="font-size:15px !important;padding:0 3px 10px 0px !important;list-style-type: disc; !important;" ng-if="PharmTaggedCount != 1">Categories tagged as Chemist are : </span>
+					
+					<ul style="margin:0 0 0 15px;padding:0;list-style-type: disc; !important;color:#FF6C00;">
+						<li ng-repeat="(key2,dataCheck) in PharmTaggedCategory | splitAll:'|~|'"  style="float: left;margin: 0 0 0 15px;width: 100%;list-style-type: disc; !important;color:#FF6C00;">
+							<span class="popup_txt" style="font-size:14px;line-height:20px;">{{dataCheck}}</span>
+						</li>	
+					</ul>
+					<span class="popup_pp_title" style="font-size:15px !important;padding:5px 3px 10px 0px !important;list-style-type: disc; !important;"  ng-if="DocHospTaggedCount == 1">Category tagged as Doctor / Hospital is : </span>
+					<span class="popup_pp_title" style="font-size:15px !important;padding:5px 3px 10px 0px !important;list-style-type: disc; !important;" ng-if="DocHospTaggedCount != 1">Categories tagged as Doctor / Hospital are :</span>
+				
+					<ul style="margin:0 0 0 15px;padding:0;list-style-type: disc; !important;color:#FF6C00;">
+						<li ng-repeat="(key2,dataCheck) in DocHospTaggedCategory | splitAll:'|~|'"  style="float: left;margin: 0 0 0 15px;width: 100%;list-style-type: disc; !important;color:#FF6C00;">
+							<span class="popup_txt" style="font-size:14px;line-height:20px;">{{dataCheck}}</span>
+						</li>
+					</ul>
+				</div>
+				<div class="popup_pp_btn_wrp">
+					<a ng-click="hide_commonPopup()" class="clse-n-n" style="width:92px;margin-right:5px;">Ok</a>
+				</div>				
+			</div>
+			
+			<div ng-if="blockCatPop == 8">
+				<div class="popup_pp_infotxt" >					
+					<span class="popup_pp_title" style="font-size:15px !important;padding:0 3px 10px 0px !important;list-style-type: disc; !important;" ng-if="HotelTaggedCount == 1">Category tagged as Hotel is :  </span>
+					<span class="popup_pp_title" style="font-size:15px !important;padding:0 3px 10px 0px !important;list-style-type: disc; !important;" ng-if="HotelTaggedCount != 1">Categories tagged as Hotel are :  </span>
+					
+					<ul style="margin:0 0 0 15px;padding:0;list-style-type: disc; !important;color:#FF6C00;">
+						<li ng-repeat="(key2,dataCheck) in HotelTaggedCategory | splitAll:'|~|'"  style="float: left;margin: 0 0 0 15px;width: 100%;list-style-type: disc; !important;color:#FF6C00;">
+							<span class="popup_txt" style="font-size:14px;line-height:20px;">{{dataCheck}}</span>
+						</li>	
+					</ul>
+					<span class="popup_pp_title" style="font-size:15px !important;padding:5px 3px 10px 0px !important;list-style-type: disc; !important;"  ng-if="RestTaggedCount == 1">Category tagged as Restaurant is : </span>
+					<span class="popup_pp_title" style="font-size:15px !important;padding:5px 3px 10px 0px !important;list-style-type: disc; !important;" ng-if="RestTaggedCount == 1">Categories tagged as Restaurant are :</span>
+				
+					<ul style="margin:0 0 0 15px;padding:0;list-style-type: disc; !important;color:#FF6C00;">
+						<li ng-repeat="(key2,dataCheck) in RestTaggedCategory | splitAll:'|~|'"  style="float: left;margin: 0 0 0 15px;width: 100%;list-style-type: disc; !important;color:#FF6C00;">
+							<span class="popup_txt" style="font-size:14px;line-height:20px;">{{dataCheck}}</span>
+						</li>
+					</ul>
+				</div>
+				<div class="popup_pp_btn_wrp">
+					<a ng-click="hide_commonPopup()" class="clse-n-n" style="width:92px;margin-right:5px;">Ok</a>
+				</div>				
+			</div>
+			<div ng-if="blockCatPop == 9">
+				<div class="popup_pp_infotxt" >
+					<ul>
+						<li style="float: left;margin: 0 0 10px;width: 100%;">
+							<span class="popup_txt" style="font-size:16px;float:left;width:100%;line-height:20px;margin:0 0 0 5px;">{{PizzaoutletsCategory}}</span>
+						</li>
+					</ul>
+				</div>
+				<div class="popup_pp_btn_wrp">
+					<a ng-click="hide_commonPopup()" class="popup_nonact_new" style="width:92px;margin-right:5px;">Ok</a>
+					<a ng-if='moduleType != "CS"' ng-href="../business/bform.php?navibar=yes" class="clse-n-n" style="margin-right:6px !important;">Go Back to Bform</a>
+					<a ng-href="../genio-i/url_convert.php?genio-i=redirect&parentid={{parentid}}" ng-if='moduleType == "CS"' class="clse-n-n" style="margin-right:6px !important;">Go Back to Bform</a>					
+				</div>
+			</div>
+			
+			<div ng-if="blockCatPop == 10">
+				<div class="popup_pp_infotxt" >
+					<ul>
+						<li ng-repeat="(key2,dataCheck) in drySateRestCategory | splitAll:'|~|'" style="float: left;margin: 0 0 10px;width: 100%;">
+							<span class="popup_txt" style="font-size:14px;float:left;width:100%;line-height:20px;margin:0 0 0 5px;">{{dataCheck}}</span>
+						</li>
+					</ul>
+				</div>
+				<div class="popup_pp_btn_wrp">
+					<a ng-click="hide_commonPopup()" class="clse-n-n" style="width:92px;margin-right:5px;">Ok</a>
+				</div>
+			</div>
+			
+			<div ng-if="blockCatPop == 11">
+				<div class="popup_pp_infotxt" >
+					<ul>
+						<li ng-repeat="(key2,dataCheck) in moviesTaggedCategory | splitAll:'|~|'" style="float: left;margin: 0 0 10px;width: 100%;">
+							<span class="popup_txt" style="font-size:14px;float:left;width:100%;line-height:20px;margin:0 0 0 5px;">{{dataCheck}}</span>
+						</li>
+					</ul>
+				</div>
+				<div class="popup_pp_btn_wrp">
+					<a ng-click="hide_commonPopup()" class="clse-n-n" style="width:92px;margin-right:5px;">Ok</a>
+				</div>
+			</div>
+			
+			<div ng-if="blockCatPop == 12">
+				<div class="popup_pp_infotxt" >
+					<ul>
+						<li ng-repeat="(key2,dataCheck) in restTaggedPriceCombo | splitAll:'|~|'" style="float: left;margin: 0 0 10px;width: 100%;">
+							<span class="popup_txt" style="font-size:14px;float:left;width:100%;line-height:20px;margin:0 0 0 5px;">{{dataCheck}}</span>
+						</li>
+					</ul>
+				</div>
+				<div class="popup_pp_btn_wrp">
+					<a ng-click="hide_commonPopup()" class="clse-n-n" style="width:92px;margin-right:5px;">Ok</a>
+				</div>
+			</div>
+			<div ng-if="blockCatPop == 13">
+				<div class="popup_pp_infotxt" >
+					<span class="popup_pp_title" style="font-size:15px !important;padding:0 3px 10px 0px !important;list-style-type: disc; !important;margin-bottom: 8px !important;" >Pure Veg and Non Veg Category restriction. </span>					
+					<span style="font-size:15px !important;padding:0 3px 10px 0px !important;list-style-type: disc; !important;" ng-if="NonVegCategoryCount == 1">Category tagged as Non Vegetarian is :  </span>
+					<span style="font-size:15px !important;padding:0 3px 10px 0px !important;list-style-type: disc; !important;" ng-if="NonVegCategoryCount != 1">Categories tagged as Non Vegetarian are :  </span>
+					<ul style="margin:0 0 0 15px;padding:0;list-style-type: disc; !important;color:#FF6C00;">
+						<li ng-repeat="(key2,dataCheck) in NonVegCategory | splitAll:'|~|'"  style="float: left;margin: 0 0 0 15px;width: 100%;list-style-type: disc; !important;color:#FF6C00;">
+							<span class="popup_txt" style="font-size:14px;line-height:20px;">{{dataCheck}}</span>
+						</li>	
+					</ul>
+					<span style="font-size:15px !important;padding:5px 3px 10px 0px !important;list-style-type: disc; !important;"  ng-if="PureVegCategoryCount == 1">Category tagged as Pure Vegetarian is : </span>
+					<span style="font-size:15px !important;padding:5px 3px 10px 0px !important;list-style-type: disc; !important;" ng-if="PureVegCategoryCount != 1">Categories tagged as Pure Vegetarian are :</span>
+					<ul style="margin:0 0 0 15px;padding:0;list-style-type: disc; !important;color:#FF6C00;">
+						<li ng-repeat="(key2,dataCheck) in PureVegCategory | splitAll:'|~|'"  style="float: left;margin: 0 0 0 15px;width: 100%;list-style-type: disc; !important;color:#FF6C00;">
+							<span class="popup_txt" style="font-size:14px;line-height:20px;">{{dataCheck}}</span>
+						</li>
+					</ul>
+				</div>
+				<div class="popup_pp_btn_wrp">
+					<a ng-click="hide_commonPopup()" class="clse-n-n" style="width:92px;margin-right:5px;">Ok</a>
+				</div>				
+			</div>
+			
+			<div ng-if="blockCatPop == 14">
+				<div class="popup_pp_infotxt" >
+					<ul>
+						<li ng-repeat="(key2,dataCheck) in vetNotVetTaggedCategory | splitAll:'|~|'" style="float: left;margin: 0 0 10px;width: 100%;">
+							<span class="popup_txt" style="font-size:14px;float:left;width:100%;line-height:20px;margin:0 0 0 5px;">{{dataCheck}}</span>
+						</li>
+					</ul>
+				</div>
+				<div class="popup_pp_btn_wrp">
+					<a ng-click="hide_commonPopup()" class="clse-n-n" style="width:92px;margin-right:5px;">Ok</a>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+</div>
+
+
+<div class="popup_blck_ovrly"  ng-if="showCommonPop=='combo_confirm'" style='z-index:9999;'>
+</div>
+<div class="popup_blck_inn"  ng-if="showCommonPop=='combo_confirm'" style='z-index:99999; position: fixed; padding: 0% 10% 25% 35%; left: 0%;font-family:roboto'>
+	<div class="popup_blck_inr" >
+		<div class="popup_pp_box" style="width:405px">
+			<a ng-click="hide_commonPopup()" class="popup_clse_spite" style="background:url('img/close.gif') no-repeat;"></a>
+			<span class="popup_pp_title">Additional Offer</span>
+			<div class="popup_pp_infotxt">
+				<span class="popup_org_txt">Do you want to claim FREE Website & Mobile Site in additional offer?</span>
+				<br>
+				<span class="popup_org_txt" style="color:#bab8b8">Note:This is a free website along with the selected campaign</span>
+			</div>
+			
+			<div class="popup_pp_btn_wrp">
+				<a ng-click="combo_comfirmation(1)" class="clse-n-n popup_lft_button" style="width: 88px;">Yes</a>
+				<a ng-click="combo_comfirmation(0)" class="clse-n-n popup_lft_button" style="color: #1273c0;background: #fff;width: 88px;">No</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="popup_blck_ovrly"  ng-if="showCommonPop=='downsel_check'" style='z-index:9999;'>
+</div>
+<div class="popup_blck_inn"  ng-if="showCommonPop=='downsel_check'" style='z-index:99999; position: fixed; padding: 15% 10% 25% 35%; left: 0%;'>
+	<div class="popup_blck_inr" >
+		<div class="popup_pp_box" style="width:405px">
+<!--
+			<a ng-click="hide_commonPopup()" class="popup_clse_spite" style="background:url('img/close.gif') no-repeat;"></a>
+-->
+			<span class="popup_pp_title">Downsell</span>
+			<div class="popup_pp_infotxt">
+				<span class="popup_org_txt">{{downselVal}}</span>
+			</div>
+			<div class="popup_pp_btn_wrp">
+				<a class="clse-n-n popup_lft_button" style="color: #1273c0;background: #fff;width: 88px;" ng-click='hide_commonPopup();redirectMainDown();'>OK</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="popup_blck_ovrly"  ng-if="showCommonPop=='forget_link'" style='z-index:9999;'>
+</div>
+<div class="popup_blck_inn" ng-if="showCommonPop=='forget_link'" style='z-index:99999; position: fixed; padding: 15% 10% 25% 35%; left: 0%;top: -35%;'>
+	<div class="popup_blck_inr" >
+		<div class="popup_pp_box">
+			<a href="#" class="popup_clse_spite" style="background:url('img/close.gif') no-repeat;" ng-click="hide_commonPopup()"></a>
+			<span class="popup_pp_title">{{commonTitle}}</span>
+			<div class="popup_pp_infotxt">
+				<span class="txt_outer">{{commonShowContent}}</span>
+				<span class="txt_outer" style='color:red;'>{{commonShowContent1}}</span>
+			</div>
+			
+			<div class="popup_pp_btn_wrp">
+				<a ng-click="hide_commonPopup()" class="clse-n-n popup_lft_button">Cancel</a>
+				<a  ng-click="forget_link_proceed()"  class="popup_nonact_new">Proceed</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="popup_blck_ovrly"  ng-if="showCommonPop=='showExistCat'" style='z-index:9999;'>
+</div>
+<div class="popup_blck_inn"  ng-if="showCommonPop=='showExistCat'" style='z-index:99999; position: absolute; padding: 0% 10% 25% 35%; left: 0%;font-family:roboto'>
+	<div class="popup_blck_inr" >
+		<div class="popup_pp_box">
+			<a ng-click="hide_commonPopup()" class="popup_clse_spite" style="background:url('img/close.gif') no-repeat;"></a>			
+			
+			<span class="popup_pp_title" ng-if="companyInfoDialog.errorCode == 1" style="font-size:15px !important;">Showing Existing Categories for Company Not Found</span>
+			<span class="popup_pp_title" ng-if="companyInfoDialog.errorCode == 0" style="font-size: 16px !important;">Showing Existing Categories for {{companyInfoDialog.data.companyname | capitalize}}</span>			
+			
+			<div ng-if="dataDialog.error.code	==	0">
+				<div class="popup_pp_infotxt_exists" style="width:100%;float:left;box-sizing:border-box;border-bottom:1px solid #ccc;font-size:14px">
+					<ul style="list-style-type: none; ">
+						<li ng-repeat="(key,dataSet) in dataDialog.data" style="float: left;margin: 0 0 0 15px;width: 100%;list-style-type: none; !important;">
+							<span ng-switch="key">
+								<span ng-switch-when="LIVE" style="border-bottom:1px solid #ccc;font-size:16px;color:#965600;">Categories present in Live</span><br>
+								<span ng-switch-when="TEMP" style="border-bottom:1px solid #ccc;font-size:16px;color:#965600;">Categories Unapproved</span>
+							</span>
+							<div ng-repeat="(key2,dataCheck) in dataSet" ng-if="key !='tmperror'">
+								<span ng-switch="key2">
+									<span ng-switch-when="PAID" style="border-bottom:1px solid #ccc;font-size:16px;color:#965600;">Paid Categories</span><br>
+									<span ng-switch-when="NONPAID" style="border-bottom:1px solid #ccc;font-size:16px;color:#965600;">Nonpaid Categories</span>
+								</span>
+								<div class="md-3-line" ng-repeat="(catid,dataList) in dataCheck" style="margin-top:5px;">{{dataList}}</div>
+							</div>							
+						</li>
+					</ul>
+				</div>		
+			</div>
+			<div ng-if="dataDialog.error.code	==	1" style="box-sizing:border-box;border-bottom:1px solid #ccc;text-align: center; padding-bottom: 6%; padding-top: 16%;">
+					No Categories Found
+			</div>
+			<div class="popup_pp_btn_wrp">
+				<a ng-click="hide_commonPopup()" class="clse-n-n" style="margin-right:5px;">Ok</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="popup_blck_ovrly"  ng-if="showCommonPop=='life_time_emi'" style='z-index:9999;'>
+</div>
+<div class="popup_blck_inn"  ng-if="showCommonPop=='life_time_emi'" style='z-index:99999; position: fixed; padding: 15% 10% 25% 35%; left: 0%;'>
+	<div class="popup_blck_inr" style='display: block;'>
+		<div class="popup_pp_box" style="width:405px">
+			<span class="popup_pp_title display_emi_error">Select EMI Tenure</span> 
+			<div class="popup_pp_infotxt">
+				<table class="chrtstbl" cellspacing="0" cellpadding="0">
+					<tr>
+						<td class="hd">Select</td>
+						<td class="hd">EMI Tenure</td>
+						<td class="hd">EMI Premium%</td>
+					</tr>
+					<tr>
+						<td>
+<!--
+							<md-radio-group ng-model="life_time_arr['life_time_emi']">
+								<md-radio-button value="3-{{life_time_arr['flexi_emi_3']}}" class="md-primary" style="margin-bottom: 0;" md-ink-ripple="false"></md-radio-button>
+							</md-radio-group>	
+							height: 35px; color: #424242; padding: 6px 30px; font-size: 17px; border-width: 0px 0px 1px;   width: 86px;
+-->
+							<md-radio-group ng-model="life_time_arr['life_time_emi']">
+								<md-radio-button value="3" class="md-primary" style="margin-bottom: 0;" md-ink-ripple="false"></md-radio-button>
+							</md-radio-group>	
+						</td>
+						<td>3 months</td>
+						<td><input type="text" ng-model="life_time_arr['flexi_emi_3']" style="height: 22px; color: rgb(66, 66, 66); padding: 7px 10px; font-size: 17px; border-width: 1px 1px 1px 1px; width: 110px;border-color: rgb(66, 66, 66);" numbersonly> </td>
+					</tr>
+					<tr>
+						<td>
+							<md-radio-group ng-model="life_time_arr['life_time_emi']">
+								<md-radio-button value="6" class="md-primary" style="margin-bottom: 0;" md-ink-ripple="false"></md-radio-button>
+							</md-radio-group>
+						</td>
+						<td>6 months</td>
+						<td><input type="text" ng-model="life_time_arr['flexi_emi_6']" style="height: 22px; color: rgb(66, 66, 66); padding: 7px 10px; font-size: 17px; border-width: 1px 1px 1px 1px; width: 110px;border-color: rgb(66, 66, 66);" numbersonly></td>
+					</tr>
+					<tr>
+						<td>
+							<md-radio-group ng-model="life_time_arr['life_time_emi']">
+								<md-radio-button value="9" class="md-primary" style="margin-bottom: 0;" md-ink-ripple="false"></md-radio-button>
+							</md-radio-group></td>
+						<td>9 months</td>
+						<td><input type="text" ng-model="life_time_arr['flexi_emi_9']" style="height: 22px; color: rgb(66, 66, 66); padding: 7px 10px; font-size: 17px; border-width: 1px 1px 1px 1px; width: 110px;border-color: rgb(66, 66, 66);" numbersonly></td>
+					</tr>
+<!--
+					<tr>
+						<td>
+							<md-radio-group ng-model="life_time_arr['life_time_emi']">
+								<md-radio-button value="3-10" class="md-primary" style="margin-bottom: 0;" md-ink-ripple="false"></md-radio-button>
+							</md-radio-group>	
+						</td>
+						<td>3 months</td>
+						<td>10</td>
+					</tr>
+					<tr>
+						<td>
+							<md-radio-group ng-model="life_time_arr['life_time_emi']">
+								<md-radio-button value="6-15" class="md-primary" style="margin-bottom: 0;" md-ink-ripple="false"></md-radio-button>
+							</md-radio-group>
+						</td>
+						<td>6 months</td>
+						<td>15</td>
+					</tr>
+					<tr>
+						<td>
+							<md-radio-group ng-model="life_time_arr['life_time_emi']">
+								<md-radio-button value="9-20" class="md-primary" style="margin-bottom: 0;" md-ink-ripple="false"></md-radio-button>
+							</md-radio-group></td>
+						<td>9 months</td>
+						<td>20</td>
+					</tr>
+-->
+				</table>	
+			</div>
+			<div class="popup_pp_btn_wrp"> 
+				<a ng-click="lifetime_ecs()" class="clse-n-n popup_lft_button" style="width: 100px;">Proceed</a>
+				<a ng-click="hide_commonPopup()" class="clse-n-n popup_lft_button" style="color: #1273c0;background: #fff;width: 100px;">Cancel</a>
+			</div>
+			
+		</div>
+	</div>
+</div>
+
+<div class="popup_blck_ovrly"  ng-if="showCommonPop=='life_time_amount'" style='z-index:9999;'>
+</div>
+<div class="popup_blck_inn"  ng-if="showCommonPop=='life_time_amount'" style='z-index:99999; position: fixed; padding: 15% 10% 25% 35%; left: 0%;'>
+	<div class="popup_blck_inr" style='display: block;'>
+		<div class="popup_pp_box" style="width:405px">
+			<span class="popup_pp_title display_budget_error">Select Budegt for Lifetime Package</span> 
+			<div class="popup_pp_infotxt">
+				<ul class="rsul">
+					<li>
+						<span class="bxsection" ng-click="budgetValuesClick(display_budget_temp)">{{display_budget_temp | number:0}}</span>
+					</li>
+					<li>
+						<span class="bxsection" ng-click="budgetValuesClick(display_budget_temp + 5000)">{{display_budget_temp + 5000 | number:0}}</span>
+					</li>
+					<li>
+						<span class="bxsection" ng-click="budgetValuesClick(display_budget_temp + 10000)">{{display_budget_temp + 10000 | number:0}}</span>
+					</li>
+					<li>
+						<span class="bxsection" ng-click="budgetValuesClick(display_budget_temp + 15000)">{{display_budget_temp + 15000 | number:0}}</span>
+					</li>
+				</ul>
+				
+				<span class="custdiv">
+					<label class="cmamt">Custom Amount*</label>
+					<span class="rupdiv">
+						<i class="imgurl"></i>
+						<input type="text" placeholder="e.g 25000" ng-model="life_time_arr['flexi_bud']" style="height: 35px;color:#9e9898;padding:6px 30px;font-size: 28px;border-width: 0 0 1px;border-color: black;border-style: solid;width: 185px" numbersonly >
+					</span>
+				</span>
+			</div>
+			<div class="popup_pp_btn_wrp"> 
+				<a ng-click="submit_lifetime()" class="clse-n-n popup_lft_button" style="width: 100px;">Submit</a>
+				<a ng-click="goToPriceChart()" class="clse-n-n popup_lft_button" style="color: #1273c0;background: #fff;width: 100px;">Go Back</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+

@@ -1,0 +1,31 @@
+<md-dialog aria-label="Categories">	
+	<md-toolbar>
+		<div class="md-toolbar-tools">
+			<h2 style="color:#FFFFFF">Please select one option.</h2>
+			<span flex></span>
+		</div>
+	</md-toolbar>
+	<md-dialog-content>
+		<div>
+			<div layout="row" layout-sm="column" layout-align="space-around" ng-if="showLoader==1">
+				<md-progress-circular class="md-hue-2" md-mode="indeterminate"></md-progress-circular>
+			</div>
+			<div layout="column" layout-sm="column" layout-align="space-around">
+				<h2 style="color:#FFFFFF">Please select one option.</h2>
+				<div layout="column" layout-sm="column" layout-align="space-around">
+					<md-button style="font-weight:bold" class="md-raised md-accent" ng-click="goToAreaPage()">Fixed Position or Best Budget</md-button>
+					<md-button style="font-weight:bold" class="md-raised md-accent" ng-click="goToSelPackage()">Package</md-button>
+					<md-button style="font-weight:bold" class="md-raised md-accent" ng-click="resetCampaignAsk($event)">Reset Campaigns</md-button>
+					<div layout="row" ng-if="resetCampAskDiv == 1">
+						<p>Are you sure you want to reset the campaigns?</p>
+						<md-button style="font-weight:bold;background:#80ad02" class="md-raised md-accent" ng-click="resetCampaign($event)">Yes</md-button>
+						<md-button style="font-weight:bold;background:#D70000" class="md-raised md-accent" ng-click="closeResetDiv($event)">No</md-button>
+					</div>
+				</div>
+			</div>
+			<div layout="row" layout-sm="column" layout-align="space-around" ng-if="showLoader==0 && dataDialog.error.code	==	1">
+				No Categories Found
+			</div>
+		</div>
+	</md-dialog-content>
+</md-dialog>

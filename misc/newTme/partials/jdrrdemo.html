@@ -1,0 +1,71 @@
+<div class="right-slidbx">			
+	<div class="conboxSlide"> 
+	<div class="whtUget-bx" ng-click="slide_menu()"> What you get?  </div>
+		<ul> 
+			<li> 16 x 12 inches laminated JDRR certificate with fiber frame. </li>
+			<li> Certificate featuring Mr. Amithabh Bachchan. </li>
+			<li> Certificate with your company name, area & star ratings by JD users.</li>
+			<li> Encourages users to rate & review your services. </li>
+			<li> Delivered in 3-5 working days. </li>
+		</ul>
+	</div>
+</div>
+
+<div class="ratReviewTitl wrpr"> 
+	<div class="bxA wrpr" ng-if="companyname !=''"> Your Business "{{companyname}}" : Currently Rated {{rating}} Stars With {{review}} Reviews & Ratings  </div>
+</div>
+
+<div class="main-imgConBx wrpr text-center" id="tabs"> 
+	<div class="tabBx wrpr"> 
+		<ul class="wrpr"> 
+			<li ng-class="{'selected_demo' : show_listing == 'rating'}"> <a ng-class="{'selected_demo_title' : show_listing == 'rating'}" ng-click="show_listing = 'rating'"> Sample Certificate with Ratings </a></li>
+			<li ng-class="{'selected_demo' : show_listing == 'without'}"> <a ng-class="{'selected_demo_title' : show_listing == 'without'}" ng-click="show_listing = 'without'" > Sample Certificate without Ratings  </a> </li>
+			<li ng-class="{'selected_demo' : show_listing == 'live'}"> 	<a ng-class="{'selected_demo_title' : show_listing == 'live'}" ng-click="show_listing = 'live'"> Live Certificate At Establishments  </a> </li>
+		</ul> 
+	</div>
+	
+	<div class="con-bx wrpr" id="tabs-1" ng-if="show_listing == 'rating'"> 
+		<img src="img/banner_img/6_JDRR.jpg" />
+	</div>
+	
+	<div class="con-bx wrpr" id="tabs-2" ng-if="show_listing == 'without'"> 
+		<img src="img/banner_img/7_JDRR.jpg" />
+	</div>
+	
+	<div class="con-bx wrpr" id="tabs-3" ng-if="show_listing == 'live'"> 
+				
+		<div style='float:right;display: inline-block;padding-bottom: 13px;padding-right: 20px;'>
+			<div style='background: url("img/banner_img/jdrr_sprite.png") no-repeat scroll -11px -13px / 215px auto rgba(0, 0, 0, 0);float: left;height: 35px;width: 36px;' ng-if='show_jdrr_samaple == 1'></div>
+			<div style='background: url("img/banner_img/jdrr_sprite.png") no-repeat scroll -13px -67px / 215px auto rgba(0, 0, 0, 0);float: left;height: 59px;width: 34px;cursor:pointer' ng-if='show_jdrr_samaple != 1' ng-click="jdrr_slider_prev()"></div>
+			<div style='background: url("img/banner_img/jdrr_sprite.png") repeat-y scroll -62px -67px / 215px auto rgba(0, 0, 0, 0);cursor: pointer;float: left;height: 35px;width: 35px;' ng-if='show_jdrr_samaple != 3' ng-click='jdrr_slider_nxt()'></div>
+			<div style='background: url("img/banner_img/jdrr_sprite.png") repeat-y scroll -63px -13px / 215px auto rgba(0, 0, 0, 0);float: left;height: 35px;width: 35px;' ng-if='show_jdrr_samaple == 3'></div>
+			<span class="spn">{{show_jdrr_samaple}} of 3</span>
+		</div>
+				
+
+				
+		<div style="max-width: 100%; margin: 0px auto;width: 999px;">
+			<div style="width: 100%; overflow: hidden; position: relative; height: 743px;">
+				<ul class="bxslider" style="width: 515%; position: relative; transition-duration: 0.5s; transform: translate3d(0px, 0px, 0px);">
+					<li style="float: left; list-style: none outside none; position: relative; width: 999px;">
+						<img src="img/banner_img/8_JDRR.jpg" />
+					</li>
+					<li style="float: left; list-style: none outside none; position: relative; width: 999px;">
+						<img src="img/banner_img/9_JDRR.jpg" />
+					</li>
+					<li style="float: left; list-style: none outside none; position: relative; width: 999px;">
+						<img src="img/banner_img/10_JDRR.jpg" />
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	
+</div>
+
+<div id="posi_fx"></div>
+<div class="prnt" style="bottom: 50px;">
+	<div class="wrpr text-center butn-bx _fixed" id="btnSec"> 
+		<button class="proceed mrg-left-15" ng-click="gotobannerdemo()"> Proceed </button> 
+	</div>
+</div>

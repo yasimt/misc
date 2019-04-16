@@ -1,0 +1,133 @@
+mongo 192.168.6.239:27017/admin -u madmin -p appm@dm#@%@%12
+
+
+
+
+
+sudo net start MongoDB
+mongo 192.168.6.86:27017/admin -u madmin -p appm@dm#@%@%12
+rs.slaveOk();
+show dbs;
+use online_regis_remote_cities;
+db.tbl_companymaster_extradetails_shadow.find();
+db.tbl_companymaster_extradetails_shadow.find({parentid:'PX712.X712.140404161547.X6J8'});
+
+
+db.getSiblingDB("admin").runCommand( { getLog : "global" } )
+
+
+db.serverStatus().connections
+
+
+db.tbl_temp_intermediate.count();
+
+db.tbl_temp_intermediate.remove({parentid:'PX481.X481.170526104627.S5H8'});
+
+
+db.tbl_companymaster_extradetails_shadow.getIndexes()
+
+
+db.tbl_temp_intermediate.find({"_id": {"$nin": [ObjectId("59e4de4e0af59d3b1ea400a7"), ObjectId("59e4ddf50af59d3b1ea400a2")]}}).count()
+
+db.api_logs.find().sort({createdat:-1}).limit(3).pretty()
+
+db.tbl_temp_intermediate.remove({"parentid": {"$nin": ["P1381.1381.171016215446.U5W5", "PX731.X731.171109214815.H9H9", "P3462.3462.171016215842.C4U8"]}});
+
+
+db.tbl_business_temp_data.remove({"contractid": {"$nin": ["P1381.1381.171016215446.U5W5", "PX731.X731.171109214815.H9H9", "P3462.3462.171016215842.C4U8"]}});
+
+
+
+db.tbl_companymaster_extradetails_shadow.find({updatedBy:'9424877192',"data_city": {"$nin": ["mumbai", "delhi", "kolkata", "bangalore", "chennai", "pune", "hyderabad", "ahmedabad", "Mumbai", "Delhi", "Kolkata", "Bangalore", "Chennai", "Pune", "Hyderabad", "Ahmedabad"]}},{parentid:1,data_city:1,_id:0}).count()
+
+
+
+db.adminCommand({currentOp: true,"active" : true,"secs_running" : { "$gt" : 1 },"ns" : /^knowledge_module_new\./})
+db.killOp(30318806)
+
+db.api_logs.remove({"createdat" : {"$gte": ISODate("2018-06-01T00:00:00.000Z")}})
+
+db.tbl_companymaster_extradetails_shadow.find({updatedOn:{$gte:'2017-11-25 00:00:00',$lte:'2017-11-25 23:59:59'}}).count()
+
+db.tbl_companymaster_extradetails_shadow.find().count()
+
+
+mongo 172.29.0.186:27017 - dev
+
+
+db.tbl_business_temp_data.update({contractid:'PXX22.XX22.140911105438.T6Y2'},{$set:{catIds:'|P|302'}})
+
+db.api_logs.remove({"createdat" : {"$gte": ISODate("2018-06-01T00:00:00.000Z")}})
+
+
+
+
+
+db.tbl_companymaster_extradetails_shadow.find( { type_flag: { $exists: true } } ).count()
+
+
+db.tbl_companymaster_extradetails_shadow.find( { type_flag: { $exists: true } } ).limit(3).pretty()
+
+
+db.api_logs.find().sort({createdat:-1}).limit(3).pretty()
+
+
+
+db.tbl_companymaster_extradetails_shadow.update({}, {$unset: {words:1}} , {multi: true});
+
+
+
+
+
+db.tbl_companymaster_extradetails_shadow.find( { imteyaz: { $exists: true } } ).limit(3).pretty()
+
+
+
+db.tbl_companymaster_extradetails_shadow.update({}, {$unset: {words:1}} , {multi: true});
+
+
+
+db.tbl_companymaster_extradetails_shadow.update({parentid:'PXX22.XX22.171010121532.K2K2'},{$set:{'qamer':'456'}})
+
+
+db.tbl_companymaster_extradetails_shadow.update({}, {$unset: {imteyaz:1,qamer:1}} , {multi: true});
+
+
+
+db.tbl_companymaster_extradetails_shadow.update({}, {$unset: {type_flag:1,sub_type_flag:1,iro_type_flag:1,website_type_flag:1,type_flag_actions:1,closedown_flag:1,businesstags:1,vertical_flags:1}} , {multi: true});
+
+
+
+mongo driver version - 1.4 (6.238/17.122)
+repo - 1.2
+
+vendor/composer/composer_lock
+
+LB - 192.168.20.111
+
+APPLICATION - 6.238 / 12.163
+
+Replica Set : 192.168.6.239/ 192.168.17.122/ 192.168.6.86
+
+rs.status() - about tmedashboard
+
+
+history | grep "mongo"
+
+mongoexport --host 172.29.0.186 --db hrversion --collection deviceid --type=csv --out text.csv --fields '_id,device,entryDate,empcode,dowload,version,devicetype,data_city'
+
+
+db.changeUserPassword("genio", "genio123")
+
+
+db.updateUser("genio",{roles : ["root"],pwd: "genio123"})
+
+
+db.updateUser("genio",{roles : ["userAdminAnyDatabase","readWriteAnyDatabase"],pwd: "genio123"})
+
+
+db.updateUser({user: "genio" , pwd: "genio123", roles: [  "userAdminAnyDatabase","readWriteAnyDatabase" ]})
+
+
+db.createUser({user: "genio", pwd: "genio123", roles: [ "root" ] });
+

@@ -1,0 +1,160 @@
+<style>
+	body {
+		background: white;
+	}
+	
+	md-checkbox .md-label span{
+		margin:0
+	}
+	
+	md-checkbox .md-label {
+		    padding-left:8px ;
+	}
+
+</style>
+<md-toolbar md-scroll-shrink style="background-color:#FFFFFF;border-bottom:1px solid #CCCCCC" ng-controller="catPreviewController">
+	<div class="md-toolbar-tools">
+		<md-button class="md-icon-button" aria-label="Settings" style="margin-left:20px;" ng-click="toggleLeft()">
+			<md-icon md-svg-icon="img/ic_menu_36px.svg" style="color:#000000;"></md-icon>
+        </md-button>
+        <h2>
+			<span>Add Categories</span>
+        </h2>
+		<span flex></span>
+		<md-button class="md-fab md-warn" ng-click="showExistCat($event)" style="top:30px; font-weight:bold;">
+			Cat.
+		</md-button>
+		<div>
+			<md-button ng-if="show_cat== 'mrk' && skip_cat_step == 0" ng-click="$state.go('appHome.bformMultiCity',{parid:parentid,page:''});" class="md-fab md-primary" style="font-weight:bold;top:30px;">
+				<md-icon  md-menu-origin md-svg-icon="img/if_back-alt_134226.svg"></md-icon>
+			</md-button>
+			<md-button aria-label="Open phone interactions menu" class="md-fab md-primary" ng-click="submitRelevantCats($event)" ng-if="show_cat== 'mrk' && skip_cat_step == 0" style="top:30px; font-weight:bold;">
+				<md-icon  md-menu-origin md-svg-icon="img/ic_arrow_forward_24px.svg"></md-icon>
+			</md-button>
+			
+			<md-button ng-if="show_cat== 'mrk' && skip_cat_step == 1" ng-click="$state.go('appHome.bformMultiCity',{parid:parentid,page:''});" class="md-fab md-primary" style="font-weight:bold;top:30px;">
+				<md-icon  md-menu-origin md-svg-icon="img/if_back-alt_134226.svg"></md-icon>
+			</md-button>
+			
+			<md-button ng-if="show_cat== 'mrk' && skip_cat_step == 1" ng-click="$state.go('appHome.catpreview',{parid:parentid,page:''});" class="md-fab md-primary" style="font-weight:bold;top:30px;">
+				<md-icon  md-menu-origin md-svg-icon="img/ic_arrow_forward_24px.svg"></md-icon>
+			</md-button>
+			
+			<md-button ng-click="getmrkcat();" ng-if="show_cat!= 'mrk' && show_cat== 'pop'" class="md-fab md-primary" style="font-weight:bold;top:30px;">
+				<md-icon  md-menu-origin md-svg-icon="img/if_back-alt_134226.svg"></md-icon>
+			</md-button>
+			
+			<md-button  ng-click="getprevcat($event);" ng-if="show_cat== 'child' || show_cat== 'sib'" class="md-fab md-primary" style="font-weight:bold;top:30px;">
+				<md-icon  md-menu-origin md-svg-icon="img/if_back-alt_134226.svg"></md-icon>
+			</md-button>
+			
+			<md-button aria-label="Open phone interactions menu" class="md-fab md-primary" ng-click="submitpopularCats($event)" ng-if="show_cat!= 'mrk'" style="top:30px; font-weight:bold;">
+				<md-icon  md-menu-origin md-svg-icon="img/ic_arrow_forward_24px.svg"></md-icon>
+			</md-button>
+			
+		</div>
+		
+		<md-menu md-position-mode="target-right target">
+			<md-button aria-label="Open phone interactions menu" class="md-icon-button" ng-click="$mdOpenMenu()">
+				<md-icon md-menu-origin md-svg-icon="img/ic_more_vert_36px.svg" style="color:#000000"></md-icon>
+			</md-button>
+			<md-menu-content width="4">
+				<md-menu-item>
+					<md-button ng-click="addCcrCatMenu(1)">
+						Add New Category[CCR]
+					</md-button>
+				</md-menu-item>
+				<md-menu-divider></md-menu-divider>
+				<md-menu-item>
+					<md-button ng-click="addCcrCatMenu(2)">
+						Requested Category Status
+					</md-button>
+				</md-menu-item>
+				<md-menu-divider></md-menu-divider>
+				<md-menu-item>
+					<md-button ng-click="addCcrCatMenu(3)">
+						Multiparentage Category Status
+					</md-button>
+				</md-menu-item>
+			</md-menu-content>
+		</md-menu>
+	</div>
+</md-toolbar>
+
+<section class="mid-section wrapper windwhgt odf-service" style="min-height: 286px;font-family: 'Roboto',sans-serif !important;margin-top:100px">
+	<div class="container">
+		<div class="row mb-0 midSectionNew">
+			<div class="wrapper keySearchBx"> 
+				<span class="headBx wrapper"> Keyword Search </span>
+				<span class="srchBx wrapper"> 
+					<span class="inpBx"> <input placeholder="Search for keywords e.g. Chinese Restaurants" showcatautosuggest ng-model="autocatsearchBox.text" /> </span>  
+					<button class="srcIcnBx" ng-click="showFreeText()"> <span class="ic-srch"> </span> </button>
+				</span>
+			</div>
+			<div class="wrapper pl-0 pr-0 rest_attr" ng-if="retDataCatStr.error.code == 0 && show_cat == 'mrk'">					
+
+				<div class="heading wrapper pt-15 mb-20"> Relevant Keywords </div>
+				<ul class="attrb_li mb-20" ng-repeat="key in notSorted(retDataCatStr.results)"  ng-if="retDataCatStr.error.code == 0 && key=='MRK' && show_cat== 'mrk'"> 
+					<li class="col-4 checkboxwrapper" ng-repeat="(key2,dataCheck) in retDataCatStr.results[key]">
+						<span ng-if="key!='FLC'  && dataCheck.bfc == '0' && !exists(dataCheck.cid, selectedChecks)" ng-init="checkCats[dataCheck.cid] =  selected.indexOf(dataCheck.cid) >-1 ? true:false" ><md-checkbox ng-model="checkCats[dataCheck.cid]" ng-click="toggle(dataCheck.cid, selected)" class="md-primary" style="line-height: 14px;">{{ dataCheck.cnm }}</md-checkbox></span>
+						<div ng-if="key!='FLC' && dataCheck.bfc == '0' && exists(dataCheck.cid, selectedChecks)" style="color:green;" ng-init="checkCats[dataCheck.cid] = true"><md-checkbox ng-model="checkCats[dataCheck.cid]" ng-click="delete_pre(dataCheck.cid)" class="md-primary" style="line-height: 14px;">{{ dataCheck.cnm }}</md-checkbox></div>
+						<!--div ng-if="key!='FLC' && dataCheck.bfc == '1'" ><div class="md-container left pointer" style="margin-right:15px;margin-left:8px; margin-top:3px; margin-bottom:8px;color:red">*</div><div class="md-label">{{ dataCheck.cnm }}</div></div-->
+					</li>
+				</ul>
+				
+<!--
+				<div class="showMore wrapper pt-15" ng-click="loadMoreCats()" ng-if="category_limit < retDataCatStr.results['MRK'].length && retDataCatStr.results['MRK'].length > 12">Show More </div>
+-->
+			</div>
+			
+			<div class="wrapper pl-0 pr-0 rest_attr" ng-if="(retDataCatStr.error.code == 1 || retDataCatStr.results['MRK'].length == undefined) && show_cat == 'mrk' && selected_name != undefined ">	
+				Sorry!! No Data Found for the searched string
+			</div>
+		
+		
+			<div class="wrapper pl-0 pr-0 rest_attr" ng-if="show_cat != 'mrk' ">					
+				<div class="heading wrapper pt-15 mb-20" ng-if="show_cat == 'pop'"> Popular Keywords chosen by similar businesses </div>
+				<div class="heading wrapper pt-15 mb-20" ng-if="show_cat == 'child'">Related Keywords</div>
+				<div class="heading wrapper pt-15 mb-20" ng-if="show_cat == 'sib'"> More Related Keywords</div>
+				<ul class="attrb_li mb-20" ng-repeat="key in notSorted(populardata.data)" ng-if="populardata.error.code == 0"> 
+					<li class="col-4 checkboxwrapper" ng-repeat="(key2,dataCheck) in populardata.data.cat_details">
+						<span ng-if="dataCheck.bfc == '0' && !exists(dataCheck.cid, selectedChecks)" ng-init="checkCats[dataCheck.cid] =  selected.indexOf(dataCheck.cid) >-1 ? true:false"><md-checkbox ng-model="checkCats[dataCheck.cid]" ng-click="toggle(dataCheck.cid, selected)" class="md-primary" style="line-height: 14px;">{{ dataCheck.cnm }}</md-checkbox></span>
+						<div ng-if="dataCheck.bfc == '0' && exists(dataCheck.cid, selectedChecks)" style="color:green;" ng-init="checkCats[dataCheck.cid] = true"><md-checkbox ng-model="checkCats[dataCheck.cid]" ng-click="delete_pre(dataCheck.cid)" class="md-primary" style="line-height: 14px;">{{ dataCheck.cnm }}</md-checkbox></div>
+						<!--div ng-if="dataCheck.bfc == '1'" ><div class="md-container left pointer" style="margin-right:15px;margin-left:8px; margin-top:3px; margin-bottom:8px;color:red">*</div><div class="md-label">{{ dataCheck.cnm }}</div></div-->
+					</li>
+				</ul>
+				
+				<ul class="attrb_li mb-20" ng-if="populardata.error.code != 0">
+					Sorry!! No Data Found for the searched string
+				</ul>
+<!--
+| limitTo:category_limit
+				<div class="showMore wrapper pt-15" ng-click="loadMoreCats()" ng-if="category_limit < populardata.data.cat_details.length && populardata.data.cat_details.length > 12">Show More </div>
+-->
+			</div>
+		
+		</div>
+
+		<div style="padding-bottom:120px;"></div>
+
+<!--
+		<div  style="bottom:10px !important;position:fixed !important;background:white !important;width:73%;text-align:center;" class="container">
+			
+			<button class="button" style=" background: none repeat scroll 0 0 #f1f1f1;border: 1px solid #1274c0;border-radius: 2px;color: #1274c0;font-size: 14px;font-weight: 400;height: 35px;line-height: 35px;margin: 10px;padding: 0 !important;text-align: center;width: 160px;"  ng-click="$state.go('appHome.bform',{parid:$stateParams.parid});" ng-if="show_cat== 'mrk'">PREVIOUS</button>
+			
+			<button class="button" style=" background: none repeat scroll 0 0 #f1f1f1;border: 1px solid #1274c0;border-radius: 2px;color: #1274c0;font-size: 14px;font-weight: 400;height: 35px;line-height: 35px;margin: 10px;padding: 0 !important;text-align: center;width: 160px;"  ng-click="getmrkcat();" ng-if="show_cat== 'pop'">PREVIOUS</button>
+			
+			<button class="button" style=" background: none repeat scroll 0 0 #f1f1f1;border: 1px solid #1274c0;border-radius: 2px;color: #1274c0;font-size: 14px;font-weight: 400;height: 35px;line-height: 35px;margin: 10px;padding: 0 !important;text-align: center;width: 160px;"  ng-click="getprevcat($event);" ng-if="show_cat== 'child' || show_cat== 'sib' ">PREVIOUS</button>
+			
+			<button class="button" style=" background: none repeat scroll 0 0 #f1f1f1;border: 1px solid #1274c0;border-radius: 2px;color: #1274c0;font-size: 14px;font-weight: 400;height: 35px;line-height: 35px;margin: 10px;padding: 0 !important;text-align: center;width: 160px;"  ng-click="submitRelevantCats($event)" ng-if="show_cat== 'mrk' && skip_cat_step == 0"> NEXT </button>
+			
+			<button class="button" style=" background: none repeat scroll 0 0 #f1f1f1;border: 1px solid #1274c0;border-radius: 2px;color: #1274c0;font-size: 14px;font-weight: 400;height: 35px;line-height: 35px;margin: 10px;padding: 0 !important;text-align: center;width: 160px;"  ng-click="$state.go('appHome.catpreview',{parid:parentid,page:''});" ng-if="show_cat== 'mrk' && skip_cat_step == 1"> NEXT </button>
+			
+			<button class="button" style=" background: none repeat scroll 0 0 #f1f1f1;border: 1px solid #1274c0;border-radius: 2px;color: #1274c0;font-size: 14px;font-weight: 400;height: 35px;line-height: 35px;margin: 10px;padding: 0 !important;text-align: center;width: 160px;"  ng-click="submitpopularCats($event)" 	ng-if="show_cat!= 'mrk'"> NEXT </button>
+			
+		</div>
+-->
+			
+		
+	</div>
+</section>

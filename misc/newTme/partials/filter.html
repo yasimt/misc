@@ -1,0 +1,103 @@
+<section class="mainSection" subtract="500">
+	<section class="mainContain" ng-if="allocContracts.errorCode == 0">
+		<nav>
+			<ul class="navFilters">
+				<a ng-click="$state.go('appHome.filter',{srchparam:'compname',srchWhich:'where'})"><li class="left">All</li></a>
+				<a ui-sref="{{page}}.({srchparam:'compname',srchWhich:'where'})"><li class="left">CompanyName</li></a>
+				<a ui-sref="{{page}}.({srchparam:'mask',srchWhich:'where'})"><li class="left">Masked</li></a>
+				<a ui-sref="{{page}}.({srchparam:'freeze',srchWhich:'where'})"><li class="left">Freezed</li>
+				<li class="left">Company CallCount</li>
+				<li class="left">Created On</li>
+				<li class="left">Updated On</li>
+			</ul>
+		</nav>
+		<div class="incDiv left width100">
+			<div class="panelDiv" ng-repeat="contract in allocContracts.data">
+				<div class="contDivs left front">
+					<div class="innerContDiv">
+						<div class="compNameTile blue"><h3>{{contract.compname|capitalize}}</h3></div>
+						<div class="parentidShow arial small-font darkGrey mar-bot-5">{{contract.contractid}}</div>
+						<p class="allocTime arial small-font darkGrey" ng-if="contract.allocationType != null" ng-switch on="contract.allocationType">
+							<span ng-switch-when="25">Allocated to ME on </span>
+							<span ng-switch-when="22">Call Back on </span>
+							<span ng-switch-when="12">Company Closed on </span>
+							<span ng-switch-when="114">Discard Call on </span>
+							<span ng-switch-when="9">Do Not Disturb on </span>
+							<span ng-switch-when="24">Follow Up on </span>
+							<span ng-switch-when="115">Intrested in Justdial Services on </span>
+							<span ng-switch-when="208">Internal Call on </span>
+							<span ng-switch-when="6">Not Contactable on </span>
+							<span ng-switch-when="21">Not Intrested on </span>
+							<span ng-switch-when="98">Not in Business on </span>
+							<span ng-switch-when="63">Other City on </span>
+							<span ng-switch-when="207">Paid Client on </span>
+							<span ng-switch-when="99">Refixed Appointments on </span>
+							<span ng-switch-when="7">Wrong Number on </span>
+							<span ng-switch-when="124">Call back – Contact details verified on </span>
+							<span ng-switch-when="64">Doctors Intrested in Master App on </span>
+							<span ng-switch-when="65">Doctors Not Intrested in Master App on </span>
+							<span ng-switch-when="123">Hospital Data on </span>
+							<span ng-switch-when="116">Intrested in Master App on </span>
+							<span ng-switch-when="127">No Menu on </span>
+							<span ng-switch-when="119">Not Applicable in Master App on </span>
+							<span ng-switch-when="117">Not Interested in Master App on </span>
+							<span ng-switch-when="90">Not Providing Home Delivery on </span>
+							<span ng-switch-when="128">Not Providing Home Pickup on </span>
+							<span ng-switch-when="61">Year of Establishment Captured on </span>
+							<span ng-switch-when="62">Year of Establishment Not Captured on </span>
+							<span ng-switch-default>--</span>
+							<span>{{contract.allocationtime}}</span>
+						</p>
+						<p class="arial small-font darkGrey" ng-if="contract.exp_on != null">Likely Expiry Status: {{contract.expondo()}}</p>
+						<p class="arial small-font darkGrey" ng-if="contract.expired==1">This contract is expired</p>
+						<p class="arial small-font darkGrey" ng-if="contract.freeze==1">This contract is Freezed</p>
+						<p class="arial small-font darkGrey" ng-if="contract.mask==1">This contract is Masked</p>
+						<p class="arial small-font darkGrey" ng-if="contract.callcnt != null">Company Callcount : {{contract.callcnt}}</p>
+						<p class="arial small-font darkGrey" ng-if="contract.prevAllocTmecode == user">You are the owner of this contract</p>
+						<p class="arial small-font darkGrey" ng-if="contract.lead == 1">This is signed up for GOLD</p>
+						<p class="arial small-font darkGrey" ng-if="contract.lead == 2">This contract is GOLD Expired Contract</p>
+						<div class="slideIndi left positionAbs bottom0 width100">
+							<div class="left arrow marTop10px" ng-click="slideright($event)"><img ng-src="img/arrow-left.png" /></div>
+							<div class="upperLayerMenu left">
+								<div class="left repPop setTotContWidth">
+									<div ng-click="showCats($event,contract.contractid)" class="left repDivsIndi very-small-font darkGrey arial text-center marRt10px marTop7px"><div class="marBot10px"><img ng-src="img/more.png" /></div><div>Show Cats</div></div>
+									<a ng-href="../00_Payment_Rework/add_on_payment/mode_selection.php?parentid={{contract.contractid}}&compname={{contract.compname | urlEncode}}" target="_blank"><div class="left repDivsIndi very-small-font darkGrey arial text-center marRt10px"><div class="marBot10px"><img ng-src="img/add-on.png" /></div><div>AddOn Payment</div></div></a>
+									<a ng-href="../00_Payment_Rework/accounts/mandate_selection.php?parentid={{contract.contractid}}&compname={{contract.compname | urlEncode}}&flag=" target="_blank"><div class="left repDivsIndi very-small-font darkGrey arial text-center marRt10px"><div class="marBot10px"><h3>EM</h3></div><div>Ext. Mandate</div></div></a>
+									<div class="left repDivsIndi very-small-font darkGrey arial text-center marRt10px" ng-click="checkTrackerRep($event,contract.contractid)"><div class="marBot10px"><img ng-src="img/report-small.png" /></div><div>Tracker Report</div></div>
+									<a ng-href="../tmAlloc/companyFeedbackRep.php?contractID={{contract.contractid}}" target="_blank"><div class="left repDivsIndi very-small-font darkGrey arial text-center marRt10px"><div class="marBot10px"><img ng-src="img/phone2.png" /></div><div>Statement/Feed</div></div></a>
+								</div>
+							</div>
+							<div class="left arrow marTop10px" ng-click="slideleft($event)"><img ng-src="img/arrow-right.png" /></div>
+						</div>
+					</div>
+					<div class="catupeven coverOverlay hide colorWhite">
+						<h3 class="loadingMini hide colorWhite">Loading...</h3>
+						<a><div class="right arial" ng-click="closeOverlay($event)">X</div></a>
+						<div class="catContain" ng-if="categories.errorCode=='0'">
+							<h3 class="colorWhite">Categories for {{contract.compname|capitalize}}</h3>
+							<div class="catsShow" ng-repeat="cats in categories.data">
+								{{cats.category_name}}
+							</div>
+						</div>
+						<div class="catContain" ng-if="categories.errorCode=='1'">
+							<h3 class="colorWhite">Categories Not Present</h3>
+						</div>
+					</div>
+					<div class="trackeroverlay coverOverlay hide colorWhite">
+						<h3 class="loadingMini hide colorWhite">Loading...</h3>
+						<a><div class="right arial" ng-click="closeOverlay($event)">X</div></a>
+						<div class="catContain">
+							<div class="colorWhite text-center" ng-if="trackRepChk.ECS == 1"><a class="colorWhite" ng-href="../00_Payment_Rework/accounts/ecs_tracker_report_tme.php?parentid={{contract.contractid}}&flag=1&me_tme={{employees.hrInfo.data.empcode}}" target="_blank"><h3 class="colorWhite">Click to see report for ECS</h3></a></div>
+							<div class="colorWhite text-center" ng-if="trackRepChk.SI == 1"><a class="colorWhite" ng-href="../00_Payment_Rework/accounts/si_tracker_report_tme.php?parentid={{contract.contractid}}&flag=2&me_tme={{employees.hrInfo.data.empcode}}" target="_blank"><h3 class="colorWhite">Click to see report for SI</h3></a></div>
+							<div class="colorWhite text-center" ng-if="trackRepChk.SI == 0 && trackRepChk.ECS == 0"><h3 class="colorWhite">Track Report is not available</h3></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section ng-if="allocContracts.errorCode == 1" class="text-center">
+		<img ng-src="img/smiley_sad.png" alt="Not Contracts"/>
+		<h1>Sorry! No contracts are allocated to you.</h1>
+	</section>
+</section>

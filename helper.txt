@@ -1,0 +1,110 @@
+SELECT * FROM d_jds.queryLog_categorymaster WHERE categoryId= 10096231
+
+
+Mysql Status IDC : http://172.29.64.48:9000/website_status/mysql_processlist.php?ip=192.168.17.233
+Mysql Status Except IDC : http://172.29.0.227:800/server/serverMonitor/index.php
+Apache Server Status: http://172.29.8.217/server-status
+ 
+ 
+ 
+user_tme   u$er_tm!
+user_decs  u$er_dec$
+
+
+http://172.29.26.217:81/logs/log_error/error2018-09-26.html
+
+
+imteyazraja.jdsoftware.com/csgenio/web_services/curl_serverside.php?city_indicator=main_city&data_city=Mumbai&parentid=PXX11.XX11.180120202627.F9I3&ucode=dbbackend&validationcode=DLCLPC&uname=dbbackend
+
+
+city_indicator=remote_city&data_city=Chandigarh&parentid=PX141.X141.110702150730.I1I7&ucode=dbbackend&validationcode=DLCLPC&uname=dbbackend&insta_activate=1
+
+Sunny Sir : $unzJu5tD1@l
+
+
+
+
+http://192.168.22.103:800/logs/D_2017_05_29.txt
+
+http://192.168.6.237:800/logs/mysql_errors/jdbox_2015-11-17.txt
+
+http://192.168.17.109/process/logsDisplay/getlogs/ME/
+
+http://192.168.17.237:197/tmAlloc/eventpull.php?event=screenpop&contractid=PX231.X231.130804151022.G2Y4&callid=6001&agtid=10000760
+
+http://192.168.22.103:800/services/mongoWrapper.php?action=getalldata&post_data=1&parentid=P3482.3482.160727124321.K2M2&data_city=Remote&module=ME
+
+
+http://172.29.0.217:81/reports/exclusion_interface.php
+
+
+beta : development :  DevelopmenT
+
+http://192.168.6.238/nginx_status
+
+http://192.168.17.237:197/php_status?full&html
+
+
+http://172.29.0.217:81/contract_report/InstantWebLive/
+
+
+
+http://pravinkucha.jdsoftware.com/gred/mvc/services/company/getcards?parentid=PXX22.XX22.140911105438.T6Y2&city=Mumbai
+http://pravinkucha.jdsoftware.com/singlebox/Cron/iro_cards_generator_api.php?parentid=PXX22.XX22.171220115944.D2D2
+
+
+http://192.168.17.227/Cron/iro_cards_generator_api.php?parentid=PXX22.XX22.171220115944.D2D2
+
+http://192.168.17.227/mvc/services/company/getCards?parentid=PXX22.XX22.171220115944.D2D2&city=remote
+
+
+
+################ Mongo Installation ############################
+https://askubuntu.com/questions/739297/how-to-install-robomongo-on-ubuntu/781793
+cd /usr/local/bin/robomongo/bin
+./robomongo
+
+
+
+
+select parent_pid,entity_name,date1,parentid,count(1) as cnt from (select parent_pid,entity_name,date(insertdate) as date1,parentid from tbl_doctor_hospital_log where module = 'ME' group by entity_name,parent_pid,date(insertdate),parentid) a group by  parent_pid,entity_name,date1 having cnt >1
+
+
+http://172.29.8.197:1010/process_data.php?data_city=remote
+
+
+
+Restaurant Tagged 1) Associated National 2 ) Price Range
+
+
+
+Missing - 1 )Restaurant Category
+
+2) Generic Category - Price Range + Restaurant Category National Catid
+
+3) Head Filter - national_catid = Associated National Catid
+
+
+Price Range + Associated Nation Catid
+
+Moderate North Indian Restaurants (Rs 400 To Rs 800)
+
+select *,associate_national_catid,rest_price_range from d_jds.tbl_categorymaster_generalinfo where category_name = 'Moderate North Indian Restaurants (Rs 400 To Rs 800)'
+
+price range - moderate
+
+Associated Nation Catid - 10339065
+
+
+
+
+SELECT catid,national_catid FROM tbl_categorymaster_generalinfo WHERE category_name = 'Restaurants' LIMIT 1
+
+SELECT * FROM tbl_categorymaster_generalinfo WHERE rest_price_range = 'moderate' AND associate_national_catid = '10408936'  #Restaurant National Catid  (Moderate Restaurants (Rs 400 To Rs 800))
+
+SELECT catid,category_name,national_catid FROM tbl_categorymaster_generalinfo WHERE national_catid = '10339065' LIMIT 1 #Associate National Catid ( North Indian Restaurants)
+
+
+4 - Block Activity 5 - Others 6 - Under Merging, 7 - Junk - bfc_bifurcation_flag
+
+$bfc_bifurcation_flag_value = array('Legal' => 1 , 'Cleaning Activity' => 2, 'To Be Allowed'=>3, 'Block Activity'=>4, 'Others'=>5, 'Merging'=>6, 'Junk'=>7);

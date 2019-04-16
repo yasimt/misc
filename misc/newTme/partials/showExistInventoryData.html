@@ -1,0 +1,180 @@
+<md-toolbar md-scroll-shrink style="background-color:#C9CFAB">
+	<div class="md-toolbar-tools">
+		<md-button class="md-icon-button" aria-label="Settings" style="margin-left:20px;" ng-click="toggleLeft()">
+			<md-icon md-svg-icon="img/ic_menu_36px.svg" style="color:#000000;"></md-icon>
+        </md-button>
+		<h2>
+			<span>Existing Inventory</span>
+        </h2>
+		<span flex></span>
+		<md-button aria-label="Open phone interactions menu" class="md-fab md-primary" style="top:30px; right:40px;" ng-click="nxt_page()" ng-if="showArrowInvVal==0">
+			<md-icon md-menu-origin md-svg-icon="img/ic_arrow_forward_24px.svg"></md-icon>
+		</md-button>
+	</div>
+</md-toolbar>
+<section class="mainSection" subtract="500">
+	<section class="mainContain">
+		<div>
+			<md-content class="md-padding">
+				<div class="md-padding">
+					<div ng-if="showArrowInvVal==1"><h2 class="md-title red">You Cannot close the deal for this contract as there is still pending for approval data.</h2></div>
+					<div ng-if="exisitingInvData.results.live.error.code == 0">
+						<md-card layout="column">
+							<md-card-content>
+								<div class="md-title blue" layout="row" layout-align="space-around">Live Data</div>
+								<md-divider></md-divider>
+								<div ng-repeat="(keyMain,invData) in exisitingInvData.results.live.results" class="budgetPinDiv">
+									<div class="mar0auto width80" ng-if="invData.inv.error.code == 0">
+										<h2 class="md-title">Inventory Data</h2>
+										<div ng-repeat="(key2,dataInventoryPin) in invData.inv.results" class="insideData">
+											<md-list-item>
+												<p class="blue">{{dataInventoryPin.cnm}}</p>
+												<div class="jbdscj" ng-init="showImg($index,keyMain)"><md-icon class="md-secondary" aria-label="Chat" md-svg-icon="{{imgButAcc[keyMain][$index]}}" ng-click="clickshrink($event,$index,keyMain)"></md-icon></div>
+											</md-list-item>
+											<div class="dataPinsInt" lazyloadpinbudget style="display:none">
+												<div layout="row" flex class="text-center greyBack">
+													<div flex="20" class="borderTakeLeft borderTop pad-top-5">Pincode</div>
+													<div flex="15" class="borderTakeLeft borderTop pad-top-5">Position</div>
+													<div flex="20" class="borderTake borderTop pad-top-5 pad-bot-5">Call Count</div>
+													<div flex="20" class="borderTake borderTop pad-top-5 pad-bot-5">Budget</div>
+													<div flex="10" class="borderTake borderTop pad-top-5 pad-bot-5">Inventory</div>
+													<div flex="14" class="borderTake borderTop pad-top-5 pad-bot-5">
+														<md-checkbox aria-label="Disabled checked checkbox" ng-if="setLiveInvCheck['live'] == 1" ng-model="selectAllCheck[0][key2]"  ng-click="selectAll(key2,'live',$index,'0')" style="margin-top:0;margin-bottom:0;margin-left:5px" class="md-primary">Release</md-checkbox>
+													</div>
+												</div>
+												<div ng-repeat="key3 in notSorted(dataInventoryPin.pin_data) | limitTo:limiter" layout="row" class="bestBudgetRow">
+													<div layout="row" flex class="text-center" layout-wrap>
+														<div flex="20" class="borderTakeLeft pad-top-10">{{key3}}</div>
+														<div flex="15" class="borderTake pad-top-10">{{dataInventoryPin.pin_data[key3][0].pos == '100' && 'Package' || dataInventoryPin.pin_data[key3][0].pos}}</div>
+														<div flex="20" class="borderTake pad-top-10">{{dataInventoryPin.pin_data[key3][0].cnt_f}}</div>
+														<div flex="20" class="borderTake pad-top-10">{{dataInventoryPin.pin_data[key3][0].budget}}</div>
+														<div flex="10" class="borderTake pad-top-10">{{dataInventoryPin.pin_data[key3][0].inv * 100}} %</div>
+														<div flex="14" class="borderTake pad-top-10" layout-align="center end">
+															<md-checkbox aria-label="Disabled checked checkbox" ng-if="setLiveInvCheck['live'] == 1" ng-model="checkPins['live'][key2][$index]" ng-click="toggle(key3,key2,dataInventoryPin.pin_data[key3][0].pos,'live',0,$index)" style="margin-top:0;margin-bottom:0;margin-left:5px" class="md-primary">Release Inv.</md-checkbox>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<br>
+									<md-divider></md-divider>
+									<br>
+									<div class="mar0auto width80" ng-if="invData.bgt.error.code == 0">
+										<h2 class="md-title">Budget Data</h2>
+										<div layout="row" flex class="text-center greyBack">
+											<div flex="20" class="borderTakeLeft borderTop pad-top-5">Campaignid</div>
+											<div flex="30" class="borderTake borderTop pad-top-5 pad-bot-5">Budget</div>
+											<div flex="20" class="borderTake borderTop pad-top-5 pad-bot-5">Balance</div>
+											<div flex="10" class="borderTake borderTop pad-top-5 pad-bot-5">Version</div>
+											<div flex="9" class="borderTake borderTop pad-top-5 pad-bot-5">Expired Flag</div>
+										</div>
+										<div ng-repeat="(key,bdetls) in invData.bgt.results" ng-if="key != 'catbestbudget'" layout="row" class="bestBudgetRow">
+											<div layout="row" flex class="text-center" layout-wrap>
+												<div flex="20" class="borderTakeLeft">
+													<span>{{campaignData[bdetls.campaignid]}}</span>
+												</div>
+												<div flex="30" class="borderTake pad-top-10">{{bdetls.budget | roundVals:0}}</div>
+												<div flex="20" class="borderTake pad-top-10">{{bdetls.balance | roundVals:0}}</div>
+												<div flex="10" class="borderTake pad-top-10">{{bdetls.version}}</div>
+												<div flex="9" class="borderTake pad-top-10">{{bdetls.expired}}</div>
+											</div>
+										</div>
+									</div>
+									<md-divider></md-divider>
+								</div>
+							</md-card-content>
+						</md-card>
+					</div>
+					<div ng-if="exisitingInvData.results.shadow.error.code == 0">
+						<md-card layout="column">
+							<md-card-content>
+								<div class="md-title blue" layout="row" layout-align="space-around">Pending for Approval Data</div>
+								<md-divider></md-divider>
+								<div ng-repeat="(keyMain,invData) in exisitingInvData.results.shadow.results" class="budgetPinDiv">
+									<md-list-item>
+										<p class="blue">For Version - {{keyMain}}</p>
+									</md-list-item>
+									<div class="mar0auto width80" ng-if="invData.inv.error.code==0">
+										<div layout="row" layout-align="space-between">
+											<h2 class="md-title">Inventory Data</h2>
+											<div ng-if="invData.updatedby == usercode">
+												<md-button class="md-warn md-raised" aria-label="Settings" style="margin-left:20px;" ng-if="buttonInvRelease['shadow'][keyMain] == 1" ng-click="releaseInvBut('shadow',keyMain,$event)">
+													Release Inventory
+												</md-button>
+											</div>
+											<div ng-if="secbuttonInvRelease['shadow'][keyMain] == 1">
+												<md-button class="md-fab md-mini md-primary" aria-label="Use Android" style="top:20px;background:red;" ng-click="butInvButRelease('shadow',keyMain)">
+													<md-icon md-svg-src="img/ic_clear_24px.svg" style="color: #FFFFFF;"></md-icon>
+												</md-button>
+												<md-button class="md-fab md-mini md-primary" aria-label="Use Android" style="top:20px;background:#348CEA;" ng-click="releaseInventorySubmit($event)">
+													<md-icon md-svg-src="img/ic_arrow_forward_24px.svg" style="color: #FFFFFF;"></md-icon>
+												</md-button>
+											</div>
+										</div>
+										<div ng-repeat="(key2,dataInventoryPin) in invData.inv.results" ng-init="currIndex=$index" class="insideData">
+											<md-list-item>
+												<p class="blue">{{dataInventoryPin.cnm}}</p>
+												<div class="jbdscj" ng-init="showImg($index,keyMain)"><md-icon class="md-secondary" aria-label="Chat" md-svg-icon="{{imgButAcc[keyMain][$index]}}" ng-click="clickshrink($event,$index,keyMain)"></md-icon></div>
+											</md-list-item>
+											<div class="dataPinsInt" lazyloadpinbudget style="display:none">
+												<div layout="row" flex class="text-center greyBack">
+													<div flex="20" class="borderTakeLeft borderTop pad-top-5">Pincode</div>
+													<div flex="15" class="borderTakeLeft borderTop pad-top-5">Position</div>
+													<div flex="20" class="borderTake borderTop pad-top-5 pad-bot-5">Call Count</div>
+													<div flex="20" class="borderTake borderTop pad-top-5 pad-bot-5">Budget</div>
+													<div flex="10" class="borderTake borderTop pad-top-5 pad-bot-5">Inventory</div>
+													<div flex="14" class="borderTake borderTop pad-top-5 pad-bot-5">
+														<md-checkbox aria-label="Disabled checked checkbox" ng-if="setLiveInvCheck['shadow'][keyMain] == 1" ng-click="selectAll(key2,'shadow',$index,keyMain)" ng-model="selectAllCheck[keyMain][key2]" style="margin-top:0;margin-bottom:0;margin-left:5px" class="md-primary">Release</md-checkbox>
+													</div>
+												</div>
+												<div ng-repeat="key3 in notSorted(dataInventoryPin.pin_data) | limitTo:limiter" layout="row" class="bestBudgetRow">
+													<div layout="row" flex class="text-center" layout-wrap>
+														<div flex="20" class="borderTakeLeft">{{key3}}</div>
+														<div flex="15" class="borderTake pad-top-10">{{dataInventoryPin.pin_data[key3][0].pos == '100' && 'Package' || dataInventoryPin.pin_data[key3][0].pos}}</div>
+														<div flex="20" class="borderTake pad-top-10">{{dataInventoryPin.pin_data[key3][0].cnt_f}}</div>
+														<div flex="20" class="borderTake pad-top-10">{{dataInventoryPin.pin_data[key3][0].budget}}</div>
+														<div flex="10" class="borderTake pad-top-10">{{dataInventoryPin.pin_data[key3][0].inv * 100}} %</div>
+														<div flex="14" class="borderTake pad-top-10">
+															<md-checkbox aria-label="Disabled checked checkbox" ng-if="setLiveInvCheck['shadow'][keyMain] == 1" ng-model="checkPins['shadow'][key2][$index]" ng-click="toggle(key3,key2,dataInventoryPin.pin_data[key3][0].pos,'shadow',keyMain,$index)" style="margin-top:0;margin-bottom:0;margin-left:5px" class="md-primary">Release Inv.</md-checkbox>
+														</div>
+													</div>
+												</div>
+											</div>
+											<md-divider></md-divider>
+										</div>
+									</div>
+									<br>
+									<md-divider></md-divider>
+									<br>
+									<div class="mar0auto width80" ng-if="invData.bgt.error.code == 0">
+										<h2 class="md-title">Budget Data</h2>
+										<div layout="row" flex class="text-center greyBack">
+											<div flex="20" class="borderTakeLeft borderTop pad-top-5">Campaignid</div>
+											<div flex="30" class="borderTake borderTop pad-top-5 pad-bot-5">Budget</div>
+											<div flex="20" class="borderTake borderTop pad-top-5 pad-bot-5">Balance</div>
+											<div flex="10" class="borderTake borderTop pad-top-5 pad-bot-5">Version</div>
+											<div flex="9" class="borderTake borderTop pad-top-5 pad-bot-5">Expired Flag</div>
+										</div>
+										<div ng-repeat="(key,bdetls) in invData.bgt.results" ng-if="key != 'catbestbudget'" layout="row" class="bestBudgetRow">
+											<div layout="row" flex class="text-center" layout-wrap>
+												<div flex="20" class="borderTakeLeft">
+													<span>{{campaignData[bdetls.campaignid]}}</span>
+												</div>
+												<div flex="30" class="borderTake pad-top-10">{{bdetls.budget | roundVals:0}}</div>
+												<div flex="20" class="borderTake pad-top-10">{{bdetls.balance | roundVals:0}}</div>
+												<div flex="10" class="borderTake pad-top-10">{{bdetls.version}}</div>
+												<div flex="9" class="borderTake pad-top-10">{{bdetls.expired}}</div>
+											</div>
+										</div>
+									</div>
+									<md-divider></md-divider>
+								</div>
+							</md-card-content>
+						</md-card>
+					</div>
+				</div>
+			</md-content>
+		</div>
+	</section>
+</section>

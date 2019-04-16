@@ -1,0 +1,105 @@
+<md-dialog aria-label="Categories">	
+	<md-toolbar>
+		<div ng-if="dialogMulti == 1 || dialogMulti == 2">
+			<div class="md-toolbar-tools">
+				<h2 style="color:#FFFFFF">You cannot enter below categories as it belongs to a seperate parentage</h2>
+				<span flex></span>
+			</div>
+		</div>
+		<div ng-if="dialogMulti == 3">
+			<div class="md-toolbar-tools">
+				<h2 style="color:#FFFFFF">Your Request has been sent.The category status can be seen in Requested Category Link</h2>
+				<span flex></span>
+			</div>
+		</div>
+		<div ng-if="dialogMulti == 4">
+			<div class="md-toolbar-tools">
+				<h2 style="color:#FFFFFF">&nbsp;The de-selected Category/s has/have been sent for moderation&nbsp;</h2>
+				<span flex></span>
+			</div>
+		</div>
+	</md-toolbar>
+	<md-dialog-content>
+		<div ng-if="dialogMulti == 1">
+			<div layout="row" layout-sm="column" layout-align="space-around" ng-if="showLoader==1">
+				<md-progress-circular class="md-hue-2" md-mode="indeterminate"></md-progress-circular>
+			</div>
+			<div layout="column" layout-sm="column" layout-align="space-around">
+				<md-list style="overflow:auto; height:70%;">
+					<md-list-item ng-repeat="catname in CatnameToBeModerated | splitAll:'|~|'">
+						<p class="blue">{{catname}}</p>
+					</md-list-item>
+					<md-divider></md-divider>					
+				</md-list>
+				<div class="md-subhead marTop20px">Click on Send Request, If you want above category/s to be entered in this contract.</div>
+				<div layout="row" layout-sm="column" layout-align="space-around">
+					<md-button class="md-raised md-accent" ng-click="sendCatsForMultiParentageMod($event)">Send Request</md-button>
+					<md-button class="md-raised md-accent" ng-click="answer('not applicable')">Cancel</md-button>
+				</div>
+			</div>
+			<div layout="row" layout-sm="column" layout-align="space-around" ng-if="showLoader==0 && dataDialog.error.code	==	1">
+				No Categories Found
+			</div>
+		</div>
+		<div ng-if="dialogMulti == 2">
+			<div layout="row" layout-sm="column" layout-align="space-around" ng-if="showLoader==1">
+				<md-progress-circular class="md-hue-2" md-mode="indeterminate"></md-progress-circular>
+			</div>
+			<md-radio-group ng-model="selectedCats">
+				<md-radio-button value="{{parentage}}" class="md-primary" ng-repeat="(parentage,catdetails) in parentageInfo">
+					{{parentage}}
+					<div>{{catdetails.catname | replace:'/\|~\|/g':','}}</div>
+				</md-radio-button>
+			</md-radio-group>
+			<div >
+				
+			</div>
+			<div class="md-subhead marTop20px">Please select any one parentage (Business Segment) & click Continue to proceed</div>
+			<div layout="row" layout-sm="column" layout-align="space-around">
+				<md-button class="md-raised md-accent" ng-click="submitMultiParentage(selectedCats,$event)">Continue</md-button>
+				<md-button class="md-raised md-accent" ng-click="answer('not applicable')">Cancel</md-button>
+			</div>
+			<div layout="row" layout-sm="column" layout-align="space-around" ng-if="showLoader==0 && dataDialog.error.code	==	1">
+				No Categories Found
+			</div>
+		</div>
+		<div ng-if="dialogMulti == 3">
+			<div layout="row" layout-sm="column" layout-align="space-around" ng-if="showLoader==1">
+				<md-progress-circular class="md-hue-2" md-mode="indeterminate"></md-progress-circular>
+			</div>
+			<md-divider></md-divider>
+			<div layout="row" layout-sm="column" layout-align="space-around">
+				<md-button class="md-raised md-accent" ng-click="hide()">OK</md-button>
+			</div>
+		</div>
+		<div ng-if="dialogMulti == 4">
+			<div class="md-subhead marTop20px">Added Category/s</div>
+			<div layout="column" layout-sm="column" layout-align="space-around">
+				<md-list style="overflow:auto; height:70%;">
+					<md-list-item ng-repeat="catname in multiparentAddedCat | splitAll:','">
+						<p class="blue">{{catname}}</p>
+					</md-list-item>
+					<md-divider></md-divider>					
+				</md-list>
+			</div>
+			<div class="md-subhead marTop20px">Rejected Category/s</div>
+			<div layout="column" layout-sm="column" layout-align="space-around">
+				<md-list style="overflow:auto; height:70%;">
+					<md-list-item ng-repeat="catname in multiparentRemoveCat | splitAll:','">
+						<p class="blue">{{catname}}</p>
+					</md-list-item>
+					<md-divider></md-divider>					
+				</md-list>
+			</div>
+			<div layout="column" layout-sm="column" layout-align="space-around">
+				<div class="md-subhead marTop20px">You may check the status of rejected category/s in the CCR Module</div>
+				<div layout="row" layout-sm="column" layout-align="space-around">
+					<md-button class="md-raised md-accent" ng-click="hide()">OK</md-button>
+				</div>
+			</div>
+			
+			
+		</div>
+		
+	</md-dialog-content>
+</md-dialog>

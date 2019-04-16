@@ -1,0 +1,57 @@
+<md-toolbar md-scroll-shrink style="background-color:#FFFFFF" ng-init="onLoadCall()" ng-controller="catPreviewController">
+	<div class="md-toolbar-tools">
+		<md-button class="md-icon-button" aria-label="Settings" style="margin-left:20px;" ng-click="toggleLeft()">
+			<md-icon md-svg-icon="img/ic_menu_36px.svg" style="color:#000000;"></md-icon>
+		</md-button>
+		<h2>
+			<span>Campaign Selection</span>
+		</h2>
+		<span flex></span>
+	</div>
+</md-toolbar>
+
+
+<section class="" subtract="500">
+	<section class="mainContain">
+		<md-content class='payment_option' style="padding-right: 13%;padding-top: 70px;width: 827px;min-height: 680px;font-family: roboto">	
+			
+			<md-card>
+				<md-card-content style="padding: 30px;">
+					
+					<h4 style='color: #FF9A00;font-size: 17px;font-weight: bold;padding-bottom: 20px;'>Bonus amount equivalent to your package value will be credited to your package account depending on your payment plan. <span style='color:#1c33a1;font-weight:normal;cursor:pointer' ng-click="open_combo($event)">Click here for egs.</span></h4>	
+					
+						<h3 style='color: #545454;font-family: roboto;font-size: 20px;'>Would you like to add any of the following to your selection?</h3>
+						
+						 <md-radio-group ng-model="budget_option_sel">
+							<md-radio-button value="jdrr" class="md-primary" style='color: #424242;font-size: 15px;' ng-show="show_jdrr">JDRR</md-radio-button>
+							</md-radio-button>
+							<md-radio-button value="banner" class="md-primary" style='color: #424242;font-size: 15px;' ng-show="show_banner">Banner</md-radio-button>
+							</md-radio-button>
+							<md-radio-button value="jdrrplus" class="md-primary" style='color: #424242;font-size: 15px;' ng-show="show_banner == true && show_jdrr == true ">Jdrr Plus</md-radio-button>
+							</md-radio-button>
+							<md-radio-button value="none" class="md-primary" style='color: #424242;font-size: 15px;'>None</md-radio-button>
+							</md-radio-button>
+
+
+						</md-radio-group>
+						
+						<div style="padding-top: 42px;text-align: center;">
+
+							<input type="submit" value="Proceed" class="procced_btn" ng-click="selected_option($event)">
+							<input type="submit" value="Back" class="procced_btn" ng-click="gotobudgettype()" style="float:left">
+						</div>
+						
+				</md-card-content>
+			</md-card>
+		</md-content>	
+		
+		<div class="ftr_wrpper" style="position:relative">
+			<div class="jdrrcontainer">
+				<div class="jdrr_footer">
+						Copyright 2008-2016 Justdial.com. All Rights Reserved. <a href="#">Privacy</a> I <a href="#">Terms</a>
+				</div><!--end of jdrr_footer-->
+			</div>
+		</div>
+		
+	</section>
+</section>

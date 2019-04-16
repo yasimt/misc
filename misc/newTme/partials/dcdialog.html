@@ -1,0 +1,50 @@
+<md-dialog aria-label="dcpopup">
+	<md-dialog-content>
+		<div class="innerDCCont">
+			<h3>Dear user, Below changes will be audited by CS. <span class="red">WRONG</span> changes will invite <span class="red">Rs.1000</span> penalty. Please Tick mark to send all correct changes.</h3>
+			<div class="changedValCont">
+				<div class="oneContain left width100" ng-repeat="(i,val) in Dcdata"> 
+					<div class="greyField">{{i}}</div>
+					<div class="bottomFieldContain">
+						<table width="100%" cellpadding="0" cellspacing="0">
+							<thead>
+								<th class="borderCoverTh" width="20%">&nbsp;</th>			
+								<th class="borderCoverTh" width="30%">Old Value</th>
+								<th class="borderCoverTh" width="30%">New Value</th>
+								<th class="borderCoverTh border-rt" width="20%">For Data Correction</th>
+							</thead>
+							<tbody>
+							<tr class="rowComp" id='{{val2.keyName}}' 	ng-repeat="(i2,val2) in val" compcolumn="{{val2.keyName}}">
+								<td class="borderCoverTd bold font-small">{{val2.heading}}</td>
+								<td class="borderCoverTd oldVal font-small">{{val2.oldval}}</td>
+								<td class="borderCoverTd newVal font-small">{{val2.newval}}</td>
+								<td class="borderCoverTd font-small border-rt" width="14%">
+<!--
+									 <md-checkbox aria-label="Checkbox 1" class="md-warn checkDCBform"  ng-click="checkDisable($event)>
+									 </md-checkbox>	 
+-->
+								<input type="checkbox" class="checkDCBform" ng-click="checkDisable($event)"/></td>
+								
+							</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="butContainerDC" style="float:right" >
+					<div class="butContDC butContDCSend left"> <md-button class="md-raised md-primary" ng-click="senddc()">SEND FOR DATA CORRECTION</md-button></div>
+					<div class="butContDC butContDCIgnore left"> <md-button class="md-raised md-primary" ng-click="ignoredc()">IGNORE</md-button></div>
+				</div>
+			</div>
+		</div>
+				
+		
+	</md-dialog-content>	
+</md-dialog>
+	
+	
+	
+	
+	
+	
+	
+	

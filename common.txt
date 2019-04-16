@@ -1,0 +1,396 @@
+find . -type f -exec sed -i s/csgenio/csgenionew/gI {} \;   // to replace csgenio with csgenionew  --- Go to csgenionew directory and run this command
+
+
+wget http://172.29.0.217:81/logs/businesstagslog/PXX22.XX22.121218181044.U9V5.html.gz
+
+gunzip 15_querylog.txt.gz
+
+
+
+sftp://imteyazraja@172.29.64.64/home/imteyazraja/htdocs/csgenio/brand_name/
+
+rsync -avrp csgenio_15052014/* --exclude='.svn' csgenio/   --- Check Sum Mismatch
+
+
+svn log | sed -n '/imteyazraja/,/-----$/ p'
+
+
+svn log --limit 4
+
+svn log -l 4
+
+
+@import url(http://fonts.googleapis.com/css?family=Nunito); // To include file in css
+
+
+Disk Size : du -hsc *   / du -sh
+
+
+
+UPDATE tbl_popular_comp_10_percent a JOIN tbl_companymaster_search b ON a.parentid = b.parentid SET a.full_address = b.address WHERE b.parentid ='PXX22.XX22.001108938213.Q5Q6'
+
+
+SELECT *,TRIM(BOTH ',' FROM CONCAT(IF(VrnPaidContract&1=1,'PAID',''),",",IF(VrnPaidContract&2=2,'JDFOS','') ,",",IF(VrnPaidContract&4=4,'SF',''))) AS contract_type FROM d_jds.tbl_virtual_num_mapping_master
+
+
+
+
+
+
+sudo find . -type f -iname "*.txt"  -exec rm -fv {} \;
+
+
+find | grep "excel_reader2.php"
+
+
+grep -irl "\[Synonym\]" *
+
+grep -irl "$_SERVER\['remote_city'\]" *
+
+grep -nrl "HTTP_SERVER_VARS" * |grep -v "\.svn/*"
+
+grep -irl "function.*\(\$_REQUEST\)" *   function followed by ($_REQUEST)
+
+grep -irl "function.*\$_REQUEST" *   function followed by $_REQUEST
+
+grep -irl "MATCH.*AGAINST" * match against
+
+grep -Ril --exclude-dir=node_modules 'helper' *
+
+grep -Frnwi --after-context=5 --before-context=10 "tblContractAllocation" > output.txt
+
+ctrl+shift+m --- Screen Resolution change
+
+
+
+
+
+Alter table `d_jds`.`tbl_categorymaster_generalinfo` add index `idx_priority_flag` (`priority_flag`);
+
+
+400 - Bad request
+401 - Authorization Required
+403 - Forbidden
+404 - File Not Found
+500 - Internal Server Error
+
+svn log --verbose -r 37
+
+svn log | sed -n '/imteyazraja/,/-----$/ p' > test.txt
+
+
+
+svn co http://172.29.64.48:800/repos/CSGENIO_NEW/TRUNK/ CSGENIONEW --username=imteyazraja --password=justdial
+
+svn co http://172.29.64.48:800/repos/CSGENIO_NEW/TRUNK  .  --username=imteyazraja --password=justdial
+
+
+svn diff -r REVNO:HEAD --summarize
+svn diff -r 5:199 --summarize
+
+curl_setopt($ch, CURLOPT_USERPWD, "jdtme:!@#diTej@$786altme");
+
+
+0143669db35c134c5  http://www.nvsp.in/   011-23052123-27    18003451950
+
+
+
+INODE
+ls -1 | while read -e k; do find $k -printf "%h\n" | cut -d/ -f-2 | sort | uniq -c | sort -rn ;done | awk '{print $1}' | tr '\n' '+' | sed s:+$::g
+
+
+Remove SVN Temp File
+ find . -name .svn -exec rm -rf {} \;
+
+ find . -type d -name .svn -exec rm -rf {} \;
+
+
+PIN -3714 (Code)
+
+
+exec("curl 'http://".CURL_URL."/iro/endSearch.php?".$params."'>/dev/null &");  // Asyncronous Curl Call
+
+
+svn diff -r 12137:12198 --summarize
+
+
+update online_regis1.tbl_words_synonym set updated_by = created_by  where created_by like concat('%',updated_by,'%')
+
+
+Spark  user : imteyazr pass : imteyazr
+
+find . -type f -iname "*.php" | while read file; do sed -i s/HTTP_SERVER_VARS/_SERVER/g $file ; done
+
+
+SELECT * FROM d_jds.tbl_categorymaster_generalinfo WHERE NOT HEX(category_name) REGEXP '^([0-7][0-9A-F])*$'
+utf8_encode($category_name);
+
+
+UPDATE tbl_company_brandname_audit a LEFT JOIN tbl_companymaster_extradetails b ON a.parentid = b. parentid set a.companyname = b.companyname WHERE NOT HEX(a.companyname) REGEXP '^([0-7][0-9A-F])*$' AND  HEX(b.companyname) REGEXP '^([0-7][0-9A-F])*$'
+
+http://demo.sodhanalibrary.com/angular/material-ui/sidePanel1.html
+
+
+
+/run/user/1000/gvfs/
+
+/run/user/1000/gvfs/sftp:host=172.29.64.64,user=imteyazraja/home/imteyazraja/htdocs/
+
+/run/user/1000/gvfs/sftp:host=172.29.64.64,user=tmegeniocategory/home/tmegeniocategory/htdocs/
+
+/run/user/1000/gvfs/sftp:host=172.29.64.64,user=genio/home/genio/htdocs/
+
+
+/run/user/1000/gvfs/sftp:host=172.29.64.64,user=vishalvinodrana/home/vishalvinodrana/htdocs/
+
+/run/user/1000/gvfs/sftp:host=172.29.64.64,user=manjeetsingh/home/manjeetsingh/htdocs/
+
+/run/user/1000/gvfs/sftp:host=172.29.64.64,user=sunnyshende/home/sunnyshende/htdocs/
+
+/run/user/1000/gvfs/sftp:host=172.29.64.64,user=javedahmad/home/javedahmad/htdocs/
+
+sftp://imteyazraja@172.29.64.64/home/imteyazraja/htdocs
+
+
+/run/user/1000/gvfs/sftp:host=172.29.64.51,user=imteyazraja/home/imteyazraja/
+/run/user/1000/gvfs/sftp:host=172.29.86.26,user=imteyazraja/home/imteyazraja/
+
+
+
+http://192.168.22.103:800/services/instant_live.php?data_city=Goa&module=jda&ucode=123456&parentid=PX832.X832.140726130620.U6Y2
+
+jomerasolutionnahimantauskahumcarenahikatra
+pohladjaisasharirsonejaisamann
+
+ps aux | grep file
+
+
+http://angular-data-grid.github.io/demo/material/
+
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+
+http://192.168.17.217:811/services/instant_live.php?parentid=PX522.X522.151209174134.S9D4&data_city=Lucknow&module=CS&ucode=10000760
+
+
+
+http://192.168.17.217:81/web_services/curl_serverside.php?insta_activate=1&city_indicator=remote_city&data_city=Lucknow&parentid=PX522.X522.151209174134.S9D4&ucode=dbbackend&validationcode=DLCLPC&uname=dbbackend
+
+http://192.168.20.102:9001/web_services/getMasterTableData.php?docid=022PXX22.XX22.170321121529.B2J1&action=instantdel
+
+
+curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+sudo apt-get install nodejs
+sudo apt-get install -y nodejs
+
+sudo apt-get remove nodejs
+
+http://172.29.0.217:1010/services/setData.php?post_data=1&updatelivedata=1&data_city=ahmedabad&parentid=PXX79.XX79.180606171932.K4X5&module=ME
+
+http://172.29.0.227/mvc/services/company/getCards?parentid=PX281.X281.140726012911.U6W2&city=remote
+
+error_reporting(E_ERROR | E_PARSE);
+
+Dial Mumbai Boardline Number 022 28884060 and then Dial 9855
+
+
+delete tbl_meabsentdetails from tbl_meabsentdetails
+  inner join (
+     select max(autoid) as autoid, empcode,absent_on
+       from tbl_meabsentdetails
+      group by empcode,absent_on 
+     having count(*) > 1) duplic on duplic.empcode = tbl_meabsentdetails.empcode AND duplic.absent_on = tbl_meabsentdetails.absent_on
+  where tbl_meabsentdetails.autoid < duplic.autoid
+
+
+delete tbl_geniolite_campaignwise_budget_distribution_new from tbl_geniolite_campaignwise_budget_distribution_new
+  inner join (
+     select max(id) as temp_id, campid,actual_campaign_id,tenure,payment_mode
+       from tbl_geniolite_campaignwise_budget_distribution_new
+      group by campid,actual_campaign_id,tenure,payment_mode
+     having count(*) > 1) temp on temp.campid = tbl_geniolite_campaignwise_budget_distribution_new.campid AND temp.actual_campaign_id = tbl_geniolite_campaignwise_budget_distribution_new.actual_campaign_id AND temp.tenure = tbl_geniolite_campaignwise_budget_distribution_new.tenure AND temp.payment_mode = tbl_geniolite_campaignwise_budget_distribution_new.payment_mode  
+  where tbl_geniolite_campaignwise_budget_distribution_new.id < temp.temp_id  
+
+
+http://192.168.17.227/mvc/autosuggest/Adv_search?dcity=Munnar&scity=Munnar&pid=P4868.4868.101215133115.P6M4&mod=cs&limit=100&debug=0
+
+
+https://codepen.io/dimbslmh/full/mKfCc
+https://github.com/jamzi/Angular2Workshop-material2
+
+
+ssh justdial@172.29.87.71
+
+svn co http://172.29.64.48:800/repos/MONGO_API/TRUNK  mongo --username=manjeetsingh --password=justdial
+
+mongo 192.168.6.238:27017/admin -u madmin -p appm@dm#@%@%12
+
+search --config /etc/sphinx/sphinx_dndlist.conf '9920554189' - DNC SPHINX
+
+
+
+172.29.87.188 !mTey@Zr
+
+https://www.practo.com/bangalore/doctor/s-b-kazi-dermatologist-cosmetologist
+
+
+php-fpm   www.error.log
+
+chmod -R 777 *
+
+http://192.168.20.17:800/services/finance_display.php?parentid=PXX22.XX22.170920132030.X5K1&version=13&action=32&module=me&data_city=Mumbai&module_name=me&usercode=10000760
+
+git clone http://172.29.64.48:900/root/GENIO_LITE.git
+
+
+http://project01.krushi.26.blrsoftware.com/GENIO_LITE/genio_lite/#/
+
+http://project01.imteyazraja.26.blrsoftware.com/GENIO_LITE/genio_lite/#/
+
+http://project02.imteyazraja.26.blrsoftware.com/genio-budget/
+
+http://project01.imteyazraja.mum.jdsoftware.com/genioBudget/
+
+################ Mongo Installation ############################
+https://askubuntu.com/questions/739297/how-to-install-robomongo-on-ubuntu/781793
+cd /usr/local/bin/robomongo/bin
+./robomongo
+
+https://codepen.io/Tipue/pen/CBbna   - Center Div
+
+
+https://dba.stackexchange.com/questions/52632/difference-between-sharding-and-replication-on-mongodb
+
+
+SHOW GRANTS FOR 'USERNAME'@'localhost';
+
+
+sudo apt-get install lamp-server^
+http://www.sudo-juice.com/install-lamp-server-ubuntu/
+ls -alh
+
+
+scrum
+https://tga.justdis.com/ - taiga
+imteyazraja - username
+Generic Password
+
+
+4 - Block Activity 5 - Others 6 - Under Merging
+
+
+
+select parent_pid,entity_name,date1,parentid,count(1) as cnt from (select parent_pid,entity_name,date(insertdate) as date1,parentid from tbl_doctor_hospital_log where module = 'ME' group by entity_name,parent_pid,date(insertdate),parentid) a group by  parent_pid,entity_name,date1 having cnt >1
+
+
+
+
+select parentid,substring_index(group_concat(request_module order by updatedon),',',1) as module from web_api_log where parentid in ('P') group by parentid having module = 'DBBKND'
+
+
+sudo npm install -g n
+sudo n 8.9.0
+sudo apt-get update
+OPEN IN ANOTHER TERMINAL TO TEST
+
+
+
+sudo scp Imteyaz/Desktop/process.php justdial@172.29.87.86:
+sudo scp -r Imteyaz/Desktop/process.php justdial@172.29.87.86:
+
+
+npm cache clean --force
+
+
+
+npm init --yes
+npm install --save express
+
+
+
+substring_index(group_concat(iro_active_flag order by updatedOn desc ),',',1) as  iro_active_flag
+
+mlab - imteyazraja Ju..
+
+https://stackoverflow.com/questions/32260537/how-to-check-whether-a-document-was-inserted-or-updated-when-using-findoneandupd
+
+https://stackoverflow.com/questions/37474489/mongoose-schema-how-to-nest-objects-in-one-schema
+
+
+https://codepen.io/joshadamous/pen/yyyqJZ - Login form
+
+
+https://stackoverflow.com/questions/10645994/node-js-how-to-format-a-date-string-in-utc
+
+http://mongoosejs.com/docs/api.html#model_Model.bulkWrite
+https://stackoverflow.com/questions/37033806/getting-async-data-from-module-and-sending-it-through-a-routes-endpoint
+
+
+https://stackoverflow.com/questions/38742475/what-is-the-right-approach-to-update-many-records-in-mongodb-using-mongoose
+
+
+https://thishosting.rocks/install-java-ubuntu/
+
+
+mongoexport --host 172.29.0.186 --db hrversion --collection deviceid --type=csv --out text.csv --fields '_id,device,entryDate,empcode,dowload,version,devicetype,data_city'
+
+http://g.justdial.com/php/pen/GetBusDetail.php?docids=022PXX22.XX22.180802152306.R2J7
+
+
+ curl --data 'parentid=P5452.5452.161119143327.W4J6&data_city=jaunpur&module=TME&table={"tbl_companymaster_generalinfo_shadow":"sphinx_id,parentid,companyname,building_name,street,landmark,country,state,city,area,pincode,latitude,longitude,geocode_accuracy_level,landline,email,email_feedback,email_display,mobile,mobile_display,mobile_feedback,mobile_admin,contact_person,fax,tollfree,email,sms_scode,website,paid,othercity_number,data_city","tbl_companymaster_extradetails_shadow":"parentid,working_time_start,working_time_end,social_media_url,award,testimonial,proof_establishment,payment_type,turnover,year_establishment,updatedBy,updatedOn,landline_addinfo,mobile_addinfo,statement_flag,fb_prefered_language,catidlineage_nonpaid,tag_line,certificates,no_employee,accreditations","tbl_business_temp_data":"catIds"}'  http://192.168.20.111/api/getshadowdata
+
+
+sudo apt-get install php-mongodb
+
+sudo mongod --dbpath /var/lib/mongodb/data/
+
+justdial@BLR-SOFT-127:/etc/php/7.0/apache2$ sudo gedit php.ini 
+;extension=mongodb.so
+
+justdial@BLR-SOFT-127:/etc/php/7.0/apache2$ sudo service apache2 restart
+
+
+https://dhalsim.github.io/en/node.js/i-have-control/2015/11/13/nodejs-error-management-and-logging
+
+sudo kill `sudo lsof -t -i:5000`
+export NODE_ENV="dev"
+echo fs.inotify.max_user_watches=582222 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+
+
+
+http://172.29.8.237:977/jdboxNode/logs/sql/2018-11-03.log
+
+http://172.29.0.237:977/jdboxNode/logs/timeout/2018-12-27.log
+
+
+LOAD DATA LOCAL INFILE '/home/justdial/Desktop/record.csv' INTO TABLE db_iro.temp_attr FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\n' IGNORE 1 LINES;
+
+
+https://stackoverflow.com/questions/47220483/change-inside-key-of-a-state-in-redux-reducer
+
+
+
+
+
+
+https://stackoverflow.com/questions/32023053/questions-about-socket-io-adapters
+https://stackoverflow.com/questions/31282578/why-is-my-socket-io-using-long-polling-instead-of-the-websocket
+https://stackoverflow.com/questions/14405693/using-cluster-in-an-expressjs-app
+https://stackoverflow.com/questions/42106004/cant-kill-a-specific-worker-in-node-js-cluster
+https://marmelab.com/blog/2018/04/03/how-to-track-and-fix-memory-leak-with-nodejs.html
+
+
+
+https://www.nginx.com/blog/nginx-nodejs-websockets-socketio/
+
+
+https://stackoverflow.com/questions/45536343/socket-io-using-multiple-nodes
+
+
+
+netstat -nlpt
+kill -9 28373
+
+https://www.youtube.com/watch?v=fchZJvaktdc
+

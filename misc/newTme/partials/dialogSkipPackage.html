@@ -1,0 +1,21 @@
+<md-dialog aria-label="Categories">
+	<form>
+	<md-toolbar>
+		<div class="md-toolbar-tools">
+			<h2 style="color:#FFFFFF">Do you want to Skip Package?</h2>
+			<span flex></span>
+		</div>
+	</md-toolbar>
+	<md-dialog-content>
+		<div layout="row" layout-sm="column" layout-align="space-around" ng-if="donotProceed==1">
+			<p class="red">Are you sure you want to skip the package.</p>
+		</div>
+		<div layout="column" layout-sm="column" layout-align="space-around">
+			<div layout="column" layout-sm="column" layout-align="space-around">
+				<md-button style="font-weight:bold" class="md-raised md-accent" ng-click="skipPackageVal($event)">Yes, I want to Skip the package postions</md-button>
+				<md-button style="font-weight:bold" class="md-raised md-accent" ng-click="goToSelPackage($event)">No, I want to proceed with package positions</md-button>
+			</div>
+		</div>
+	</md-dialog-content>
+	</form>
+</md-dialog>

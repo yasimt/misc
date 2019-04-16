@@ -1,0 +1,612 @@
+<style>
+body,html {
+    background:white;
+}
+
+.md-radio-button.md-default-theme.md-checked .md-off, md-radio-button.md-checked .md-off{
+  border-color: #6b6868 !important;
+}
+.md-radio-button.md-default-theme .md-on, md-radio-button .md-on{
+  background-color: #6b6868 !important;
+}  
+
+md-radio-button {
+	margin-bottom: 0px !important;
+}
+
+.md-switch-thumb, md-radio-button{
+	
+	margin :0
+}
+
+md-radio-button .md-container {
+	margin-left: 26px;
+	position: absolute !important;
+	top:inherit
+}
+
+.md-label{
+	padding-top: 30px;
+	margin-left: 0px !important;
+	margin-top: 5px;
+}
+
+.md-ripple-container {
+	display:none !important;
+} 
+
+.md-container:before{
+	    background-color: inherit !important;
+}
+
+.pointer_dis {
+	pointer-events: none; 
+}
+
+.mdlnxt2{
+	width: 22.6%;
+}
+
+.mdltdt2{
+	width: 37%;
+}
+
+
+.text-center{
+	text-align:left;
+}
+
+.text-right{
+	text-align:left;
+}
+</style>
+<md-toolbar md-scroll-shrink style="background-color:#FFFFFF" ng-init="onLoadCall()" ng-controller='catPreviewController'>
+    <div class="md-toolbar-tools">
+        <md-button class="md-icon-button" aria-label="Settings" style="margin-left:20px;" ng-click="toggleLeft()">
+            <md-icon md-svg-icon="img/ic_menu_36px.svg" style="color:#000000;"></md-icon>
+        </md-button>
+        <h2>
+            <span>Price Chart</span>
+        </h2>
+        <span flex></span>
+        <div>
+		</div>
+    </div>
+</md-toolbar>
+
+<div class="price-wrp-omn" ng-controller='pricechartnewController'>
+    <span class="tblhding">Select Payment Plan
+        <md-button id="btnReset" class="md-warn md-raised right" ng-click="reset_campaign($event)">Reset Campaign</md-button>
+    </span>
+    <div class="orngthmb-wrp">
+        <span class="thumbntxt">
+            <i class="chart-sprite tumbi"></i>
+            <span>Recommended Campaign</span>
+        </span>
+        
+        <span class="chrstrs" ng-click="open_price($event)" style="cursor: pointer; height: 25px; width: 70px; padding: 6px; font-size: 14px;color: #1274c0;">
+		<i class="chart-sprite edit_icon"></i>
+			Edit
+        </span>
+<!--
+        <span style="float: right;color: #1274c0;font-size: 14px;cursor: pointer;padding: 6px;" ng-click="apply_discount()">
+			<i class="discount_img" style="width:47px;height:38px;float:left;margin:-3px;margin-right: -7px;"></i>
+			Apply Discount &nbsp;&nbsp; | &nbsp;&nbsp;
+		</span>
+-->
+	</div>
+    <table class="chrtstbl" cellspacing="0" cellpadding="0">
+        <tr>
+            <td style="width:18%;" class="lefttd hd">Campaign</td>
+            <td style="width:27.5%" class="mdltdt hd">What You Get?</td>
+            <td style="width:21.5%" class="mdlnxt hd">
+                <table cellspacing="0" cellpadding="0" width="100%">
+                    <tr>
+                        <td colspan="2" >
+                            <span class="chkwrps">
+								<md-radio-group ng-model="pricechart_rb['payment_type']">
+									<md-radio-button value="ecs" class="md-primary"  ng-click="setpayment_type('ecs')" style="margin-bottom: 0;" md-ink-ripple="false"> <span style="text-align:center">ECS Plan</span></md-radio-button>
+								</md-radio-group>	
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:50%;height:93px;"><span class="chkwrps" >Down Payment</span></td>
+                        <td style="width:50%;height:93px;"><span class="chkwrps" >Monthly Payment</span></td>
+                    </tr>
+                </table>
+            </td>
+            <td style="width:33%" class="mdlnxt hd">
+                <table cellspacing="0" cellpadding="0" width="100%">
+                    <tr>
+                        <td colspan="3">
+                            <span class="chkwrps" style="height:50px">
+								Non ECS Plan <br>
+								<span style="font-size:12px">One shot payment should be done for discounted price</span> 
+							</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:33%;font-size:14px;height: 94px;">
+							<md-radio-group ng-model="pricechart_rb['discount_type']">
+									<md-radio-button value="original" class="md-primary"  class="chkwrps" md-ink-ripple="false" style="text-align: center;" ng-click="set_tenure(12)">Original</md-radio-button>
+							</md-radio-group>
+						</td>
+                        <td style="width:33%;font-size:14px;">
+							<md-radio-group ng-model="pricechart_rb['discount_type']">
+								<md-radio-button value="discount" class="md-primary" class="chkwrps" md-ink-ripple="false" style="text-align: center;" ng-click="set_tenure(12)">15% Discount for 1st year</md-radio-button>
+							</md-radio-group>							
+						</td>
+						<td style="width:33%;font-size:14px;">
+							<md-radio-group ng-model="pricechart_rb['discount_type']" ng-if="block_2yr != 1">
+								<md-radio-button value="two_year" class="md-primary" class="chkwrps" md-ink-ripple="false" style="text-align: center;" ng-click="set_tenure(24)" ng-disabled="block_2yr == 1">Pay only 50% 2nd year </md-radio-button>
+							</md-radio-group>
+						</td>							
+					</tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" class="tdgry">
+                Standard Campaigns   
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" class="padd0">
+                <table width="100%" cellspacing="0"  cellpadding="0" width="100%">
+                    <tr>
+                        <td style="width:18%;padding:0 10px;" class="lefttd subtdtxtx text-center bdrB0" ng-click="show_package('package')">
+                            Packages
+                            <i class="chart-sprite dwnarws"></i>
+                        </td>
+                        <td style="width:27.6%;padding:0 10px;" class="mdltdt subtdtxtx bdrB0">
+							JD Search Packages  
+							<div style="float:right" ng-if="pricechart_rb['payment_type'] == 'upfront' && active_campaign != 1">
+							</div>
+						</td>
+                        <td style="width:21.5%;padding:0;" class="mdlnxt subtdtxtx bdrB0">
+                            <table cellspacing="0" cellpadding="0" width="100%">
+                                <tr>
+                                    <td style="width:50%;height:64px;" class="bdrB0">&nbsp;</td>
+                                    <td style="width:50%;height:64px;" class="bdrB0">&nbsp;</td>
+                                </tr>
+                            </table>
+                        </td>
+                       <td style="width:33%;padding:0;" class="mdlnxt subtdtxtx bdrB0">
+                            <table cellspacing="0" cellpadding="0" width="100%">
+                                <tr>
+                                    <td style="width:33%;height:64px;" class="bdrB0">&nbsp;</td>
+                                    <td style="width:33%;height:64px;" class="bdrB0">&nbsp;</td>
+									<td style="width:33%;height:64px;" class="bdrB0">&nbsp;</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+<!--
+        ng-if="((value.campaignid != 1 || (value.campaignid == 1 && (expiredePackval != 0 || ##value.setup_upfront==1))))"
+-->
+        <tr ng-show="show_package_option">
+            <td colspan="4" class="padd10 bgf9">
+                <table width="100%" class="bdrl bdrT" cellspacing="0"  cellpadding="0" width="100%">
+                    <tr ng-repeat="value in pricechat.Package | toArray |  orderBy: 'order'" ng-init="key=value.campaignid"  ng-if="((value.campaignid != 1 && value.campaignid != 111) || (value.campaignid == 1 && sPriceChat.isExpired == 1) || (value.campaignid == 111 && sPriceChat.flexflag == 1))"> 
+                        <td style="width:17.5%;padding:0 10px;" class="subtdtxtx padd10">
+                            <label for="{{key}}_pck"  style="color:#424242;font-size: 14px;">
+                                <input type="checkbox" id="{{key}}_pck" ng-model="pricechart_cb[key]" ng-click='disable_campaign(key,"ecs",$event)' ng-class="{pointer_dis: disable_cb[key] == true}" ng-disabled='disable_cb[key]' style="width:18px;height:18px"/>
+                                    {{value.name}}
+                                    <span style="float: right; font-size: 15px;" ng-if="key == 1 && expiredePackval != 0">*</span>
+                            </label>
+                        </td>
+                        <td style="width:27.9%;padding:0 10px;" class="mdltdt2 subtdtxtx">
+                            <span style="display: inline-block;"> 
+								{{value.campaign_description}}  <span style="background:#c1f9c1" ng-if="(value.campaignid == 731 || value.campaignid == 736 || value.campaignid == 737) "> Additional Offer</span>
+                            </span>
+                        </td>
+						
+						<td  colspan="3" ng-if="value.campaignid == 118 || value.campaignid == 119 " style="text-align:center"> Choose Your Own Budget</td>
+						
+                        <td style="width:21.9%;padding:0" class="subtdtxtx" ng-if="value.campaignid != 118 && value.campaignid != 119">
+                            <table cellspacing="0" cellpadding="0" width="100%" class="hgt">
+                                <tr>
+                                    <td style="width:50%;" class="text-right bdrl0 bdrB0 hgt">{{value.down_payment}}</td>
+                                    <td style="width:50%;" class="text-right bdrB0 bdrR0 hgt">
+                                        <span ng-if="edit_price == false || (custom_campaign_ecs.indexOf(key) == -1 ||  pricechart_rb['payment_type'] != 'ecs')" ng-class="{strikethrough:apply_dis[key] == true}">
+											{{value.price_ecs}}
+										</span>
+                                        <input class="edit-input" type="text"  ng-model="pc_discount_ecs[key]" ng-if="edit_price == true && custom_campaign_ecs.indexOf(key) > -1 && pricechart_rb['payment_type'] == 'ecs' && apply_dis[key] != true" ng-blur="call_discount_api($event,key,'ecs',value.price_ecs,pc_discount_ecs[key])" numbersonly>
+                                        <span ng-if="apply_dis[key] == true"  style="width:auto;display:block">
+											{{value.omni_dis_ecs}}
+										</span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        
+                         <td style="width:33%;padding:0" class="subtdtxtx" ng-if="value.campaignid != 118 && value.campaignid != 119">
+                            <table cellspacing="0" cellpadding="0" width="100%" class="hgt">
+                                <tr>
+                                    <td style="width:33.9%;" class="text-right bdrl0 bdrB0 hgt">
+										<span ng-if="edit_price == false || (custom_campaign_upfront.indexOf(key) == -1 ||  pricechart_rb['payment_type'] != 'upfront')"  ng-class="{strikethrough:apply_dis[key] == true}"> 
+											<span>{{value.price_upfront}}</span>
+										</span>
+										
+										<input class="edit-input" type="text"  ng-model="pc_discount[key]" ng-if="edit_price == true && custom_campaign_upfront.indexOf(key) > -1 && pricechart_rb['payment_type'] == 'upfront' && apply_dis[key] != true" ng-blur="call_discount_api($event,key,'upfront',value.price_upfront,pc_discount[key])" numbersonly>
+										
+										<span ng-if="apply_dis[key] == true"  style="width:auto;display:block"> 
+											<span>{{value.omni_dis_price}}</span>
+										</span>
+										
+										
+                        </td>
+                        
+                                    <td style="width:33.9%;" class="text-right bdrB0 hgt" ng-if="value.campaignid != 118 && value.campaignid != 119">
+										<span class="strikethrough" ng-if="key != 1 && value.price_upfront != value.price_upfront_discount">
+											<span>{{value.price_upfront}}</span>
+										</span>
+										<span class="edit-input">
+											
+											<span ng-if="edit_price == false || (custom_campaign_upfront_dis.indexOf(key) == -1 ||  pricechart_rb['payment_type'] != 'upfront') ">{{value.price_upfront_discount}}</span>
+											<input class="edit-input" type="text"  ng-model="pc_pck_discount[key]" ng-if="edit_price == true && custom_campaign_upfront_dis.indexOf(key) > -1 && pricechart_rb['payment_type'] == 'upfront'" ng-blur="call_discount_api($event,key,'upfront_dis',value.price_upfront_discount,pc_pck_discount[key])" numbersonly>
+										
+										</span>
+										
+                        </td>
+                        
+									 <td style="width:33.3%;" class="text-right bdrB0 bdrR0 hgt" ng-if="value.campaignid != 118 && value.campaignid != 119">
+										
+										<span class="strikethrough" ng-if=" value.price_ecs*24 != value.price_upfront_two_years">
+											<span>{{value.price_ecs * 24}}</span>
+										</span>
+										
+										<span class="edit-input">
+											<span ng-if="edit_price == false || (custom_campaign_upfront.indexOf(key) == -1 ||  pricechart_rb['payment_type'] != 'upfront') || block_2yr == 1 ">{{value.price_upfront_two_years}}</span>
+											<input class="edit-input" type="text"  ng-model="pc_discount_2yr[key]" ng-if="edit_price == true && custom_campaign_upfront.indexOf(key) > -1 && pricechart_rb['payment_type'] == 'upfront' && block_2yr != 1" ng-blur="call_discount_api($event,key,'upfront_2yr',value.price_upfront_two_years,pc_discount_2yr[key])" numbersonly>
+										</span>
+										
+									</td>
+                                </tr>
+                            </table>
+                        </td>
+             
+                    </tr>
+                </table>
+            </td>
+        </tr>
+		<tr ng-if="pricechat.Omni!=undefined">
+            <td colspan="4" class="padd0">
+                <table width="100%" cellspacing="0"  cellpadding="0" width="100%">
+                    <tr>
+                        <td style="width:18.1%;" class="lefttd subtdtxtx text-center bdrB0" ng-click="show_package('omni')">
+                            Website/ Application
+                            <i class="chart-sprite dwnarws"></i>
+                        </td>
+                        <td style="width:17.5%;" class="mdltdt subtdtxtx bdrB0">
+							Your Digital Business Manager 
+						</td>
+						<td style="width:10%;" class="mdltdt subtdtxtx bdrB0">
+							One Time website creation fee 
+						</td>
+                        <td style="width:21.5%;padding:0;" class="mdlnxt subtdtxtx bdrB0">
+                            <table cellspacing="0" cellpadding="0" width="100%">
+                                <tr>
+                                    <td style="width:50%;height:64px;" class="bdrB0">&nbsp;</td>
+                                    <td style="width:50%;height:64px;" class="bdrB0">&nbsp;</td>
+                                </tr>
+                            </table>
+                        </td>
+                       <td style="width:33%;padding:0;" class="mdlnxt subtdtxtx bdrB0">
+                            <table cellspacing="0" cellpadding="0" width="100%">
+                                <tr>
+                                    <td style="width:33%;height:64px;" class="bdrB0">&nbsp;</td>
+                                    <td style="width:33%;height:64px;" class="bdrB0">&nbsp;</td>
+									<td style="width:33%;height:64px;" class="bdrB0">&nbsp;</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr ng-show="show_omni_option">
+            <td colspan="4" class="padd10 bgf9">
+                <table width="100%" class="bdrl bdrT" cellspacing="0"  cellpadding="0" width="100%">
+                    <tr ng-repeat="value in pricechat.Omni | toArray |  orderBy: 'order'"  ng-init="key=value.campaignid"> 
+                        <td style="width:17.5%;padding:0 10px;" class="subtdtxtx padd10">
+                            <label for="{{key}}_omni"  style="color:#424242;font-size: 14px;">
+                                <input type="checkbox" id="{{key}}_omni" ng-model='pricechart_cb[key]' ng-click='disable_campaign(key,"ecs",$event)' ng-class="{pointer_dis: disable_cb[key] == true}" ng-disabled='disable_cb[key]' style="width:18px;height:18px"/>
+                                    {{value.name}}
+                            </label>
+                        </td>
+                        <td style="width:17%;" class="mdltdt2 subtdtxtx">
+                            <span style="display: inline-block;"> 
+								{{value.campaign_description}} 
+                            </span>
+                        </td>
+                        
+                        <td style="width:10.5%;" class="mdltdt2 subtdtxtx">
+							<span style="display: inline-block;"> 
+<!--
+								<span ng-if="edit_price == false || (custom_campaign_ecs.indexOf(key+'_setup') == -1 || custom_campaign.indexOf(key+'_setup') == -1) ">
+								{{value.down_payment}}
+                            </span>
+-->
+<!--
+								<input class="edit-input" type="text"  ng-model="pc_discount_ecs[key+'_setup']" ng-if="edit_price == true && (custom_campaign_ecs.indexOf(key+'_setup') > -1 || custom_campaign.indexOf(key+'_setup') > -1)" ng-blur="call_discount_api($event,key+'_setup',pricechart_rb['payment_type'],value.down_payment,pc_discount_ecs[key+'_setup'])" numbersonly>
+-->
+								<select name='setup_fee' width="100px" ng-model="pc_discount_ecs[key+'_setup']" ng-if="key == '740' || key == '741'" ng-change="call_discount_api($event,key+'_setup',pricechart_rb['payment_type'],value.down_payment,pc_discount_ecs[key+'_setup'])"> 
+									<option ng-value="{{value.down_payment}}">{{value.down_payment}}</option>
+									<option ng-value='10000'>10000</option>
+									<option ng-value='0' ng-if="show_73 == 1">0</option>
+								</select>
+								
+								<span ng-if="key != '740' && key != '741' && key != '746'">
+									{{value.down_payment}}
+								</span>
+                            </span>
+                        </td>
+
+                        <td style="width:21.5%;padding:0;" class="subtdtxtx">
+                            <table cellspacing="0" cellpadding="0" width="100%" class="hgt">
+                                <tr>
+                                    <td style="width:50%;" class="text-right bdrl0 bdrB0 hgt">
+										<span ng-if="edit_price == false || (custom_campaign_ecs.indexOf(key+'_setup') == -1 ||  pricechart_rb['payment_type'] != 'ecs') ">
+											<span ng-if="key != '742' && key != '743'   && key != '745' && key != '746' && key != '73' && key != '748'">{{value.price_ecs *3}}</span>
+											<span ng-if="key == '742' || key == '743'  || key == '745' || key == '746'  || key == '73' || key == '748' ">{{value.price_ecs}}</span>
+										</span>
+										
+<!--
+										<span ng-if="apply_dis[key] == true"  style="width:auto;display:block" class="edit-input"> 
+											<span class="edit-input">{{value.omni_dis_price}}</span>
+										</span>
+-->
+										
+										<input class="edit-input" type="text"  ng-model="pc_discount_ecs[key+'_setup']" ng-if="edit_price == true && custom_campaign_ecs.indexOf(key+'_setup') > -1 && pricechart_rb['payment_type'] == 'ecs'" ng-blur="call_discount_api($event,key+'_setup','ecs',value.down_payment,pc_discount_ecs[key+'_setup'])" numbersonly>
+                                        
+									</td>
+									
+                                    <td style="width:50%;" class="text-right bdrB0 bdrR0 hgt">
+                                        <span ng-if="edit_price == false || (custom_campaign_ecs.indexOf(key) == -1 ||  pricechart_rb['payment_type'] != 'ecs') " class="edit-input">{{value.price_ecs}}</span>
+                                        
+<!--
+                                        <span ng-if="apply_dis[key] == true"  style="width:auto;display:block" class="edit-input"> 
+											<span class="edit-input">{{value.omni_dis_price}}</span>
+										</span>
+-->
+                                        <input class="edit-input" type="text"  ng-model="pc_discount_ecs[key]" ng-if="edit_price == true && custom_campaign_ecs.indexOf(key) > -1 && pricechart_rb['payment_type'] == 'ecs'" ng-blur="call_discount_api($event,key,'ecs',value.price_ecs,pc_discount_ecs[key])" numbersonly>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        
+                         <td style="width:33%;padding:0;" class="subtdtxtx">
+                            <table cellspacing="0" cellpadding="0" width="100%" class="hgt">
+                                <tr>
+                                    <td style="width:33%;" class="text-right bdrl0 bdrB0 hgt">
+										<span ng-if="edit_price == false || (custom_campaign_upfront.indexOf(key) == -1 ||  pricechart_rb['payment_type'] != 'upfront')" class="edit-input" ng-class="{strikethrough:apply_dis[key] == true}" style="width:auto""> 
+											<span>{{value.price_upfront}}</span>
+										</span>
+										
+										<input class="edit-input" type="text"  ng-model="pc_discount[key]" ng-if="edit_price == true && custom_campaign_upfront.indexOf(key) > -1 && pricechart_rb['payment_type'] == 'upfront'" ng-blur="call_discount_api($event,key,'upfront',value.price_upfront,pc_discount[key])" numbersonly>
+										
+										<span ng-if="apply_dis[key] == true"  style="width:auto;display:block" class="edit-input"> 
+											<span class="edit-input">{{value.omni_dis_price}}</span>
+										</span>
+										
+                                    </td>
+                                    <td style="width:33%;" class="text-right bdrB0 hgt">
+										<span class="edit-input">{{value.price_upfront_discount}}</span>
+									</td>
+									 <td style="width:33%;" class="text-right bdrB0 bdrR0 hgt">
+										<span class="edit-input">{{value.price_upfront_two_years}}</span>
+									</td>
+                                </tr>
+                            </table>
+                        </td>
+             
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr ng-repeat="(key,value) in pricechat.Normal">
+			<td colspan="4" class="padd0">
+				<table width="100%" cellspacing="0"  cellpadding="0" width="100%">
+					<tr ng-if="(value.campaignid != 10 || (value.campaignid == 10 && sPriceChat.national_main == 1))">
+						<td style="width:18.1%;" class="lefttd subtdtxtx text-center bdrB0">
+							<label for="{{key}}"  style="color:#424242;font-size: 14px;">
+								<input type="checkbox" id="{{key}}"  ng-model='pricechart_cb[key]' ng-click='disable_campaign(key,"ecs",$event)' style="width:18px;height:18px" ng-class="{pointer_dis: disable_cb[key] == true}" ng-disabled='disable_cb[key]'/>
+                                {{value.name}}
+                            </label>
+						</td>
+						
+						<td style="width:27.5%;" class="mdltdt subtdtxtx bdrB0">
+							{{value.campaign_description}} 
+							<!--md-select ng-model="pricechart_rb['national_tenure']" ng-change="change_national_budget()" style="display: inline-block; float: right; width: 116px;margin:0px" ng-if="(key == 10 &&  pricechart_rb['payment_type'] == 'upfront' )">
+								<md-option ng-value=''>Select Tenure</md-option>
+								<md-option ng-value='365'>1 Year</md-option>
+								<md-option ng-value='730'>2 Years</md-option>
+							</md-select-->
+							
+							<input type="text" style="width:41px;height: 27px;text-align: center;" ng-if="key == 5 && value.banner_rules.rotation_avl == true" ng-model="pricechat_model.banner_rotation" ng-change="change_banner($event)" numbersonly/>
+						</td>
+						
+						<td style="width:21.5%;padding:0;" class="mdlnxt subtdtxtx bdrB0" ng-if="key != 2">
+							<table cellspacing="0" cellpadding="0" width="100%">
+								<tr>
+									<td style="width:50%;height:64px;" class="bdrB0">
+										<span>{{value.down_payment}}</span>
+									</td>
+									
+									<td style="width:50%;height:64px;" class="bdrB0">
+										 <span ng-if="(edit_price == false || (custom_campaign_ecs.indexOf(key) == -1 ||  pricechart_rb['payment_type'] != 'ecs'))" class="edit-input">{{value.price_ecs}}</span>
+										
+										<input class="edit-input" type="text"  ng-model="pc_discount_ecs[key]" ng-if="edit_price == true && custom_campaign_ecs.indexOf(key) > -1 && pricechart_rb['payment_type'] == 'ecs' && key !=10" ng-blur="call_discount_api($event,key,'ecs',value.price_ecs,pc_discount_ecs[key])" numbersonly>
+                                        
+                                        <span ng-if="(edit_price == true && (pricechart_rb['payment_type'] != 'upfront')) && key == 10">{{value.price_ecs}}</span>
+									</td>
+								</tr>
+							</table>
+						</td>
+						
+					   <td style="width:33%;padding:0;" class="mdlnxt subtdtxtx bdrB0" ng-if="key != 2">
+							<table cellspacing="0" cellpadding="0" width="100%">
+								<tr>
+									<td style="width:33%;height:64px;" class="bdrB0">
+										<span ng-if="(edit_price == false || (custom_campaign_upfront.indexOf(key) == -1 ||  pricechart_rb['payment_type'] != 'upfront'))" class="edit-input"> 
+											<span>{{value.price_upfront}}</span>
+										</span>
+										
+										<input class="edit-input" type="text"  ng-model="pc_discount[key]" ng-if="edit_price == true && custom_campaign_upfront.indexOf(key) > -1 && pricechart_rb['payment_type'] == 'upfront'  && key !=10"  ng-blur="call_discount_api($event,key,'upfront',value.price_upfront,pc_discount[key])" numbersonly>
+										<span ng-if="(edit_price == true && (pricechart_rb['payment_type'] != 'ecs')) && key == 10">{{value.price_upfront}}</span>
+									</td>
+									
+									<td style="width:33%;height:64px;" class="bdrB0" ng-if="key == 10">
+										<span class="strikethrough" >
+											<span>{{value.price_upfront}}</span>
+										</span>
+										<span class="edit-input">{{value.price_upfront_discount}}</span>
+									</td>
+									<td class="bdrB0" ng-if="key != 10">
+									{{value.price_upfront_discount}}
+									</td>
+									<td style="width:33%;height:64px;" class="bdrB0" ng-if="key == 10">
+										
+										<span class="strikethrough" ng-if=" value.price_upfront*2 != value.price_upfront_two_years" >
+											<span>{{value.price_upfront *2}}</span>
+										</span>
+										<span class="edit-input">{{value.price_upfront_two_years}}</span>
+									</td>
+								<td class="bdrB0" ng-if="key != 10">
+									{{value.price_upfront_discount}}
+									</td>	
+								</tr>
+							</table>
+						</td>
+						
+						<td class="bdrB0 " colspan="8" ng-if="key == 2" style="width:210px; text-align: center;height:64px">
+							SYSTEM BUDGET
+						</td>
+						
+<!--
+						<td class="bdrB0 bdrR0" colspan="4" ng-if="key == 2" style="width:210px; text-align: center;height:64px">
+							SYSTEM BUDGET
+						</td>
+-->
+						
+					</tr>
+				</table>
+			</td>
+		</tr>
+		<tr ng-if="pricechat.Banner!=undefined">
+            <td colspan="4" class="padd0">
+                <table width="100%" cellspacing="0"  cellpadding="0" width="100%">
+                    <tr>
+                        <td style="width:18.1%;" class="lefttd subtdtxtx text-center bdrB0" ng-click="show_package('banner')">
+                            Banner
+                            <i class="chart-sprite dwnarws"></i>
+                        </td>
+                        <td style="width:27.5%;" class="mdltdt subtdtxtx bdrB0"></td>
+                        <td style="width:21.5%;padding:0;" class="mdlnxt subtdtxtx bdrB0">
+                            <table cellspacing="0" cellpadding="0" width="100%">
+                                <tr>
+                                    <td style="width:50%;height:64px;" class="bdrB0">&nbsp;</td>
+                                    <td style="width:50%;height:64px;" class="bdrB0">&nbsp;</td>
+                                </tr>
+                            </table>
+                        </td>
+                       <td style="width:33%;padding:0;" class="mdlnxt subtdtxtx bdrB0">
+                            <table cellspacing="0" cellpadding="0" width="100%">
+                                <tr>
+                                    <td style="width:33%;height:64px;" class="bdrB0">&nbsp;</td>
+                                    <td style="width:33%;height:64px;" class="bdrB0">&nbsp;</td>
+									<td style="width:33%;height:64px;" class="bdrB0">&nbsp;</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+          
+        
+					<tr ng-show="show_banner_option">
+						<td colspan="4" class="padd10 bgf9">
+							<table width="100%" class="bdrl bdrT" cellspacing="0"  cellpadding="0" width="100%">
+								<tr ng-repeat="value in pricechat.Banner | toArray |  orderBy: 'order'" ng-init="key=value.campaignid"> 
+									<td style="width:17.5%;" class="subtdtxtx padd10">
+										<label for="{{key}}"  style="color:#424242;font-size: 14px;">
+											<input type="checkbox" class="banner" id="{{key}}" ng-class="{pointer_dis: disable_cb[key] == true}" ng-model='pricechart_cb[key]' ng-click='disable_banner(key,"ecs",$event)'  ng-disabled='disable_cb[key]' name="banner[]"/>
+												{{value.name}}
+										</label>
+									</td>
+									<td style="width:27.9%;" class="mdltdt2 subtdtxtx">
+										<span style="display: inline-block;"> 
+											{{value.campaign_description}} 
+<!--
+											<span ng-if="key == 54">4</span>
+-->
+											<input type="text" style="width:41px;height: 27px;text-align: center;" ng-if="key == 54 && pricechat.Banner[51].banner_rules.rotation_avl == true && pricechart_cb[54] == true" ng-model="pricechat_model.banner_rotation" ng-change="change_banner($event)" numbersonly/>
+										</span>
+									</td>
+
+                        <td style="width:21.9%;padding:0;" class="subtdtxtx">
+										<table cellspacing="0" cellpadding="0" width="100%" class="hgt">
+											<tr>
+                                    <td style="width:50%;" class="text-right bdrl0 bdrB0 hgt">
+													<span ng-if="edit_price == false || (custom_campaign_ecs.indexOf(key+'_setup') == -1 ||  pricechart_rb['payment_type'] != 'ecs') " class="edit-input">{{value.down_payment}}</span>
+													<input class="edit-input" type="text"  ng-model="pc_discount_ecs[key+'_setup']" ng-if="edit_price == true && custom_campaign_ecs.indexOf(key+'_setup') > -1 && pricechart_rb['payment_type'] == 'ecs'" ng-blur="call_discount_api($event,key+'_setup','ecs',value.down_payment,pc_discount_ecs[key+'_setup'])" numbersonly>
+                                        
+									</td>
+									
+                                    <td style="width:50%;" class="text-right bdrB0 bdrR0 hgt">
+													<span ng-if="edit_price == false || (custom_campaign_ecs.indexOf(key) == -1 ||  pricechart_rb['payment_type'] != 'ecs') " class="edit-input">{{value.price_ecs}}</span>
+													<input class="edit-input" type="text"  ng-model="pc_discount_ecs[key]" ng-if="edit_price == true && custom_campaign_ecs.indexOf(key) > -1 && pricechart_rb['payment_type'] == 'ecs'" ng-blur="call_discount_api($event,key,'ecs',value.price_ecs,pc_discount_ecs[key])" numbersonly>
+												</td>
+											</tr>
+										</table>
+									</td>
+									
+                         <td style="width:33%;padding:0;" class="subtdtxtx">
+										<table cellspacing="0" cellpadding="0" width="100%" class="hgt">
+											<tr>
+                                    <td style="width:33.9%;" class="text-right bdrl0 bdrB0 hgt">
+													<span ng-if="edit_price == false || (custom_campaign_upfront.indexOf(key) == -1 ||  pricechart_rb['payment_type'] != 'upfront') " class="edit-input"> 
+														<span>{{value.price_upfront}}</span>
+													</span>
+													
+													<input class="edit-input" type="text"  ng-model="pc_discount[key]" ng-if="edit_price == true && custom_campaign_upfront.indexOf(key) > -1 && pricechart_rb['payment_type'] == 'upfront'" ng-blur="call_discount_api($event,key,'upfront',value.price_upfront,pc_discount[key])" numbersonly>
+												</td>
+									<td style="width:33.9%;" class="text-right bdrB0 hgt">
+													<span class="edit-input">{{value.price_upfront_discount}}</span>
+												</td>
+									<td style="width:33.3%;" class="text-right bdrB0 bdrR0 hgt">
+													<span class="edit-input">{{value.price_upfront_two_years}}</span>
+												</td>
+											</tr>
+										</table>
+									</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+
+                </table>
+            </td>
+        </tr>
+    </table>
+
+    <div style="padding-bottom:150px;"></div>
+
+    <div  class='price_prev_next' >
+
+
+        <div  style="bottom:0px !important;position:fixed !important;background:white !important;width:980px;">
+            <button class="button" style=" background: none repeat scroll 0 0 #f1f1f1;border: 1px solid #1274c0;border-radius: 2px;color: #1274c0;font-size: 14px;font-weight: 400;height: 35px;line-height: 35px;padding: 0 !important;text-align: center;width: 160px;margin-left:40%;" ng-click="$state.go('appHome.demopage',{parid:$stateParams.parid,ver:$stateParams.ver,page:extraHandler,demo_flg:5});" id="prevBtnId">Prev </button>
+
+            <button class="button"  id='next_button' style=" background: none repeat scroll 0 0 #f1f1f1;border: 1px solid #1274c0;border-radius: 2px;color: #1274c0;font-size: 14px;font-weight: 400;height: 35px;line-height: 35px;margin: 10px;padding: 0 !important;text-align: center;width: 160px;"  ng-click='submit_campaigns($event)'>Next </button>
+        </div>
+    </div>
+
+</div>
+

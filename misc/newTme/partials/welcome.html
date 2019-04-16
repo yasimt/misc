@@ -1,0 +1,39 @@
+<section class="main">
+	<section class="innerMain">
+		<div class="pageCentre profileShow" ng-if="employees.errorCode == 0">
+			<div class="picShow text-center automartop">
+				<div class="imgContainer">
+					<img ng-src="{{employees.hrInfo.data.pro_pic_url == '' && 'img/defaultUser.png' || employees.hrInfo.data.pro_pic_url}}" alt="Profile Picture" class="med-img pro-pic-welcome" ng-mouseenter="bringOverlay()" />
+					<div class="onTheTop" ng-show="show" ng-mouseleave="closeOverlay()" divToCover="pro-pic-welcome">
+						<div style="margin-top:25px;">
+							<a ng-href="http://accounts.justdial.com/hrmodule/profile/" target="_blank"><img ng-src="img/camera.png" alt="Camera" /></a>
+							<p>Click to Change Profile Picture</p>
+						</div>
+					</div>
+				</div>
+				<h1>Welcome to TME Module! {{employees.hrInfo.data.empname}}</h1>
+				<h3>Welcome to the change.</h3>
+				<div class="actionSpace text-center">
+					<a ui-sref=".profile" class="buttonLink" ng-if="showForwardAhd == 0"><reportshowbutton class="button floatLeft marRt10px">Dashboard</reportshowbutton></a>
+					<a ui-sref="appHome.home" class="buttonLink" ng-if="showForwardAhd == 0"><div class="button floatLeft">Move Forward</div></a>
+				</div>
+			</div>
+		</div>
+		<div class="pageCentre profileShow ng-scope" style="margin-left:35%;">
+			<h3 ng-if="showForwardAhd == 1" style="color:red;">Please update your Lineage on My Jd app in Lineage Selection.</h3>
+		</div>
+		<div class="pageCentre text-center profileShow" ng-if="employees.errorCode>0">
+			<div class="picShow text-center automartop">
+				<div class="imgContainer">
+					<img ng-src="img/notAuthorised.png" alt="Not Authorised" />
+				</div>
+				<h1>TME Not present. Please login Again</h1>
+				<div class="actionSpace text-center">
+					<gobacklogin class="button">Go Back to Login</gobacklogin>
+				</div>
+			</div>
+		</div>
+	</section>
+</section>
+<createoverlaybig></createoverlaybig>
+<dashboard></dashboard>

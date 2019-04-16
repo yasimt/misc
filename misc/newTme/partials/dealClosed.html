@@ -1,0 +1,12 @@
+<hr>
+<section class="impLinkContainer dealClosedCont">
+	<h1>Deal Closed</h1>
+	<div ng-if="employees.rankingData.count == 0" class="left width100">
+		<h3 class="colorWhite marBot30px">No Deal Closed by you in this month</h3>
+	</div>
+	<div ng-if="employees.rankingData.count > 0" class="left width100">
+		<div class="marBot10px">You have closed {{employees.rankingData.data.dc_today}} deals today</div>
+		<div class="marBot30px">And you have closed {{employees.rankingData.data.dc_month}} deals this month</div>
+	</div>
+	<!--div class="button floatLeft"><a class="buttonLink">Deal Closed Contracts</a></div-->
+</section>

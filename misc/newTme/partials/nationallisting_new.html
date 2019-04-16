@@ -1,0 +1,149 @@
+<md-toolbar md-scroll-shrink style="background-color:#FFFFFF" ng-init="onLoadCall()" ng-controller='catPreviewController'>
+	<div class="md-toolbar-tools">
+		<md-button class="md-icon-button" aria-label="Settings" style="margin-left:20px;" ng-click="toggleLeft()">
+			<md-icon md-svg-icon="img/ic_menu_36px.svg" style="color:#000000;"></md-icon>
+		</md-button>
+		<h2>
+			<span>National Listing</span>
+		</h2>
+		<span flex></span>
+	</div>
+</md-toolbar>
+<section class="mainSection" subtract="500">
+	<section class="mainContain">
+		<div>
+			<md-content class="md-padding">
+				<span class="chrstrs" ng-click="open_price($event)" style="width: 5px; height: 5px; cursor: pointer; padding: 9px;">*</span>
+				<div>
+					
+					<md-card layout="column">
+						<md-card-content>
+							
+							<div class="md-title blue bold" layout="row" layout-align="space-around">Selected Option & Tenure
+							</div>
+							
+							<md-divider></md-divider>
+							
+							<div layout="row" layout-align="space-around">
+								<h2>Tenure : {{tenure}} days</h2>
+								<!--h2 ng-if="edit_price==false;">Tenure : {{tenure}} days</h2>
+								<h2 ng-if="edit_price==true;">Tenure : 
+								<input  class="edit-input" type="text" maxlength="3" ng-model="$parent.tenure" style="width:90px;height:25px;" ng-keypress="" ng-keyup="" numbersonly > days</h2-->
+							</div>
+						</md-card-content>
+					</md-card>
+					<md-progress-linear md-mode="indeterminate" ng-if="showOptionLoader == 1"></md-progress-linear>
+					<md-card layout="row" layout-align="space-around" class="showTotBudget">
+						<md-card-content>
+							<div class="md-title blue bold" layout="row" layout-align="space-around">Budget</div>
+							<md-divider></md-divider>
+							<div layout="row" layout-align="space-around">
+								<md-list>
+									<md-list-item>
+										<div class="md-headline" ng-if="edit_price==false;">National Listing Budget:  {{nationallistingbudget | currency : '&#8377;' : 0}}</div>
+										<div class="md-headline" ng-if="edit_price==true;">National Listing Budget: &#8377;
+										
+										<input class="edit-input"  type="text" ng-model="$parent.nationallistingbudget" ng-keypress="" style="width:90px;height:20px;float: none;" ng-keyup="" numbersonly >
+										</div>
+									</md-list-item>
+									
+									<md-divider></md-divider>
+									<md-list-item>
+										<div layout="column">
+											<h2 class="md-headline"><b>Total Budget : {{nationallistingbudget | currency : '&#8377;' : 0}}</b></h2>
+										</div>
+									</md-list-item>
+								</md-list>
+							</div>
+						</md-card-content>
+					</md-card>
+					<br>
+					<!--span class="chrstrs" ng-show="nationallistingcity.length > 1 && showCity== 1" style="height: 5px;">Skip local city for national listing<md-icon class="md-secondary" style="cursor: pointer;" ng-click="remove_local()" aria-label="Chat" md-svg-icon="{{imgButA}}" ></md-icon></span-->
+					
+					<md-card class="catDataShow">
+						<md-divider></md-divider>
+						<md-toolbar style="background-color:transparent" ng-if='extraHandler != "jda"'>
+							<div class="md-toolbar-tools">
+								<div class="md-title blue bold">{{nationallistingType}}
+								 </div>
+<!--
+								<md-button class="red" ng-href="catSearch/{{parentid}}/">Add New Category</md-button>
+-->
+<!--
+								<md-button class="red" ng-href="areaSel/{{parentid}}/">Edit Pincode List</md-button>
+-->
+							</div>
+						</md-toolbar>
+						<md-divider></md-divider>
+						<md-list>
+							<div class="budgetPinDiv" ng-init="currIndex = $index;">
+								<!--md-list-item>
+									<!--div style="margin-top:2px;margin-left:1090px;"></div>
+									<div class="jbdscj" ng-init="showImg($index)"><md-icon class="md-secondary" aria-label="Chat" md-svg-icon="{{imgButAcc[$index]}}" ng-click="clickshrink($event,$index)"></md-icon></div>
+								</md-list-item>-->
+								<div class="dataPinsInt width80" style="margin-top:2%">
+									<div  class="text-center greyBack">
+										<div  class="borderTakeLeft borderTop pad-top-5">Cities</div>
+									
+<!--
+										<div flex="20" class="borderTake borderTop pad-top-5 pad-bot-5">Inv %</div>
+-->
+									</div>
+									<div ng-repeat="(keyMain,valueMain) in nationallistingcity | limitTo:(nationallistingcity.length/4)+1"  layout="row"  class="bestBudgetRow" ng-init="current = $parent.start; $parent.start=$parent.start+3;">
+										
+										
+										<div flex="25" layout='row' layout-align='center' style="border:0.5px solid #dcdada">
+										{{ capitalVal(nationallistingcity[$index+current])}}
+											</div>
+										
+											<div flex="25" layout='row' layout-align='center' style="border:0.5px solid #dcdada">
+											{{ capitalVal(nationallistingcity[$index+1+current])}}	
+													
+											</div>
+										
+											<div  flex="25" layout='row' layout-align='center' style="border:0.5px solid #dcdada">
+												{{ capitalVal(nationallistingcity[$index+2+current])}}
+													
+											</div>
+										
+											<div  flex="25" layout='row' layout-align='center' style="border:0.5px solid #dcdada">
+												{{ capitalVal(nationallistingcity[$index+3+current])}}
+													
+											</div>
+											
+																					
+<!--
+											<div flex="20" class="borderTake" layout="row" layout-align="space-around" ng-repeat="(keyPos,valuePos) in bdetls">
+												<div style="margin-top:12px;">{{valuePos.inventory * 100}}</div>
+											</div>
+-->
+										
+									</div>
+								</div>
+								<md-divider></md-divider>
+							</div>
+						</md-list>
+					</md-card>
+				</div>
+			</md-content>
+		</div>
+	</section>
+</section>
+
+<div style="margin-top: 20px; margin-bottom: 20px;margin-left: 700px;"> 
+		<button ng-click="$state.go('appHome.pricechartnew',{parid:$stateParams.parid,ver:$stateParams.ver,page:extraHandler,demo_flg:6});" class="proceed mrg-left-15"> BACK </button>
+		<button ng-click='callpopup($event)' class="proceed mrg-left-15" > PROCEED </button>
+	</div>
+
+</div>
+</div>		
+<div class="wrapper" id="">
+	<div class="wrapper" style="background:#F6F6F6; border-top:1px solid #E3E3E3;">
+		<div class="">
+			<div class="jdrr_footer">
+					Copyright 2008-2016 Justdial.com. All Rights Reserved. <a href="#">Privacy</a> I <a href="#">Terms</a>
+			</div>
+		</div>
+	</div>
+</div>
+

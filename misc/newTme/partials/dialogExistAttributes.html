@@ -1,0 +1,50 @@
+<md-dialog aria-label="Categories">	
+
+	<md-toolbar>
+		<div ng-if="attrTaken == 1">
+			<div class="md-toolbar-tools">
+				<h2 style="color:#FFFFFF">&nbsp;Selected attributes for this contract {{compname}} | {{parentid}}&nbsp;</h2>
+				<span flex></span>
+			</div>
+		</div>
+		<div ng-if="attrTaken == 0">
+			<div class="md-toolbar-tools">
+				<h2 style="color:#FFFFFF">&nbsp;No attributes found for this contract {{compname}} | {{parentid}}&nbsp;</h2>
+				<span flex></span>
+			</div>
+		</div>
+	</md-toolbar>
+	<md-dialog-content>
+		<section ng-if="attrTaken == 1">
+			<div layout="row" flex class="text-center greyBack">
+				<div flex="30" class="borderTakeLeft borderTop pad-top-5">Facility</div>
+				<div flex="40" class="borderTake borderTop pad-top-5 pad-bot-5">Descriptions</div>
+				<div flex="30" class="borderTake borderTop pad-top-5 pad-bot-5">Service</div>
+			</div>
+			
+			<div ng-repeat="(attrname,attrdata) in attrHtmlData" class="bestBudgetRow">
+				<div flex="100" class="borderTakeLeft borderTop pad-top-5 pad-bot-5 text-center">{{attrname | capitalize}} Facilities : </div>
+				
+				<div ng-repeat="(attrkey,attrval) in attrdata" class="bestBudgetRow">
+					<div ng-repeat="(key,val) in attrval" layout="row" class="bestBudgetRow">
+						<div flex="30" class="borderTakeLeft borderTop pad-top-5 pad-bot-5 text-center">{{val.fcl}}</div>
+						<div flex="40" class="borderTake borderTop pad-top-5 pad-bot-5 text-center">{{val.des}}</div>
+						<div flex="30" class="borderTake borderTop pad-top-5 pad-bot-5 text-center">{{attrkey}}</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<br>
+		<div layout="column" layout-sm="column" layout-align="space-around">
+			<div layout="row" layout-sm="column" layout-align="space-around">
+				<md-button class="md-raised md-accent" ng-click="hide()">Edit</md-button>
+<!--
+				<md-button class="md-raised md-accent" ng-href="../00_Payment_Rework/04_payment_mode_selection.php" >Proceed</md-button>
+-->
+				 <md-button class="md-raised md-accent" ng-click="hide()" ng-href="../newTme/catpreview/{{parentid}}/" >Proceed</md-button>
+			</div>
+		</div>
+	</md-dialog-content>
+	
+</md-dialog>
+

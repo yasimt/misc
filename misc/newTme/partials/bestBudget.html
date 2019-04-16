@@ -1,0 +1,287 @@
+<div ng-if="bestBudget.error.code	==	0">
+	<md-card layout="column" ng-if="tabNo != 3 && tabNo != 5 && tabNo != 6">
+		<md-card-content>
+			<div class="md-title blue bold" layout="row" layout-align="space-around">Please select an option</div>
+			<md-divider></md-divider>
+			<md-radio-group ng-model="selRadio" layout="row" layout-wrap layout-sm="column" layout-align="space-around">
+				<md-radio-button value="{{key}}" class="md-warn" ng-repeat="(key,positionData) in bestBudget.result.pos" ng-if="key !=100 && ((tabNo == 1 && key !=0) || (key !=0 && tabNo == 2) || (key ==0 && tabNo == 6) || (key ==0 && tabNo == 5) || (key !=0 && (tabNo == 6 ||tabNo == 5)))" ng-click="setOption(tabNo,key,selRadioTenure)">{{optName}} {{key}}</md-radio-button>
+			</md-radio-group>
+		</md-card-content>
+	</md-card>
+	<md-progress-linear md-mode="indeterminate" ng-if="showOptionLoader == 1"></md-progress-linear>
+	<md-card layout="column" ng-if="tabNo != 3">
+		<md-card-content>
+			<div class="md-title blue bold" layout="row" layout-align="space-around">Select Tenure</div>
+			<md-divider></md-divider>
+			<md-radio-group ng-model="selRadioTenure" layout="row" layout-wrap layout-sm="column" layout-align="space-around">
+				<md-radio-button ng-if="tabNo != 5" value="120-3650" class="md-access" ng-click="setOption(tabNo,selRadio,'120-3650')">VFL</md-radio-button>
+				<md-radio-button ng-if="tabNo != 5" value="60-1825" class="md-access" ng-click="setOption(tabNo,selRadio,'60-1825')">5 Years</md-radio-button>
+				<md-radio-button ng-if="tabNo != 5" value="36-1095" class="md-access" ng-click="setOption(tabNo,selRadio,'36-1095')">3 Years</md-radio-button>
+				<md-radio-button ng-if="tabNo != 5" value="24-730" class="md-access" ng-click="setOption(tabNo,selRadio,'24-730')">2 Years</md-radio-button>
+				<md-radio-button value="12-365" class="md-access" ng-click="setOption(tabNo,selRadio,'12-365')">365 Days</md-radio-button>
+				<md-radio-button value="6-180" class="md-access" ng-click="setOption(tabNo,selRadio,'6-180')">180 Days</md-radio-button>
+				<md-radio-button value="3-90" class="md-access" ng-click="setOption(tabNo,selRadio,'3-90')">90 Days</md-radio-button>
+				<!--<md-radio-button value="1-30" class="md-access" ng-click="setOption(tabNo,selRadio,'1-30')">30 Days</md-radio-button>-->
+			</md-radio-group>
+			<md-card-content ng-if="tabNo == 5">
+			<md-divider></md-divider>
+			<md-checkbox ng-model="onlyExclusive" ng-change="setOnlyExclusive(tabNo,selRadio,selRadioTenure);" >Only Exclusive</md-checkbox>
+			</md-card-content>
+			<md-card-content ng-if="tabNo == 6">
+				<md-divider></md-divider>
+				<md-checkbox ng-model="exactRenewal" ng-change="setExactRenewal(tabNo,selRadio,selRadioTenure);" >Exact Renewal</md-checkbox>
+			</md-card-content>
+		</md-card-content>
+	</md-card>
+	<div ng-if="tabNo != 3" layout="row" layout-align="space-around" class="red showTotBudget"><h2 style="color:red">Per Day Budget : {{(totalBudgetShowMain/(selRadioTenure | split:'-':1))  | currency : '&#8377;' : 0}}</h2></div>
+	<div ng-if="tabNo != 3" layout="row" layout-align="space-around" class=""><h3 class="orange">Total Budget : {{totalBudgetShowMain | currency : '&#8377;' : 0}}<span title="City Level Minimum Budget" class="pointer" ng-if="totalBudgetShowMain == bestBudget.result.city_bgt">*</span></h3></div>
+	<div ng-if="tabNo == 3" layout="row" layout-align="space-around">
+		<div layout="column" layout-align="space-around">
+			<div layout="row" layout-align="space-around">
+				<md-input-container>
+					<div style="width:100%">
+						<label style="color:#616161">Enter Monthly Budget in INR</label>
+						<input required autocomplete="off" style="text-align: center" type="text" numbersonly="numbersonly" name="rate" ng-model="customBudgetVal">
+					</div>
+				</md-input-container>
+			</div>
+			<p style="font-size:13px;" class="blue">Recommended budget for selected campaign is {{sugBudget}} and above</p>
+			<div layout="row" layout-align="space-around">
+				<p style="font-size:12px;" class="red" ng-if="showErrPack == 1">{{showErrPackMsg}}</p>
+			</div>
+			<div layout="row" layout-align="space-around">
+				<button class="md-button md-primary md-raised" ng-click="sendCustomValid(customBudgetVal,1)">Calculate</button>
+			</div>
+		</div>
+	</div>
+	<div layout="row" layout-align="space-around">Total Categories Selected : {{catLength}} | Total Pincodes Selected : {{pinLength}}</div>
+	<div ng-if="tabNo != 3" layout="row" layout-align="space-around" class="red">SZ + L : {{zoneper}}% | A + Z + NM + VNM : {{allper}}%</div>
+	<div ng-if="tabNo != 3" layout="row" layout-align="center center" class="red">
+		<span style="font-size:24px; cursor:pointer ; margin-right:10px;" ng-click="showLead=!showLead">*</span>
+<!--
+		<span ng-show="showLead">Estimated Leads : {{callCountTotalTop | setDecimal:0}}</span>
+-->
+	</div> 
+	<div layout="row" layout-align="space-around" class="md-title blue bold" style="font-size:24px;" ng-show="showLead">Estimated Searches (all mediums) : {{searchCountTotalTop + callCountTotalTop | setDecimal:0}} </div>
+	<md-card  ng-if="tabNo != 3">
+		<md-card-content>
+			<div class="md-title blue bold" layout="row" layout-align="space-around">Pincode Wise Allocation Summary</div>
+			<md-divider></md-divider>
+			<div layout="row" class="pad-top-25" layout-sm="column">
+				<div layout="column" flex class="text-center" ng-repeat="key in notSorted(bestBudget.result.pos)" ng-if="((tabNo == 1 && key !=0) || (key !=0 && tabNo == 2) || (key !=0 && tabNo == 3) || (key !=0 && tabNo == 6) || (key ==0 && tabNo == 5) || (key !=0 && (tabNo == 6 ||tabNo == 5)))">
+					<div class="pad-bot-5 orange md-subhead bold" ng-if="key != 100 && key != 0">Position {{key}}</div>
+					<div class="pad-bot-5 orange md-subhead bold" ng-if="key == 100">Package</div>
+					<div class="pad-bot-5 orange md-subhead bold" ng-if="key == 0">Exclusive</div>
+					<md-divider></md-divider>
+					<div class="pad-top-5">{{bestBudget.result.pos[key]}}%</div>
+				</div>
+			</div>
+		</md-card-content>
+	</md-card>
+	<md-card class="catDataShow">
+		<md-divider></md-divider>
+		<md-toolbar style="background-color:transparent">
+			<div class="md-toolbar-tools">
+				<md-button class="md-button md-primary" style="float:left;color:#0b6bc3" ng-click="takeBacktoCat(parentid)">Edit Category</md-button>
+				<div style="color:#0b6bc3">|</div>
+				<md-button class="md-button md-primary" style="float:right;color:#0b6bc3" ng-href="areaSel/{{parentid}}/">Edit Pincode List</md-button>
+				<div style="color:#0b6bc3">|</div>
+				<md-button class="md-button md-primary" style="float:right;color:#0b6bc3" ng-click="sortCats('budget')">Sort By Budget
+					<md-icon ng-if="budSort == 'asc' && typeSort == 'budget'" md-svg-icon="img/ic_expand_less_18px.svg"></md-icon>
+					<md-icon ng-if="budSort == 'desc' && typeSort == 'budget'" md-svg-icon="img/ic_expand_more_18px.svg"></md-icon>
+				</md-button>
+				<div style="color:#0b6bc3">|</div>
+				<md-button class="md-button md-primary" style="float:right;color:#0b6bc3" ng-click="sortCats('catname')">Sort By CatName
+					<md-icon ng-if="nameSort == 'asc' && typeSort == 'catname'" md-svg-icon="img/ic_expand_less_18px.svg"></md-icon>
+					<md-icon ng-if="nameSort == 'desc' && typeSort == 'catname'" md-svg-icon="img/ic_expand_more_18px.svg"></md-icon>
+				</md-button>
+			</div>
+		</md-toolbar>
+		<md-divider></md-divider>
+		<md-list lazyloadcat ng-if="tabNo != 3">
+			<div class="budgetPinDiv budgetPinDivHead">
+				<md-list-item>
+					<md-checkbox ng-model="selAllCheckZone[0]" ng-click="selectAllZone(bestBudget.result.c_data.length,0,selected)"></md-checkbox>
+					<p class="blue">Select All</p>
+					<div class="jbdscj orange bold">Total : {{totalBudgetShowMain | currency : '&#8377;' : 0}}</div>
+				</md-list-item>
+			</div>
+			<div ng-repeat="keyMain in notSorted(bestBudget.result.c_data) | limitTo:limiterOuter" class="budgetPinDiv" ng-init="currIndex = $index;showImg($index,keyMain)">
+				<md-button ng-if="bestBudget.result.c_data[keyMain].cst == 'A'" title="{{bestBudget.result.cat_desc[bestBudget.result.c_data[keyMain].cst]}}" class="md-fab md-mini md-primary" aria-label="Use Android" style="background:#FC0404;position:absolute;right:-7px" ng-click="clickshrink($event,$index)">
+					<b>{{bestBudget.result.c_data[keyMain].cst}}</b>
+				</md-button>
+				<md-button ng-if="bestBudget.result.c_data[keyMain].cst == 'L'" title="{{bestBudget.result.cat_desc[bestBudget.result.c_data[keyMain].cst]}}" class="md-fab md-mini md-primary" aria-label="Use Android" style="background:#047DFC;position:absolute;right:-7px" ng-click="clickshrink($event,$index)">
+					<b>{{bestBudget.result.c_data[keyMain].cst}}</b>
+				</md-button>
+				<md-button ng-if="bestBudget.result.c_data[keyMain].cst == 'NM'" title="{{bestBudget.result.cat_desc[bestBudget.result.c_data[keyMain].cst]}}" class="md-fab md-mini md-primary" aria-label="Use Android" style="background:#FC9804;position:absolute;right:-7px" ng-click="clickshrink($event,$index)">
+					<b>{{bestBudget.result.c_data[keyMain].cst}}</b>
+				</md-button>
+				<md-button ng-if="bestBudget.result.c_data[keyMain].cst == 'SZ'" title="{{bestBudget.result.cat_desc[bestBudget.result.c_data[keyMain].cst]}}" class="md-fab md-mini md-primary" aria-label="Use Android" style="background:#14700c;position:absolute;right:-7px" ng-click="clickshrink($event,$index)">
+					<b>{{bestBudget.result.c_data[keyMain].cst}}</b>
+				</md-button>
+				<md-button ng-if="bestBudget.result.c_data[keyMain].cst == 'VNM'" title="{{bestBudget.result.cat_desc[bestBudget.result.c_data[keyMain].cst]}}" class="md-fab md-mini md-primary" aria-label="Use Android" style="background:#FC04B1;position:absolute;right:-7px" ng-click="clickshrink($event,$index)">
+					<b>{{bestBudget.result.c_data[keyMain].cst}}</b>
+				</md-button>
+				<md-button ng-if="bestBudget.result.c_data[keyMain].cst == 'Z'" title="{{bestBudget.result.cat_desc[bestBudget.result.c_data[keyMain].cst]}}" class="md-fab md-mini md-primary" aria-label="Use Android" style="background:#0A1922;position:absolute;right:-7px" ng-click="clickshrink($event,$index)">
+					<b>{{bestBudget.result.c_data[keyMain].cst}}</b>
+				</md-button>
+				<md-list-item>
+					<md-checkbox ng-model="selAllCheck[currIndex]" ng-click="selectAll($event,currIndex,keyMain)"></md-checkbox>
+					<p class="blue"><span title="B2B Category Minimum Budget" class="pointer" ng-if="bestBudget.result.c_data[keyMain].bflg == 1" style="color:red">*</span>{{bestBudget.result.c_data[keyMain].cnm}}</p>
+					<div style="margin-top:2px;margin-right:26px;">Budget: {{cattotalBudget[keyMain] | currency : '&#8377;' : 0}}</div>
+					<md-icon class="md-secondary" aria-label="Chat" md-svg-icon="{{imgButAcc[keyMain]}}" ng-click="clickshrink($event,$index,keyMain)"></md-icon>
+<!--
+					<div class="jbdscj" ng-init="showImg($index)"><md-icon class="md-secondary" aria-label="Chat" md-svg-icon="{{imgButAcc[$index]}}" ng-click="clickshrink($event,$index)"></md-icon></div>
+-->
+				</md-list-item>
+				<div class="dataPinsInt width80" ng-if="limitVals.indexOf(currIndex) > -1" lazyloadpinbudget>
+					<div layout="row" flex class="text-center greyBack">
+						<div flex="20" class="borderTakeLeft borderTop pad-top-5">Pincodes</div>
+						<div flex="30" class="borderTake borderTop pad-top-5 pad-bot-5">Area</div>
+						<div flex="30" class="borderTake borderTop pad-top-5 pad-bot-5">Positon</div>
+<!--
+						<div flex="10" class="borderTake borderTop pad-top-5 pad-bot-5">Budget</div>
+-->
+						<div flex="9" class="borderTake borderTop pad-top-5 pad-bot-5">Bidders</div>
+<!--
+						<div flex="10" class="borderTake borderTop pad-top-5 pad-bot-5">Inv %</div>
+-->
+					</div>
+					<div ng-repeat="key in notSorted(bestBudget.result.c_data[keyMain].pin_data) | limitTo:limiter" ng-if="key != 'catbestbudget'" layout="row" class="bestBudgetRow">
+						<div layout="row" flex class="text-center" layout-wrap>
+							<div flex="20" class="borderTakeLeft">
+								<md-checkbox  ng-if="pushDisabled[keyMain][key] == true" ng-disabled="pushDisabled[keyMain][key]" aria-label="Disabled checked checkbox" ng-model="checkPins[keyMain][$index]" class="md-primary">{{ key }}</md-checkbox>
+								<md-checkbox  ng-click="toggle(currIndex,$index,keyMain,key)" ng-if="pushDisabled[keyMain][key] == false" ng-disabled="pushDisabled[keyMain][key]" aria-label="Disabled checked checkbox" ng-model="checkPins[keyMain][$index]" class="md-primary">{{ key }}</md-checkbox>
+							</div>
+							<div flex="30" class="borderTake pad-top-10">{{ bestBudget.result.c_data[keyMain].pin_data[key].anm }}</div>
+							<div flex="30" class="borderTake" layout="row" layout-align="space-around">
+								<md-icon md-svg-icon="img/ic_expand_more_18px.svg" ng-if="stopEdit[keyMain][$index] == 0 && tabNo != 3" ng-click="lowPos(keyMain,key,bestPositionShow[keyMain][key],currIndex,$index)"></md-icon>
+								<md-icon md-svg-icon="img/ic_expand_more_18px.svg" ng-if="stopEdit[keyMain][$index] == 1"></md-icon>
+								<div style="margin-top:12px;" ng-if="bestPositionShow[keyMain][key] != 100 && bestPositionShow[keyMain][key] != 0">{{bestPositionShow[keyMain][key]}}</div>
+								<div style="margin-top:12px;" ng-if="bestPositionShow[keyMain][key] == 0">Exc.</div>
+								<div style="margin-top:12px;" ng-if="bestPositionShow[keyMain][key] == 100">Package</div>
+
+								<md-icon md-svg-icon="img/ic_expand_less_18px.svg" ng-if="stopEdit[keyMain][$index] == 0  && tabNo != 3" ng-click="highPos(keyMain,key,bestPositionShow[keyMain][key],currIndex,$index)"></md-icon>
+								<md-icon md-svg-icon="img/ic_expand_less_18px.svg" ng-if="stopEdit[keyMain][$index] == 1"></md-icon>
+							</div>
+<!--
+							<div flex="10" class="borderTake pad-top-10" ng-if="inventory[keyMain][key] != 0">{{bestBudgetShow[keyMain][key] | setDecimal:0}}</div>
+							<div flex="10" class="borderTake pad-top-10" ng-if="inventory[keyMain][key] == 0">No Inventory</div>
+-->
+							<div flex="9" class="borderTake pad-top-10 pointer" ng-if="bestBudget.result.c_data[keyMain].pin_data[key].sbflg == 1" ng-click="showDialogBidders($event,bestBudget.result.c_data[keyMain].cnm,key,bestBudget.result.c_data[keyMain].pin_data[key],tabNo)"><md-icon style="color:red" md-svg-icon="img/ic_star_24px.svg"></md-icon></div>
+							<div flex="9" class="borderTake pad-top-10" ng-if="bestBudget.result.c_data[keyMain].pin_data[key].sbflg == 0"><md-icon style="color:#1278b7" md-svg-icon="img/ic_star_24px.svg"></md-icon></div>
+<!--
+							<div flex="10" class="borderTake pad-top-10">{{inventory[keyMain][key] * 100}}</div>
+-->
+						</div>
+					</div>
+				</div>
+				<md-divider></md-divider>
+			</div>
+		</md-list>
+		<md-list lazyloadcat ng-if="tabNo == 3">
+			<div class="budgetPinDiv budgetPinDivHead">
+				<md-list-item>
+					<md-checkbox ng-model="selAllCheckZone[0]" ng-click="selectAllZonePack(bestBudget.result.c_data.length,0,selected)"></md-checkbox>
+					<p class="blue">Select All</p>
+					<div ng-if="showFlexiCalc == 1" style="font-size:24px" class="jbdscj orange bold">Total : {{totalBudgetShowMain | currency : '&#8377;' : 0}}<p ng-if="showFlexiCalc == 1" style="font-size: 12px;text-align: right;margin: 0;margin-top: 0px;">Calculated Budget</p></div>
+				</md-list-item>
+			</div>
+			<div ng-repeat="keyMain in sortedArr | limitTo:limiterOuter" class="budgetPinDiv" ng-init="currIndex = $index;showImg($index,keyMain)"> 
+				<md-list-item>
+					<md-checkbox ng-model="selAllCheck[currIndex]" ng-click="selectAllPackage($event,currIndex,keyMain)"></md-checkbox>
+					<p class="blue"><!--span title="B2B Category Minimum Budget" class="pointer" ng-if="bestBudget.result.c_data[keyMain].bflg == 1" style="color:red">*</span-->{{bestBudget.result.c_data[keyMain].cnm}}</p>
+					<div  ng-if="showFlexiCalc == 1" style="margin-top:2px;margin-right:45px;">Budget: {{cattotalBudget[keyMain] | currency : '&#8377;' : 0}}</div>
+					<md-icon class="md-secondary" aria-label="Chat" md-svg-icon="{{imgButAcc[keyMain]}}" ng-click="clickshrink($event,$index,keyMain)"></md-icon>
+				</md-list-item>
+				<div class="dataPinsInt" style="width:94%" ng-if="limitVals.indexOf(currIndex) > -1" lazyloadpinbudget>
+					<div layout="row" flex class="text-center greyBack">
+						<div flex="20" class="borderTakeLeft borderTop pad-top-5">Pincodes</div>
+						<div flex="30" class="borderTake borderTop pad-top-5 pad-bot-5">Area</div>
+						<div ng-if="showFlexiCalc == 1" flex="20" class="borderTake borderTop pad-top-5 pad-bot-5">Position</div>
+						<div flex="9" class="borderTake borderTop pad-top-5 pad-bot-5">Bidders</div>
+						<div ng-if="showFlexiCalc == 1" flex="19" class="borderTake borderTop pad-top-5 pad-bot-5">Budget<i class="chart-sprite edit_icon"></i></div>
+					</div>
+					<div ng-repeat="key in notSorted(bestBudget.result.c_data[keyMain].pin_data) | limitTo:limiter" ng-if="key != 'catbestbudget'" layout="row" class="bestBudgetRow" ng-class="{'backOr' : exitPackVal[keyMain][key] == 1}">
+						<div layout="row" flex class="text-center" layout-wrap>
+							<div flex="20" class="borderTakeLeft">
+								<md-checkbox style="margin-top:9px;margin-bottom: 11px" ng-if="pushDisabled[keyMain][key] == true" ng-disabled="pushDisabled[keyMain][key]" aria-label="Disabled checked checkbox" ng-model="checkPins[keyMain][$index]" class="md-primary">{{ key }}</md-checkbox>
+								<md-checkbox style="margin-top:9px;margin-bottom: 11px" ng-click="togglePinPackage(currIndex,$index,keyMain,key)" ng-if="pushDisabled[keyMain][key] == false" ng-disabled="pushDisabled[keyMain][key]" aria-label="Disabled checked checkbox" ng-model="checkPins[keyMain][$index]" class="md-primary">{{ key }}</md-checkbox>
+							</div>
+							<div flex="30" class="borderTake pad-top-10">{{ bestBudget.result.c_data[keyMain].pin_data[key].anm }}</div>
+							<div ng-if="showFlexiCalc == 1" flex="20" class="borderTake" layout="row" layout-align="space-around">
+								<md-icon md-svg-icon="img/ic_expand_more_18px.svg" ng-if="stopEdit[keyMain][$index] == 0 && tabNo == 3" ng-click="highPosPack(keyMain,key,flexiBudgetCatPos[keyMain][key],currIndex,$index)"></md-icon>
+								<md-icon md-svg-icon="img/ic_expand_more_18px.svg" ng-if="stopEdit[keyMain][$index] == 1"></md-icon>
+								<div style="margin-top:12px;" ng-if="bestPositionShow[keyMain][key] != 100 && bestPositionShow[keyMain][key] != 0">{{bestPositionShow[keyMain][key]}}</div>
+								<!--div style="margin-top:12px;" ng-if="bestPositionShow[keyMain][key] == 0">Exc.</div-->
+								<div style="margin-top:12px;" ng-if="bestPositionShow[keyMain][key] == 100">{{flexiBudgetCatPos[keyMain][key]}}</div>
+								<md-icon md-svg-icon="img/ic_expand_less_18px.svg" ng-if="stopEdit[keyMain][$index] == 0  && tabNo == 3"  ng-click="lowPosPack(keyMain,key,flexiBudgetCatPos[keyMain][key],currIndex,$index)"></md-icon>
+								<md-icon md-svg-icon="img/ic_expand_less_18px.svg" ng-if="stopEdit[keyMain][$index] == 1"></md-icon>
+							</div>
+							<div flex="9" class="borderTake pad-top-10 pointer" ng-click="showDialogBidders($event,bestBudget.result.c_data[keyMain].cnm,key,bestBudget.result.c_data[keyMain].pin_data[key],tabNo,keyMain)"><a href="javascript:void(0)">View Bid</a></div>
+							<!--div flex="9" class="borderTake pad-top-10" ng-if="bestBudget.result.c_data[keyMain].pin_data[key].sbflg == 0"><md-icon style="color:#1278b7" md-svg-icon="img/ic_star_24px.svg"></md-icon></div-->
+							<div ng-if="showFlexiCalc == 1" flex="19" class="borderTake">
+								<div style="float: left;height: 100%;width: 100%;">
+									<input type="text" aria-label="Use Android" name="rate" ng-model="flexiBudgetCatPin[keyMain][key]" ng-change="changeAmountPack(keyMain,key)" style="width: 100%;height: 95%;border: 0;text-align: center;"  ng-class="{'backOr' : exitPackVal[keyMain][key] == 1}" maxlength="8">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<md-divider></md-divider>
+			</div>
+		</md-list>
+	</md-card>
+	<md-card ng-if="dataExistCats.data.TEMP.NONPAID != undefined">
+		<md-card-content>
+			<h2 class="md-title blue">NonPaid Categories (Will not appear in Paid Search)</h2>
+			<md-divider></md-divider>
+			<md-list>
+				<md-list-item ng-repeat="(key,catData) in dataExistCats.data.TEMP.NONPAID">
+					{{catData}} [{{key}}]
+				</md-list-item>
+			</md-list>
+		</md-card-content>
+	</md-card>
+</div>
+<div ng-if="bestBudget.error.code	==	1">
+	<md-card>
+		<h2>No Data Found</h2>
+	</md-card>
+</div>
+<div ng-if="bestBudget.dataCompare.error.code	==	2" class="renewalPop" style="position:fixed;width:100%;height:100%;top:0;left:0;background:rgba(0, 0, 0, 0.49);z-index:999"></div>
+<div ng-if="bestBudget.dataCompare.error.code	==	2" class="renewalPop" style="position:absolute;z-index:1000;top:0;left:0;height:429px;overflow:auto;">
+	<md-card>
+		<md-card-content>
+			<button class="md-button md-primary" style="float:right" ng-click="closeRenewal()">Close</button>
+			<h2 class="md-title" style="padding: 0;margin:0">This is not an exact renewal.Following Categories/Pincodes are additionaly added or removed</h2>
+			<md-list>
+				<h2 class="md-title" style="padding: 0;margin:0">Categories</h2>
+				<div ng-repeat="(keyMain,budgetData) in bestBudget.dataCompare.cat_data" class="budgetPinDiv" ng-init="currIndex = $index;selAllCheck[currIndex] = true;loaderArea[$index] = 0">
+					<md-list-item>
+						<p class="blue"><span title="B2B Category Minimum Budget" class="pointer" ng-if="budgetData.bflg == 1" style="color:red">*</span>{{budgetData.catname}} [{{keyMain}}]</p>
+						<div class="jbdscj" ng-if="budgetData.error_code == 1 || budgetData.error_code == 2"><div style="position:relative;right:57px;">{{budgetData.error_msg}}</div><md-icon class="md-secondary" aria-label="Chat" md-svg-icon="img/ic_thumb_down_24px.svg" style="color:#b71313"></md-icon></div>
+						<div class="jbdscj" ng-if="budgetData.error_code == 0"><md-icon class="md-secondary" aria-label="Chat" md-svg-icon="img/ic_thumb_up_24px.svg" style="color:#86b031"></md-icon></div>
+					</md-list-item>
+					<md-divider></md-divider>
+				</div>
+			</md-list>
+			<md-list>
+				<h2 class="md-title" style="padding: 0;margin:0">Pincodes</h2>
+				<div ng-repeat="(keyMain,budgetData) in bestBudget.dataCompare.pin_data" class="budgetPinDiv" ng-init="currIndex = $index;selAllCheck[currIndex] = true;loaderArea[$index] = 0">
+					<md-list-item>
+						<p class="blue"><span title="B2B Category Minimum Budget" class="pointer" ng-if="budgetData.bflg == 1" style="color:red">*</span>{{budgetData.area_name}} [{{keyMain}}]</p>
+						<div class="jbdscj" ng-if="budgetData.error_code == 1 || budgetData.error_code == 2"><div style="position:relative;right:57px;">{{budgetData.error_msg}}</div><md-icon class="md-secondary" aria-label="Chat" md-svg-icon="img/ic_thumb_down_24px.svg" style="color:#b71313"></md-icon></div>
+						<div class="jbdscj" ng-if="budgetData.error_code == 0"><md-icon class="md-secondary" aria-label="Chat" md-svg-icon="img/ic_thumb_up_24px.svg" style="color:#86b031"></md-icon></div>
+					</md-list-item>
+					<md-divider></md-divider>
+				</div>
+			</md-list>
+		</md-card-content>
+	</md-card>
+</div>
+<div ng-if="bestBudget.error_code	==	2">
+	<md-card>
+		<h2>Error Returned From API. Please contact Software Team.</h2>
+	</md-card>
+</div>
